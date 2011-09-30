@@ -1,0 +1,21 @@
+<%= form_for(@bike_brand) do |f| %>
+  <% if @bike_brand.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bike_brand.errors.count, "error") %> prohibited this bike_brand from being saved:</h2>
+
+      <ul>
+      <% @bike_brand.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

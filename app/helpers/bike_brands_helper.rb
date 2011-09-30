@@ -1,0 +1,2 @@
+module BikeBrandsHelper
+end

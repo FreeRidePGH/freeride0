@@ -1,0 +1,29 @@
+<%= form_for(@safety_inspection) do |f| %>
+  <% if @safety_inspection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@safety_inspection.errors.count, "error") %> prohibited this safety_inspection from being saved:</h2>
+
+      <ul>
+      <% @safety_inspection.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bike_id %><br />
+    <%= f.number_field :bike_id %>
+  </div>
+  <div class="field">
+    <%= f.label :inspector_id %><br />
+    <%= f.number_field :inspector_id %>
+  </div>
+  <div class="field">
+    <%= f.label :inspection_date %><br />
+    <%= f.datetime_select :inspection_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

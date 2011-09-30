@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  encrypted_password: MyString
+  salt: MyString
+  account_value: 9.99
+  has_read_packet: false
+  role: 1
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  encrypted_password: MyString
+  salt: MyString
+  account_value: 9.99
+  has_read_packet: false
+  role: 1

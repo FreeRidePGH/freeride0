@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  bike_id: 1
+  inspector_id: 1
+  inspection_date: 2011-09-30 14:27:09
+
+two:
+  bike_id: 1
+  inspector_id: 1
+  inspection_date: 2011-09-30 14:27:09

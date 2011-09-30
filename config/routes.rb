@@ -1,4 +1,26 @@
 Freeride::Application.routes.draw do
+  resources :safety_item_responses
+
+  resources :safety_items
+
+  resources :safety_inspections
+
+  resources :volunteer_hours_entries
+
+  resources :repair_hours_entries
+
+  resources :users
+
+  resources :eab_projects
+
+  resources :locations
+
+  resources :bike_models
+
+  resources :bike_brands
+
+  resources :bikes
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

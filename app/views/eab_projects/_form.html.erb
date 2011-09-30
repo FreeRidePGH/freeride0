@@ -1,0 +1,33 @@
+<%= form_for(@eab_project) do |f| %>
+  <% if @eab_project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@eab_project.errors.count, "error") %> prohibited this eab_project from being saved:</h2>
+
+      <ul>
+      <% @eab_project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bike_id %><br />
+    <%= f.number_field :bike_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.number_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.datetime_select :start_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

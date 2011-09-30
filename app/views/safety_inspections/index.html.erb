@@ -1,0 +1,27 @@
+<h1>Listing safety_inspections</h1>
+
+<table>
+  <tr>
+    <th>Bike</th>
+    <th>Inspector</th>
+    <th>Inspection date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @safety_inspections.each do |safety_inspection| %>
+  <tr>
+    <td><%= safety_inspection.bike_id %></td>
+    <td><%= safety_inspection.inspector_id %></td>
+    <td><%= safety_inspection.inspection_date %></td>
+    <td><%= link_to 'Show', safety_inspection %></td>
+    <td><%= link_to 'Edit', edit_safety_inspection_path(safety_inspection) %></td>
+    <td><%= link_to 'Destroy', safety_inspection, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Safety inspection', new_safety_inspection_path %>

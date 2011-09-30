@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Model:</b>
+  <%= @bike.model_id %>
+</p>
+
+<p>
+  <b>Brand:</b>
+  <%= @bike.brand_id %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @bike.location_id %>
+</p>
+
+<p>
+  <b>Wheel size:</b>
+  <%= @bike.wheel_size %>
+</p>
+
+<p>
+  <b>Frame size:</b>
+  <%= @bike.frame_size %>
+</p>
+
+<p>
+  <b>Top tube:</b>
+  <%= @bike.top_tube %>
+</p>
+
+<p>
+  <b>Seat tube:</b>
+  <%= @bike.seat_tube %>
+</p>
+
+<p>
+  <b>Color:</b>
+  <%= @bike.color %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @bike.type %>
+</p>
+
+
+<%= link_to 'Edit', edit_bike_path(@bike) %> |
+<%= link_to 'Back', bikes_path %>

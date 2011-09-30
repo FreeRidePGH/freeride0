@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @repair_hours_entry.user_id %>
+</p>
+
+<p>
+  <b>Bike:</b>
+  <%= @repair_hours_entry.bike_id %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= @repair_hours_entry.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= @repair_hours_entry.end_time %>
+</p>
+
+
+<%= link_to 'Edit', edit_repair_hours_entry_path(@repair_hours_entry) %> |
+<%= link_to 'Back', repair_hours_entries_path %>

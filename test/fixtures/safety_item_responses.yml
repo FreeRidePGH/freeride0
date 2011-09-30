@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  safety_inspection_id: 1
+  safety_item_id: 1
+  is_checked: false
+
+two:
+  safety_inspection_id: 1
+  safety_item_id: 1
+  is_checked: false

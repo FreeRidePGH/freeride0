@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Bike:</b>
+  <%= @eab_project.bike_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @eab_project.user_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @eab_project.status %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @eab_project.start_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_eab_project_path(@eab_project) %> |
+<%= link_to 'Back', eab_projects_path %>

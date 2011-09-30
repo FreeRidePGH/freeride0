@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Safety inspection:</b>
+  <%= @safety_item_response.safety_inspection_id %>
+</p>
+
+<p>
+  <b>Safety item:</b>
+  <%= @safety_item_response.safety_item_id %>
+</p>
+
+<p>
+  <b>Is checked:</b>
+  <%= @safety_item_response.is_checked %>
+</p>
+
+
+<%= link_to 'Edit', edit_safety_item_response_path(@safety_item_response) %> |
+<%= link_to 'Back', safety_item_responses_path %>
