@@ -1,4 +1,8 @@
 Freeride::Application.routes.draw do
+  
+  root :to => 'home#index'
+  match '/dashboard', :to => 'home#dashboard', :as => :dashboard
+  
   resources :safety_item_responses
 
   resources :safety_items

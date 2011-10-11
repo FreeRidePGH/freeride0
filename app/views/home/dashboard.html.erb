@@ -1,0 +1,20 @@
+<h1>User Dashboard</h1>
+<ul>
+	<li><%= link_to "Bikes", bikes_path %>
+		<ul>
+			<li><%= link_to "Locations", locations_path %>
+			<li><%= link_to "Brands", bike_brands_path %>	
+			<li><%= link_to "Models", bike_models_path %>		
+		</ul>
+	<li><%= link_to "Users", users_path %>
+	<li><%= link_to "EAB Projects", eab_projects_path %>
+		<ul>
+			<li><%= link_to "Repair Hours Entries", repair_hours_entries_path %>
+			<li><%= link_to "Volunteer Hours Entries", volunteer_hours_entries_path %>
+		</ul>
+	<li><%= link_to "Safety Inspections", safety_inspections_path %>
+		<ul>
+			<li><%= link_to "Safety Items", safety_items_path %>
+			<li><%= link_to "Safety Item Responses", safety_item_responses_path %>				
+		</ul>
+</ul>
