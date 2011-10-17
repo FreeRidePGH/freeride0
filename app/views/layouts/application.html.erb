@@ -15,11 +15,12 @@
 	<div id="container">
 		<div id="navigation">
 			<ul>
-				<li><%= link_to "Home", dashboard_path %></li>
-				<li><%= link_to "Bikes", bikes_path %></li>
-				<li><%= link_to "Users", users_path %></li>
-				<li><%= link_to "Projects", eab_projects_path %></li>
-				<li id="last_link"><%= link_to "Safety", safety_inspections_path %></li>
+				<% page = controller.controller_name %>
+				<li><%= link_to "Home", dashboard_path, :class => (page == "home" ? "selected" : "") %></li>
+				<li><%= link_to "Bikes", bikes_path, :class => (page == "bikes" ? "selected" : "") %></li>
+				<li><%= link_to "Users", users_path, :class => (page == "users" ? "selected" : "") %></li>
+				<li><%= link_to "EAB Projects", eab_projects_path, :class => (page == "eab_projects" ? "selected" : "") %></li>
+				<li><%= link_to "Safety Inspections", safety_inspections_path, :class => (page == "safety_inspections" ? "selected" : "") %></li>
 			</ul>
 		</div>
 		<div id="content">

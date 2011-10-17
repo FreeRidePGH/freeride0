@@ -1,7 +1,7 @@
 class BikesController < ApplicationController
   # GET /bikes
   # GET /bikes.json
-  def index
+  def index  
     @bikes = Bike.all
 
     respond_to do |format|
