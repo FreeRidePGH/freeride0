@@ -1,6 +1,6 @@
 body {
 	background-color: #333333;
-	color: #333;
+	color: #333333;
 	font-family: helvetica, arial, verdana, sans-serif;
 	font-size: 14px;
 	line-height: 18px;
@@ -12,7 +12,7 @@ a {
     	color: #e00000; 
 	}
   	&:hover {
-    	color: #000; 
+    	color: #000000; 
 	} 
 }
 
@@ -66,18 +66,50 @@ a {
 		padding: 5px 10px 7px 10px;
 		text-decoration: none;
 		&:hover {
-			color: #d00000;
-			background-color: #ffffff;
+			color: #ffffff;
+			background-color: #555555;
 		}
 	}
 	.selected {
-		color: #333333;
-		background-color: #ffffff;
+		color: #ffffff;
+		background-color: #555555;
 		&:hover {
-			background-color: #ffffff;
+			background-color: #555555;
 		}
 	}
 }
+
+#subnav {
+	background-color: #555555;
+	color: #ffcc00;
+	font-size: 18px;
+	line-height: 8px;
+	height: 20px;
+	margin: 0 auto 0 auto;
+	padding: 5px 10px 5px 10px;
+	
+	ul { 
+		margin: 7px 0 0 5px;
+		padding: 0;
+		li {
+			margin: 0;
+			padding: 0;
+			display: inline;
+			list-style: none;
+		}
+	}
+	a {
+		color: #ffcc00;
+		margin: 0 5px 0 0;
+		padding: 5px 10px 7px 10px;
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	
+}
+
 
 #container {
 	background-color: #ffffff;

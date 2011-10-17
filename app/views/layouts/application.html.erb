@@ -24,6 +24,12 @@
 				<li><%= link_to "Safety Inspections", safety_inspections_path, :class => (page == "safety_inspections" ? "selected" : "") %></li>
 			</ul>
 		</div>
+		<div id="subnav">
+			<ul>
+				<%= render(partial: "subnav", object: page) %>
+			</ul>
+		</div>
+		<div id="divider"></div>
 		<div id="content">
 			<%= yield %>
 		</div>
