@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>BikeID:</b>
+  <%= @bike.bike_id %>
+</p>
+
+<p>
   <b>Model:</b>
   <%= @bike.model_id %>
 </p>
@@ -33,6 +38,31 @@
 <p>
   <b>Color:</b>
   <%= @bike.color %>
+</p>
+
+<p>
+  <b>Quality:</b>
+  <%= @bike.quality %>
+</p>
+
+<p>
+  <b>Condition: </b>
+  <%= @bike.condition %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @bike.status %>
+</p>
+
+<p>
+  <b>Date In:</b>
+  <%= @bike.date_in %>
+</p>
+
+<p>
+  <b>Date Out:</b>
+  <%= @bike.date_out %>
 </p>
 
 <%= link_to 'Edit', edit_bike_path(@bike) %> |
