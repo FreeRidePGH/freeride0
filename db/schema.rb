@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930183316) do
+ActiveRecord::Schema.define(:version => 20111018000220) do
 
   create_table "bike_brands", :force => true do |t|
     t.string   "name"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(:version => 20110930183316) do
     t.integer  "brand_id"
     t.integer  "location_id"
     t.decimal  "wheel_size"
-    t.decimal  "frame_size"
     t.decimal  "top_tube"
     t.decimal  "seat_tube"
     t.string   "color"
@@ -64,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20110930183316) do
     t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "eab_project_id"
   end
 
   create_table "safety_inspections", :force => true do |t|
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(:version => 20110930183316) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
+    t.string   "instructions"
   end
 
   create_table "users", :force => true do |t|
@@ -99,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20110930183316) do
     t.integer  "role"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone_number"
   end
 
   create_table "volunteer_hours_entries", :force => true do |t|
