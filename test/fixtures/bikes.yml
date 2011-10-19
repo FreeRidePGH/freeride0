@@ -5,19 +5,15 @@ one:
   brand_id: 1
   location_id: 1
   wheel_size: 9.99
-  frame_size: 9.99
   top_tube: 9.99
   seat_tube: 9.99
   color: MyString
-  type: 
 
 two:
   model_id: 1
   brand_id: 1
   location_id: 1
   wheel_size: 9.99
-  frame_size: 9.99
   top_tube: 9.99
   seat_tube: 9.99
   color: MyString
-  type: 

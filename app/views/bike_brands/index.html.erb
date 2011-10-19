@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
+	<th>ID</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +12,7 @@
 <% @bike_brands.each do |bike_brand| %>
   <tr>
     <td><%= bike_brand.name %></td>
+	<td><%= bike_brand.id %></td>
     <td><%= link_to 'Show', bike_brand %></td>
     <td><%= link_to 'Edit', edit_bike_brand_path(bike_brand) %></td>
     <td><%= link_to 'Destroy', bike_brand, confirm: 'Are you sure?', method: :delete %></td>

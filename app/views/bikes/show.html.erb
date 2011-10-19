@@ -1,69 +1,101 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>BikeID:</b>
+<h1>Bike Profile </h1>
+<table border="0" id="maininfo">
+<tr>
+<td>
+<b>BikeID:</b>
   <%= @bike.bike_id %>
+</td>
+<td align='right'>
+  <b>Status:</b>
+  <%= @bike.status %>
+</td>
+</tr>
+<tr>
+<td>
+  <b>Hook Number/Location:</b>
+  <%= @bike.location_id %>
+</td>
+<td align='right'>
+  <b>Date Arrived:</b>
+  <%= @bike.date_in.year %>/<%= @bike.date_in.month %>/<%= @bike.date_in.day %> 
+</td>
+<tr>
+<td colspan='2' align='right'>
+  <b>Date Departed:</b>
+  <%= @bike.date_out.year %>/<%= @bike.date_out.month %>/<%= @bike.date_out.day %> 
+</td>
+ </tr>
+ 
+<table border="1" id="bikeTable">
+<tr>
+<td>
+<p>
+  <b>Mfgr/Brand:</b>
+  <% 
+  @bike_brand = BikeBrand.find(@bike.brand_id)
+  %>
+  <%= @bike_brand.name %>
 </p>
-
+</td>
+<td>
 <p>
   <b>Model:</b>
-  <%= @bike.model_id %>
+   <% 
+  @bike_model = BikeModel.find(@bike.model_id)
+  %>
+  <%= @bike_model.name %>
 </p>
+</td>
+</tr>
 
-<p>
-  <b>Brand:</b>
-  <%= @bike.brand_id %>
-</p>
-
-<p>
-  <b>Location:</b>
-  <%= @bike.location_id %>
-</p>
-
+<tr>
+<td>
 <p>
   <b>Wheel size:</b>
   <%= @bike.wheel_size %>
 </p>
-
+</td>
+<td>
 <p>
   <b>Top tube:</b>
   <%= @bike.top_tube %>
 </p>
+</td>
+</tr>
 
+<tr>
+<td>
 <p>
   <b>Seat tube:</b>
   <%= @bike.seat_tube %>
 </p>
-
+</td>
+<td>
 <p>
   <b>Color:</b>
   <%= @bike.color %>
 </p>
+</td>
+</tr>
 
+<tr>
+<td>
 <p>
   <b>Quality:</b>
   <%= @bike.quality %>
 </p>
-
+</td>
+<td>
 <p>
   <b>Condition: </b>
   <%= @bike.condition %>
 </p>
+</td>
+</tr>
+</table>
+<br/>
+<br/>
+<a href="#">View history log</a> | <a href="#">Add to favourites</a> | <a href="#">Start EAB Project</a> |
 
-<p>
-  <b>Status:</b>
-  <%= @bike.status %>
-</p>
-
-<p>
-  <b>Date In:</b>
-  <%= @bike.date_in %>
-</p>
-
-<p>
-  <b>Date Out:</b>
-  <%= @bike.date_out %>
-</p>
-
-<%= link_to 'Edit', edit_bike_path(@bike) %> |
-<%= link_to 'Back', bikes_path %>
+<%= link_to 'Edit Info', edit_bike_path(@bike) %>
