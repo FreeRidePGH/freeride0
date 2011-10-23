@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  id: 1
+  name: Schwinn
 
 two:
-  name: MyString
+  id: 2
+  name: Trek
+
+three:
+  id: 3
+  name: Giant

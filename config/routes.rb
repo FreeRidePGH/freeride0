@@ -2,27 +2,18 @@ Freeride::Application.routes.draw do
   
   root :to => 'home#index'
   match '/dashboard', :to => 'home#dashboard', :as => :dashboard
+  match '/signup', :to => 'users#new', :as => :signup
   
   resources :safety_item_responses
-
   resources :safety_items
-
   resources :safety_inspections
-
   resources :volunteer_hours_entries
-
   resources :repair_hours_entries
-
-  resources :users
-
+  resources :users, :except => [:new]
   resources :eab_projects
-
   resources :locations
-
   resources :bike_models
-
   resources :bike_brands
-
   resources :bikes
 
   # The priority is based upon order of creation:

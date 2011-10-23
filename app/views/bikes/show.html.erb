@@ -3,12 +3,8 @@
 <table border="0" id="maininfo">
 <tr>
 <td>
-<b>BikeID:</b>
-  <%= @bike.bike_id %>
-</td>
-<td align='right'>
-  <b>Status:</b>
-  <%= @bike.status %>
+<b>Bike ID:</b>
+  <%= @bike.id %>
 </td>
 </tr>
 <tr>
@@ -23,7 +19,9 @@
 <tr>
 <td colspan='2' align='right'>
   <b>Date Departed:</b>
+	<% unless @bike.date_out.nil? %>
   <%= @bike.date_out.year %>/<%= @bike.date_out.month %>/<%= @bike.date_out.day %> 
+	<% end %>
 </td>
  </tr>
  
@@ -80,22 +78,11 @@
 </tr>
 
 <tr>
-<td>
-<p>
-  <b>Quality:</b>
-  <%= @bike.quality %>
-</p>
-</td>
-<td>
-<p>
-  <b>Condition: </b>
-  <%= @bike.condition %>
-</p>
-</td>
+
 </tr>
 </table>
 <br/>
 <br/>
-<a href="#">View history log</a> | <a href="#">Add to favourites</a> | <a href="#">Start EAB Project</a> |
+<a href="#">View history log</a> | <a href="#">Add to favorites</a> | <a href="#">Start EAB Project</a> |
 
 <%= link_to 'Edit Info', edit_bike_path(@bike) %>

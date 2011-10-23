@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   bike_id: 1
   inspector_id: 1
-  inspection_date: 2011-09-30 14:27:09
+  inspection_date: 2011-10-02 19:20:09
 
 two:
-  bike_id: 1
-  inspector_id: 1
-  inspection_date: 2011-09-30 14:27:09
+  id: 2
+  bike_id: 2
+  inspector_id: 2
+  inspection_date: 2011-10-22 16:30:00

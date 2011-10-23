@@ -1,21 +1,41 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+<% require 'digest' %>
+
+<% pass = "password" %>
+<% salt = Digest::SHA2.hexdigest("#{Time.now.utc}--#{pass}") %>
 
 one:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  encrypted_password: MyString
-  salt: MyString
-  account_value: 9.99
-  has_read_packet: false
+  id: 1
+  first_name: Jason
+  last_name: Meyers
+  email: jrmeyers@andrew.cmu.edu
+  phone_number: 4129872345
+  encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
+  salt: <%= salt %>
+  account_value: 45.50
+  has_read_packet: true
   role: 1
 
 two:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  encrypted_password: MyString
-  salt: MyString
-  account_value: 9.99
+  id: 2
+  first_name: Sarah
+  last_name: Jacobs
+  email: sjacobs@cmu.edu
+  phone_number: 9871236543
+  encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
+  salt: <%= salt %>
+  account_value: 0
   has_read_packet: false
+  role: 1
+
+three:
+  id: 3
+  first_name: Tyler
+  last_name: Fox
+  email: tmfox@andrew.cmu.edu
+  phone_number: 8581234567
+  encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
+  salt: <%= salt %>
+  account_value: 230
+  has_read_packet: true
   role: 1

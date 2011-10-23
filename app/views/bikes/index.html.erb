@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-	<th>Bike ID</th>
+		<th>ID</th>
     <th>Model</th>
     <th>Brand</th>
     <th>Location</th>
@@ -10,9 +10,6 @@
     <th>Top tube</th>
     <th>Seat tube</th>
     <th>Color</th>
-    <th>Quality</th>
-    <th>Condition</th>
-    <th>Status</th>
     <th>Date In</th>
     <th>Date Out</th>
     
@@ -23,7 +20,7 @@
 
 <% @bikes.each do |bike| %>
   <tr>
-	<td><%= bike.bike_id %></td>
+		<td><%= bike.id %></td>
     <td><%= bike.model_id %></td>
     <td><%= bike.brand_id %></td>
     <td><%= bike.location_id %></td>
@@ -31,9 +28,6 @@
     <td><%= bike.top_tube %></td>
     <td><%= bike.seat_tube %></td>
     <td><%= bike.color %></td>
-    <td><%= bike.quality %></td>
-    <td><%= bike.condition %></td>
-    <td><%= bike.status %></td>
     <td><%= bike.date_in %></td>
     <td><%= bike.date_out %></td>
     <td><%= link_to 'Show', bike %></td>

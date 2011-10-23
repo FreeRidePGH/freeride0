@@ -3,6 +3,7 @@ class BikeBrand < ActiveRecord::Base
   has_many :bikes
   
   attr_accessible :name
-  	validates :name, presence: true
-	validates :name, uniqueness: true
+  
+  validates :name, :presence => true
+	validates :name, :uniqueness => true
 end

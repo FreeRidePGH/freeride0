@@ -3,9 +3,39 @@
 one:
   safety_inspection_id: 1
   safety_item_id: 1
-  is_checked: false
-
+  is_checked: true
+  
 two:
   safety_inspection_id: 1
+  safety_item_id: 2
+  is_checked: true
+  
+three:
+  safety_inspection_id: 1
+  safety_item_id: 3
+  is_checked: true
+  
+four:
+  safety_inspection_id: 1
+  safety_item_id: 4
+  is_checked: true
+
+five:
+  safety_inspection_id: 2
   safety_item_id: 1
+  is_checked: false
+  
+six:
+  safety_inspection_id: 2
+  safety_item_id: 2
+  is_checked: true
+  
+seven:
+  safety_inspection_id: 2
+  safety_item_id: 3
+  is_checked: false
+  
+eight:
+  safety_inspection_id: 2
+  safety_item_id: 4
   is_checked: false

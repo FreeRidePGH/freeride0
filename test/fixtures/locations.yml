@@ -1,11 +1,26 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  description: MyString
-  hook_number: 1
+  name: 
+  description: 
+  hook_number: 2
 
 two:
-  name: MyString
-  description: MyString
-  hook_number: 1
+  name: 
+  description: 
+  hook_number: 6
+  
+three:
+  name: 
+  description:
+  hook_number: 44
+
+four:
+  name: CMU - Porter Hall
+  description: Classroom PH A19A
+  hook_number: 
+
+five:
+  name: Shadyside Elementary School
+  description: Basement storage closet
+  hook_number: 

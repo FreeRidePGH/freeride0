@@ -1,7 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  id: 1
+  name: Front hub is adjusted properly
+  description: Front hub must be within 2 inches of frame.
+  instructions: Visually inspect front hub for proper adjustment.
 
 two:
-  name: MyString
+  id: 2
+  name: Stem bolt is tight
+  description: Stem bolt must be tightened to 15 lb-ft torque.
+  instructions: Use a torque wrench to check tightness.
+  
+three:
+  id: 3
+  name: Chain is lubed
+  description: Chain must not be dry.
+  instructions: Ensure chain lube has been applied.
+  
+four:
+  id: 4
+  name: Rear wheel is true
+  description: Rear wheel must spin freely.
+  instructions: Spin rear wheel for 5 seconds.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111018235332) do
+ActiveRecord::Schema.define(:version => 20111023181115) do
 
   create_table "bike_brands", :force => true do |t|
     t.string   "name"
@@ -36,12 +36,8 @@ ActiveRecord::Schema.define(:version => 20111018235332) do
     t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "bike_id"
     t.datetime "date_in"
     t.datetime "date_out"
-    t.integer  "quality"
-    t.integer  "condition"
-    t.string   "status"
   end
 
   create_table "eab_projects", :force => true do |t|
