@@ -1,0 +1,99 @@
+<h1></h1>
+<br/>
+<br/>
+<div name="searchFromDiv"align="center">
+<form name="searchForm" action = "/search/index" method = "get">
+<input type="text" size = "70" name="searchText" value="Bike ID or Hook Number"/>
+<input type="submit" value="Go" name = "submit">
+<br/>
+<br/>
+
+<table id="criteria" border="4">
+	<tr>
+	<td>
+		<table>
+		<tr>
+		<th>Brand</th>
+		</tr>
+		<% for i in BikeBrand.all %>
+		<tr><td>
+		<a href="#">
+		<%= i.name %>
+		</td></tr>
+		</a>
+		<% end %>
+		</table>	
+	</td>
+	<td>
+		<table>
+		<tr>
+		<th>Color</th>
+		</tr>	
+		<% for i in Bike.select("distinct color").map {|a| a.color}%>
+		<tr><td><a href="#">
+		<%=i%></a>
+		</td></tr>
+		<% end %>		
+		</table>
+	</td>	
+	<td>
+		<table>
+		<tr>
+		<th>Status</th>
+		</tr>		
+		<% for i in Bike.all %>
+		<tr><td><a href="#">
+		<%= i.id%></a>
+		</td></tr>
+		<% end %>		
+		</table>
+	</td>		
+	</tr>
+	<tr>
+	<td>
+		<table>
+		<tr>
+		<th>Wheel</th>
+		</tr>
+		<% for i in Bike.select("distinct wheel_size").map {|a| a.wheel_size} %>
+		<tr><td><a href="#">
+		<%= i%></a>
+		</td></tr>
+		<% end %>		
+		</table>
+	
+	
+	</td>
+	<td>
+		<table>
+		<tr>
+		<th>Top Tube</th>
+		</tr>
+		<% for i in Bike.select("distinct top_tube").map {|a| a.top_tube} %>
+		<tr><td><a href="#">
+		<%= i%></a>
+		</td></tr>
+		<% end %>		
+		</table>
+	</td>	
+	<td>
+		<table>
+		<tr>
+		<th>Seat Tube</th>
+		</tr>
+		<% for i in Bike.select("distinct seat_tube").map {|a| a.seat_tube} %>
+		<tr><td><a href="#">
+		<%= i%></a>
+		</td></tr>
+		<% end %>		
+		</table>
+	</td>		
+	</tr>
+
+
+
+</table>
+
+
+</div>
+</form>

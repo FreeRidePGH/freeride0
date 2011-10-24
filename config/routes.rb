@@ -1,5 +1,7 @@
 Freeride::Application.routes.draw do
   
+  get "search/index"
+
   root :to => 'home#index'
   match '/dashboard', :to => 'home#dashboard', :as => :dashboard
   match '/signup', :to => 'users#new', :as => :signup
