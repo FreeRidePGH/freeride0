@@ -1,89 +1,155 @@
 <p id="notice"><%= notice %></p>
 <h1>Bike Profile </h1>
 <table border="0" id="maininfo">
-<tr>
+<tr height="80px">
 <td>
-<b>ID:</b>
-  <%= @bike.id %>
+	<table border="1" id="IDhook">
+	<tr>
+		<td >
+			<b>ID:</b></td><td>
+			<%= @bike.id %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<b>Hook:</b></td><td>
+			<%= @bike.location_id %>
+		</td>
+	</tr>
+	</table>
 </td>
-</tr>
-</tr>
 <td>
-  <b>Hook:</b>
-  <%= @bike.location_id %>
+		<table border="0" cellpadding="3" id="bikeTable">
+		<tr>
+		<td>
+
+		  <b>Mfgr/Brand:</b></td><td>
+		  <% 
+		  @bike_brand = BikeBrand.find(@bike.brand_id)
+		  %>
+		  <%= @bike_brand.name %>
+
+		</td>
+		<td>
+
+		  <b>Model:</b></td><td>
+		   <% 
+		  @bike_model = BikeModel.find(@bike.model_id)
+		  %>
+		  <%= @bike_model.name %>
+
+		</td>
+		<td>
+
+		  <b>Condition:</b></td><td>
+		   <% 
+		  @bikeA = BikeAssesment.find(@bike.id)
+		  %>
+		  <%= @bikeA.condition %>
+
+		</td>
+		
+		</tr>
+
+		<tr>
+		<td>
+
+		  <b>Wheel size:</b></td><td>
+		  <%= @bike.wheel_size %>
+
+		</td>
+		<td>
+
+		  <b>Top tube:</b></td><td>
+		  <%= @bike.top_tube %>
+
+		</td>
+		
+		<td>
+
+		  <b>Quality:</b></td><td>
+		  <%= @bikeA.quality %>
+
+		</td>
+		</tr>
+
+		<tr>
+		<td>
+
+		  <b>Seat tube:</b></td><td>
+		  <%= @bike.seat_tube %>
+
+		</td>
+		<td>
+
+		  <b>Color:</b></td><td>
+		  <%= @bike.color %>
+
+		</td>
+		<td>
+
+		  <b>Value:</b></td><td>
+		  $<%= @bikeA.value %>
+
+		</td>
+		</tr>
+
+		<tr>
+
+		</tr>
+		</table>
 </td>
 <td align='right'>
-  <b>Date Arrived:</b>
-  <%= @bike.date_in.year %>/<%= @bike.date_in.month %>/<%= @bike.date_in.day %> 
-</td>
-<tr>
-<td colspan='2' align='right'>
-  <b>Date Departed:</b>
-	<% unless @bike.date_out.nil? %>
-  <%= @bike.date_out.year %>/<%= @bike.date_out.month %>/<%= @bike.date_out.day %> 
-	<% end %>
-</td>
- </tr>
-</table> 
-
-<table border="1" id="bikeTable">
-<tr>
-<td>
-<p>
-  <b>Mfgr/Brand:</b>
-  <% 
-  @bike_brand = BikeBrand.find(@bike.brand_id)
-  %>
-  <%= @bike_brand.name %>
-</p>
-</td>
-<td>
-<p>
-  <b>Model:</b>
-   <% 
-  @bike_model = BikeModel.find(@bike.model_id)
-  %>
-  <%= @bike_model.name %>
-</p>
+	<table>
+	<tr>
+		<td>
+		  <b>Date Arrived:</b>
+		  <%= @bike.date_in.year %>/<%= @bike.date_in.month %>/<%= @bike.date_in.day %> 
+		</td>
+		</tr>
+		<tr>
+		<td align='right'>
+		  <b>Date Departed:</b>
+			<% unless @bike.date_out.nil? %>
+		    <%= @bike.date_out.year %>/<%= @bike.date_out.month %>/<%= @bike.date_out.day %> 
+			<% end %>
+		</td>
+		</tr>
+	</table>
 </td>
 </tr>
-
 <tr>
-<td>
-<p>
-  <b>Wheel size:</b>
-  <%= @bike.wheel_size %>
-</p>
+
+<td style="border:solid 2px #060" colspan="2"><h2>Projects</h2>
+	<table border="1" id="projects">
+	<tr id="headers">
+	<td>Project Type</td><td>User</td><td>Date Started</td><td>Status</td>
+	</tr>	
+	</table>
 </td>
-<td>
-<p>
-  <b>Top tube:</b>
-  <%= @bike.top_tube %>
-</p>
+<td style="border:solid 2px #060" rowspan="2"><h2>Notes</h2>
+
+	<table border="1" id="notes">
+	<tr id="headers">
+	<td>Note</td><td>Date</td>
+	</tr>	
+	</table>
 </td>
+
 </tr>
-
 <tr>
-<td>
-<p>
-  <b>Seat tube:</b>
-  <%= @bike.seat_tube %>
-</p>
+<td style="border:solid 2px #060" colspan="2"><h2>Location History</h2>
+	<table border="1" id="history">
+	<tr id="headers">
+	<td>Location</td><td>Date</td>
+	</tr>	
+	</table>
 </td>
-<td>
-<p>
-  <b>Color:</b>
-  <%= @bike.color %>
-</p>
-</td>
-</tr>
-
-<tr>
-
 </tr>
 </table>
+
 <br/>
 <br/>
-<a href="#">View history log</a> | <a href="#">Add to favorites</a> | <a href="#">Start EAB Project</a> |
+<a href="#">Add to favorites</a> | <a href="#">Start EAB Project</a> |
 
 <%= link_to 'Edit Info', edit_bike_path(@bike) %>

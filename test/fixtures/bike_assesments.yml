@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  bike_id: 1
+  user_id: 1
+  quality: A
+  condition: A
+  value: 9.99
+
+two:
+  id: 2
+  bike_id: 2
+  user_id: 2
+  quality: B
+  condition: B
+  value: 50.40

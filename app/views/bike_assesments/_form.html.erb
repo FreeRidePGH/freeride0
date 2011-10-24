@@ -1,0 +1,37 @@
+<%= form_for(@bike_assesment) do |f| %>
+  <% if @bike_assesment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bike_assesment.errors.count, "error") %> prohibited this bike_assesment from being saved:</h2>
+
+      <ul>
+      <% @bike_assesment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bike_id %><br />
+    <%= f.number_field :bike_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :quality %><br />
+    <%= f.text_field :quality %>
+  </div>
+  <div class="field">
+    <%= f.label :condition %><br />
+    <%= f.text_field :condition %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br />
+    <%= f.text_field :value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

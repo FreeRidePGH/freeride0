@@ -1,0 +1,31 @@
+<h1>Listing bike_assesments</h1>
+
+<table>
+  <tr>
+    <th>Bike</th>
+    <th>User</th>
+    <th>Quality</th>
+    <th>Condition</th>
+    <th>Value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bike_assesments.each do |bike_assesment| %>
+  <tr>
+    <td><%= bike_assesment.bike_id %></td>
+    <td><%= bike_assesment.user_id %></td>
+    <td><%= bike_assesment.quality %></td>
+    <td><%= bike_assesment.condition %></td>
+    <td><%= bike_assesment.value %></td>
+    <td><%= link_to 'Show', bike_assesment %></td>
+    <td><%= link_to 'Edit', edit_bike_assesment_path(bike_assesment) %></td>
+    <td><%= link_to 'Destroy', bike_assesment, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bike assesment', new_bike_assesment_path %>

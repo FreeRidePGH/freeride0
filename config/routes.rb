@@ -1,5 +1,7 @@
 Freeride::Application.routes.draw do
   
+  resources :bike_assesments
+
   get "search/index"
 
   root :to => 'home#index'

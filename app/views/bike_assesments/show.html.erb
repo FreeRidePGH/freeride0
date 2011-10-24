@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Bike:</b>
+  <%= @bike_assesment.bike_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @bike_assesment.user_id %>
+</p>
+
+<p>
+  <b>Quality:</b>
+  <%= @bike_assesment.quality %>
+</p>
+
+<p>
+  <b>Condition:</b>
+  <%= @bike_assesment.condition %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @bike_assesment.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_bike_assesment_path(@bike_assesment) %> |
+<%= link_to 'Back', bike_assesments_path %>

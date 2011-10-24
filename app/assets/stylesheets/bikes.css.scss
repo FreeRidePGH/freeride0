@@ -1,28 +1,67 @@
 // Place all the styles related to the Bikes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#bikeTable {
-	color: #660000;
-	text-decoration: none;
-	margin: 5px;
-	padding: 10px;
-	border-top-width: 0px;
-	border-right-width: 0px;
-	border-bottom-width: 0px;
-	border-left-width: 0px;
-	border-collapse: collapse;
-	width: 525px;
-}
 
 #maininfo {
-	font-size: medium;
-	background-color:00000;
+	font-size: small;
+	background-color:#00000;
 	text-decoration: none;
 	margin: 1px;
-	padding: 0px;
+	padding: 5px;
 	border-top-width: 0px;
 	border-right-width: 0px;
 	border-bottom-width: 0px;
 	border-left-width: 0px;
 	width:100%;
+	height: 400px;
+
+}
+
+#maininfo tr{
+	vertical-align: top;
+	
+}
+
+#bikeTable {
+	color: #660000;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+	border-width: 0px;
+	border-collapse: seperate;
+}
+
+#IDhook{
+	font-size: large;
+	color: #660000;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+	border-top-width: 5px;
+	border-right-width: 5px;
+	border-bottom-width: 5px;
+	border-left-width: 5px;
+	border-collapse: collapse;
+	width: 80%;
+	background-color: #AFC7C7;
+}
+
+#headers{
+	color: #660000;
+	text-decoration: underline;
+}
+#projects {
+	width: 90%;
+	border-collapse: collapse;
+	border-spacing: 1px;
+}
+#history {
+	width: 60%;
+	border-collapse: collapse;
+	border-spacing: 1px;
+}
+#notes {
+	width: 60%;
+	border-collapse: collapse;
+	border-spacing: 1px;
 }
