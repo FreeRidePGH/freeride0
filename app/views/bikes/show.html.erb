@@ -43,7 +43,7 @@
 
 		  <b>Condition:</b></td><td>
 		   <% 
-		  @bikeA = BikeAssesment.find(@bike.id)
+		  @bikeA = BikeAssesment.find_by_bike_id(@bike.id)
 		  %>
 		  <%= @bikeA.condition %>
 
@@ -121,15 +121,21 @@
 <tr>
 
 <td style="border:solid 2px #060" colspan="2"><h2>Projects</h2>
-	<table border="1" id="projects">
+	<table border="0" id="projects">
 	<tr id="headers">
 	<td>Project Type</td><td>User</td><td>Date Started</td><td>Status</td>
 	</tr>	
+	<% @project = EabProject.find_by_bike_id(@bike.id) 
+		unless @project.nil? %>
+	<tr>
+	<td>EAB</td><td><%= @project.user_id%></td><td><%= @project.start_date%></td><td><%= @project.status%></td>
+	</tr>
+	<% end %>
 	</table>
 </td>
 <td style="border:solid 2px #060" rowspan="2"><h2>Notes</h2>
 
-	<table border="1" id="notes">
+	<table border="0" id="notes">
 	<tr id="headers">
 	<td>Note</td><td>Date</td>
 	</tr>	
@@ -139,7 +145,7 @@
 </tr>
 <tr>
 <td style="border:solid 2px #060" colspan="2"><h2>Location History</h2>
-	<table border="1" id="history">
+	<table border="0" id="history">
 	<tr id="headers">
 	<td>Location</td><td>Date</td>
 	</tr>	
