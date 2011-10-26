@@ -42,8 +42,14 @@ class BikesController < ApplicationController
   def create
     @bike = Bike.new(params[:bike])
 
+	@q = params[:quality]
+	@c = params[:condition]
+	@v = params[:value]
+	
     respond_to do |format|
       if @bike.save
+		@bike_assesment = BikeAssesment.new(:bike_id => @bike.id, :quality => @q, :condition => @c, :value => @v)
+		@bike_assesment.save
         format.html { redirect_to @bike, notice: 'Bike was successfully created.' }
         format.json { render json: @bike, status: :created, location: @bike }
       else

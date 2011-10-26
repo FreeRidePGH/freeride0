@@ -128,7 +128,8 @@
 	<% @project = EabProject.find_by_bike_id(@bike.id) 
 		unless @project.nil? %>
 	<tr>
-	<td>EAB</td><td><%= @project.user_id%></td><td><%= @project.start_date%></td><td><%= @project.status%></td>
+	<% @projuser = User.find_by_id(@project.user_id) %>
+	<td>EAB</td><td><%= @projuser.first_name + " " + @projuser.last_name%></td><td><%= @project.start_date%></td><td><%= @project.status%></td>
 	</tr>
 	<% end %>
 	</table>
@@ -156,6 +157,6 @@
 
 <br/>
 <br/>
-<a href="#">Add to favorites</a> | <a href="#">Start EAB Project</a> |
+<a href="/favorites/new">Add to favorites</a> | <a href="/eab_projects/new">Start EAB Project</a> |
 
 <%= link_to 'Edit Info', edit_bike_path(@bike) %>

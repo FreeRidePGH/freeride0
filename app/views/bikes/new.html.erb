@@ -1,5 +1,156 @@
-<h1>New bike</h1>
+<h1>New bike form</h1>
 
-<%= render 'form' %>
+
+<%= form_for(@bike) do |f| %>
+  <% if @bike.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bike.errors.count, "error") %> prohibited this bike from being saved:</h2>
+
+      <ul>
+      <% @bike.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<table border="1" id="maininfo">
+<tr height="80px">
+<td>
+	<table border="1" id="IDhook">
+	<tr>
+		<td >
+			<b>ID</b></td><td>
+			<b>			    
+		<input id="id" name="id" size="10" type="number" />			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<b><%= f.label :location_id %></b></td><td>
+			    
+    <%= f.number_field :location_id %>
+		</td>
+	</tr>
+	</table>
+	<br/><b><%= f.label :date_in %></b>
+    
+    <%= f.datetime_select :date_in %><br/><br/>
+	
+		
+
+		  <b>AS-IS Value:</b>
+		  $ <input id="value" name="value" size="10" type="number" />
+
+</td>
+<td>
+		<table border="1" cellpadding="3" id="bikeTable">
+		<tr>
+		<td>
+		
+		  <b><%= f.label :brand_id %></b></td><td>
+		  <select id="bike_brand_id" name="bike[brand_id]">
+		  <% for i in BikeBrand.all %>
+  
+			<option value=<%=i.id%>><%= i.name %></option>
+		  <%end%>
+		  </select>
+	
+		</td>
+		<td>
+
+		  <b><%= f.label :model_id %></b></td><td>
+    
+		  <select id="bike_model_id" name="bike[model_id]">
+		  <% for i in BikeModel.all %>
+  
+			<option value=<%=i.id%>><%= i.name %></option>
+		  <%end%>
+		  </select>
+
+		</td>
+
+		
+		</tr>
+
+		<tr>
+		<td>
+
+		  <b><%= f.label :wheel_size %></b></td><td>
+   
+    <%= f.text_field :wheel_size %>
+
+		</td>
+		<td>
+
+		  <b><%= f.label :top_tube %></b></td><td>
+    
+    <%= f.text_field :top_tube %>
+
+		</td>
+		</tr>
+
+		<tr>
+		<td>
+
+		  <b><%= f.label :seat_tube %></b></td><td>
+    
+    <%= f.text_field :seat_tube %>
+
+		</td>
+		<td>
+
+		  <b><%= f.label :color %></b></td><td>
+
+    
+    <%= f.text_field :color %>
+		</td>
+
+		</tr>
+
+		<tr>
+
+		</tr>
+		</table>
+		<br/>
+		<br/>
+		<table border="0">
+		<tr><td>		
+		
+		<b>Condition:</b></td><td>
+		  <select id="condition" name="condition">
+		  <option value="A">A</option>
+		  <option value="B">B</option>
+		  <option value="C">C</option>
+		  <option value="D">D</option>
+		</select></td>	
+		</tr>
+		<tr>
+		<td>		
+		 <b>Quality:</b></td><td>
+		  <select id="quality" name="quality">
+		  <option value="A">A</option>
+		  <option value="B">B</option>
+		  <option value="C">C</option>
+		  <option value="D">D</option>
+		</select></td>
+		
+		</tr>
+		</table>
+	
+		
+</td>
+
+</tr>
+</table>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+
 
 <%= link_to 'Back', bikes_path %>

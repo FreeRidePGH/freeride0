@@ -1,6 +1,7 @@
 class BikeAssesmentsController < ApplicationController
   # GET /bike_assesments
   # GET /bike_assesments.json
+ 
   def index
     @bike_assesments = BikeAssesment.all
 
@@ -52,7 +53,7 @@ class BikeAssesmentsController < ApplicationController
       end
     end
   end
-
+  
   # PUT /bike_assesments/1
   # PUT /bike_assesments/1.json
   def update

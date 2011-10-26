@@ -1,5 +1,7 @@
 Freeride::Application.routes.draw do
   
+  resources :favorites
+
   resources :bike_assesments
 
   get "search/index"

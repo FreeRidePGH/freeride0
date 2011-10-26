@@ -2,7 +2,15 @@
 <% # which is the controller name ("page" variable from the %>
 <% # application.html.erb layout file) %>
 
+<% if subnav=="bikes" || subnav=="search" %>
+<li><a href="/search/index">Find Bikes</a></li>
+<li><a href="/bikes">View Bikes</a></li>
+<li><a href="/bikes/new">Add Bike</a></li>	
+
+<% else %>	
 
 <li><a href=""><%= subnav.capitalize %> Sublink 1</a></li>
 <li><a href=""><%= subnav.capitalize %> Sublink 2</a></li>
-<li><a href=""><%= subnav.capitalize %> Sublink 3</a></li>		
+<li><a href=""><%= subnav.capitalize %> Sublink 3</a></li>	
+
+<% end%>
