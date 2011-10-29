@@ -20,28 +20,20 @@
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number %>
+  </div>
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :encrypted_password %><br />
-    <%= f.text_field :encrypted_password %>
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
   </div>
   <div class="field">
-    <%= f.label :salt %><br />
-    <%= f.text_field :salt %>
-  </div>
-  <div class="field">
-    <%= f.label :account_value %><br />
-    <%= f.text_field :account_value %>
-  </div>
-  <div class="field">
-    <%= f.label :has_read_packet %><br />
-    <%= f.check_box :has_read_packet %>
-  </div>
-  <div class="field">
-    <%= f.label :role %><br />
-    <%= f.number_field :role %>
+    <%= f.label :password_confirmation %><br />
+    <%= f.text_field :password_confirmation %>
   </div>
   <div class="actions">
     <%= f.submit %>
