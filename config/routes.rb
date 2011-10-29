@@ -1,15 +1,13 @@
 Freeride::Application.routes.draw do
-  
-  resources :favorites
-
-  resources :bike_assesments
 
   get "search/index"
 
   root :to => 'home#index'
   match '/dashboard', :to => 'home#dashboard', :as => :dashboard
   match '/signup', :to => 'users#new', :as => :signup
+  match '/logout', :to => 'sessions#destroy'
   
+  resources :sessions, :only => [:create, :destroy]
   resources :safety_item_responses
   resources :safety_items
   resources :safety_inspections
@@ -21,6 +19,10 @@ Freeride::Application.routes.draw do
   resources :bike_models
   resources :bike_brands
   resources :bikes
+  resources :favorites
+  resources :bike_assesments
+  
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

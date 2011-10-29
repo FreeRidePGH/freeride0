@@ -1,0 +1,25 @@
+<%= form_for(:session, :url => sessions_path) do |f| %>
+<table id="login">
+	<tr>
+		<td>
+			<div class="field">
+				<%= f.label :email %>: &nbsp;<br />
+				<%= f.text_field :email, :size => 25 %>
+			</div>
+		</td>
+	</tr><tr>
+		<td>
+			<div class="field">
+				<%= f.label :password %>: &nbsp; <br />
+				<%= f.password_field :password, :size => 25 %>
+			</div>
+		</td>
+	</tr><tr>
+		<td align="center">
+			<div class="actions">
+				<%= f.submit "Login!" %>
+			</div>
+		</td>
+	</tr>
+</table>
+<% end %>

@@ -1,3 +1,15 @@
+<p id="notice"><%= notice %></p>
 <h1>Index Page</h1>
-<h2><%= link_to "\"Log in\" to Dashboard Page", dashboard_path %></h2>
+<h2><%= link_to "Dashboard Page", dashboard_path %></h2>
 <p><%= link_to "New User Signup", signup_path %></p>
+
+<table>
+	<tr>
+		<td>
+			<%= render :partial => "sessions/form_login" %>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+</table>	

@@ -11,7 +11,24 @@
 <body>
 
 <div id="wrapper">
-	<div id="header">
+	<div id="header">	
+		<div id="personal_welcome">
+			<% if current_user %>
+
+			<a href="<%= logout_path %>">
+				<li>Logout</li>
+			</a>
+			<a href="<%= user_path(current_user) %>">
+				<li>
+					<%= "Welcome, #{current_user.first_name}" %>
+				</li>
+			</a>
+			<% else %>
+			<a href="<%= root_path %>">
+				<li>Please Login or Signup</li>
+			</a>
+			<%end%>
+		</div>
 		<h1 align="center"><%= link_to "Free Ride", root_path %></h1>
 	</div>
 	<div id="container">
