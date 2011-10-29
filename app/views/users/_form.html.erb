@@ -21,7 +21,9 @@
   </div>
   <div class="field">
     <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number %>
+    (<%= f.text_field :phone1, :size => 2, :maxlength => 3 %>)
+		<%= f.text_field :phone2, :size => 3, :maxlength => 3 %> &ndash;
+		<%= f.text_field :phone3, :size => 4, :maxlength => 4 %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
@@ -29,11 +31,11 @@
   </div>
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
   </div>
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.text_field :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
   </div>
   <div class="actions">
     <%= f.submit %>

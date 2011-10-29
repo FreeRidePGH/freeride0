@@ -14,19 +14,21 @@
 	<div id="header">	
 		<div id="personal_welcome">
 			<% if current_user %>
-
-			<a href="<%= logout_path %>">
-				<li>Logout</li>
-			</a>
-			<a href="<%= user_path(current_user) %>">
-				<li>
-					<%= "Welcome, #{current_user.first_name}" %>
-				</li>
-			</a>
+				<a href="<%= logout_path %>">
+					<li>Logout</li>
+				</a>
+				<a href="<%= user_path(current_user) %>">
+					<li>
+						<%= "Welcome, #{current_user.first_name}" %>
+					</li>
+				</a>
 			<% else %>
-			<a href="<%= root_path %>">
-				<li>Please Login or Signup</li>
-			</a>
+				<a href="<%= signup_path %>">
+					<li>Signup</li>
+				</a>
+				<a href="<%= root_path %>">
+					<li>Login</li>
+				</a>
 			<%end%>
 		</div>
 		<h1 align="center"><%= link_to "Free Ride", root_path %></h1>
@@ -35,10 +37,9 @@
 		<div id="navigation">
 			<ul>
 				<li><%= link_to "Home", dashboard_path, :class => (page == "home" ? "selected" : "") %></li>
-				<li><%= link_to "Bikes", bikes_path, :class => ((page == "bikes" || page=="search") ? "selected" : "") %></li>
-				<li><%= link_to "Users", users_path, :class => (page == "users" ? "selected" : "") %></li>
+				<li><%= link_to "Bikes", search_path, :class => ((page == "bikes" || page=="search") ? "selected" : "") %></li>
 				<li><%= link_to "EAB Projects", eab_projects_path, :class => (page == "eab_projects" ? "selected" : "") %></li>
-				<li><%= link_to "Safety Inspections", safety_inspections_path, :class => (page == "safety_inspections" ? "selected" : "") %></li>
+				<li><%= link_to "Users", users_path, :class => (page == "users" ? "selected" : "") %></li>
 			</ul>
 		</div>
 		<div id="subnav">

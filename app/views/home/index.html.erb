@@ -1,14 +1,10 @@
-<p id="notice"><%= notice %></p>
 <h1 align="center">Welcome to Free Ride!</h1>
-<table>
-	<tr>
-		<td valign="top">
-			<h2 align="center">Login</h2>
-			<%= render :partial => "sessions/form_login" %>
-		</td>
-		<td valign="top">
-			<h2 align="center">Signup</h2>
-			<%= render :partial => "users/form" %>
-		</td>
-	</tr>
-</table>	
+<br />
+<h2 align="center">Login</h2>
+<table align="center"><tr><td>
+<%= render :partial => "sessions/form_login" %>
+</td></tr></table>
+<br />
+<h2 align="center">
+	<%= link_to "New User Signup", signup_path %>
+</h3>

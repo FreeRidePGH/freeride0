@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :volunteer_hours_entries
   
   attr_accessor :password # using attr_accessor :password creates a virtual password attribute, not stored in database
+  attr_accessor :phone1, :phone2, :phone3
   attr_accessible :first_name, :last_name, :email, :phone_number, :password, :password_confirmation                
   attr_protected :account_value, :has_read_packet, :role
   

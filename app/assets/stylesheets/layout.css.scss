@@ -43,23 +43,26 @@ a {
 
 #personal_welcome { 
 	margin: 0 11px 0 0;
-
-}
-
-#personal_welcome li { 
-	margin: 36px 5px 0 5px;
-	padding: 5px 7px 5px 7px;
-	float: right;
-	display: block;
-	color: #ffffff;
-	font-weight: bold;
-	text-decoration: none;
-	background-color: #d00000;
 	
-	a {
+	li {
+		margin: 36px 5px 0 5px;
+		padding: 5px 7px 5px 7px;
+		float: right;
+		display: block;
 		color: #ffffff;
+		font-weight: bold;
+		text-decoration: none;
+		background-color: #d00000;
+
+		a {
+			color: #ffcc00;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
 	}
 }
+
 
 #navigation {
 	background-color: #333333;

@@ -55,10 +55,11 @@ class UsersController < ApplicationController
     else
     
       @user = User.new(params[:user])
+      @user.phone_number = params[:user][:phone1]+params[:user][:phone2]+params[:user][:phone3]
       @user.email = @user.email.downcase
       @user.account_value = 0
-      @user.has_read_packed = false
-
+      @user.has_read_packet = false
+      
       respond_to do |format|
         if @user.save
           sign_in @user   # sign in the user right away after they register
