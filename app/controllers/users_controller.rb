@@ -44,6 +44,9 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    @user.phone1 = @user.phone_number[0..2]
+    @user.phone2 = @user.phone_number[3..5]
+    @user.phone3 = @user.phone_number[6..9]
   end
 
   # POST /users

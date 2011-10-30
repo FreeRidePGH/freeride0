@@ -1,45 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>First name:</b>
-  <%= @user.first_name %>
-</p>
 
-<p>
-  <b>Last name:</b>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>Encrypted password:</b>
-  <%= @user.encrypted_password %>
-</p>
-
-<p>
-  <b>Salt:</b>
-  <%= @user.salt %>
-</p>
-
-<p>
-  <b>Account value:</b>
-  <%= @user.account_value %>
-</p>
-
-<p>
-  <b>Has read packet:</b>
-  <%= @user.has_read_packet %>
-</p>
-
-<p>
-  <b>Role:</b>
-  <%= @user.role %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<table cellpadding="5">
+	<tr>
+		<td colspan="2" align="center">
+			<h1><%= @user.name %></h1>
+			<h3><%= mail_to @user.email %></h3>
+			<p><b>Phone Number</b><br />
+			<%= number_to_phone(@user.phone_number, :area_code => true) %></p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<b>Has Read Packet</b><br />
+			<%= @user.has_read_packet ? "Yes" : "No" %>
+		</td>
+		<td align="center">
+			<b>Account Value</b><br />
+			<%= number_to_currency(@user.account_value) %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<b>Role</b><br />
+			<%= @user.role %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<%= link_to 'Edit', edit_user_path(@user) %> |
+			<%= link_to 'Back', users_path %>
+		</td>
+	</tr>
+</table>
