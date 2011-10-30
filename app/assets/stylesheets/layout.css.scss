@@ -54,13 +54,16 @@ a {
 		text-decoration: none;
 		background-color: #d00000;
 
-		a {
+
+	}
+	
+	a li {
+		&:hover {
 			color: #ffcc00;
-		}
-		a:hover {
-			text-decoration: underline;
+			background-color: #333333;
 		}
 	}
+	
 }
 
 
