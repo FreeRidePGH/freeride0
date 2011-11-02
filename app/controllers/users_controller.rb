@@ -5,13 +5,17 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-
+    @term = (params[:q])
+    if @term == nil
+      @users = User.all
+    else
+      @users = User.search(@term)
+    end
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # search.html.erb
       format.json { render json: @users }
     end
-  end
+  end 
 
   # GET /users/1
   # GET /users/1.json
