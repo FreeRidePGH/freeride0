@@ -1,26 +1,31 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   name: 
   description: 
   hook_number: 2
 
 two:
+  id: 2
   name: 
   description: 
   hook_number: 6
   
 three:
+  id: 3
   name: 
   description:
   hook_number: 44
 
 four:
+  id: 4
   name: CMU - Porter Hall
   description: Classroom PH A19A
   hook_number: 
 
 five:
+  id: 5
   name: Shadyside Elementary School
   description: Basement storage closet
   hook_number: 

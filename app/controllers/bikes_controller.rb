@@ -9,7 +9,7 @@ class BikesController < ApplicationController
 	elsif @idtype == "bikeID"
 		@bikes = Bike.where(:id => @searchID)
 	else
-		@bikes = Bike.where(:location_id => @searchID)
+		@bikes = Bike.where(:location_id => Location.find_by_hook_number(@searchID))
 	end
 	
     respond_to do |format|

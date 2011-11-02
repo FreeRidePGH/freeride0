@@ -22,11 +22,16 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
   </tr>
 
 <% @bikes.each do |bike| %>
+<% @loc = Location.find_by_id(bike.location_id)%>
   <tr>
 		<td><%= bike.id %></td>
     <td><%= bike.model_id %></td>
     <td><%= bike.brand_id %></td>
-    <td><%= bike.location_id %></td>
+    <td><%if @loc.hook_number.nil?%>
+			<%=@loc.name%>
+		<%else%>
+			Hook - <%=@loc.hook_number%>
+		<%end%></td>
     <td><%= bike.wheel_size %></td>
     <td><%= bike.top_tube %></td>
     <td><%= bike.seat_tube %></td>
