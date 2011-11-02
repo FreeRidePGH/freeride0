@@ -2,8 +2,16 @@ class BikesController < ApplicationController
   # GET /bikes
   # GET /bikes.json
   def index  
-    @bikes = Bike.all
-
+    @searchID = params[:searchText]
+	@idtype = params[:idtype]
+	if @searchID.nil?
+		@bikes = Bike.all
+	elsif @idtype == "bikeID"
+		@bikes = Bike.where(:id => @searchID)
+	else
+		@bikes = Bike.where(:location_id => @searchID)
+	end
+	
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @bikes }

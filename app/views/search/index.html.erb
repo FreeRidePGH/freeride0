@@ -1,10 +1,14 @@
+
 <h1 align="center">Search Bikes</h1>
 <div name="searchFromDiv"align="center">
 <form name="searchForm" action = "/bikes" method = "get">
-<input type="text" size = "50" name="searchText" value="Bike ID or Hook Number"/>
-<input type="submit" value="Go" name = "submit">
+<input type="text" size = "50" name="searchText" id="txtfld" value="Bike ID or Hook Number" onClick="document.getElementById('txtfld').select();"/>
+<input type="submit" value="Go">
 <br/>
 <br/>
+
+	<input type="radio" name = "idtype" value="bikeID" id="bikeID" checked="checked"><label for="bikeID">Bike ID</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="radio" name = "idtype" value="hookID" id="hookID"/><label for="hookID">Hook ID</label><br/><br/>
 
 <table id="criteria" border="4">
 	<tr>

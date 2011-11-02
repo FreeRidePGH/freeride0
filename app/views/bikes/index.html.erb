@@ -1,4 +1,7 @@
 <h1>Listing bikes</h1>
+<% if !@searchID.nil? %>
+You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
+<% end %>
 
 <table>
   <tr>
