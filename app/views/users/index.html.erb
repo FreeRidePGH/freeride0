@@ -5,6 +5,7 @@
     <th>First name</th>
     <th>Last name</th>
     <th>Email</th>
+		<th>Phone number</th>
     <th>Account value</th>
     <th>Has read packet</th>
     <th>Role</th>
@@ -18,8 +19,9 @@
     <td><%= user.first_name %></td>
     <td><%= user.last_name %></td>
     <td><%= user.email %></td>
+    <td><%= user.phone_number %></td>
     <td><%= user.account_value %></td>
-    <td><%= user.has_read_packet %></td>
+    <td><%= user.has_read_packet ? "Yes" : "No" %></td>
     <td><%= user.role %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
@@ -27,7 +29,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New User', signup_path %>
