@@ -155,8 +155,15 @@
 </tr>
 </table>
 
+
+<div align="right">
+<form name="addtoFav" action = "/favorites" method = "post">
+<input type="hidden" name="bike_id" value="<%=@bike.id%>" />
+<input type="hidden" name="user_id" value="<%=@current_user.id%>" />
+<input type="submit" value="Add to Favorites"></form>
 <br/>
-<br/>
-<a href="/favorites?bike_id=<%=@bike.id%>">Add to favorites</a> | <a href="/eab_projects/new">Start EAB Project</a> |
+
+<a href="/eab_projects/new">Start EAB Project</a> |
 
 <%= link_to 'Edit Info', edit_bike_path(@bike) %>
+</div>

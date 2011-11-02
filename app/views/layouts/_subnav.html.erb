@@ -23,6 +23,7 @@
 
 	<% if current_user %>
 		<li><%= link_to "Browse Users", users_path %></li>
+		<li><%= link_to "My Favorites", "../myfav" %></li>
 	<% else %>
 		<li><%= link_to "Login", root_path %></li>
 		<li><%= link_to "Signup", signup_path %></li>

@@ -4,6 +4,7 @@ Freeride::Application.routes.draw do
   match "/search", :to => 'search#index', :as => :search
   match '/dashboard', :to => 'home#dashboard', :as => :dashboard
   match '/signup', :to => 'users#new', :as => :signup
+  match '/myfav', :to => 'users#myfav'
   match '/logout', :to => 'sessions#destroy'
   
   resources :sessions, :only => [:create, :destroy]

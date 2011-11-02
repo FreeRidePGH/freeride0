@@ -104,4 +104,9 @@ class UsersController < ApplicationController
       format.json { head :ok }
     end
   end
+    
+  def myfav
+    @favs = Favorite.where(:user_id => current_user.id)
+
+  end  
 end

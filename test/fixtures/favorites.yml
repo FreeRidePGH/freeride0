@@ -6,4 +6,12 @@ one:
 
 two:
   user_id: 1
-  bike_id: 1
+  bike_id: 2
+
+three:
+  user_id: 2
+  bike_id: 2
+  
+four:
+  user_id: 3
+  bike_id: 2

@@ -24,3 +24,15 @@ two:
   color: Red
   date_in: 2011-08-25 14:26:55
   date_out: 2011-10-22 16:55:06
+
+two:
+  id: 3
+  model_id: 1
+  brand_id: 2
+  location_id: 3
+  wheel_size: 400
+  top_tube: 24
+  seat_tube: 28.5
+  color: Maroon
+  date_in: 2011-08-25 14:26:55
+  date_out: 2011-10-22 16:55:06

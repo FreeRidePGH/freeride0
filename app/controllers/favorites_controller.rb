@@ -40,7 +40,10 @@ class FavoritesController < ApplicationController
   # POST /favorites
   # POST /favorites.json
   def create
-    @favorite = Favorite.new(params[:favorite])
+  
+    @bid = params[:bike_id]
+	@uid = params[:user_id]
+    @favorite = Favorite.new(:user_id => @uid, :bike_id => @bid)
 
     respond_to do |format|
       if @favorite.save
@@ -80,4 +83,5 @@ class FavoritesController < ApplicationController
       format.json { head :ok }
     end
   end
+
 end
