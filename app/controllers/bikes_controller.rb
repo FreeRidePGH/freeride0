@@ -49,7 +49,7 @@ class BikesController < ApplicationController
   # POST /bikes.json
   def create
     @bike = Bike.new(params[:bike])
-
+	@bike.status = "Available"
 	@q = params[:quality]
 	@c = params[:condition]
 	@v = params[:value]
