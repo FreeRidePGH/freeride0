@@ -1,5 +1,22 @@
 <p id="notice"><%= notice %></p>
-<h1>Bike Profile </h1>
+<% 
+@isDeparted = false
+@hasProj = false
+@sColor = "Sother" 
+if @bike.status.casecmp("EAB in progress")==0 || @bike.status.casecmp("FFS in progress") ==0
+	@sColor = "Seab"
+	@hasProj = true
+elsif @bike.status.casecmp("Sold") ==0 || @bike.status.casecmp("Departed") ==0
+	@sColor = "Ssold"
+	@isDeparted = true
+elsif @bike.status.casecmp("Avaliable") ==0
+	@sColor = "Savaliable"
+else
+	@sColor = "Sother"
+end
+%>
+<% @loc = Location.find_by_id(@bike.location_id)%>
+<h1>Bike Profile&nbsp;&nbsp;&nbsp;&nbsp;<table border="1" id="<%=@sColor%>"><tr><td> Status: <%=@bike.status%></td></tr></table></h1> 
 <table border="0" id="maininfo">
 <tr height="80px">
 <td>
@@ -13,7 +30,11 @@
 	<tr>
 		<td>
 			<b>Hook:</b></td><td>
-			<%= @bike.location_id %>
+			<%if @loc.hook_number.nil?%>
+			<font size="2">Not on Hook</font>
+			<%else%>
+			<%=@loc.hook_number%>
+			<%end%>
 		</td>
 	</tr>
 	</table>
@@ -146,10 +167,22 @@
 </tr>
 <tr>
 <td style="border:solid 2px #060" colspan="2"><h2>Location History</h2>
+
+
 	<table border="0" id="history">
 	<tr id="headers">
 	<td>Location</td><td>Date</td>
 	</tr>	
+	<tr>
+	    <td><%if @loc.hook_number.nil?%>
+			<%=@loc.name%>
+		<%else%>
+			HookID - <%=@loc.hook_number%>
+		<%end%></td>
+		<td>
+			<%=@loc.updated_at%>
+		</td>
+	</tr>
 	</table>
 </td>
 </tr>
@@ -157,13 +190,15 @@
 
 
 <div align="right">
+<%if !@isDeparted and !@hasProj %>
 <form name="addtoFav" action = "/favorites" method = "post">
 <input type="hidden" name="bike_id" value="<%=@bike.id%>" />
 <input type="hidden" name="user_id" value="<%=@current_user.id%>" />
 <input type="submit" value="Add to Favorites"></form>
 <br/>
 
-<a href="/eab_projects/new">Start EAB Project</a> |
 
+	<a href="/eab_projects/new">Start EAB Project</a> |
+<%end%>
 <%= link_to 'Edit Info', edit_bike_path(@bike) %>
 </div>

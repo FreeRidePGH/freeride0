@@ -1,9 +1,12 @@
-<h1>Listing my favorites</h1>
+<h1>My favorites list</h1>
 
 <table>
   <tr>
-    <th>User</th>
     <th>Bike</th>
+	<th>Location</th>
+	<th>Brand</th>
+    <th>Model</th>
+	<th>Color</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,8 +14,18 @@
 
 <% @favs.each do |favorite| %>
   <tr>
-    <td><%= favorite.user_id %></td>
+  <% @bike = Bike.find_by_id(favorite.bike_id)%>
+  <% @loc = Location.find_by_id(@bike.location_id)%>
+  
     <td><%= favorite.bike_id %></td>
+    <td><%if @loc.hook_number.nil?%>
+			<%=@loc.name%>
+		<%else%>
+			HookID - <%=@loc.hook_number%>
+		<%end%></td>
+    <td><%= BikeBrand.find(@bike.brand_id).name %></td>
+    <td><%= BikeModel.find(@bike.model_id).name %></td>
+    <td><%= @bike.color %></td>
     <td><%= link_to 'Show', favorite %></td>
     <td><%= link_to 'Edit', edit_favorite_path(favorite) %></td>
     <td><%= link_to 'Destroy', favorite, confirm: 'Are you sure?', method: :delete %></td>

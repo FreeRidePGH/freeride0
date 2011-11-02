@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026054221) do
+ActiveRecord::Schema.define(:version => 20111102172937) do
 
   create_table "bike_assesments", :force => true do |t|
     t.integer  "bike_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20111026054221) do
     t.datetime "updated_at"
     t.datetime "date_in"
     t.datetime "date_out"
+    t.string   "status"
   end
 
   create_table "eab_projects", :force => true do |t|
