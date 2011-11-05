@@ -75,6 +75,7 @@ class User < ActiveRecord::Base
     def initialize_user
       self.account_value = 0
       self.has_read_packet = false
+      true # if this method returns false as part of the before_create callback, user won't be saved
     end
   
     def sanitize_user
