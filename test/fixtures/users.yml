@@ -10,6 +10,10 @@ one:
   last_name: Meyers
   email: jrmeyers@andrew.cmu.edu
   phone_number: 4129872345
+  can_text_phone: false
+  address: |
+            5822 Garnet St
+            San Diego, CA 92120
   encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
   salt: <%= salt %>
   account_value: 45.50
@@ -22,6 +26,11 @@ two:
   last_name: Jacobs
   email: sjacobs@cmu.edu
   phone_number: 9871236543
+  can_text_phone: true
+  address: |
+            9235 Wilson Ave
+            Apt '#'203
+            Chicago, IL 64233
   encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
   salt: <%= salt %>
   account_value: 0
@@ -34,6 +43,10 @@ three:
   last_name: Fox
   email: tmfox@andrew.cmu.edu
   phone_number: 8581234567
+  can_text_phone: true
+  address: |
+            1234 Cherry Ln
+            Princeton, NJ 15032
   encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
   salt: <%= salt %>
   account_value: 230

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102172937) do
+ActiveRecord::Schema.define(:version => 20111105163640) do
 
   create_table "bike_assesments", :force => true do |t|
     t.integer  "bike_id"
@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(:version => 20111102172937) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "phone_number"
+    t.boolean  "can_text_phone"
+    t.string   "address"
   end
 
   create_table "volunteer_hours_entries", :force => true do |t|
