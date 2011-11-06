@@ -14,6 +14,11 @@ class EabProjectsController < ApplicationController
   # GET /eab_projects/1.json
   def show
     @eab_project = EabProject.find(params[:id])
+    
+    @total_hours_spent = 0
+    @eab_project.repair_hours_entries.each do |entry|
+      @total_hours_spent = @total_hours_spent + entry.duration
+    end
 
     respond_to do |format|
       format.html # show.html.erb

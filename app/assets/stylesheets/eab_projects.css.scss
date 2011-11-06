@@ -1,3 +1,61 @@
 // Place all the styles related to the EABProjects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h2 {
+	line-height: 22px;
+	margin: 0;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.checkmark {
+	font-size: 24px;
+	line-height: 24px;
+}
+
+#info_table {
+	text-align: center;
+	border: 2px solid black;
+	h3 {
+		margin: 0;
+	}
+}
+
+#project_table {
+	width: 600px;
+}
+
+#stats_table {
+	text-align: center;
+	border: 2px solid black;
+	h3 {
+		margin: 0 0 10px 0;
+	}
+}
+
+#progress_table {
+	border: 2px solid black;
+	vertical-align: middle;
+	td {
+		margin: 0;
+		padding: 5px;
+		border: 2px solid black;		
+	}
+}
+
+.work_table {
+	h2 {
+		text-align: center;
+	}
+	p {
+		margin: 0;
+		text-align: center;
+		font-weight: bold;
+		font-style: italic;
+	}
+	border: 2px solid black;
+}

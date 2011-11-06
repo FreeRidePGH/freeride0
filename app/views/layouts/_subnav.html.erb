@@ -23,11 +23,16 @@
 
 	<% if current_user %>
 		<li><%= link_to "Browse Users", users_path %></li>
-		<li><%= link_to "My Favorites", "../myfav" %></li>
+		<li><%= link_to "My Favorites", myfav_path %></li>
 	<% else %>
 		<li><%= link_to "Login", root_path %></li>
 		<li><%= link_to "Signup", signup_path %></li>
 	<% end %>
+	
+<% elsif subnav=="eab_projects" %>
+
+		<li><%= link_to "All Projects", eab_projects_path %></li>
+		<li><%= link_to "My Projects", root_path %></li>
 
 <% else %>	
 

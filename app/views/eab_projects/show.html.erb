@@ -1,23 +1,104 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Bike:</b>
-  <%= @eab_project.bike_id %>
-</p>
+<table id="project_table">
+	<tr>
+		<td>
+			<h1 align="center">EAB Project</h1>
+		</td>
+		<td>
+			<table id="info_table">
+				<tr><td>
+					<h3>Bike ID: <%= @eab_project.bike_id %></h3>
+				</td></tr>
+				<tr><td>
+					<h3>Project Owner</h3>
+					<b><%= @eab_project.user.name %></b>
+				</td></tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table id="progress_table">
+				<tr>
+					<td><h2>1</h2></td>
+					<td><h2 align="center">Complete<br/>Prerequisites</h2></td>
+					<td class="checkmark">&#10004;</td>
+				</tr>
+				<tr>
+					<td><h2>2</h2></td>
+					<td><a href="<%= bike_path(@eab_project.bike) %>"><h2 align="center">Select Bike</h2></a></td>
+					<td class="checkmark">&#10004;</td>
+				</tr>
+				<tr>
+					<td><h2>3</h2></td>
+					<td><a href="<%= new_volunteer_hours_entry_path %>"><h2 align="center">Earn Volunteer<br/>Hours</h2></a></td>
+					<td class="checkmark">&#10004;</td>
+				</tr>
+				</tr>
+				<tr>
+					<td><h2>4</h2></td>
+					<td><a href="<%= new_repair_hours_entry_path %>"><h2 align="center">Refurbish Bike</h2></td>
+					<td class="checkmark">&#10004;</td>
+				</tr>
+				<tr>
+					<td><h2>5</h2></td>
+					<td><h2 align="center">Safety Check<br/>&amp; Sign Off</h2></td>
+					<td class="checkmark">&#10004;</td>
+				</tr>
+			</table>
+		</td>
+		<td>
+			<table id="stats_table">
+				<tr>
+					<td>
+						<h2>Total Hours Spent</h2>
+						<h3><%= @total_hours_spent %></h3>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h2>Last Active</h2>
+						<h3><%= time_ago_in_words(@eab_project.updated_at) %> ago</h3>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h2>Project Started</h2>
+						<h3><%= time_ago_in_words(@eab_project.start_date) %> ago</h3>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<table class="work_table">
+				<tr>
+					<td>
+						<h2>Refurbishment Work</h2>
+						<p><%= link_to "New Repair Hours Entry", new_repair_hours_entry_path %></p>
+					</td>
+				</tr>
+				<% if @eab_project.repair_hours_entries.empty? %>
+					<tr><td><h3>None yet!</h3></td></tr>
+				<% end %>
+				<% @eab_project.repair_hours_entries.each do |entry| %>
+				<tr>
+					<td>
+						&rarr; <%= link_to "#{entry.start_date} for #{entry.duration_text}", entry %>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+		</td>
+	</tr>
+</table>
 
-<p>
-  <b>User:</b>
-  <%= @eab_project.user_id %>
-</p>
 
 <p>
   <b>Status:</b>
   <%= @eab_project.status %>
-</p>
-
-<p>
-  <b>Start date:</b>
-  <%= @eab_project.start_date %>
 </p>
 
 
