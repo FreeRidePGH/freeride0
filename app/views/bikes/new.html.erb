@@ -50,6 +50,7 @@
 		
 		  <b><%= f.label :brand_id %></b></td><td>
 		  <select id="bike_brand_id" name="bike[brand_id]">
+		  <option value="N.A.">Select Brand</option>
 		  <% for i in BikeBrand.all %>
   
 			<option value=<%=i.id%>><%= i.name %></option>
@@ -62,6 +63,7 @@
 		  <b><%= f.label :model_id %></b></td><td>
     
 		  <select id="bike_model_id" name="bike[model_id]">
+		  <option value="N.A.">Select Model</option>
 		  <% for i in BikeModel.all %>
   
 			<option value=<%=i.id%>><%= i.name %></option>

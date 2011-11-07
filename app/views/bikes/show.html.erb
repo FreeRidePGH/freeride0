@@ -16,7 +16,16 @@ else
 end
 %>
 <% @loc = Location.find_by_id(@bike.location_id)%>
-<h1>Bike Profile&nbsp;&nbsp;&nbsp;&nbsp;<table border="1" id="<%=@sColor%>"><tr><td> Status: <%=@bike.status%></td></tr></table></h1> 
+<table id="statusTable"><tr><td><h2>Bike Profile&nbsp;&nbsp;&nbsp;&nbsp;</h2></td><td id="<%=@sColor%>"> Status: <%=@bike.status%></td></tr></table>
+<div class="floatright">
+<%if !@isDeparted and !@hasProj %>
+<form name="addtoFav" action = "/favorites" method = "post">
+<input type="hidden" name="bike_id" value="<%=@bike.id%>" />
+<input type="hidden" name="user_id" value="<%=@current_user.id%>" />
+<input type="submit" value="Add to Fav"></form>
+<%end%>
+</div>
+
 <table border="0" id="maininfo">
 <tr height="80px">
 <td>
@@ -30,7 +39,9 @@ end
 	<tr>
 		<td>
 			<b>Hook:</b></td><td>
-			<%if @loc.hook_number.nil?%>
+			<%if @loc.nil?%>
+			N.A.
+			<%elsif @loc.hook_number.nil?%>
 			<font size="2">Not on Hook</font>
 			<%else%>
 			<%=@loc.hook_number%>
@@ -65,9 +76,16 @@ end
 		  <b>Condition:</b></td><td>
 		   <% 
 		  @bikeA = BikeAssesment.find_by_bike_id(@bike.id)
+		  @condition = "N.A."
+		  @quality = "N.A."
+		  @value = "N.A."
+		  if !@bikeA.nil?
+			@condition = @bikeA.condition
+			@quality = @bikeA.quality
+			@value = @bikeA.value
+		  end
 		  %>
-		  <%= @bikeA.condition %>
-
+		  <%= @condition %>
 		</td>
 		
 		</tr>
@@ -89,7 +107,7 @@ end
 		<td>
 
 		  <b>Quality:</b></td><td>
-		  <%= @bikeA.quality %>
+		  <%= @quality %>
 
 		</td>
 		</tr>
@@ -110,7 +128,7 @@ end
 		<td>
 
 		  <b>Value:</b></td><td>
-		  $<%= @bikeA.value %>
+		  $<%= @value %>
 
 		</td>
 		</tr>
@@ -174,13 +192,20 @@ end
 	<td>Location</td><td>Date</td>
 	</tr>	
 	<tr>
-	    <td><%if @loc.hook_number.nil?%>
+	    <td>
+		<%if @loc.nil?%>
+		N.A.		
+		<%elsif @loc.hook_number.nil?%>
 			<%=@loc.name%>
 		<%else%>
 			HookID - <%=@loc.hook_number%>
 		<%end%></td>
 		<td>
+		<%if @loc.nil?%>
+			N.A.
+		<%else%>
 			<%=@loc.updated_at%>
+		<%end%>
 		</td>
 	</tr>
 	</table>
@@ -191,13 +216,6 @@ end
 
 <div align="right">
 <%if !@isDeparted and !@hasProj %>
-<form name="addtoFav" action = "/favorites" method = "post">
-<input type="hidden" name="bike_id" value="<%=@bike.id%>" />
-<input type="hidden" name="user_id" value="<%=@current_user.id%>" />
-<input type="submit" value="Add to Favorites"></form>
-<br/>
-
-
 	<a href="/eab_projects/new">Start EAB Project</a> |
 <%end%>
 <%= link_to 'Edit Info', edit_bike_path(@bike) %>

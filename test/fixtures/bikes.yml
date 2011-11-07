@@ -11,7 +11,7 @@ one:
   color: Blue
   date_in: 2011-08-16 18:30:00
   date_out: 
-
+  status: "Avaliable"
 
 two:
   id: 2
@@ -24,6 +24,7 @@ two:
   color: Red
   date_in: 2011-08-25 14:26:55
   date_out: 2011-10-22 16:55:06
+  status: "EAB in progress"
 
 three:
   id: 3
@@ -36,3 +37,4 @@ three:
   color: Maroon
   date_in: 2011-08-25 14:26:55
   date_out: 2011-10-22 16:55:06
+  status: "sold"

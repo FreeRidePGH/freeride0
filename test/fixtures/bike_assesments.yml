@@ -15,3 +15,11 @@ two:
   quality: B
   condition: B
   value: 50.40
+  
+two:
+  id: 3
+  bike_id: 3
+  user_id: 2
+  quality: B
+  condition: B
+  value: 50.11

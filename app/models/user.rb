@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
   
     def sanitize_user
       self.email = self.email.downcase
-      self.address = strip_tags(self.address)
+      #self.address = strip_tags(self.address)
     end
  
     def encrypt_password
