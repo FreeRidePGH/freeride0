@@ -33,7 +33,7 @@ class BikesController < ApplicationController
   # GET /bikes/new.json
   def new
     @bike = Bike.new
-
+	@models = BikeModel.find(:all)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @bike }
@@ -53,11 +53,14 @@ class BikesController < ApplicationController
 	@q = params[:quality]
 	@c = params[:condition]
 	@v = params[:value]
+	#@locname = params[:locname]
 	
     respond_to do |format|
       if @bike.save
 		@bike_assesment = BikeAssesment.new(:bike_id => @bike.id, :quality => @q, :condition => @c, :value => @v)
 		@bike_assesment.save
+		#@bike_loc = Location.new(:name => @locname)
+		#@bike_loc.save
         format.html { redirect_to @bike, notice: 'Bike was successfully created.' }
         format.json { render json: @bike, status: :created, location: @bike }
       else

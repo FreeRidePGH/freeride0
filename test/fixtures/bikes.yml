@@ -11,7 +11,7 @@ one:
   color: Blue
   date_in: 2011-08-16 18:30:00
   date_out: 
-  status: "Avaliable"
+  status: "Available"
 
 two:
   id: 2

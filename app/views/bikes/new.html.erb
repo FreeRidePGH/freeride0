@@ -1,7 +1,34 @@
+<script>
+function update(box)
+{
+	var lists = new Array();
+	<% if !@models.nil?%>
+		<% for i in @models%>
+			if(document.newbikeform['bike[brand_id]'].value == <%=i.brand_id%>){
+				lists.push(new Array('<%=i.name %>', <%= i.id %>));
+			}
+		<%end%>
+	<%end%>
+	emptyList( box['bike[model_id]'] );
+	for ( i = 0; i < lists.length; i++ ) {
+		option = new Option(lists[i][0], lists[i][1]);
+		box['bike[model_id]'].options[i] = option;
+	}
+	
+	if(box['bike[model_id]'].options.length==0){
+		box['bike[model_id]'].options[0] = new Option("Choose a Brand", "");
+	}
+}
+
+function emptyList( box ) {
+	while ( box.options.length ) box.options[0] = null;
+}
+</script>
+  
+  
 <h1>New bike form</h1>
 
-
-<%= form_for(@bike) do |f| %>
+<%= form_for(@bike,:html => {:name => 'newbikeform'}) do |f| %>
   <% if @bike.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@bike.errors.count, "error") %> prohibited this bike from being saved:</h2>
@@ -28,8 +55,8 @@
 	<tr>
 		<td>
 			<b><%= f.label :location_id %></b></td><td>
-			    
-    <%= f.number_field :location_id %>
+			<input id="location_id" name="bike[location_id]" size="10" type="text" />		    
+
 		</td>
 	</tr>
 	</table>
@@ -47,29 +74,23 @@
 		<table border="1" cellpadding="3" id="bikeTable">
 		<tr>
 		<td>
-		
 		  <b><%= f.label :brand_id %></b></td><td>
-		  <select id="bike_brand_id" name="bike[brand_id]">
-		  <option value="N.A.">Select Brand</option>
-		  <% for i in BikeBrand.all %>
-  
-			<option value=<%=i.id%>><%= i.name %></option>
-		  <%end%>
-		  </select>
-	
+		<select name="bike[brand_id]" onchange="update(document.forms['newbikeform']);">
+		<option value="">Select a Brand</option>
+		<%for i in BikeBrand.all%>
+		<option value="<%=i.id%>"><%=i.name%></option>
+		<%end%>
+		</select>
+
 		</td>
 		<td>
-
+	
 		  <b><%= f.label :model_id %></b></td><td>
-    
-		  <select id="bike_model_id" name="bike[model_id]">
-		  <option value="N.A.">Select Model</option>
-		  <% for i in BikeModel.all %>
-  
-			<option value=<%=i.id%>><%= i.name %></option>
-		  <%end%>
-		  </select>
-
+		<select name="bike[model_id]">
+		<option value="">Select a Model</option>	
+	
+		</select>
+		
 		</td>
 
 		

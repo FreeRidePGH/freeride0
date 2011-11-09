@@ -18,11 +18,16 @@
   <% @loc = Location.find_by_id(@bike.location_id)%>
   
     <td><%= favorite.bike_id %></td>
-    <td><%if @loc.hook_number.nil?%>
+    <td>
+	<%if @loc.nil?%>
+		N.A.
+	<%else%>
+		<%if @loc.hook_number.nil?%>
 			<%=@loc.name%>
 		<%else%>
 			HookID - <%=@loc.hook_number%>
-		<%end%></td>
+		<%end%>		
+	<%end%></td>
     <td><%= BikeBrand.find(@bike.brand_id).name %></td>
     <td><%= BikeModel.find(@bike.model_id).name %></td>
     <td><%= @bike.color %></td>

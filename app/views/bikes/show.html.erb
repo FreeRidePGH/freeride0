@@ -9,7 +9,7 @@ if @bike.status.casecmp("EAB in progress")==0 || @bike.status.casecmp("FFS in pr
 elsif @bike.status.casecmp("Sold") ==0 || @bike.status.casecmp("Departed") ==0
 	@sColor = "Ssold"
 	@isDeparted = true
-elsif @bike.status.casecmp("Avaliable") ==0
+elsif @bike.status.casecmp("Available") ==0
 	@sColor = "Savaliable"
 else
 	@sColor = "Sother"
