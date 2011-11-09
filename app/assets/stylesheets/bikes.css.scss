@@ -102,3 +102,20 @@ visibility: hidden;
 z-index: 100;
 font-size: 12px;
 }
+
+.bikelisttable th .current {
+  padding-right: 12px;
+  background-color: yellow;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.bikelisttable th .asc {
+	background-color: yellow;
+
+}
+
+.bikelisttable th .desc {
+	background-color: yellow;
+	
+}

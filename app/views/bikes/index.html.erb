@@ -3,18 +3,18 @@
 You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <% end %>
 
-<table>
+<table class="bikelisttable">
   <tr>
-		<th>ID</th>
-    <th>Model</th>
-    <th>Brand</th>
-    <th>Location</th>
-    <th>Wheel size</th>
-    <th>Top tube</th>
-    <th>Seat tube</th>
-    <th>Color</th>
-    <th>Date In</th>
-    <th>Date Out</th>
+		<th><%= sortable "id" %></th>
+    <th><%= sortable "model_id" %></th>
+    <th><%= sortable "brand_id"%></th>
+    <th><%= sortable "location_id" %></th>
+    <th><%= sortable "wheel_size"%></th>
+    <th><%= sortable "top_tube" %></th>
+    <th><%= sortable "seat_tube" %></th>
+    <th><%= sortable "color"%></th>
+    <th><%= sortable "date_in", "Date In"%></th>
+    <th><%= sortable "date_out", "Date Out"%></th>
     
     <th></th>
     <th></th>

@@ -1,11 +1,17 @@
 class BikesController < ApplicationController
+  helper_method :sort_column, :sort_direction
   # GET /bikes
   # GET /bikes.json
   def index  
+	
     @searchID = params[:searchText]
 	@idtype = params[:idtype]
 	if @searchID.nil?
-		@bikes = Bike.all
+		if !params[:sort].nil?	 && !params[:direction].nil?
+			@bikes = Bike.order(params[:sort] + ' ' + params[:direction])
+		else
+			@bikes = Bike.all
+		end
 	elsif @idtype == "bikeID"
 		@bikes = Bike.where(:id => @searchID)
 	else
@@ -96,5 +102,14 @@ class BikesController < ApplicationController
       format.html { redirect_to bikes_url }
       format.json { head :ok }
     end
+  end
+  
+  private
+  def sort_column
+    Bike.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
   end
 end
