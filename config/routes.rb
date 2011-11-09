@@ -5,8 +5,9 @@ Freeride::Application.routes.draw do
   match '/dashboard', :to => 'home#dashboard', :as => :dashboard
   match '/signup', :to => 'users#new', :as => :signup
   match '/myfav', :to => 'users#myfav', :as => :myfav
+  match '/newbrandform', :to =>'bikeBrands#newbrandform', :as => :newbrandform
   match '/logout', :to => 'sessions#destroy'
-  
+    
   resources :sessions, :only => [:create, :destroy]
   resources :safety_item_responses
   resources :safety_items

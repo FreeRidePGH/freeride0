@@ -91,7 +91,25 @@ tipobj.style.width=''
 document.onmousemove=positiontip
 
 </script>
-  
+<script>
+var counter = 0;
+function addInput(divName){
+
+     if (counter < 1)  {
+          var newdiv = document.createElement('div');
+          newdiv.innerHTML = " <br/><input type='text' id='tempbrand' name='tempbrand' placeholder='Brand Name' />";
+          document.getElementById(divName).appendChild(newdiv);
+          counter++;
+     }
+	 else{
+		//post the data
+		
+		document.body.innerHTML += '<form id="newbrandform" action="/newbrandform" method="post"><input type="hidden" name="bike_brand[name]" value="'
+								+	document.getElementById("tempbrand").value  +'"></form>';
+		document.getElementById("newbrandform").submit();
+	 }
+}
+</script>  
 <h1>New bike form</h1>
 
 <%= form_for(@bike,:html => {:name => 'newbikeform'}) do |f| %>
@@ -150,7 +168,10 @@ document.onmousemove=positiontip
 		<option value="<%=i.id%>"><%=i.name%></option>
 		<%end%>
 		</select>
-
+		<form name="brandname" id="brandname" method="POST" >
+			<div id="dynamicInput"></div>
+			 <input type="button" value="Add" onClick="addInput('dynamicInput');">
+		</form>		
 		</td>
 		<td>
 	
