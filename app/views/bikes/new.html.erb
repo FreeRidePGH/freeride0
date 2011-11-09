@@ -24,7 +24,73 @@ function emptyList( box ) {
 	while ( box.options.length ) box.options[0] = null;
 }
 </script>
-  
+<div id="dhtmltooltip"></div>
+<script type="text/javascript">
+
+var offsetxpoint=-60 //Customize x offset of tooltip
+var offsetypoint=20 //Customize y offset of tooltip
+var ie=document.all
+var ns6=document.getElementById && !document.all
+var enabletip=false
+if (ie||ns6)
+var tipobj=document.all? document.all["dhtmltooltip"] : document.getElementById? document.getElementById("dhtmltooltip") : ""
+
+function ietruebody(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+function ddrivetip(thetext, thecolor, thewidth){
+if (ns6||ie){
+if (typeof thewidth!="undefined") tipobj.style.width=thewidth+"px"
+if (typeof thecolor!="undefined" && thecolor!="") tipobj.style.backgroundColor=thecolor
+tipobj.innerHTML=thetext
+enabletip=true
+return false
+}
+}
+
+function positiontip(e){
+if (enabletip){
+var curX=(ns6)?e.pageX : event.clientX+ietruebody().scrollLeft;
+var curY=(ns6)?e.pageY : event.clientY+ietruebody().scrollTop;
+//Find out how close the mouse is to the corner of the window
+var rightedge=ie&&!window.opera? ietruebody().clientWidth-event.clientX-offsetxpoint : window.innerWidth-e.clientX-offsetxpoint-20
+var bottomedge=ie&&!window.opera? ietruebody().clientHeight-event.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+
+var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+
+//if the horizontal distance isn't enough to accomodate the width of the context menu
+if (rightedge<tipobj.offsetWidth)
+//move the horizontal position of the menu to the left by it's width
+tipobj.style.left=ie? ietruebody().scrollLeft+event.clientX-tipobj.offsetWidth+"px" : window.pageXOffset+e.clientX-tipobj.offsetWidth+"px"
+else if (curX<leftedge)
+tipobj.style.left="5px"
+else
+//position the horizontal position of the menu where the mouse is positioned
+tipobj.style.left=curX+offsetxpoint+"px"
+
+//same concept with the vertical position
+if (bottomedge<tipobj.offsetHeight)
+tipobj.style.top=ie? ietruebody().scrollTop+event.clientY-tipobj.offsetHeight-offsetypoint+"px" : window.pageYOffset+e.clientY-tipobj.offsetHeight-offsetypoint+"px"
+else
+tipobj.style.top=curY+offsetypoint+"px"
+tipobj.style.visibility="visible"
+}
+}
+
+function hideddrivetip(){
+if (ns6||ie){
+enabletip=false
+tipobj.style.visibility="hidden"
+tipobj.style.left="-1000px"
+tipobj.style.backgroundColor=''
+tipobj.style.width=''
+}
+}
+
+document.onmousemove=positiontip
+
+</script>
   
 <h1>New bike form</h1>
 
@@ -47,34 +113,37 @@ function emptyList( box ) {
 	<table border="1" id="IDhook">
 	<tr>
 		<td >
-			<b>ID</b></td><td>
+			<b><div onMouseover="ddrivetip('ID of the bike','yellow', 50)"; onMouseout="hideddrivetip()">ID</div></b></td><td>
 			<b>			    
-		<input id="id" name="id" size="10" type="number" />			
+		<input id="id" name="id" size="10" type="number"/>			
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<b><%= f.label :location_id %></b></td><td>
+			<b><div onMouseover="ddrivetip('Input Hook Number or Physical Location (E.g. Off-site)','yellow', 80)"; onMouseout="hideddrivetip()">
+			<%= f.label :location_id %></div></b></td><td>
 			<input id="location_id" name="bike[location_id]" size="10" type="text" />		    
 
 		</td>
 	</tr>
 	</table>
-	<br/><b><%= f.label :date_in %></b>
+	<br/><b onMouseover="ddrivetip('Date that bike arrived at Free Ride','yellow', 80)"; onMouseout="hideddrivetip()">
+	<%= f.label :date_in %></b>
     
     <%= f.datetime_select :date_in %><br/><br/>
 	
 		
 
-		  <b>AS-IS Value:</b>
-		  $ <input id="value" name="value" size="10" type="number" />
+		  <b onMouseover="ddrivetip('Current price of the bike if it was to be sold','yellow', 80)"; onMouseout="hideddrivetip()">
+		  AS-IS Value:</b>
+		  $ <input id="value" name="value" size="9" type="number" placeholder="0.00"/>
 
 </td>
 <td>
 		<table border="1" cellpadding="3" id="bikeTable">
 		<tr>
 		<td>
-		  <b><%= f.label :brand_id %></b></td><td>
+		  <b onMouseover="ddrivetip('Brand of the bike','yellow', 80)"; onMouseout="hideddrivetip()"><%= f.label :brand_id %></b></td><td>
 		<select name="bike[brand_id]" onchange="update(document.forms['newbikeform']);">
 		<option value="">Select a Brand</option>
 		<%for i in BikeBrand.all%>
@@ -85,7 +154,7 @@ function emptyList( box ) {
 		</td>
 		<td>
 	
-		  <b><%= f.label :model_id %></b></td><td>
+		  <b onMouseover="ddrivetip('Model of bike(choose a brand to see the list of models)','yellow', 150)"; onMouseout="hideddrivetip()"><%= f.label :model_id %></b></td><td>
 		<select name="bike[model_id]">
 		<option value="">Select a Model</option>	
 	
@@ -99,14 +168,16 @@ function emptyList( box ) {
 		<tr>
 		<td>
 
-		  <b><%= f.label :wheel_size %></b></td><td>
+		  <b onMouseover="ddrivetip('Wheel size in ISO format','#66FF33', 80)"; onMouseout="hideddrivetip()">
+		  <%= f.label :wheel_size %></b></td><td>
    
     <%= f.text_field :wheel_size %>
 
 		</td>
 		<td>
 
-		  <b><%= f.label :top_tube %></b></td><td>
+		  <b onMouseover="ddrivetip('Tube size in ISO format','#66FF33', 80)"; onMouseout="hideddrivetip()">
+		  <%= f.label :top_tube %></b></td><td>
     
     <%= f.text_field :top_tube %>
 
@@ -116,14 +187,16 @@ function emptyList( box ) {
 		<tr>
 		<td>
 
-		  <b><%= f.label :seat_tube %></b></td><td>
+		  <b onMouseover="ddrivetip('Seat tube in ISO format','yellow', 80)"; onMouseout="hideddrivetip()">
+		  <%= f.label :seat_tube %></b></td><td>
     
     <%= f.text_field :seat_tube %>
 
 		</td>
 		<td>
 
-		  <b><%= f.label :color %></b></td><td>
+		  <b onMouseover="ddrivetip('Color of bicycle frame','yellow', 80)"; onMouseout="hideddrivetip()">
+		  <%= f.label :color %></b></td><td>
 
     
     <%= f.text_field :color %>
@@ -140,7 +213,8 @@ function emptyList( box ) {
 		<table border="0">
 		<tr><td>		
 		
-		<b>Condition:</b></td><td>
+		<b onMouseover="ddrivetip('Condition of the bike','yellow', 80)"; onMouseout="hideddrivetip()">
+		Condition:</b></td><td>
 		  <select id="condition" name="condition">
 		  <option value="A">A</option>
 		  <option value="B">B</option>
@@ -150,7 +224,8 @@ function emptyList( box ) {
 		</tr>
 		<tr>
 		<td>		
-		 <b>Quality:</b></td><td>
+		 <b onMouseover="ddrivetip('Quality of the Bike','yellow', 80)"; onMouseout="hideddrivetip()">
+		 Quality:</b></td><td>
 		  <select id="quality" name="quality">
 		  <option value="A">A</option>
 		  <option value="B">B</option>
