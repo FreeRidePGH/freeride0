@@ -29,7 +29,7 @@ two:
   can_text_phone: true
   address: |
             9235 Wilson Ave
-            Apt '#'203
+            Apt #203
             Chicago, IL 64233
   encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
   salt: <%= salt %>

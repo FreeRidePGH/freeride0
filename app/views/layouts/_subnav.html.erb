@@ -19,7 +19,7 @@
 		<li><%= link_to "Contact", root_path %></li>
 	<% end %>
 	
-<% elsif subnav=="users" %>
+<% elsif subnav=="users" || subnav=="volunteer_hours_entries" %>
 
 	<% if current_user %>
 		<li><%= link_to "Browse Users", users_path %></li>
@@ -29,7 +29,7 @@
 		<li><%= link_to "Signup", signup_path %></li>
 	<% end %>
 	
-<% elsif subnav=="eab_projects" %>
+<% elsif subnav=="eab_projects" || subnav=="repair_hours_entries" %>
 
 		<li><%= link_to "All Projects", eab_projects_path %></li>
 		<li><%= link_to "My Projects", root_path %></li>
