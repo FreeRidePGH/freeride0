@@ -8,11 +8,11 @@
 		<td>
 			<table id="info_table">
 				<tr><td>
-					<h3>Bike ID: <%= @eab_project.bike_id %></h3>
+					<h3>Bike ID: <%= link_to @eab_project.bike_id, @eab_project.bike %></h3>
 				</td></tr>
 				<tr><td>
 					<h3>Project Owner</h3>
-					<b><%= @eab_project.user.name %></b>
+					<b><%= link_to @eab_project.user.name, @eab_project.user %></b>
 				</td></tr>
 			</table>
 		</td>
