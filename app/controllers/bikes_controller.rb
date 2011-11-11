@@ -10,7 +10,36 @@ class BikesController < ApplicationController
 		if !params[:sort].nil?	 && !params[:direction].nil?
 			@bikes = Bike.order(params[:sort] + ' ' + params[:direction])
 		else
+			#nothing selected, display all
 			@bikes = Bike.all
+			
+			#if a category was chosen, display it
+			@brand = params[:brand]
+			@color = params[:color]
+			@status = params[:status]
+			@wheel_size = params[:wheel_size]
+			@top_tube = params[:top_tube]
+			@seat_tube = params[:seat_tube]
+			
+			if !@brand.nil?
+				@bikes = Bike.where(:brand_id => @brand)
+			end
+			if !@color.nil?
+				@bikes = Bike.where(:color => @color)
+			end
+			if !@status.nil?
+				@bikes = Bike.where(:status => @status)
+			end
+			if !@wheel_size.nil?
+				@bikes = Bike.where(:wheel_size => @wheel_size)
+			end
+			if !@top_tube.nil?
+				@bikes = Bike.where(:top_tube => @top_tube)
+			end
+			if !@seat_tube.nil?
+				@bikes = Bike.where(:seat_tube => @seat_tube)
+			end
+						
 		end
 	elsif @idtype == "bikeID"
 		@bikes = Bike.where(:id => @searchID)
@@ -60,14 +89,36 @@ class BikesController < ApplicationController
 	@q = params[:quality]
 	@c = params[:condition]
 	@v = params[:value]
-	#@locname = params[:locname]
+	@locname = params[:locname]
+	
+	@hooknum = @bike.location_id #location_id was actually hook number	
+	if @hooknum.nil?			
+		if !@locname.nil?
+			@loc = Location.find_by_id(@locname)
+			if !@loc.nil?
+				@bike.location_id = @loc.id
+			else
+				#both hooknum and location not entered
+			end
+		end
+	else		
+		@loc = Location.find_by_hook_number(@hooknum)
+		if @loc.nil?
+			#if location does not exist, create it
+			@newloc = Location.new(:hook_number => @hooknum)
+			@newloc.save
+			@bike.location_id = @newloc.id
+		else
+			#location exist, just add it to the bike
+			@bike.location_id = @loc.id
+		end
+	end
+	
 	
     respond_to do |format|
       if @bike.save
 		@bike_assesment = BikeAssesment.new(:bike_id => @bike.id, :quality => @q, :condition => @c, :value => @v)
 		@bike_assesment.save
-		#@bike_loc = Location.new(:name => @locname)
-		#@bike_loc.save
         format.html { redirect_to @bike, notice: 'Bike was successfully created.' }
         format.json { render json: @bike, status: :created, location: @bike }
       else

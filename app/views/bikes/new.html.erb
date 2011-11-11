@@ -159,12 +159,25 @@ function addInput2(divName){
 	<tr>
 		<td>
 			<b><div onMouseover="ddrivetip('Input Hook Number or Physical Location (E.g. Off-site)','yellow', 80)"; onMouseout="hideddrivetip()">
-			<%= f.label :location_id %></div></b></td><td>
+			Hook No.</div></b></td><td>
 			<input id="location_id" name="bike[location_id]" size="10" type="text" />		    
 
 		</td>
 	</tr>
 	</table>
+	<br/>
+	OR select location name:
+	<select id="locname" name="locname">
+	<option value="">On hook - enter above</option>
+	<% for i in Location.all%>
+		<%if !i.name.nil?%>
+			<option value="<%=i.id%>"><%=i.name%></option>
+		<%end%>
+	<%end%>
+	</select>
+	<br/>
+	</br>
+	
 	<br/><b onMouseover="ddrivetip('Date that bike arrived at Free Ride','yellow', 80)"; onMouseout="hideddrivetip()">
 	<%= f.label :date_in %></b>
     

@@ -1,4 +1,4 @@
-<h1>Listing bikes</h1>
+<h1>Listing bikes<font size="1"><a href="/bikes">(show all)</a></font></h1>
 <% if !@searchID.nil? %>
 You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <% end %>
@@ -14,7 +14,7 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
     <th><%= sortable "seat_tube" %></th>
     <th><%= sortable "color"%></th>
     <th><%= sortable "date_in", "Date In"%></th>
-    <th><%= sortable "date_out", "Date Out"%></th>
+    <th><%= sortable "status", "Status"%></th>
     
     <th></th>
     <th></th>
@@ -42,7 +42,7 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
     <td><%= bike.seat_tube %></td>
     <td><%= bike.color %></td>
     <td><%= bike.date_in %></td>
-    <td><%= bike.date_out %></td>
+    <td><%= bike.status %></td>
     <td><%= link_to 'Show', bike %></td>
     <td><%= link_to 'Edit', edit_bike_path(bike) %></td>
     <td><%= link_to 'Destroy', bike, confirm: 'Are you sure?', method: :delete %></td>

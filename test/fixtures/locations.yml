@@ -2,9 +2,9 @@
 
 one:
   id: 1
-  name: 
-  description: 
-  hook_number: 2
+  name: In Shop - Off Hook
+  description: Bike inside Free Ride but not on hook
+  hook_number: 
 
 two:
   id: 2
@@ -29,3 +29,9 @@ five:
   name: Shadyside Elementary School
   description: Basement storage closet
   hook_number: 
+  
+six:
+  id: 6
+  name: 
+  description: 
+  hook_number: 2

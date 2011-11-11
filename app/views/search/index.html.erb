@@ -17,9 +17,9 @@
 		<tr>
 		<th>Brand</th>
 		</tr>
-		<% for i in BikeBrand.all %>
+		<% for i in BikeBrand.limit(6) %>
 		<tr><td>
-		<a href="#">
+		<a href="/bikes?brand=<%=i.id%>">
 		<%= i.name %>
 		</td></tr>
 		</a>
@@ -31,8 +31,8 @@
 		<tr>
 		<th>Color</th>
 		</tr>	
-		<% for i in Bike.select("distinct color").map {|a| a.color}%>
-		<tr><td><a href="#">
+		<% for i in Bike.select("distinct color").limit(6).map {|a| a.color}%>
+		<tr><td><a href="/bikes?color=<%=i%>">
 		<%=i%></a>
 		</td></tr>
 		<% end %>		
@@ -43,9 +43,9 @@
 		<tr>
 		<th>Status</th>
 		</tr>		
-		<% for i in Bike.all %>
-		<tr><td><a href="#">
-		<%= i.id%></a>
+		<% for i in Bike.select("distinct status").limit(6).map {|a| a.status} %>
+		<tr><td><a href="/bikes?status=<%=i%>">
+		<%= i%></a>
 		</td></tr>
 		<% end %>		
 		</table>
@@ -57,8 +57,8 @@
 		<tr>
 		<th>Wheel</th>
 		</tr>
-		<% for i in Bike.select("distinct wheel_size").map {|a| a.wheel_size} %>
-		<tr><td><a href="#">
+		<% for i in Bike.select("distinct wheel_size").limit(6).map {|a| a.wheel_size} %>
+		<tr><td><a href="/bikes?wheel_size=<%=i%>">
 		<%= i%></a>
 		</td></tr>
 		<% end %>		
@@ -71,8 +71,8 @@
 		<tr>
 		<th>Top Tube</th>
 		</tr>
-		<% for i in Bike.select("distinct top_tube").map {|a| a.top_tube} %>
-		<tr><td><a href="#">
+		<% for i in Bike.select("distinct top_tube").limit(6).map {|a| a.top_tube} %>
+		<tr><td><a href="/bikes?top_tube=<%=i%>">
 		<%= i%></a>
 		</td></tr>
 		<% end %>		
@@ -83,8 +83,8 @@
 		<tr>
 		<th>Seat Tube</th>
 		</tr>
-		<% for i in Bike.select("distinct seat_tube").map {|a| a.seat_tube} %>
-		<tr><td><a href="#">
+		<% for i in Bike.select("distinct seat_tube").limit(6).map {|a| a.seat_tube} %>
+		<tr><td><a href="/bikes?seat_tube=<%=i%>">
 		<%= i%></a>
 		</td></tr>
 		<% end %>		
