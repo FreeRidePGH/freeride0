@@ -3,6 +3,6 @@ class BikeModel < ActiveRecord::Base
   
   attr_accessible :name, :brand_id
   	
-  validates :brand_id, :presence => true
+  validates :brand_id, :name, :presence => true
 	validates :name, :uniqueness => true
 end

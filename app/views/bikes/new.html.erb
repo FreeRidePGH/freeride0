@@ -105,8 +105,27 @@ function addInput(divName){
 		//post the data
 		
 		document.body.innerHTML += '<form id="newbrandform" action="/newbrandform" method="post"><input type="hidden" name="bike_brand[name]" value="'
-								+	document.getElementById("tempbrand").value  +'"></form>';
+								+	document.getElementById("tempbrand").value  +'"><input type="hidden" name="bike[color]" value="yellow"></form>';
 		document.getElementById("newbrandform").submit();
+	 }
+}
+
+var counter2 = 0;
+function addInput2(divName){
+
+     if (counter2 < 1)  {
+          var newdiv = document.createElement('div');
+          newdiv.innerHTML = " <br/><input type='text' id='tempmodel' name='tempmodel' placeholder='Model Name' />";
+          document.getElementById(divName).appendChild(newdiv);
+          counter2++;
+     }
+	 else{
+		//post the data
+		
+		document.body.innerHTML += '<form id="newmodelform" action="/newmodelform" method="post"><input type="hidden" name="bike_model[name]" value="'
+								+	document.getElementById("tempmodel").value  +'"><input type="hidden" name="bike_model[brand_id]" value="'
+								+	document.getElementById("bike_brand_id").value  +'"></form>';
+		document.getElementById("newmodelform").submit();
 	 }
 }
 </script>  
@@ -124,6 +143,7 @@ function addInput(divName){
       </ul>
     </div>
   <% end %>
+  
   
 <table border="1" id="maininfo">
 <tr height="80px">
@@ -162,7 +182,7 @@ function addInput(divName){
 		<tr>
 		<td>
 		  <b onMouseover="ddrivetip('Brand of the bike','yellow', 80)"; onMouseout="hideddrivetip()"><%= f.label :brand_id %></b></td><td>
-		<select name="bike[brand_id]" onchange="update(document.forms['newbikeform']);">
+		<select id="bike_brand_id" name="bike[brand_id]" onchange="update(document.forms['newbikeform']);">
 		<option value="">Select a Brand</option>
 		<%for i in BikeBrand.all%>
 		<option value="<%=i.id%>"><%=i.name%></option>
@@ -170,7 +190,7 @@ function addInput(divName){
 		</select>
 		<form name="brandname" id="brandname" method="POST" >
 			<div id="dynamicInput"></div>
-			 <input type="button" value="Add" onClick="addInput('dynamicInput');">
+			 <input type="button" value="New Brand" onClick="addInput('dynamicInput');">
 		</form>		
 		</td>
 		<td>
@@ -180,7 +200,10 @@ function addInput(divName){
 		<option value="">Select a Model</option>	
 	
 		</select>
-		
+		<form name="newmodelname" id="newmodelname" method="POST" >
+			<div id="dynamicInput2"></div>
+			 <input type="button" value="New Model" onClick="addInput2('dynamicInput2');">
+		</form>			
 		</td>
 
 		

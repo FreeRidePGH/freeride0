@@ -54,6 +54,7 @@ class BikesController < ApplicationController
   # POST /bikes
   # POST /bikes.json
   def create
+	@models = BikeModel.find(:all)
     @bike = Bike.new(params[:bike])
 	@bike.status = "Available"
 	@q = params[:quality]
@@ -101,6 +102,41 @@ class BikesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to bikes_url }
       format.json { head :ok }
+    end
+  end
+
+  # POST /newbrandform
+  # POST /newbrandform.json
+  def newbrandform
+    @bike_brand = BikeBrand.new(params[:bike_brand])
+    @bike = Bike.new(params[:bike])
+	
+    respond_to do |format|
+      if @bike_brand.save
+		
+        format.html { redirect_to '/bikes/new', notice: 'Bike brand was successfully created.' }
+        format.json { render json: @bike, status: :created, location: @bike }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @bike, status: :unprocessable_entity }
+      end
+    end
+  end  
+ 
+  # POST /newmodelform
+  # POST /newmodelform.json
+  def newmodelform
+    @bike_model = BikeModel.new(params[:bike_model])
+	@bike = Bike.new(params[:bike])
+
+    respond_to do |format|
+      if @bike_model.save
+        format.html { redirect_to '/bikes/new', notice: 'Bike model was successfully created.' }
+        format.json { render json: @bike, status: :created, location: @bike_model }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @bike, status: :unprocessable_entity }
+      end
     end
   end
   
