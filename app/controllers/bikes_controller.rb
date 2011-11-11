@@ -7,7 +7,7 @@ class BikesController < ApplicationController
     @searchID = params[:searchText]
 	@idtype = params[:idtype]
 	if @searchID.nil?
-		if !params[:sort].nil?	 && !params[:direction].nil?
+		if !params[:sort].nil?	 && !params[:direction].nil? #Sort column was clicked
 			@bikes = Bike.order(params[:sort] + ' ' + params[:direction])
 		else
 			#nothing selected, display all

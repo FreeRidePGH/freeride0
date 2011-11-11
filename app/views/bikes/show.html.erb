@@ -143,14 +143,14 @@ end
 	<tr>
 		<td>
 		  <b>Date Arrived:</b>
-		  <%= @bike.date_in.year %>/<%= @bike.date_in.month %>/<%= @bike.date_in.day %> 
+		  <%= @bike.date_in.year %>-<%= @bike.date_in.strftime("%b") %>-<%= @bike.date_in.day %> 
 		</td>
 		</tr>
 		<tr>
 		<td align='right'>
 		  <b>Date Departed:</b>
 			<% unless @bike.date_out.nil? %>
-		    <%= @bike.date_out.year %>/<%= @bike.date_out.month %>/<%= @bike.date_out.day %> 
+		    <%= @bike.date_out.year %>-<%= @bike.date_out.strftime("%b") %>-<%= @bike.date_out.day %>
 			<% end %>
 		</td>
 		</tr>
@@ -168,7 +168,8 @@ end
 		unless @project.nil? %>
 	<tr>
 	<% @projuser = User.find_by_id(@project.user_id) %>
-	<td>EAB</td><td><%= @projuser.first_name + " " + @projuser.last_name%></td><td><%= @project.start_date%></td><td><%= @project.status%></td>
+	<td>EAB</td><td><%= @projuser.first_name + " " + @projuser.last_name%></td><td>
+	<%=@project.start_date.year%>-<%= @project.start_date.strftime("%b") %>-<%= @project.start_date.day %></td><td><%= @project.status%></td>
 	</tr>
 	<% end %>
 	</table>
@@ -204,7 +205,7 @@ end
 		<%if @loc.nil?%>
 			N.A.
 		<%else%>
-			<%=@loc.updated_at%>
+			<%=@loc.updated_at.year%>-<%= @loc.updated_at.strftime("%b") %>-<%= @loc.updated_at.day %>
 		<%end%>
 		</td>
 	</tr>

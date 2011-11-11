@@ -6,8 +6,8 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <table class="bikelisttable">
   <tr>
 		<th><%= sortable "id" %></th>
+    <th><%= sortable "brand_id"%></th>		
     <th><%= sortable "model_id" %></th>
-    <th><%= sortable "brand_id"%></th>
     <th><%= sortable "location_id" %></th>
     <th><%= sortable "wheel_size"%></th>
     <th><%= sortable "top_tube" %></th>
@@ -25,8 +25,8 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <% @loc = Location.find_by_id(bike.location_id)%>
   <tr>
 		<td><%= bike.id %></td>
-    <td><%= bike.model_id %></td>
-    <td><%= bike.brand_id %></td>
+    <td><%= BikeBrand.find_by_id(bike.brand_id).name%></td>
+	<td><%= BikeModel.find_by_id(bike.model_id).name %></td>
     <td><%if @loc.nil?%>
 			N.A.
 		<%else%>
@@ -41,7 +41,7 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
     <td><%= bike.top_tube %></td>
     <td><%= bike.seat_tube %></td>
     <td><%= bike.color %></td>
-    <td><%= bike.date_in %></td>
+    <td><%= bike.date_in.year %>-<%= bike.date_in.strftime("%b")%>-<%=bike.date_in.day %></td>
     <td><%= bike.status %></td>
     <td><%= link_to 'Show', bike %></td>
     <td><%= link_to 'Edit', edit_bike_path(bike) %></td>

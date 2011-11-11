@@ -38,3 +38,29 @@ three:
   date_in: 2011-08-25 14:26:55
   date_out: 2011-10-22 16:55:06
   status: "sold"
+  
+four:
+  id: 4
+  model_id: 1
+  brand_id: 2
+  location_id: 3
+  wheel_size: 360
+  top_tube: 24
+  seat_tube: 28.5
+  color: Black
+  date_in: 2011-08-25 14:26:55
+  date_out: 2011-10-22 16:55:06
+  status: "Available"
+
+five:
+  id: 5
+  model_id: 3
+  brand_id: 2
+  location_id: 1
+  wheel_size: 400
+  top_tube: 22
+  seat_tube: 28.5
+  color: Black
+  date_in: 2011-08-25 14:26:55
+  date_out: 2011-10-22 16:55:06
+  status: "Available"
