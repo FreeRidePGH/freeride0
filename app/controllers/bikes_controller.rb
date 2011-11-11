@@ -7,12 +7,9 @@ class BikesController < ApplicationController
     @searchID = params[:searchText]
 	@idtype = params[:idtype]
 	if @searchID.nil?
-		if !params[:sort].nil?	 && !params[:direction].nil? #Sort column was clicked
-			@bikes = Bike.order(params[:sort] + ' ' + params[:direction])
-		else
 			#nothing selected, display all
-			@bikes = Bike.all
-			
+			@bikes = Bike.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+			#
 			#if a category was chosen, display it
 			@brand = params[:brand]
 			@color = params[:color]
@@ -22,29 +19,29 @@ class BikesController < ApplicationController
 			@seat_tube = params[:seat_tube]
 			
 			if !@brand.nil?
-				@bikes = Bike.where(:brand_id => @brand)
+				@bikes = Bike.where(:brand_id => @brand).paginate(:per_page => 10, :page => params[:page])
 			end
 			if !@color.nil?
-				@bikes = Bike.where(:color => @color)
+				@bikes = Bike.where(:color => @color).paginate(:per_page => 10, :page => params[:page])
 			end
 			if !@status.nil?
-				@bikes = Bike.where(:status => @status)
+				@bikes = Bike.where(:status => @status).paginate(:per_page => 10, :page => params[:page])
 			end
 			if !@wheel_size.nil?
-				@bikes = Bike.where(:wheel_size => @wheel_size)
+				@bikes = Bike.where(:wheel_size => @wheel_size).paginate(:per_page => 10, :page => params[:page])
 			end
 			if !@top_tube.nil?
-				@bikes = Bike.where(:top_tube => @top_tube)
+				@bikes = Bike.where(:top_tube => @top_tube).paginate(:per_page => 10, :page => params[:page])
 			end
 			if !@seat_tube.nil?
-				@bikes = Bike.where(:seat_tube => @seat_tube)
+				@bikes = Bike.where(:seat_tube => @seat_tube).paginate(:per_page => 10, :page => params[:page])
 			end
 						
-		end
+		
 	elsif @idtype == "bikeID"
-		@bikes = Bike.where(:id => @searchID)
+		@bikes = Bike.where(:bike_id => @searchID).paginate(:per_page => 10, :page => params[:page])
 	else
-		@bikes = Bike.where(:location_id => Location.find_by_hook_number(@searchID))
+		@bikes = Bike.where(:location_id => Location.find_by_hook_number(@searchID)).paginate(:per_page => 10, :page => params[:page])
 	end
 	
     respond_to do |format|

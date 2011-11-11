@@ -2,10 +2,16 @@
 <% if !@searchID.nil? %>
 You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <% end %>
+<%= form_tag bikes_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
 
 <table class="bikelisttable">
   <tr>
-		<th><%= sortable "id" %></th>
+		<th><%= sortable "bike_id" %></th>
     <th><%= sortable "brand_id"%></th>		
     <th><%= sortable "model_id" %></th>
     <th><%= sortable "location_id" %></th>
@@ -24,7 +30,7 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <% @bikes.each do |bike| %>
 <% @loc = Location.find_by_id(bike.location_id)%>
   <tr>
-		<td><%= bike.id %></td>
+		<td><%= bike.bike_id %></td>
     <td><%= BikeBrand.find_by_id(bike.brand_id).name%></td>
 	<td><%= BikeModel.find_by_id(bike.model_id).name %></td>
     <td><%if @loc.nil?%>
@@ -49,6 +55,10 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
   </tr>
 <% end %>
 </table>
+<br/>
+
+<%= will_paginate @bikes %>
+
 
 <br />
 

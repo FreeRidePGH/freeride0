@@ -2,6 +2,7 @@
 
 one:
   id: 1
+  bike_id: 1
   model_id: 1
   brand_id: 1
   location_id: 1
@@ -15,6 +16,7 @@ one:
 
 two:
   id: 2
+  bike_id: 2
   model_id: 3
   brand_id: 2
   location_id: 4
@@ -28,6 +30,7 @@ two:
 
 three:
   id: 3
+  bike_id: 4
   model_id: 1
   brand_id: 2
   location_id: 3
@@ -41,6 +44,7 @@ three:
   
 four:
   id: 4
+  bike_id: 8
   model_id: 1
   brand_id: 2
   location_id: 3
@@ -54,6 +58,7 @@ four:
 
 five:
   id: 5
+  bike_id: 16
   model_id: 3
   brand_id: 2
   location_id: 1
