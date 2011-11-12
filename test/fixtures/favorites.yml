@@ -10,8 +10,37 @@ two:
 
 three:
   user_id: 2
-  bike_id: 2
+  bike_id: 1
   
 four:
   user_id: 3
   bike_id: 2
+  
+five:
+  user_id: 4
+  bike_id: 1
+
+six:
+  user_id: 4
+  bike_id: 2
+  
+seven:
+  user_id: 4
+  bike_id: 3
+  
+eight:
+  user_id: 4
+  bike_id: 4
+  
+nine:
+  user_id: 3
+  bike_id: 3
+  
+ten:
+  user_id: 3
+  bike_id: 4
+  
+eleven:
+  user_id: 3
+  bike_id: 5
+  

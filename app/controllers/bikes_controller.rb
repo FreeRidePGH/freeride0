@@ -213,27 +213,10 @@ class BikesController < ApplicationController
 
     respond_to do |format|
       if @bike_model.save
-        format.html { redirect_to '/bikes/new', notice: 'Bike model was successfully created.' }
+        format.html { redirect_to :back, notice: 'Bike model was successfully created.' }
         format.json { render json: @bike, status: :created, location: @bike_model }
       else
-        format.html { render action: "new" }
-        format.json { render json: @bike, status: :unprocessable_entity }
-      end
-    end
-  end
-  
-  # POST /newmodelformedit
-  # POST /newmodelformedit.json
-  def newmodelformedit
-    @bike_model = BikeModel.new(params[:bike_model])
-	@bike = Bike.new(params[:bike])
-
-    respond_to do |format|
-      if @bike_model.save
-        format.html { redirect_to "edit", notice: 'Bike model was successfully created.' }
-        format.json { render json: @bike, status: :created, location: @bike_model }
-      else
-        format.html { redirect_to "edit" }
+        format.html { redirect_to :back }
         format.json { render json: @bike, status: :unprocessable_entity }
       end
     end

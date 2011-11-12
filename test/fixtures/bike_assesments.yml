@@ -16,10 +16,90 @@ two:
   condition: B
   value: 50.40
   
-two:
+three:
   id: 3
   bike_id: 3
   user_id: 2
   quality: B
   condition: B
   value: 50.11
+  
+four:
+  id: 4
+  bike_id: 4
+  user_id: 5
+  quality: C
+  condition: C
+  value: 12.50
+  
+five:
+  id: 5
+  bike_id: 5
+  user_id: 2
+  quality: D
+  condition: B
+  value: 1.00
+
+six:
+  id: 6
+  bike_id: 6
+  user_id: 2
+  quality: A
+  condition: A
+  value: 100.11
+  
+seven:
+  id: 7
+  bike_id: 7
+  user_id: 2
+  quality: B
+  condition: A
+  value: 60.88
+  
+eight:
+  id: 8
+  bike_id: 8
+  user_id: 2
+  quality: A
+  condition: B
+  value: 30.11
+  
+nine:
+  id: 9
+  bike_id: 9
+  user_id: 2
+  quality: B
+  condition: B
+  value: 30.11
+  
+ten:
+  id: 10
+  bike_id: 10
+  user_id: 2
+  quality: B
+  condition: B
+  value: 20.22
+
+eleven:
+  id: 11
+  bike_id: 11
+  user_id: 2
+  quality: B
+  condition: B
+  value: 50.11
+  
+twelve:
+  id: 12
+  bike_id: 12
+  user_id: 2
+  quality: B
+  condition: C
+  value: 22.22
+  
+thirteen:
+  id: 13
+  bike_id: 13
+  user_id: 2
+  quality: D
+  condition: A
+  value: 13.50

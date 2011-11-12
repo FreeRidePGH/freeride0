@@ -11,3 +11,23 @@ two:
 three:
   id: 3
   name: Giant
+  
+four:
+  id: 4
+  name: Cannondale
+  
+five:
+  id: 5
+  name: Mongoose 
+  
+six:
+  id: 6
+  name: Raleigh 
+  
+seven:
+  id: 7
+  name: Diamondback 
+  
+eight:
+  id: 8
+  name: Rocky Mountain 
