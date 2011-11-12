@@ -69,3 +69,88 @@ five:
   date_in: 2011-08-25 14:26:55
   date_out: 2011-10-22 16:55:06
   status: "Available"
+  
+six:
+  id: 6
+  bike_id: 17
+  model_id: 3
+  brand_id: 2
+  location_id: 1
+  wheel_size: 400
+  top_tube: 22
+  seat_tube: 28.5
+  color: Red
+  date_in: 2011-08-25 14:26:55
+  date_out: 2011-10-22 16:55:06
+  status: "Available"
+  
+seven:
+  id: 7
+  bike_id: 20
+  model_id: 3
+  brand_id: 2
+  location_id: 1
+  wheel_size: 400
+  top_tube: 22
+  seat_tube: 28.5
+  color: Black
+  date_in: 2011-08-25 14:26:55
+  date_out: 2011-10-22 16:55:06
+  status: "Available"
+
+eight:
+  id: 8
+  bike_id: 25
+  model_id: 3
+  brand_id: 2
+  location_id: 1
+  wheel_size: 400
+  top_tube: 22
+  seat_tube: 28.5
+  color: Black
+  date_in: 2011-08-25 14:26:55
+  date_out: 2011-10-22 16:55:06
+  status: "Available"
+  
+nine:
+  id: 9
+  bike_id: 31
+  model_id: 3
+  brand_id: 2
+  location_id: 1
+  wheel_size: 400
+  top_tube: 22
+  seat_tube: 28.5
+  color: Black
+  date_in: 2011-08-25 14:26:55
+  date_out: 2011-10-22 16:55:06
+  status: "Available"
+  
+  
+ten:
+  id: 10
+  bike_id: 32
+  model_id: 3
+  brand_id: 2
+  location_id: 1
+  wheel_size: 400
+  top_tube: 22
+  seat_tube: 28.5
+  color: Blue
+  date_in: 2011-08-25 14:26:55
+  date_out: 2011-10-22 16:55:06
+  status: "Available"
+  
+eleven:
+  id: 11
+  bike_id: 86
+  model_id: 3
+  brand_id: 2
+  location_id: 1
+  wheel_size: 400
+  top_tube: 22
+  seat_tube: 28.5
+  color: Blue
+  date_in: 2011-08-25 14:26:55
+  date_out: 2011-10-22 16:55:06
+  status: "Available"

@@ -52,3 +52,19 @@ three:
   account_value: 230
   has_read_packet: true
   role: 1
+  
+four:
+  id: 4
+  first_name: swin
+  last_name: swin
+  email: mingswil@andrew.cmu.edu
+  phone_number: 122233334
+  can_text_phone: true
+  address: |
+            1234 Ellsworth Ave
+            Princeton, NJ 15032
+  encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
+  salt: <%= salt %>
+  account_value: 230
+  has_read_packet: true
+  role: 1

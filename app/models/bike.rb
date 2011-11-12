@@ -9,10 +9,11 @@ class Bike < ActiveRecord::Base
   
   validates :brand_id, :bike_id, :presence => true 
   validates_numericality_of :model_id, :brand_id, :bike_id, :message => "has to be selected"
+  validates_uniqueness_of :bike_id, :message => "ID has already been taken"
   
   def self.search(search)
     if search
-      where('color LIKE ?', "%#{search}%")
+      where('bike_id LIKE ?', "%#{search}%")
     else
       scoped
     end
