@@ -36,7 +36,5 @@
 	<% end %>
 </table>
 
-
-
-<%= link_to 'Edit', edit_safety_inspection_path(@safety_inspection) %> |
-<%= link_to 'Back', safety_inspections_path %>
+<br/>
+<%= link_to 'Back to Bike', bike_path(@safety_inspection.bike) %>

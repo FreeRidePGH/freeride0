@@ -9,7 +9,8 @@ class SafetyInspection < ActiveRecord::Base
   
   validates :inspector_id, :presence => true
   validates :bike_id, :presence => true
-
+  
+  scope :all, :order => "inspection_date DESC, created_at DESC"
 
   def result_text
     self.safety_item_responses.each do |response|
@@ -21,7 +22,7 @@ class SafetyInspection < ActiveRecord::Base
   end
   
   def date_text
-    return created_at.localtime.strftime("%A %-m/%-e/%Y")
+    return inspection_date.localtime.strftime("%A %-m/%-e/%Y")
   end
   
 end
