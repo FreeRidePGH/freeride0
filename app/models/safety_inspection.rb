@@ -1,5 +1,5 @@
 class SafetyInspection < ActiveRecord::Base
-  has_many :safety_item_responses
+  has_many :safety_item_responses, :dependent => :destroy
   belongs_to :inspector, :class_name => "User"
   belongs_to :bike
   

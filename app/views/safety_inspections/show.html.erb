@@ -26,11 +26,19 @@
 	<tr>
 		<td>
 			<% if safety_item_response.is_checked? %>
-			&#10004;
+			<span class="passed">&#10004;</span>
+			<% else %>
+			<span class="failed">X</span>
 			<% end %>
 		</td>
 		<td>
+			<% if safety_item_response.is_checked? %>
+			<span class="passed">
+			<% else %>
+			<span class="failed">
+			<% end %>
 			<%= safety_item_response.safety_item.name %>
+			</span>
 		</td>
 	</tr>
 	<% end %>
