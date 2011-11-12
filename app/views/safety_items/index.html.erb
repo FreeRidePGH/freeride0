@@ -1,9 +1,8 @@
-<h1>Listing safety_items</h1>
+<h1>Safety Items</h1>
 
 <table>
   <tr>
     <th>Name</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -11,13 +10,12 @@
 <% @safety_items.each do |safety_item| %>
   <tr>
     <td><%= safety_item.name %></td>
-    <td><%= link_to 'Show', safety_item %></td>
     <td><%= link_to 'Edit', edit_safety_item_path(safety_item) %></td>
-    <td><%= link_to 'Destroy', safety_item, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Delete', safety_item, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Safety item', new_safety_item_path %>
+<%= link_to 'Add New Safety Item', new_safety_item_path %>

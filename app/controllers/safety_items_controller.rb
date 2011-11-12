@@ -44,7 +44,7 @@ class SafetyItemsController < ApplicationController
 
     respond_to do |format|
       if @safety_item.save
-        format.html { redirect_to @safety_item, notice: 'Safety item was successfully created.' }
+        format.html { redirect_to safety_items_url, notice: 'Safety item was successfully created.' }
         format.json { render json: @safety_item, status: :created, location: @safety_item }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class SafetyItemsController < ApplicationController
 
     respond_to do |format|
       if @safety_item.update_attributes(params[:safety_item])
-        format.html { redirect_to @safety_item, notice: 'Safety item was successfully updated.' }
+        format.html { redirect_to safety_items_url, notice: 'Safety item was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

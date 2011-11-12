@@ -11,7 +11,7 @@ Freeride::Application.routes.draw do
     
   resources :sessions, :only => [:create, :destroy]
   resources :safety_item_responses
-  resources :safety_items
+  resources :safety_items, :except => [:show]
   resources :safety_inspections
   resources :volunteer_hours_entries
   resources :repair_hours_entries

@@ -21,6 +21,7 @@ class Bike < ActiveRecord::Base
   end
   
   def has_passed_safety?
+    return false if self.safety_inspections.empty?
     self.safety_inspections[0].passed?
   end
 
