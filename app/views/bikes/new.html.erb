@@ -155,14 +155,15 @@ function addInput2(divName){
 		<td >
 			<b><div onMouseover="ddrivetip('ID of the bike','yellow', 50)"; onMouseout="hideddrivetip()"><%= f.label :bike_id, "ID"%></div></b></td><td>
 			<b>			    
-		<input id="bike_id" name="bike[bike_id]" size="10" type="number"/>			
+		<input id="bike_id" name="bike[bike_id]" size="10" type="number" value="<%=@bike.bike_id%>"/>			
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<b><div onMouseover="ddrivetip('Input Hook Number or Physical Location (E.g. Off-site)','yellow', 80)"; onMouseout="hideddrivetip()">
-			Hook No.</div></b></td><td>
-			<input id="location_id" name="bike[location_id]" size="10" type="text" />		    
+			Hook No.</div></b></td><td><%@currloc = Location.find_by_id(@bike.location_id)%>
+			<input id="location_id" name="bike[location_id]" size="10" type="text" 
+			value="<%if !@currloc.nil?%><%=@currloc.hook_number%><%end%>" placeholder="NA"/>		    
 
 		</td>
 	</tr>

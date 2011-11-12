@@ -68,3 +68,35 @@ four:
   account_value: 230
   has_read_packet: true
   role: 1
+  
+five:
+  id: 5
+  first_name: Will
+  last_name: FreeRide
+  email: will@freeride.com
+  phone_number: 122233334
+  can_text_phone: true
+  address: |
+            1234 FreeRide Ave
+            Pittsburgh, PA 15032
+  encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
+  salt: <%= salt %>
+  account_value: 230
+  has_read_packet: true
+  role: 1
+  
+six:
+  id: 6
+  first_name: bob
+  last_name: bobby
+  email: bob@bob.com
+  phone_number: 122233334
+  can_text_phone: true
+  address: |
+            1234 Bobby Ave
+            Boston, BO 15999
+  encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
+  salt: <%= salt %>
+  account_value: 230
+  has_read_packet: true
+  role: 2

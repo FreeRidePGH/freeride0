@@ -10,13 +10,13 @@ two:
   id: 2
   name: 
   description: 
-  hook_number: 6
+  hook_number: 10
   
 three:
   id: 3
   name: 
   description:
-  hook_number: 44
+  hook_number: 11
 
 four:
   id: 4
@@ -34,4 +34,34 @@ six:
   id: 6
   name: 
   description: 
-  hook_number: 2
+  hook_number: 12
+  
+seven:
+  id: 7
+  name: 
+  description: 
+  hook_number: 20
+  
+eight:
+  id: 8
+  name: 
+  description: 
+  hook_number: 21
+  
+nine:
+  id: 9
+  name: 
+  description: 
+  hook_number: 25
+  
+ten:
+  id: 10
+  name: University of Pittsburgh
+  description: Cathedral of Learning
+  hook_number: 
+  
+eleven:
+  id: 11
+  name: Craig Street
+  description: 
+  hook_number: 
