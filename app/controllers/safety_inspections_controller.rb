@@ -14,6 +14,7 @@ class SafetyInspectionsController < ApplicationController
   # GET /safety_inspections/1.json
   def show
     @safety_inspection = SafetyInspection.find(params[:id])
+    @safety_item_responses = @safety_inspection.safety_item_responses
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +26,12 @@ class SafetyInspectionsController < ApplicationController
   # GET /safety_inspections/new.json
   def new
     @safety_inspection = SafetyInspection.new
+    @safety_inspection.bike = Bike.find(params[:bike_id])
+    @safety_inspection.inspector = current_user
+    
+    SafetyItem.all.each do |safety_item|
+      @safety_inspection.safety_item_responses.build(:safety_item_id => safety_item.id)
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +48,8 @@ class SafetyInspectionsController < ApplicationController
   # POST /safety_inspections.json
   def create
     @safety_inspection = SafetyInspection.new(params[:safety_inspection])
+    @safety_inspection.bike = Bike.find(params[:safety_inspection][:bike_id])
+    @safety_inspection.inspector = current_user
 
     respond_to do |format|
       if @safety_inspection.save

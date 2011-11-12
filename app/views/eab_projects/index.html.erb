@@ -17,13 +17,9 @@
     <td><%= link_to eab_project.user.name, eab_project.user %></td>
     <td><%= eab_project.status %></td>
     <td><%= eab_project.start_date_format %></td>
-    <td><%= link_to 'Show', eab_project %></td>
+    <td><%= link_to 'View Project', eab_project %></td>
     <td><%= link_to 'Edit', edit_eab_project_path(eab_project) %></td>
-    <td><%= link_to 'Destroy', eab_project, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Delete', eab_project, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Eab project', new_eab_project_path %>

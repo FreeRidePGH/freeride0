@@ -1,23 +1,24 @@
-<h1>Listing safety_item_responses</h1>
+<h1>All Safety Item Responses</h1>
 
 <table>
   <tr>
-    <th>Safety inspection</th>
+    <th>Safety Inspection</th>
     <th>Safety item</th>
-    <th>Is checked</th>
-    <th></th>
+    <th>Result</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @safety_item_responses.each do |safety_item_response| %>
   <tr>
-    <td><%= safety_item_response.safety_inspection_id %></td>
-    <td><%= safety_item_response.safety_item_id %></td>
-    <td><%= safety_item_response.is_checked %></td>
-    <td><%= link_to 'Show', safety_item_response %></td>
+    <td><%= link_to "View", safety_item_response.safety_inspection %></td>
+    <td><%= safety_item_response.safety_item.name %></td>
+    <td align="center"><% if safety_item_response.is_checked %>
+		&#10004;
+		<% end %>
+		</td>
     <td><%= link_to 'Edit', edit_safety_item_response_path(safety_item_response) %></td>
-    <td><%= link_to 'Destroy', safety_item_response, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Delete', safety_item_response, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

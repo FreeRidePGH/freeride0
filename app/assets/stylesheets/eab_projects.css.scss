@@ -30,6 +30,7 @@ table {
 }
 
 #stats_table {
+	margin-top: 10px;
 	text-align: center;
 	border: 2px solid black;
 	h3 {
@@ -38,6 +39,7 @@ table {
 }
 
 #progress_table {
+	margin-top: 10px;
 	border: 2px solid black;
 	vertical-align: middle;
 	td {
@@ -47,7 +49,22 @@ table {
 	}
 }
 
-.work_table {
+#work_table {
+	margin-top: 10px;
+	h2 {
+		text-align: center;
+	}
+	p {
+		margin: 0;
+		text-align: center;
+		font-weight: bold;
+		font-style: italic;
+	}
+	border: 2px solid black;
+}
+
+#safety_table {
+	margin-top: 10px;
 	h2 {
 		text-align: center;
 	}

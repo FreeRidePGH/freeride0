@@ -19,6 +19,7 @@ class EabProjectsController < ApplicationController
     @eab_project.repair_hours_entries.each do |entry|
       @total_hours_spent = @total_hours_spent + entry.duration
     end
+    @safety_inspections = @eab_project.bike.safety_inspections
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,6 +46,7 @@ class EabProjectsController < ApplicationController
   # POST /eab_projects
   # POST /eab_projects.json
   def create
+
     @eab_project = EabProject.new(params[:eab_project])
 	@eab_project.status = 1 #status 1 means EAB in progress	
 	@alreadyTaken = EabProject.find_by_bike_id(@eab_project.bike_id)

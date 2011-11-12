@@ -55,48 +55,48 @@ three:
   
 four:
   id: 4
-  first_name: swin
-  last_name: swin
+  first_name: Swin
+  last_name: Lim
   email: mingswil@andrew.cmu.edu
-  phone_number: 122233334
+  phone_number: 8273029311
   can_text_phone: true
   address: |
             1234 Ellsworth Ave
             Princeton, NJ 15032
   encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
   salt: <%= salt %>
-  account_value: 230
+  account_value: 105
   has_read_packet: true
   role: 1
   
 five:
   id: 5
   first_name: Will
-  last_name: FreeRide
+  last_name: Wedler
   email: will@freeride.com
-  phone_number: 122233334
+  phone_number: 8574839223
   can_text_phone: true
   address: |
             1234 FreeRide Ave
             Pittsburgh, PA 15032
   encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
   salt: <%= salt %>
-  account_value: 230
+  account_value: 78
   has_read_packet: true
   role: 1
   
 six:
   id: 6
-  first_name: bob
-  last_name: bobby
+  first_name: Bob
+  last_name: Smith
   email: bob@bob.com
-  phone_number: 122233334
-  can_text_phone: true
+  phone_number: 1232233334
+  can_text_phone: false
   address: |
             1234 Bobby Ave
             Boston, BO 15999
   encrypted_password: <%= Digest::SHA2.hexdigest("#{salt}--#{pass}") %>
   salt: <%= salt %>
-  account_value: 230
-  has_read_packet: true
+  account_value: 45
+  has_read_packet: false
   role: 2
