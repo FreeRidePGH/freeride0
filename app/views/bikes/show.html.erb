@@ -164,12 +164,11 @@ end
 	<tr id="headers">
 	<td>Project Type</td><td>User</td><td>Date Started</td><td>Status</td>
 	</tr>	
-	<% @project = EabProject.find_by_bike_id(@bike.id) 
-		unless @project.nil? %>
+	<% for project in EabProject.where(:bike_id => @bike.id) %>
 	<tr>
-	<% @projuser = User.find_by_id(@project.user_id) %>
+	<% @projuser = User.find_by_id(project.user_id) %>
 	<td>EAB</td><td><%= link_to @projuser.name, @projuser %></td><td>
-	<%=@project.start_date.year%>-<%= @project.start_date.strftime("%b") %>-<%= @project.start_date.day %></td><td><%= @project.status%></td><td><%= link_to "View Project", @project %></td>
+	<%=project.start_date.year%>-<%= project.start_date.strftime("%b") %>-<%= project.start_date.day %></td><td><%= project.status%></td><td><%= link_to "View Project", project %></td>
 	</tr>
 	<% end %>
 	</table>
