@@ -148,6 +148,8 @@ function addInput2(divName){
 <table border="1" id="maininfo">
 <tr height="80px">
 <td>
+	<p onMouseover="ddrivetip('Type in the bike ID as per the printed stickers. Hook number corresponds to the hooks in the shop','yellow', 120)"; onMouseout="hideddrivetip()">
+	1a. Enter Bike ID and Hook Number:</p>
 	<table border="1" id="IDhook">
 	<tr>
 		<td >
@@ -165,9 +167,9 @@ function addInput2(divName){
 		</td>
 	</tr>
 	</table>
-	<br/>
-	OR select location name:
-	<select id="locname" name="locname">
+	<p onMouseover="ddrivetip('Leave this field unchanged if the bike has a hook. Only choose a value here if it is left in the shop without a hook number or on a off-site location.','yellow', 180)"; onMouseout="hideddrivetip()">
+	1b.	OR select location name(if not on hook):<br/></p>
+	<center><select id="locname" name="locname">
 	<option value="">On hook - enter above</option>
 	<% for i in Location.all%>
 		<%if !i.name.nil?%>
@@ -175,26 +177,31 @@ function addInput2(divName){
 		<%end%>
 	<%end%>
 	</select>
+	<br/></center>
 	<br/>
-	</br>
-	
-	<br/><b onMouseover="ddrivetip('Date that bike arrived at Free Ride','yellow', 80)"; onMouseout="hideddrivetip()">
+	<p onMouseover="ddrivetip('The date and time are auto-populated according to the current time. Adjust accordingly.','yellow', 120)"; onMouseout="hideddrivetip()">
+	2. Enter the date and time of arrival:</p>
+	<b onMouseover="ddrivetip('Date that bike arrived at Free Ride','yellow', 80)"; onMouseout="hideddrivetip()">
 	<%= f.label :date_in %></b>
     
     <%= f.datetime_select :date_in %><br/><br/>
 	
 		
-
+	<p onMouseover="ddrivetip('This is the value of the bike if it was to be sold right now. Leave empty if unsure.','yellow', 80)"; onMouseout="hideddrivetip()">
+	3. Estimate the AS-IS value of the bike:
+	</p><center>
 		  <b onMouseover="ddrivetip('Current price of the bike if it was to be sold','yellow', 80)"; onMouseout="hideddrivetip()">
 		  AS-IS Value:</b>
-		  $ <input id="value" name="value" size="9" type="number" placeholder="0.00"/>
+		  $ <input id="value" name="value" size="6" type="number" placeholder="0.00"/></center>
 
 </td>
 <td>
+	<p>&nbsp;4. Fill in bike details as below: </p>
 		<table border="1" cellpadding="3" id="bikeTable">
 		<tr>
 		<td>
-		  <b onMouseover="ddrivetip('Brand of the bike','yellow', 80)"; onMouseout="hideddrivetip()"><%= f.label :brand_id %></b></td><td>
+		  <b onMouseover="ddrivetip('Brand of the bike. Click button to add a new brand if not found in the list ','yellow', 150)"; onMouseout="hideddrivetip()">
+		  <%= f.label :brand_id %></b></td><td>
 		<select id="bike_brand_id" name="bike[brand_id]" onchange="update(document.forms['newbikeform']);">
 		<option value="">Select a Brand</option>
 		<%for i in BikeBrand.all%>
@@ -267,10 +274,11 @@ function addInput2(divName){
 		</table>
 		<br/>
 		<br/>
+		<p>&nbsp;5. Select the condition and quality of the bike: </p>
 		<table border="0">
 		<tr><td>		
 		
-		<b onMouseover="ddrivetip('Condition of the bike','yellow', 80)"; onMouseout="hideddrivetip()">
+		<b onMouseover="ddrivetip('A - Excellent condition. Almost like brand new.<br/> B - Good. Used but in working condition. <br/> C - Fair Condition. Requires a few tweaks to get it running. <br/> D - Poor Condition. Almost unusable and needs extensive repair.','yellow', 300)"; onMouseout="hideddrivetip()">
 		Condition:</b></td><td>
 		  <select id="condition" name="condition">
 		  <option value="A">A</option>
@@ -281,7 +289,7 @@ function addInput2(divName){
 		</tr>
 		<tr>
 		<td>		
-		 <b onMouseover="ddrivetip('Quality of the Bike','yellow', 80)"; onMouseout="hideddrivetip()">
+		 <b onMouseover="ddrivetip('A - High quality. Excellent brand, sturdy frame, expensive gears.<br/>B - Good quality. Good brand and frame.<br/>C - Fair quality. Recognizable brand, normal frame and brakes.<br/>D - Lousy quality. Unrecognizable brand, cheap and useless.','yellow', 300)"; onMouseout="hideddrivetip()">
 		 Quality:</b></td><td>
 		  <select id="quality" name="quality">
 		  <option value="A">A</option>
@@ -291,8 +299,9 @@ function addInput2(divName){
 		</select></td>
 		
 		</tr>
-		</table>
-	
+		</table><br/>
+	<p onMouseover="ddrivetip('Bike will be created with status as Available. To change more details of the bike, go to it\'s Edit Info link after the bike is created.','yellow', 180)"; onMouseout="hideddrivetip()">
+	&nbsp;6. Click the <i>Create Bike</i> button below to complete the process.</p>
 		
 </td>
 

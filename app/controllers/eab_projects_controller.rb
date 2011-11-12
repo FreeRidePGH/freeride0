@@ -46,7 +46,10 @@ class EabProjectsController < ApplicationController
   # POST /eab_projects.json
   def create
     @eab_project = EabProject.new(params[:eab_project])
-
+	@bike = Bike.find_by_id(@eab_project.bike_id)
+	@bike.status = "EAB in Progress"
+	@bike.save
+	
     respond_to do |format|
       if @eab_project.save
         format.html { redirect_to @eab_project, notice: 'Eab project was successfully created.' }

@@ -46,6 +46,26 @@
 	background-color: #AFC7C7;
 }
 
+#value{
+	height: 28px;
+	font-size: 16px;
+	
+}
+
+#condition{
+	height: 24px;
+	width: 60px;
+	font-size: 16px;
+	
+}
+
+#quality{
+	height: 24px;
+	width: 60px;
+	font-size: 16px;
+	
+}
+
 #headers{
 	color: #660000;
 	text-decoration: underline;
@@ -126,4 +146,10 @@ font-size: 12px;
 
 #searchbox{
 	float: left;
+}
+
+p{
+	color: brown;
+	font-weight: bold;
+
 }
