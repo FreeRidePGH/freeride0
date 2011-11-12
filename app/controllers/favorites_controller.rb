@@ -79,7 +79,7 @@ class FavoritesController < ApplicationController
     @favorite.destroy
 
     respond_to do |format|
-      format.html { redirect_to favorites_url }
+      format.html { redirect_to myfav_url }
       format.json { head :ok }
     end
   end

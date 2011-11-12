@@ -31,16 +31,14 @@
     <td><%= BikeBrand.find(@bike.brand_id).name %></td>
     <td><%= BikeModel.find(@bike.model_id).name %></td>
     <td><%= @bike.color %></td>
-    <td><%= link_to 'Show', favorite %></td>
-    <td><%= link_to 'Edit', edit_favorite_path(favorite) %></td>
-    <td><%= link_to 'Destroy', favorite, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Remove', favorite, confirm: 'Are you sure?', method: :delete %></td>
 	<td>&nbsp;&nbsp;&nbsp;</td>
 	<td><%@proj = EabProject.find_by_bike_id(@bike.id)%>
 	<% if !@proj.nil?%>
 		<% if @proj.user_id==@current_user.id%>
 			<table id="favpage"><tr><td>My Current Project</td></tr></table>
 		<%else%>
-			<i>Project claimed by <%=User.find_by_id(@proj.user_id).first_name%></i>
+			<i>Project claimed by <%=User.find_by_id(@proj.user_id).name%></i>
 		<%end%>
 	<%end%>
 	
@@ -51,4 +49,4 @@
 
 <br />
 
-<%= link_to 'New Favorite', new_favorite_path %>
+<%= link_to 'View more bikes', bikes_path %>

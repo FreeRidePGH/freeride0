@@ -1,5 +1,48 @@
-<h1>New eab_project</h1>
+<h1>Start EAB Project</h1>
+<p id="notice"><font color="red"><%= notice %></font></p>
+<%= form_for(@eab_project) do |f| %>
+  <% if @eab_project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@eab_project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-<%= render 'form' %>
+      <ul>
+      <% @eab_project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<table id="neweabtable">
+	<%if @bikeID.nil?%>
+		<p>Bike ID:
+		<select ="bike_id" name="eab_project[bike_id]">
+		<%for i in Bike.all%>
+		<option value="<%=i.id%>"><%=i.bike_id%></option>
+		<%end%>		
+		</select>
+		</p>
+	<%else%>
+		<%@bike = Bike.find_by_id(@bikeID)%>	
+		<p>Bike ID: <font size="5"><b><%=@bike.bike_id%></b></font></p>
+		<input id="bike_id" name="eab_project[bike_id]" size="10" type="hidden" value="<%=@bikeID%>"/>
+	<%end%>
+	
+	<p>EAB earner name:
+	<select id="user_id" name="eab_project[user_id]">
+	<%for i in User.all%>
+    <option value="<%=i.id%>"><%=i.name%></option>
+	<%end%>
+	</select></p>
+	
+	<p>Start date and time:<br/><%= f.datetime_select :start_date %></p>
+	
+</table>
+<br/>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
-<%= link_to 'Back', eab_projects_path %>
+<%if !@bikeID.nil?%>
+<%= link_to 'Back', '/bikes/'+@bikeID %>
+<%end%>

@@ -217,7 +217,7 @@ end
 
 <div align="right">
 <%if !@isDeparted and !@hasProj %>
-	<a href="/eab_projects/new">Start EAB Project</a> |
+	<a href="/eab_projects/new?bike_id=<%=@bike.id%>">Start EAB Project</a> |
 <%end%>
 <%= link_to 'Edit Info', edit_bike_path(@bike) %>
 </div>

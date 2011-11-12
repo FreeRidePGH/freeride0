@@ -107,8 +107,17 @@ class BikesController < ApplicationController
 			@newloc.save
 			@bike.location_id = @newloc.id
 		else
-			#location exist, just add it to the bike
-			@bike.location_id = @loc.id
+			#location exist, check if hook number already taken
+			if !Bike.find_by_location_id(@loc.id).nil?
+				@bike.errors.add(:hook, "Number already taken")
+				respond_to do |format|
+					format.html { render action: "new" }
+					format.json { render json: @bike.errors, status: :unprocessable_entity }				
+				end
+				return
+			else
+				@bike.location_id = @loc.id
+			end
 		end
 	end
 	
@@ -131,7 +140,8 @@ class BikesController < ApplicationController
   def update
     @bike = Bike.find(params[:id])
 	@models = BikeModel.find(:all)
-
+	@originalLoc = @bike.location_id
+	
 	@bike_assesment = BikeAssesment.find_by_bike_id(@bike.id)
 	@bike_assesment.quality = params[:quality]
 	@bike_assesment.condition = params[:condition]
@@ -140,11 +150,10 @@ class BikesController < ApplicationController
 	
     respond_to do |format|
       if @bike.update_attributes(params[:bike])
-			
 			@locname = params[:locname]
-			@hooknum = @bike.location_id #location_id was actually hook number	
-			if @hooknum.nil?			
-				if !@locname.nil?
+			@hooknum = @bike.location_id #location_id was actually hook number
+			if @hooknum.nil? #hooknumber not entered, bike is off-hook		
+				if !@locname.nil? #location name was entered
 					@loc = Location.find_by_id(@locname)
 					if !@loc.nil?
 						@bike.location_id = @loc.id
@@ -152,16 +161,26 @@ class BikesController < ApplicationController
 						#both hooknum and location not entered
 					end
 				end
-			else		
+			else #hooknumber entered
 				@loc = Location.find_by_hook_number(@hooknum)
 				if @loc.nil?
-					#if location does not exist, create it
+					#if location(hook Number) does not exist, create it
 					@newloc = Location.new(:hook_number => @hooknum)
 					@newloc.save
 					@bike.location_id = @newloc.id
 				else
-					#location exist, just add it to the bike
-					@bike.location_id = @loc.id
+					#location exist, check if hook number already taken
+					if !Bike.find_by_location_id(@loc.id).nil?
+						@bike.errors.add(:Hook, "number already taken")
+						respond_to do |format|
+							format.html { redirect_to :back, notice: 'Hook number already taken' }
+							format.json { render json: @bike.errors, status: :unprocessable_entity }				
+						end
+						@bike.location_id = @originalLoc
+						return
+					else
+						@bike.location_id = @loc.id
+					end
 				end
 			end
 			@bike.save

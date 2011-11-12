@@ -30,7 +30,7 @@ class EabProjectsController < ApplicationController
   # GET /eab_projects/new.json
   def new
     @eab_project = EabProject.new
-
+	@bikeID = params[:bike_id]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @eab_project }
@@ -46,19 +46,37 @@ class EabProjectsController < ApplicationController
   # POST /eab_projects.json
   def create
     @eab_project = EabProject.new(params[:eab_project])
-	@bike = Bike.find_by_id(@eab_project.bike_id)
-	@bike.status = "EAB in Progress"
-	@bike.save
+	@eab_project.status = 1 #status 1 means EAB in progress	
+	@alreadyTaken = EabProject.find_by_bike_id(@eab_project.bike_id)
+	@alreadyHas = EabProject.find_by_user_id(@eab_project.user_id)
 	
-    respond_to do |format|
-      if @eab_project.save
-        format.html { redirect_to @eab_project, notice: 'Eab project was successfully created.' }
-        format.json { render json: @eab_project, status: :created, location: @eab_project }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @eab_project.errors, status: :unprocessable_entity }
-      end
-    end
+	if !@alreadyTaken.nil? && @alreadyTaken.status==1 
+	    respond_to do |format|
+			format.html { redirect_to :back, notice: 'Bike is currently in a project already.' }
+			format.json { render json: @eab_project.errors, notice: 'Bike is currently in a project already' }
+		end
+	elsif !@alreadyHas.nil? && @alreadyHas.status==1
+	    respond_to do |format|
+			format.html { redirect_to :back, notice: 'User already has an eab project in progress' }
+			format.json { render json: @eab_project.errors, notice: 'User already has an eab roject in progress' }
+		end		
+	else
+		@bike = Bike.find_by_id(@eab_project.bike_id)
+		@bike.status = "EAB in Progress"
+		@bike.save
+		@favorite = Favorite.new(:bike_id => @eab_project.bike_id, :user_id => @eab_project.user_id)
+		@favorite.save
+		
+		respond_to do |format|
+		  if @eab_project.save
+			format.html { redirect_to @eab_project, notice: 'Eab project was successfully created.' }
+			format.json { render json: @eab_project, status: :created, location: @eab_project }
+		  else
+			format.html { render action: "new" }
+			format.json { render json: @eab_project.errors, status: :unprocessable_entity }
+		  end
+		end
+	end
   end
 
   # PUT /eab_projects/1
@@ -81,6 +99,9 @@ class EabProjectsController < ApplicationController
   # DELETE /eab_projects/1.json
   def destroy
     @eab_project = EabProject.find(params[:id])
+	@bike = Bike.find_by_id(@eab_project.bike_id)
+	@bike.status = "Available"
+	@bike.save
     @eab_project.destroy
 
     respond_to do |format|
