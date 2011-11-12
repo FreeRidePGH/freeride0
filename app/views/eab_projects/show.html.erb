@@ -39,12 +39,27 @@
 				<tr>
 					<td><h2>4</h2></td>
 					<td><a href="<%= new_repair_hours_entry_path %>"><h2 align="center">Refurbish Bike</h2></td>
-					<td class="checkmark">&#10004;</td>
+					<td class="checkmark">
+						<% if @eab_project.bike.has_passed_safety? %>
+						&#10004;
+						<% end %>
+					</td>
 				</tr>
 				<tr>
 					<td><h2>5</h2></td>
-					<td><h2 align="center">Safety Check<br/>&amp; Sign Off</h2></td>
-					<td class="checkmark">&#10004;</td>
+					<td><a href="<%= new_repair_hours_entry_path %>"><h2 align="center">Safety Check</h2></td>
+					<td class="checkmark">
+						<% if @eab_project.bike.has_passed_safety? %>
+						&#10004;
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<td><h2>6</h2></td>
+					<td><h2 align="center">Sign Off</h2></td>
+					<td class="checkmark">
+						<!-- &#10004; -->
+						</td>
 				</tr>
 			</table>
 		</td>

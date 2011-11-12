@@ -21,6 +21,15 @@ class SafetyInspection < ActiveRecord::Base
     "Passed!"
   end
   
+  def passed?
+    self.safety_item_responses.each do |response|
+      if !response.is_checked
+        return false
+      end
+    end
+    true
+  end
+  
   def date_text
     return inspection_date.localtime.strftime("%A %-m/%-e/%Y")
   end

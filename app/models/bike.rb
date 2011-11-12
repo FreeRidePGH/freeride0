@@ -19,5 +19,9 @@ class Bike < ActiveRecord::Base
       scoped
     end
   end
+  
+  def has_passed_safety?
+    self.safety_inspections[0].passed?
+  end
 
 end
