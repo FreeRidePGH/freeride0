@@ -12,18 +12,25 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :bike_id %><br />
-    <%= f.number_field :bike_id %>
+    Bike ID: <%= link_to @safety_inspection.bike.bike_id, @safety_inspection.bike %>
+		<%= f.hidden_field :bike_id %>
   </div>
   <div class="field">
-    <%= f.label :inspector_id %><br />
-    <%= f.number_field :inspector_id %>
+    Inspector: <%= link_to @safety_inspection.inspector.name, @safety_inspection.inspector %>
   </div>
   <div class="field">
     <%= f.label :inspection_date %><br />
-    <%= f.datetime_select :inspection_date %>
+    <%= f.date_select :inspection_date, :order => [:month, :day, :year] %>
   </div>
+	
+	<%= f.fields_for :safety_item_responses do |b| %>
+	  <div class="field">
+    <%= b.check_box :is_checked %> <%= b.object.safety_item.name %> 
+		<%= b.hidden_field :safety_item_id %>
+  	</div>
+	<% end %>
+	
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit Inspection" %>
   </div>
 <% end %>

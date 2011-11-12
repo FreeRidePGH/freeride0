@@ -93,6 +93,28 @@
 			</table>
 		</td>
 	</tr>
+		<tr>
+		<td colspan="2">
+			<table class="safety_table">
+				<tr>
+					<td>
+						<h2>Safety Inspections</h2>
+						<p><%= link_to "New Safety Inspection", new_safety_inspection_path(:bike_id => @eab_project.bike) %></p>
+					</td>
+				</tr>
+				<% if @safety_inspections.empty? %>
+					<tr><td><h3>None yet!</h3></td></tr>
+				<% end %>
+				<% @safety_inspections.each do |inspection| %>
+				<tr>
+					<td>
+						&rarr; <%= link_to "#{inspection.result_text} - #{inspection.date_text}", inspection %>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+		</td>
+	</tr>
 </table>
 
 

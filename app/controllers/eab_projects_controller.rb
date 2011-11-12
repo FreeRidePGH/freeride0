@@ -19,6 +19,7 @@ class EabProjectsController < ApplicationController
     @eab_project.repair_hours_entries.each do |entry|
       @total_hours_spent = @total_hours_spent + entry.duration
     end
+    @safety_inspections = @eab_project.bike.safety_inspections
 
     respond_to do |format|
       format.html # show.html.erb

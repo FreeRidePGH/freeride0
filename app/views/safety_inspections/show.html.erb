@@ -1,19 +1,41 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Safety Inspection</h1>
+
 <p>
-  <b>Bike:</b>
-  <%= @safety_inspection.bike_id %>
+  <b>Bike ID:</b>
+  <%= link_to @safety_inspection.bike.bike_id, @safety_inspection.bike %>
 </p>
 
 <p>
   <b>Inspector:</b>
-  <%= @safety_inspection.inspector_id %>
+  <%= link_to @safety_inspection.inspector.name, @safety_inspection.inspector %>
 </p>
 
 <p>
   <b>Inspection date:</b>
-  <%= @safety_inspection.inspection_date %>
+  <%= @safety_inspection.inspection_date.localtime.strftime("%a, %-m/%-e/%Y") %>
 </p>
+
+<table>
+	<tr>
+		<th>Status</th>
+		<th>Item</th>
+	</tr>
+	<% @safety_item_responses.each do |safety_item_response| %>
+	<tr>
+		<td>
+			<% if safety_item_response.is_checked? %>
+			&#10004;
+			<% end %>
+		</td>
+		<td>
+			<%= safety_item_response.safety_item.name %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
 
 
 <%= link_to 'Edit', edit_safety_inspection_path(@safety_inspection) %> |
