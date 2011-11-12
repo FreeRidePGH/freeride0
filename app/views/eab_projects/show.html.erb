@@ -23,7 +23,11 @@
 				<tr>
 					<td><h2>1</h2></td>
 					<td><h2 align="center">Complete<br/>Prerequisites</h2></td>
-					<td class="checkmark">&#10004;</td>
+					<td class="checkmark">
+						<% if @eab_project.user.has_read_packet %>
+						&#10004;
+						<% end %>
+					</td>
 				</tr>
 				<tr>
 					<td><h2>2</h2></td>
