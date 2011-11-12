@@ -7,6 +7,7 @@ Freeride::Application.routes.draw do
   match '/myfav', :to => 'users#myfav', :as => :myfav
   match '/newbrandform', :to =>'Bikes#newbrandform', :as => :newbrandform
   match '/newmodelform', :to =>'Bikes#newmodelform', :as => :newmodelform
+  match '/newmodelformedit', :to =>'Bikes#newmodelformedit', :as => :newmodelformedit  
   match '/logout', :to => 'sessions#destroy'
     
   resources :sessions, :only => [:create, :destroy]

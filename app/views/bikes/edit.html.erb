@@ -1,6 +1,331 @@
-<h1>Editing bike</h1>
+<script>
+function update(box)
+{
+	var lists = new Array();
+	<% if !@models.nil?%>
+		<% for i in @models%>
+			if(document.newbikeform['bike[brand_id]'].value == <%=i.brand_id%>){
+				lists.push(new Array('<%=i.name %>', <%= i.id %>));
+			}
+		<%end%>
+	<%end%>
+	emptyList( box['bike[model_id]'] );
+	for ( i = 0; i < lists.length; i++ ) {
+		option = new Option(lists[i][0], lists[i][1]);
+		box['bike[model_id]'].options[i] = option;
+	}
+	
+	if(box['bike[model_id]'].options.length==0){
+		box['bike[model_id]'].options[0] = new Option("Add a new model", "");
+	}
+}
 
-<%= render 'form' %>
+function emptyList( box ) {
+	while ( box.options.length ) box.options[0] = null;
+}
+</script>
+<div id="dhtmltooltip"></div>
+<script type="text/javascript">
 
-<%= link_to 'Show', @bike %> |
+var offsetxpoint=-60 //Customize x offset of tooltip
+var offsetypoint=20 //Customize y offset of tooltip
+var ie=document.all
+var ns6=document.getElementById && !document.all
+var enabletip=false
+if (ie||ns6)
+var tipobj=document.all? document.all["dhtmltooltip"] : document.getElementById? document.getElementById("dhtmltooltip") : ""
+
+function ietruebody(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+function ddrivetip(thetext, thecolor, thewidth){
+if (ns6||ie){
+if (typeof thewidth!="undefined") tipobj.style.width=thewidth+"px"
+if (typeof thecolor!="undefined" && thecolor!="") tipobj.style.backgroundColor=thecolor
+tipobj.innerHTML=thetext
+enabletip=true
+return false
+}
+}
+
+function positiontip(e){
+if (enabletip){
+var curX=(ns6)?e.pageX : event.clientX+ietruebody().scrollLeft;
+var curY=(ns6)?e.pageY : event.clientY+ietruebody().scrollTop;
+//Find out how close the mouse is to the corner of the window
+var rightedge=ie&&!window.opera? ietruebody().clientWidth-event.clientX-offsetxpoint : window.innerWidth-e.clientX-offsetxpoint-20
+var bottomedge=ie&&!window.opera? ietruebody().clientHeight-event.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+
+var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+
+//if the horizontal distance isn't enough to accomodate the width of the context menu
+if (rightedge<tipobj.offsetWidth)
+//move the horizontal position of the menu to the left by it's width
+tipobj.style.left=ie? ietruebody().scrollLeft+event.clientX-tipobj.offsetWidth+"px" : window.pageXOffset+e.clientX-tipobj.offsetWidth+"px"
+else if (curX<leftedge)
+tipobj.style.left="5px"
+else
+//position the horizontal position of the menu where the mouse is positioned
+tipobj.style.left=curX+offsetxpoint+"px"
+
+//same concept with the vertical position
+if (bottomedge<tipobj.offsetHeight)
+tipobj.style.top=ie? ietruebody().scrollTop+event.clientY-tipobj.offsetHeight-offsetypoint+"px" : window.pageYOffset+e.clientY-tipobj.offsetHeight-offsetypoint+"px"
+else
+tipobj.style.top=curY+offsetypoint+"px"
+tipobj.style.visibility="visible"
+}
+}
+
+function hideddrivetip(){
+if (ns6||ie){
+enabletip=false
+tipobj.style.visibility="hidden"
+tipobj.style.left="-1000px"
+tipobj.style.backgroundColor=''
+tipobj.style.width=''
+}
+}
+
+document.onmousemove=positiontip
+
+</script>
+<script>
+var counter = 0;
+function addInput(divName){
+
+     if (counter < 1)  {
+          var newdiv = document.createElement('div');
+          newdiv.innerHTML = " <br/><input type='text' id='tempbrand' name='tempbrand' placeholder='Brand Name' />";
+          document.getElementById(divName).appendChild(newdiv);
+          counter++;
+     }
+	 else{
+		//post the data
+		
+		document.body.innerHTML += '<form id="newbrandform" action="/newbrandform" method="post"><input type="hidden" name="bike_brand[name]" value="'
+								+	document.getElementById("tempbrand").value  +'"></form>';
+		document.getElementById("newbrandform").submit();
+	 }
+}
+
+var counter2 = 0;
+function addInput2(divName){
+
+     if (counter2 < 1)  {
+          var newdiv = document.createElement('div');
+          newdiv.innerHTML = " <br/><input type='text' id='tempmodel' name='tempmodel' placeholder='Model Name' />";
+          document.getElementById(divName).appendChild(newdiv);
+          counter2++;
+     }
+	 else{
+		//post the data
+		
+		document.body.innerHTML += '<form id="newmodelform" action="/newmodelform" method="post"><input type="hidden" name="bike_model[name]" value="'
+								+	document.getElementById("tempmodel").value  +'"><input type="hidden" name="bike_model[brand_id]" value="'
+								+	document.getElementById("bike_brand_id").value  +'"></form>';
+		document.getElementById("newmodelform").submit();
+	 }
+}
+</script>  
+<h1>Edit bike info</h1>
+
+<%= form_for(@bike,:html => {:name => 'newbikeform'}) do |f| %>
+  <% if @bike.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bike.errors.count, "error") %> prohibited this bike from being saved:</h2>
+
+      <ul>
+      <% @bike.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  
+<table border="1" id="maininfo">
+<tr height="80px">
+<td>
+	<p onMouseover="ddrivetip('Type in the bike ID as per the printed stickers. Hook number corresponds to the hooks in the shop','yellow', 120)"; onMouseout="hideddrivetip()">
+	Bike ID and Hook Info:</p>
+	<table border="1" id="IDhook">
+	<tr>
+		<td >
+			<b><div onMouseover="ddrivetip('ID of the bike','yellow', 50)"; onMouseout="hideddrivetip()"><%= f.label :bike_id, "ID"%></div></b></td><td>
+			<b>			    
+		<input id="bike_id" name="bike[bike_id]" size="10" type="number" value="<%=@bike.bike_id%>"/>			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<b><div onMouseover="ddrivetip('Input Hook Number or Physical Location (E.g. Off-site)','yellow', 80)"; onMouseout="hideddrivetip()">
+			Hook No.</div></b></td><td>
+			<%@currloc = Location.find_by_id(@bike.location_id)%>
+			<input id="location_id" name="bike[location_id]" size="10" type="text" 
+			value="<%if !@currloc.nil?%><%=@currloc.hook_number%><%end%>" placeholder="NA"/>		    
+
+		</td>
+	</tr>
+	</table>
+	<br/>OR location name
+	<select id="locname" name="locname">
+	<option value="">On hook - enter above</option>
+	<% for i in Location.all%>
+		<%if !i.name.nil?%>
+			<option value="<%=i.id%>"<%if !@currloc.nil? && i.name==@currloc.name%>selected="selected"<%end%>><%=i.name%></option>
+		<%end%>
+	<%end%>
+	</select>
+	<br/><br/><hr/>
+	<p>Date arrived and departed:</p>
+	
+	<b onMouseover="ddrivetip('Date that bike arrived at Free Ride','yellow', 80)"; onMouseout="hideddrivetip()">
+	<%= f.label :date_in %></b>    
+    <%= f.datetime_select :date_in %>
+	<br/><br/>
+	<b onMouseover="ddrivetip('Date of bike departure from Free Ride','yellow', 80)"; onMouseout="hideddrivetip()">
+	<%= f.label :date_out %></b>    
+    <%= f.datetime_select :date_out %><br/><br/>
+	
+		
+	<hr/>
+	<b>Update Status</b>
+	<select id="status" name="bike[status]">
+	
+	<% for i in ["Available", "EAB in Progress", "FFS in Progress", "Off-site", "Sold", "Departed", "Missing", "Other"] %>
+	<option value="<%=i%>"<%if i.casecmp(@bike.status) ==0%>selected="selected"<%end%>><%=i%></option>
+	<% end %>
+	</select>
+	<br/><br/>
+	
+	
+		  <b onMouseover="ddrivetip('Current price of the bike if it was to be sold','yellow', 80)"; onMouseout="hideddrivetip()">
+		  AS-IS Value:</b><% @bikeAss = BikeAssesment.find_by_bike_id(@bike.id)%>
+		  $ <input id="value" name="value" size="6" type="number" value="<%if @bikeAss.nil? || @bikeAss.value.nil?%>0.00<%else%><%=@bikeAss.value%><%end%>"/>
+
+</td>
+<td>
+	<p>&nbsp;Bike details: </p>
+		<table border="1" cellpadding="3" id="bikeTable">
+		<tr>
+		<td>
+		  <b onMouseover="ddrivetip('Brand of the bike. Click button to add a new brand if not found in the list ','yellow', 150)"; onMouseout="hideddrivetip()">
+		  <%= f.label :brand_id %></b></td><td>
+		<select id="bike_brand_id" name="bike[brand_id]" onchange="update(document.forms['newbikeform']);">
+		
+		<%for i in BikeBrand.all%>
+		<option value="<%=i.id%>" <%if @bike.brand_id==i.id%>selected="selected"<%end%>><%=i.name%></option>
+		<%end%>
+		</select>
+		<form name="brandname" id="brandname" method="POST" >
+			<div id="dynamicInput"></div>
+			 <input type="button" value="New Brand" onClick="addInput('dynamicInput');">
+		</form>		
+		</td>
+		<td>
+	
+		  <b onMouseover="ddrivetip('Model of bike(choose a brand to see the list of models)','yellow', 150)"; onMouseout="hideddrivetip()"><%= f.label :model_id %></b></td><td>
+		<select name="bike[model_id]">
+			
+		<%for i in BikeModel.where(:brand_id => @bike.brand_id)%>
+			<option value="<%=i.id%>" <%if i.id==@bike.model_id%>selected="selected"<%end%>><%=i.name%></option>
+		<%end%>
+		</select>
+		<form name="newmodelname" id="newmodelname" method="POST" >
+			<div id="dynamicInput2"></div>
+			 <input type="button" value="New Model" onClick="addInput2('dynamicInput2');">
+		</form>			
+		</td>
+
+		
+		</tr>
+
+		<tr>
+		<td>
+
+		  <b onMouseover="ddrivetip('Wheel size in ISO format','#66FF33', 80)"; onMouseout="hideddrivetip()">
+		  <%= f.label :wheel_size %></b></td><td>
+   
+    <%= f.text_field :wheel_size %>
+
+		</td>
+		<td>
+
+		  <b onMouseover="ddrivetip('Tube size in ISO format','#66FF33', 80)"; onMouseout="hideddrivetip()">
+		  <%= f.label :top_tube %></b></td><td>
+    
+    <%= f.text_field :top_tube %>
+
+		</td>
+		</tr>
+
+		<tr>
+		<td>
+
+		  <b onMouseover="ddrivetip('Seat tube in ISO format','yellow', 80)"; onMouseout="hideddrivetip()">
+		  <%= f.label :seat_tube %></b></td><td>
+    
+    <%= f.text_field :seat_tube %>
+
+		</td>
+		<td>
+
+		  <b onMouseover="ddrivetip('Color of bicycle frame','yellow', 80)"; onMouseout="hideddrivetip()">
+		  <%= f.label :color %></b></td><td>
+
+    
+    <%= f.text_field :color %>
+		</td>
+
+		</tr>
+
+		<tr>
+
+		</tr>
+		</table>
+		<br/>
+		<br/>
+		<p>&nbsp;Condition and quality: </p>
+		
+		<table border="0">
+		<tr><td>		
+		
+		<b onMouseover="ddrivetip('A - Excellent condition. Almost like brand new.<br/> B - Good. Used but in working condition. <br/> C - Fair Condition. Requires a few tweaks to get it running. <br/> D - Poor Condition. Almost unusable and needs extensive repair.','yellow', 300)"; onMouseout="hideddrivetip()">
+		Condition:</b></td><td>
+		  <select id="condition" name="condition">
+		  <option value="A" <%if !@bikeAss.nil? && @bikeAss.condition=="A"%>selected="selected"<%end%>>A</option>
+		  <option value="B" <%if !@bikeAss.nil? && @bikeAss.condition=="B"%>selected="selected"<%end%>>B</option>
+		  <option value="C" <%if !@bikeAss.nil? && @bikeAss.condition=="C"%>selected="selected"<%end%>>C</option>
+		  <option value="D" <%if !@bikeAss.nil? && @bikeAss.condition=="D"%>selected="selected"<%end%>>D</option>
+		</select></td>	
+		</tr>
+		<tr>
+		<td>		
+		 <b onMouseover="ddrivetip('A - High quality. Excellent brand, sturdy frame, expensive gears.<br/>B - Good quality. Good brand and frame.<br/>C - Fair quality. Recognizable brand, normal frame and brakes.<br/>D - Lousy quality. Unrecognizable brand, cheap and useless.','yellow', 300)"; onMouseout="hideddrivetip()">
+		 Quality:</b></td><td>
+		  <select id="quality" name="quality">
+		  <option value="A" <%if !@bikeAss.nil? && @bikeAss.quality=="A"%>selected="selected"<%end%>>A</option>
+		  <option value="B" <%if !@bikeAss.nil? && @bikeAss.quality=="B"%>selected="selected"<%end%>>B</option>
+		  <option value="C" <%if !@bikeAss.nil? && @bikeAss.quality=="C"%>selected="selected"<%end%>>C</option>
+		  <option value="D" <%if !@bikeAss.nil? && @bikeAss.quality=="D"%>selected="selected"<%end%>>D</option>
+		</select></td>
+		
+		</tr>
+		</table><br/>
+	
+		
+</td>
+
+</tr>
+</table>
+
+
+  <div align="right" class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
 <%= link_to 'Back', @bike %>
