@@ -218,7 +218,7 @@ class BikesController < ApplicationController
         format.html { redirect_to :back, notice: 'Bike brand was successfully created.' }
         format.json { render json: @bike, status: :created, location: @bike_brand }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to :back, notice: 'Invalid brand or brand already exist'  }
         format.json { render json: @bike, status: :unprocessable_entity }
       end
     end
@@ -235,7 +235,7 @@ class BikesController < ApplicationController
         format.html { redirect_to :back, notice: 'Bike model was successfully created.' }
         format.json { render json: @bike, status: :created, location: @bike_model }
       else
-        format.html { redirect_to :back }
+        format.html { redirect_to :back, notice: 'Invalid model or model already exist'  }
         format.json { render json: @bike, status: :unprocessable_entity }
       end
     end
