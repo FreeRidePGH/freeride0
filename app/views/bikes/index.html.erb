@@ -1,4 +1,55 @@
-<h1>Browse Bikes <font size="1"><a href="/bikes">(show all)</a></font></h1>
+<style>
+#bikelisttable th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+#bikelisttable th .asc {
+	background-color: yellow;
+	background: url(/images/uparrow.JPG) no-repeat right;
+}
+
+#bikelisttable th .desc {
+	background-color: yellow;
+	background: url(/images/downarrow.JPG) no-repeat right;	
+}
+
+#bikelisttable  {
+	width: 100%;
+	border-collapse:collapse;
+	border:1px solid #FFCA5E;
+}
+
+#bikelisttable thead th {
+	
+	font-size: 13px;
+	height: 30px;
+	color: #FFFFFF;
+	font-weight: bolder;
+	padding: 0px 7px;
+	margin: 20px 0px 0px;
+	text-align: left;
+	border-right: 1px solid #FCF1D4;
+}
+#bikelisttable tbody tr {
+	background: url(/images/bg_td1.jpg) repeat-x top;
+}
+#bikelisttable tbody tr.odd {
+	background: #FFF8E8 url(/images/bg_td2.jpg) repeat-x;
+}
+
+#bikelisttable tbody th,td {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #565051;
+	padding: 10px 7px;
+	border-top: 1px solid #FFCA5E;
+	border-right: 1px solid #DDDDDD;
+	text-align: left;
+}
+
+</style>
+<h2>Browse Bikes <font size="1"><a href="/bikes">(show all)</a></font></h2>
 <% if !@searchID.nil? %>
 You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <% end %>
@@ -13,8 +64,8 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <% end %>
 
 
-<table class="bikelisttable">
-  <tr>
+<table id="bikelisttable">
+  <thead><tr>
 		<th><%= sortable "bike_id" %></th>
     <th><%= sortable "brand_id"%></th>		
     <th><%= sortable "model_id" %></th>
@@ -25,15 +76,14 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
     <th><%= sortable "color"%></th>
     <th><%= sortable "date_in", "Date In"%></th>
     <th><%= sortable "status", "Status"%></th>
-    
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<th></th>
+  </tr></thead><tbody>
 
+<% @count = 0%>
 <% @bikes.each do |bike| %>
 <% @loc = Location.find_by_id(bike.location_id)%>
-  <tr>
+
+  <tr <% if @count % 2 ==0%>class="odd"<%end%> >
 		<td><%= bike.bike_id %></td>
     <td><%= BikeBrand.find_by_id(bike.brand_id).name%></td>
 	<td><%= BikeModel.find_by_id(bike.model_id).name %></td>
@@ -53,11 +103,12 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
     <td><%= bike.color %></td>
     <td><%= bike.date_in.year %>-<%= bike.date_in.strftime("%b")%>-<%=bike.date_in.day %></td>
     <td><%= bike.status %></td>
-    <td><%= link_to 'Show', bike %></td>
-    <td><%= link_to 'Edit', edit_bike_path(bike) %></td>
-    <td><%= link_to 'Destroy', bike, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'View', bike %></td>
+
   </tr>
+<% @count = @count + 1%>
 <% end %>
+</tbody>
 </table>
 <br/>
 
