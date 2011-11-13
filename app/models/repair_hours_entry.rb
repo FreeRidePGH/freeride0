@@ -1,13 +1,13 @@
 class RepairHoursEntry < ActiveRecord::Base
   belongs_to :user
   
-  attr_accessible :user_id, :bike_id, :start_time, :end_time
+  attr_accessible :user_id, :bike_id, :start_time, :end_time, :eab_project_id
   
   def start_date
     return start_time.localtime.strftime("%A %-m/%-e/%Y")
   end
   def end_date
-    return start_time.localtime.strftime("%A %-m/%-e/%Y")
+  return end_time.localtime.strftime("%A %-m/%-e/%Y")
   end
   
   def duration

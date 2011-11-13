@@ -15,8 +15,9 @@ Freeride::Application.routes.draw do
   resources :safety_item_responses
   resources :safety_items, :except => [:show]
   resources :safety_inspections
-  resources :volunteer_hours_entries
-  resources :repair_hours_entries
+  resources :volunteer_hours_entries, :except => [:edit]
+  resources :repair_hours_entries, :except => [:edit]
+  resources :hours_entries, :except => [:create, :destroy, :show, :edit]
   resources :users, :except => [:new]
   resources :eab_projects
   resources :locations

@@ -42,7 +42,7 @@
 				</tr>
 				<tr>
 					<td><h2>4</h2></td>
-					<td><a href="<%= new_repair_hours_entry_path %>"><h2 align="center">Refurbish Bike</h2></td>
+					<td><a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>"><h2 align="center">Refurbish Bike</h2></td>
 					<td class="checkmark">
 						<% if @eab_project.bike.has_passed_safety? %>
 						&#10004;
@@ -51,7 +51,7 @@
 				</tr>
 				<tr>
 					<td><h2>5</h2></td>
-					<td><a href="<%= new_repair_hours_entry_path %>"><h2 align="center">Safety Check</h2></td>
+					<td><a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>"><h2 align="center">Safety Check</h2></td>
 					<td class="checkmark">
 						<% if @eab_project.bike.has_passed_safety? %>
 						&#10004;
@@ -96,7 +96,7 @@
 				<tr>
 					<td>
 						<h2>Refurbishment Work</h2>
-						<p><%= link_to "New Repair Hours Entry", new_repair_hours_entry_path %></p>
+						<p><a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>">New Repair Hours Entry</a></p>
 					</td>
 				</tr>
 				<% if @eab_project.repair_hours_entries.empty? %>

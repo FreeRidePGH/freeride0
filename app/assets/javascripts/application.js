@@ -7,6 +7,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require jquery-ui-1.8.16.custom.min.js
+//= require jquery-ui-timepicker-addon.js
+
+$(document).ready(function(){
+	$('.datetimepicker').datetimepicker();
+});
 
 $('[placeholder]').focus(function() {
   var input = $(this);

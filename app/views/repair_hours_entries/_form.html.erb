@@ -12,14 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :bike_id %><br />
-    <%= f.number_field :bike_id %>
-  </div>
-  <div class="field">
     <%= f.label :start_time %><br />
     <%= f.datetime_select :start_time %>
   </div>
@@ -27,6 +19,7 @@
     <%= f.label :end_time %><br />
     <%= f.datetime_select :end_time %>
   </div>
+  <%= hidden_field_tag :eab, params[:eab] %>
   <div class="actions">
     <%= f.submit %>
   </div>
