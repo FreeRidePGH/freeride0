@@ -51,7 +51,7 @@
 				</tr>
 				<tr>
 					<td><h2>5</h2></td>
-					<td><a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>"><h2 align="center">Safety Check</h2></td>
+					<td><a href="<%= new_safety_inspection_path(:bike_id => @eab_project.bike) %>"><h2 align="center">Safety Check</h2></td>
 					<td class="checkmark">
 						<% if @eab_project.bike.has_passed_safety? %>
 						&#10004;
@@ -144,4 +144,4 @@
 
 
 <%= link_to 'Edit', edit_eab_project_path(@eab_project) %> |
-<%= link_to 'Back', eab_projects_path %>
+<%= link_to 'Back', myproj_path %>

@@ -111,4 +111,8 @@ class EabProjectsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  def myproj
+    @eab_projects = EabProject.all  
+  end
 end

@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>User:</b>
+  <b>User ID:</b>
   <%= @repair_hours_entry.user_id %>
 </p>
 
 <p>
-  <b>Bike:</b>
-  <%= @repair_hours_entry.bike_id %>
+  <b>User Name:</b>
+  <%= User.find_by_id(@repair_hours_entry.user_id).name %>
 </p>
 
 <p>
@@ -21,4 +21,4 @@
 </p>
 
 
-<%= link_to 'Back', repair_hours_entries_path %>
+<%= link_to 'Back', :back %>

@@ -1,0 +1,27 @@
+<h1>My EAB Projects</h1>
+
+<table>
+  <tr>
+    <th>Bike ID</th>
+    <th>User</th>
+    <th>Status</th>
+    <th>Start date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @eab_projects.each do |eab_project| %>
+  <%if eab_project.user_id == @current_user.id%>
+  <tr>
+    <td><%= link_to eab_project.bike_id, eab_project.bike %></td>
+    <td><%= link_to eab_project.user.name, eab_project.user %></td>
+    <td><%= eab_project.status %></td>
+    <td><%= eab_project.start_date_format %></td>
+    <td><%= link_to 'View Project', eab_project %></td>
+    <td><%= link_to 'Edit', edit_eab_project_path(eab_project) %></td>
+    <td><%= link_to 'Delete', eab_project, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+  <%end%>
+<% end %>
+</table>

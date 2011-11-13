@@ -11,6 +11,23 @@
     </div>
   <% end %>
 
+  Updating repair hours for: <b><%=@current_user.name%></b>	
+  <div class="field">
+    <br />
+    <input type="hidden" name="repair_hours_entry[user_id]" value="<%=@current_user.id%>"/>
+  </div>
+  <%if @bike_id.nil?%>
+    <div class="field">
+    <%= f.label :bike_id %><br />
+    <%= f.number_field :bike_id %>
+  </div>
+  <%else%>
+  Bike ID: <b><%=@bike_id%></b>	
+  <div class="field">
+    <br />
+    <input type="hidden" name="repair_hours_entry[bike_id]" value="<%=@bike_id%>"/>
+  </div>
+  <%end%>
   <div class="field">
     <%= f.label :start_time %><br />
     <%= f.datetime_select :start_time %>

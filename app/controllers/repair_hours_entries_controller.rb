@@ -35,7 +35,8 @@ class RepairHoursEntriesController < ApplicationController
     # redirect_to location: :back
     #end
     @repair_hours_entry = RepairHoursEntry.new
-
+	@bike_id = params[:bike_id]
+	
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @repair_hours_entry }

@@ -11,6 +11,11 @@
     </div>
   <% end %>
 	
+  Updating volunteer hours for: <b><%=@current_user.name%></b>	
+  <div class="field">
+    <br />
+    <input type="hidden" name="volunteer_hours_entry[user_id]" value="<%=@current_user.id%>"/>
+  </div>
   <div class="field">
     <%= f.label :start_time %><br />
     <%= f.datetime_select :start_time %>
