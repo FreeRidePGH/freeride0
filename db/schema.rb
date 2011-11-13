@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111111215335) do
+ActiveRecord::Schema.define(:version => 20111112232245) do
 
   create_table "bike_assesments", :force => true do |t|
     t.integer  "bike_id"
@@ -64,6 +64,14 @@ ActiveRecord::Schema.define(:version => 20111111215335) do
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
     t.integer  "bike_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "location_histories", :force => true do |t|
+    t.integer  "bike_id"
+    t.string   "location_name"
+    t.datetime "last_date_at_location"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

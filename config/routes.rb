@@ -1,5 +1,7 @@
 Freeride::Application.routes.draw do
 
+  resources :location_histories
+
   root :to => 'home#index'
   match "/search", :to => 'search#index', :as => :search
   match '/dashboard', :to => 'home#dashboard', :as => :dashboard

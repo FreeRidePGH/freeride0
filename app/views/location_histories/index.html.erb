@@ -1,0 +1,27 @@
+<h1>Listing location_histories</h1>
+
+<table>
+  <tr>
+    <th>Bike</th>
+    <th>Location name</th>
+    <th>Last date at location</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @location_histories.each do |location_history| %>
+  <tr>
+    <td><%= location_history.bike_id %></td>
+    <td><%= location_history.location_name %></td>
+    <td><%= location_history.last_date_at_location %></td>
+    <td><%= link_to 'Show', location_history %></td>
+    <td><%= link_to 'Edit', edit_location_history_path(location_history) %></td>
+    <td><%= link_to 'Destroy', location_history, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Location history', new_location_history_path %>

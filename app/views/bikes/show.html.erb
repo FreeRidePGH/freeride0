@@ -189,8 +189,15 @@ end
 
 	<table border="0" id="history">
 	<tr id="headers">
-	<td>Location</td><td>Date</td>
+	<td>Location</td><td>Last date at location</td>
 	</tr>	
+	<%for i in LocationHistory.where(:bike_id => @bike)%>
+	<tr>
+		<td><%=i.location_name%></td>
+		<%@lastdate = i.last_date_at_location%>
+		<td><%=@lastdate.to_formatted_s(:long) %></td>
+	</tr>
+	<%end%>
 	<tr>
 	    <td>
 		<%if @loc.nil?%>
@@ -204,7 +211,7 @@ end
 		<%if @loc.nil?%>
 			N.A.
 		<%else%>
-			<%=@loc.updated_at.year%>-<%= @loc.updated_at.strftime("%b") %>-<%= @loc.updated_at.day %>
+			Current Location
 		<%end%>
 		</td>
 	</tr>

@@ -141,6 +141,12 @@ class BikesController < ApplicationController
     @bike = Bike.find(params[:id])
 	@models = BikeModel.find(:all)
 	@originalLoc = @bike.location_id
+	@originalLocHist = Location.find_by_id(@originalLoc)
+	if @originalLocHist.name.nil?
+		@historyName = "HookID - " + @originalLocHist.hook_number.to_s()
+	else
+		@historyName = @originalLocHist.name
+	end
 	
 	@bike_assesment = BikeAssesment.find_by_bike_id(@bike.id)
 	@bike_assesment.quality = params[:quality]
@@ -156,7 +162,11 @@ class BikesController < ApplicationController
 				if !@locname.nil? #location name was entered
 					@loc = Location.find_by_id(@locname)
 					if !@loc.nil?
-						@bike.location_id = @loc.id
+						if @locname != @originalLoc #execute only if value entered was not the same as the original
+							@lochistory = LocationHistory.new(:bike_id => @bike.id, :location_name => @historyName, :last_date_at_location => Time.now)
+							@lochistory.save
+							@bike.location_id = @loc.id
+						end
 					else
 						#both hooknum and location not entered
 					end
@@ -167,6 +177,8 @@ class BikesController < ApplicationController
 					#if location(hook Number) does not exist, create it
 					@newloc = Location.new(:hook_number => @hooknum)
 					@newloc.save
+					@lochistory = LocationHistory.new(:bike_id => @bike.id, :location_name => @historyName, :last_date_at_location => Time.now)
+					@lochistory.save
 					@bike.location_id = @newloc.id
 				else
 					#location exist, check if hook number already taken
@@ -179,6 +191,10 @@ class BikesController < ApplicationController
 						@bike.location_id = @originalLoc
 						return
 					else
+						if @loc.id != @originalLoc
+							@lochistory = LocationHistory.new(:bike_id => @bike.id, :location_name => @historyName, :last_date_at_location => Time.now)
+							@lochistory.save
+						end
 						@bike.location_id = @loc.id
 					end
 				end
