@@ -8,8 +8,10 @@ class EabProject < ActiveRecord::Base
   validates :bike_id, :presence => true
   validates :user_id, :presence => true
   
+  #scope :all, :order => "status"
+  
   def start_date_format
     return start_date.localtime.strftime("%a, %-m/%-e/%Y %-I:%M %p") # show the year
   end
-  
+
 end

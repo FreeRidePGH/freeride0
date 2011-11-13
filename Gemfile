@@ -7,7 +7,7 @@ gem 'rails', '3.1.0'
 
 gem 'sqlite3'
 gem 'will_paginate'
-gem 'therubyracer'
+#gem 'therubyracer'
 
 
 # Gems used only for assets and not required
