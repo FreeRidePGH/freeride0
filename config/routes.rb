@@ -9,7 +9,10 @@ Freeride::Application.routes.draw do
   match '/myfav', :to => 'users#myfav', :as => :myfav
   match '/newbrandform', :to =>'Bikes#newbrandform', :as => :newbrandform
   match '/newmodelform', :to =>'Bikes#newmodelform', :as => :newmodelform
+  match '/myproj', :to => 'EabProjects#myproj', :as => :myproj
+  match '/myhours', :to => 'VolunteerHoursEntries#myhours', :as => :myhours
   match '/logout', :to => 'sessions#destroy'
+
     
   resources :sessions, :only => [:create, :destroy]
   resources :safety_item_responses

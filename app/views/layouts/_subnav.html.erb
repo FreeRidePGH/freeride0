@@ -32,11 +32,11 @@
 <% elsif subnav=="eab_projects" %>
 
 		<li><%= link_to "All Projects", eab_projects_path %></li>
-		<li><%= link_to "My Projects", root_path %></li>
+		<li><%= link_to "My Projects", myproj_path %></li>
 		
 <% elsif subnav=="volunteer_hours_entries" || subnav=="repair_hours_entries" %>
 
-		<li><%= link_to "View Hours Log", root_path %></li>
+		<li><%= link_to "View Hours Log", myhours_path %></li>
 		<li><%= link_to "Record Volunteer Hours", new_volunteer_hours_entry_path %></li>
 		<li><%= link_to "Record Repair Hours", new_repair_hours_entry_path %></li>	
 

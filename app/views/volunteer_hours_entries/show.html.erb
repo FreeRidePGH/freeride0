@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>User:</b>
+  <b>User ID:</b>
   <%= @volunteer_hours_entry.user_id %>
+</p>
+
+<p>
+  <b>User Name:</b>
+  <%= User.find_by_id(@volunteer_hours_entry.user_id).name %>
 </p>
 
 <p>
@@ -17,4 +22,4 @@
 
 
 <%= link_to 'Edit', edit_volunteer_hours_entry_path(@volunteer_hours_entry) %> |
-<%= link_to 'Back', volunteer_hours_entries_path %>
+<%= link_to 'Back', myproj_path %>

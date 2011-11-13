@@ -80,4 +80,8 @@ class VolunteerHoursEntriesController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  def myhours
+    @volunteer_hours_entries = VolunteerHoursEntry.all  
+  end
 end

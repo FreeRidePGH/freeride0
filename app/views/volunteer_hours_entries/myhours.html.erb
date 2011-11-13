@@ -1,4 +1,4 @@
-<h1>Listing Volunteer Hours Entries</h1>
+<h1>My Volunteer Hours Entries</h1>
 
 <table>
   <tr>
@@ -11,14 +11,16 @@
   </tr>
 
 <% @volunteer_hours_entries.each do |volunteer_hours_entry| %>
+  <%if volunteer_hours_entry.user_id == @current_user.id%>
   <tr>
-    <td><%= volunteer_hours_entry.user_id %></td>
+    <td><%= @current_user.name %></td>
     <td><%= volunteer_hours_entry.start_time %></td>
     <td><%= volunteer_hours_entry.end_time %></td>
     <td><%= link_to 'Show', volunteer_hours_entry %></td>
     <td><%= link_to 'Edit', edit_volunteer_hours_entry_path(volunteer_hours_entry) %></td>
     <td><%= link_to 'Destroy', volunteer_hours_entry, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
+  <%end%>
 <% end %>
 </table>
 
