@@ -7,8 +7,6 @@ Freeride::Application.routes.draw do
   match '/dashboard', :to => 'home#dashboard', :as => :dashboard
   match '/signup', :to => 'users#new', :as => :signup
   match '/myfav', :to => 'users#myfav', :as => :myfav
-  match '/newbrandform', :to =>'Bikes#newbrandform', :as => :newbrandform
-  match '/newmodelform', :to =>'Bikes#newmodelform', :as => :newmodelform
   match '/myproj', :to => 'EabProjects#myproj', :as => :myproj
   match '/myhours', :to => 'VolunteerHoursEntries#myhours', :as => :myhours
   match '/logout', :to => 'sessions#destroy'

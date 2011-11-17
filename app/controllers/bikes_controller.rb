@@ -89,6 +89,36 @@ class BikesController < ApplicationController
 	@v = params[:value]
 	@locname = params[:locname]
 	
+	#Checking and adding new brand/models
+	if !params[:tempbrand].nil?	
+		@bike_brand = BikeBrand.new(:name => params[:tempbrand])		
+		if @bike_brand.save      
+			@bike.brand_id = @bike_brand.id   
+			
+		else
+			@bike.errors.add(:brand_id, "is invalid or already exists")
+			respond_to do |format|
+				format.html { render action: "new" }
+				format.json { render json: @bike.errors, status: :unprocessable_entity }				
+			end
+			return
+		end			
+	end	
+	
+	if !params[:tempmodel].nil?
+		@bike_model = BikeModel.new(:brand_id => @bike.brand_id, :name => params[:tempmodel])
+		if @bike_model.save      
+			@bike.model_id = @bike_model.id		
+		else
+			@bike.errors.add(:model_id, "is invalid or already exists")
+			respond_to do |format|
+				format.html { render action: "new" }
+				format.json { render json: @bike.errors, status: :unprocessable_entity }				
+			end
+			return
+		end		
+	end
+	
 	@hooknum = @bike.location_id #location_id was actually hook number	
 	if @hooknum.nil?			
 		if !@locname.nil?
@@ -96,7 +126,13 @@ class BikesController < ApplicationController
 			if !@loc.nil?
 				@bike.location_id = @loc.id
 			else
-				#both hooknum and location not entered
+				#both hooknum and location not entered, default location: off-hook
+				@offhook = Location.find_by_name("In Shop - Off Hook")
+				if @offhook.nil?
+					@offhook = Location.new(:name => "In Shop - Off Hook")
+					@offhook.save
+				end
+				@bike.location_id = @offhook.id
 			end
 		end
 	else		
@@ -120,14 +156,19 @@ class BikesController < ApplicationController
 			end
 		end
 	end
-	
-	
+
     respond_to do |format|
       if @bike.save
 		@bike_assesment = BikeAssesment.new(:bike_id => @bike.id, :quality => @q, :condition => @c, :value => @v)
 		@bike_assesment.save
-        format.html { redirect_to @bike, notice: 'Bike was successfully created.' }
-        format.json { render json: @bike, status: :created, location: @bike }
+        
+		if(params[:submit] == "Create") #Create and go to bike profile page
+			format.html { redirect_to @bike, notice: 'Bike was successfully created.' }
+			format.json { render json: @bike, status: :created, location: @bike }
+		else 							#Create and go back to new bike page
+			format.html { redirect_to "/bikes/new", notice: 'Bike was successfully created.' }
+			format.json { render json: @bike, status: :created, location: @bike }		
+		end
       else
         format.html { render action: "new" }
         format.json { render json: @bike.errors, status: :unprocessable_entity }
@@ -142,10 +183,13 @@ class BikesController < ApplicationController
 	@models = BikeModel.find(:all)
 	@originalLoc = @bike.location_id
 	@originalLocHist = Location.find_by_id(@originalLoc)
-	if @originalLocHist.name.nil?
-		@historyName = "HookID - " + @originalLocHist.hook_number.to_s()
-	else
-		@historyName = @originalLocHist.name
+	
+	if !@originalLocHist.nil?
+		if @originalLocHist.name.nil?
+			@historyName = "HookID - " + @originalLocHist.hook_number.to_s()
+		else
+			@historyName = @originalLocHist.name
+		end
 	end
 	
 	@bike_assesment = BikeAssesment.find_by_bike_id(@bike.id)
@@ -221,42 +265,7 @@ class BikesController < ApplicationController
       format.json { head :ok }
     end
   end
-
-  # POST /newbrandform
-  # POST /newbrandform.json
-  def newbrandform
-    @bike_brand = BikeBrand.new(params[:bike_brand])
-    @bike = Bike.new(params[:bike])
-	
-    respond_to do |format|
-      if @bike_brand.save
-		
-        format.html { redirect_to :back, notice: 'Bike brand was successfully created.' }
-        format.json { render json: @bike, status: :created, location: @bike_brand }
-      else
-        format.html { redirect_to :back, notice: 'Invalid brand or brand already exist'  }
-        format.json { render json: @bike, status: :unprocessable_entity }
-      end
-    end
-  end  
  
-  # POST /newmodelform
-  # POST /newmodelform.json
-  def newmodelform
-    @bike_model = BikeModel.new(params[:bike_model])
-	@bike = Bike.new(params[:bike])
-
-    respond_to do |format|
-      if @bike_model.save
-        format.html { redirect_to :back, notice: 'Bike model was successfully created.' }
-        format.json { render json: @bike, status: :created, location: @bike_model }
-      else
-        format.html { redirect_to :back, notice: 'Invalid model or model already exist'  }
-        format.json { render json: @bike, status: :unprocessable_entity }
-      end
-    end
-  end
-  
   private
   def sort_column
     Bike.column_names.include?(params[:sort]) ? params[:sort] : "id"

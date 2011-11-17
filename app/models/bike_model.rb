@@ -4,5 +4,6 @@ class BikeModel < ActiveRecord::Base
   attr_accessible :name, :brand_id
   	
   validates :brand_id, :name, :presence => true
-	validates :name, :uniqueness => true
+  validates_uniqueness_of :name, :scope => :brand_id, :message => "for the model already exists for its brand"
+
 end
