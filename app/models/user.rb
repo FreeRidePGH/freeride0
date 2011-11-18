@@ -105,6 +105,7 @@ class User < ActiveRecord::Base
     def initialize_user
       self.account_value = 0
       self.has_read_packet = false
+      self.role = 10 #by default new users have Member permissions
       true # if this method returns false as part of the before_create callback, user won't be saved
     end
   
