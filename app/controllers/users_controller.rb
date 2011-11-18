@@ -5,6 +5,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    if current_user.is_not_council?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @term = (params[:q])
     if @term == nil
       @users = User.all
@@ -20,6 +25,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -47,10 +57,20 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @user = User.find(params[:id])
     @user.phone1 = @user.phone_number[0..2]
     @user.phone2 = @user.phone_number[3..5]
     @user.phone3 = @user.phone_number[6..9]
+    
+    if @user != current_user && current_user.is_not_council?
+      flash.now[:error] = "You do not have permissions to edit other users."
+      redirect_to root_path and return
+    end
   end
 
   # POST /users
@@ -81,7 +101,17 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @user = User.find(params[:id])
+    
+    if @user != current_user && current_user.is_not_council?
+      flash.now[:error] = "You do not have permissions to edit other users."
+      redirect_to root_path and return
+    end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -97,6 +127,11 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    if current_user.is_not_council?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @user = User.find(params[:id])
     @user.destroy
 

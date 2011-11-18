@@ -2,6 +2,11 @@ class SafetyInspectionsController < ApplicationController
   # GET /safety_inspections
   # GET /safety_inspections.json
   def index
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @safety_inspections = SafetyInspection.all
 
     respond_to do |format|
@@ -13,6 +18,11 @@ class SafetyInspectionsController < ApplicationController
   # GET /safety_inspections/1
   # GET /safety_inspections/1.json
   def show
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @safety_inspection = SafetyInspection.find(params[:id])
     @safety_item_responses = @safety_inspection.safety_item_responses
 
@@ -25,6 +35,11 @@ class SafetyInspectionsController < ApplicationController
   # GET /safety_inspections/new
   # GET /safety_inspections/new.json
   def new
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @safety_inspection = SafetyInspection.new
     @safety_inspection.bike = Bike.find(params[:bike_id])
     @safety_inspection.inspector = current_user
@@ -41,12 +56,22 @@ class SafetyInspectionsController < ApplicationController
 
   # GET /safety_inspections/1/edit
   def edit
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @safety_inspection = SafetyInspection.find(params[:id])
   end
 
   # POST /safety_inspections
   # POST /safety_inspections.json
   def create
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @safety_inspection = SafetyInspection.new(params[:safety_inspection])
     @safety_inspection.bike = Bike.find(params[:safety_inspection][:bike_id])
     @safety_inspection.inspector = current_user
@@ -65,6 +90,11 @@ class SafetyInspectionsController < ApplicationController
   # PUT /safety_inspections/1
   # PUT /safety_inspections/1.json
   def update
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @safety_inspection = SafetyInspection.find(params[:id])
 
     respond_to do |format|
@@ -81,6 +111,11 @@ class SafetyInspectionsController < ApplicationController
   # DELETE /safety_inspections/1
   # DELETE /safety_inspections/1.json
   def destroy
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @safety_inspection = SafetyInspection.find(params[:id])
     @safety_inspection.destroy
 

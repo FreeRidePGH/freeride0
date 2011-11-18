@@ -2,6 +2,11 @@ class VolunteerHoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries
   # GET /volunteer_hours_entries.json
   def index
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @volunteer_hours_entries = VolunteerHoursEntry.all
 
     respond_to do |format|
@@ -13,6 +18,11 @@ class VolunteerHoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries/1
   # GET /volunteer_hours_entries/1.json
   def show
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @volunteer_hours_entry = VolunteerHoursEntry.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +34,11 @@ class VolunteerHoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries/new
   # GET /volunteer_hours_entries/new.json
   def new
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @volunteer_hours_entry = VolunteerHoursEntry.new
     @user_id = current_user.id
 
@@ -36,6 +51,11 @@ class VolunteerHoursEntriesController < ApplicationController
   # POST /volunteer_hours_entries
   # POST /volunteer_hours_entries.json
   def create
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @volunteer_hours_entry = VolunteerHoursEntry.new(params[:volunteer_hours_entry])
     @volunteer_hours_entry.user_id = current_user.id
     #@volunteer_hours_entry.start_time = Date.strptime(params["start"], '%m/%d/%Y %H:%M')
@@ -54,6 +74,11 @@ class VolunteerHoursEntriesController < ApplicationController
   # DELETE /volunteer_hours_entries/1
   # DELETE /volunteer_hours_entries/1.json
   def destroy
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @volunteer_hours_entry = VolunteerHoursEntry.find(params[:id])
     @volunteer_hours_entry.destroy
 
@@ -64,6 +89,11 @@ class VolunteerHoursEntriesController < ApplicationController
   end
   
   def myhours
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @volunteer_hours_entries = VolunteerHoursEntry.all  
   end
 end

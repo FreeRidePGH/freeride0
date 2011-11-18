@@ -2,6 +2,11 @@ class RepairHoursEntriesController < ApplicationController
   # GET /repair_hours_entries
   # GET /repair_hours_entries.json
   def index
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @repair_hours_entries = RepairHoursEntry.all
 
     respond_to do |format|
@@ -13,6 +18,11 @@ class RepairHoursEntriesController < ApplicationController
   # GET /repair_hours_entries/1
   # GET /repair_hours_entries/1.json
   def show
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @repair_hours_entry = RepairHoursEntry.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +34,11 @@ class RepairHoursEntriesController < ApplicationController
   # GET /repair_hours_entries/new
   # GET /repair_hours_entries/new.json
   def new
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     if current_user.eab_project.nil? || current_user.eab_project.status != 1
       respond_to do |format|
         format.html { redirect_to :root, error: 'You do not have an EAB Project' }
@@ -46,6 +61,11 @@ class RepairHoursEntriesController < ApplicationController
   # POST /repair_hours_entries
   # POST /repair_hours_entries.json
   def create
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @repair_hours_entry = RepairHoursEntry.new(params[:repair_hours_entry])
     #@repair_hours_entry.end_time = Date.strptime(params["end"], '%m/%d/%Y %H:%M')
     #@repair_hours_entry.start_time = Date.strptime(params["start"], '%m/%d/%Y %H:%M')
@@ -67,6 +87,11 @@ class RepairHoursEntriesController < ApplicationController
   # DELETE /repair_hours_entries/1
   # DELETE /repair_hours_entries/1.json
   def destroy
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @repair_hours_entry = RepairHoursEntry.find(params[:id])
     @repair_hours_entry.destroy
 

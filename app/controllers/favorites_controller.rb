@@ -2,6 +2,11 @@ class FavoritesController < ApplicationController
   # GET /favorites
   # GET /favorites.json
   def index
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @favorites = Favorite.all
 
     respond_to do |format|
@@ -13,6 +18,11 @@ class FavoritesController < ApplicationController
   # GET /favorites/1
   # GET /favorites/1.json
   def show
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @favorite = Favorite.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +34,11 @@ class FavoritesController < ApplicationController
   # GET /favorites/new
   # GET /favorites/new.json
   def new
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @favorite = Favorite.new
 
     respond_to do |format|
@@ -34,15 +49,24 @@ class FavoritesController < ApplicationController
 
   # GET /favorites/1/edit
   def edit
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @favorite = Favorite.find(params[:id])
   end
 
   # POST /favorites
   # POST /favorites.json
   def create
-  
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end    
+
     @bid = params[:bike_id]
-	@uid = params[:user_id]
+    @uid = params[:user_id]
     @favorite = Favorite.new(:user_id => @uid, :bike_id => @bid)
 
     respond_to do |format|
@@ -59,6 +83,11 @@ class FavoritesController < ApplicationController
   # PUT /favorites/1
   # PUT /favorites/1.json
   def update
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @favorite = Favorite.find(params[:id])
 
     respond_to do |format|
@@ -75,6 +104,11 @@ class FavoritesController < ApplicationController
   # DELETE /favorites/1
   # DELETE /favorites/1.json
   def destroy
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @favorite = Favorite.find(params[:id])
     @favorite.destroy
 

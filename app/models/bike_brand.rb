@@ -1,6 +1,6 @@
 class BikeBrand < ActiveRecord::Base
-  has_many :bike_models
-  has_many :bikes
+  has_many :bike_models, :dependent => :destroy
+  has_many :bikes, :dependent => :destroy
   
   attr_accessible :name
   

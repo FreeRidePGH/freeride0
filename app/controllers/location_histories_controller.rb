@@ -2,6 +2,11 @@ class LocationHistoriesController < ApplicationController
   # GET /location_histories
   # GET /location_histories.json
   def index
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location_histories = LocationHistory.all
 
     respond_to do |format|
@@ -13,6 +18,11 @@ class LocationHistoriesController < ApplicationController
   # GET /location_histories/1
   # GET /location_histories/1.json
   def show
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location_history = LocationHistory.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +34,11 @@ class LocationHistoriesController < ApplicationController
   # GET /location_histories/new
   # GET /location_histories/new.json
   def new
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location_history = LocationHistory.new
 
     respond_to do |format|
@@ -34,12 +49,22 @@ class LocationHistoriesController < ApplicationController
 
   # GET /location_histories/1/edit
   def edit
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location_history = LocationHistory.find(params[:id])
   end
 
   # POST /location_histories
   # POST /location_histories.json
   def create
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location_history = LocationHistory.new(params[:location_history])
 
     respond_to do |format|
@@ -56,6 +81,11 @@ class LocationHistoriesController < ApplicationController
   # PUT /location_histories/1
   # PUT /location_histories/1.json
   def update
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location_history = LocationHistory.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +102,11 @@ class LocationHistoriesController < ApplicationController
   # DELETE /location_histories/1
   # DELETE /location_histories/1.json
   def destroy
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location_history = LocationHistory.find(params[:id])
     @location_history.destroy
 

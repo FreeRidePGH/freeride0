@@ -2,6 +2,11 @@ class BikeBrandsController < ApplicationController
   # GET /bike_brands
   # GET /bike_brands.json
   def index
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @bike_brands = BikeBrand.all
 
     respond_to do |format|
@@ -13,6 +18,11 @@ class BikeBrandsController < ApplicationController
   # GET /bike_brands/1
   # GET /bike_brands/1.json
   def show
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @bike_brand = BikeBrand.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +34,11 @@ class BikeBrandsController < ApplicationController
   # GET /bike_brands/new
   # GET /bike_brands/new.json
   def new
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @bike_brand = BikeBrand.new
 
     respond_to do |format|
@@ -34,12 +49,22 @@ class BikeBrandsController < ApplicationController
 
   # GET /bike_brands/1/edit
   def edit
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @bike_brand = BikeBrand.find(params[:id])
   end
 
   # POST /bike_brands
   # POST /bike_brands.json
   def create
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @bike_brand = BikeBrand.new(params[:bike_brand])
 
     respond_to do |format|
@@ -56,6 +81,11 @@ class BikeBrandsController < ApplicationController
   # PUT /bike_brands/1
   # PUT /bike_brands/1.json
   def update
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @bike_brand = BikeBrand.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +102,11 @@ class BikeBrandsController < ApplicationController
   # DELETE /bike_brands/1
   # DELETE /bike_brands/1.json
   def destroy
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @bike_brand = BikeBrand.find(params[:id])
     @bike_brand.destroy
 

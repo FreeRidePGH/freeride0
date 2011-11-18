@@ -3,9 +3,14 @@ class HoursEntriesController < ApplicationController
   # GET /hours_entries
   # GET /hours_entries.json
   def index
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @hours_entries = VolunteerHoursEntry.all
     @hours_entries += RepairHoursEntry.all
-    @hours_entries =  @hours_entries.sort_by(&:start_date)
+    @hours_entries =  @hours_entries.sort_by(&:start_time)
     
     respond_to do |format|
       format.html # index.html.erb
@@ -16,6 +21,11 @@ class HoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries/1
   # GET /volunteer_hours_entries/1.json
   def volunteer_show
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @volunteer_hours_entry = VolunteerHoursEntry.find(params[:id])
 
     respond_to do |format|
@@ -27,6 +37,11 @@ class HoursEntriesController < ApplicationController
   # GET /repair_hours_entries/1
   # GET /repair_hours_entries/1.json
   def repair_show
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @repair_hours_entry = RepairHoursEntry.find(params[:id])
       
       respond_to do |format|
@@ -39,6 +54,11 @@ class HoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries/new
   # GET /volunteer_hours_entries/new.json
   def volunteer_new
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @volunteer_hours_entry = VolunteerHoursEntry.new
 
     respond_to do |format|
@@ -50,6 +70,11 @@ class HoursEntriesController < ApplicationController
   # GET /repair_hours_entries/new
   # GET /repair_hours_entries/new.json
   def repair_new
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @repair_hours_entry = RepairHoursEntry.new
 
     respond_to do |format|
@@ -61,6 +86,11 @@ class HoursEntriesController < ApplicationController
   # POST /volunteer_hours_entries
   # POST /volunteer_hours_entries.json
   def volunteer_create
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @volunteer_hours_entry = VolunteerHoursEntry.new(params[:volunteer_hours_entry])
 
     respond_to do |format|
@@ -78,6 +108,11 @@ class HoursEntriesController < ApplicationController
   # POST /repair_hours_entries
   # POST /repair_hours_entries.json
   def repair_create
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @repair_hours_entry = RepairHoursEntry.new(params[:repair_hours_entry])
 
     respond_to do |format|
@@ -95,6 +130,11 @@ class HoursEntriesController < ApplicationController
   # DELETE /volunteer_hours_entries/1
   # DELETE /volunteer_hours_entries/1.json
   def volunteer_destroy
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @volunteer_hours_entry = VolunteerHoursEntry.find(params[:id])
     @volunteer_hours_entry.destroy
 
@@ -107,6 +147,11 @@ class HoursEntriesController < ApplicationController
   # DELETE /repair_hours_entries/1
   # DELETE /repair_hours_entries/1.json
   def repair_destroy
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @repair_hours_entry = RepairHoursEntry.find(params[:id])
     @repair_hours_entry.destroy
 

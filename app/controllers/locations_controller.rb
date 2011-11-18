@@ -2,6 +2,11 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @locations = Location.all
 
     respond_to do |format|
@@ -13,6 +18,11 @@ class LocationsController < ApplicationController
   # GET /locations/1
   # GET /locations/1.json
   def show
+    if current_user.is_not_member?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location = Location.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +34,11 @@ class LocationsController < ApplicationController
   # GET /locations/new
   # GET /locations/new.json
   def new
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location = Location.new
 
     respond_to do |format|
@@ -34,12 +49,22 @@ class LocationsController < ApplicationController
 
   # GET /locations/1/edit
   def edit
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location = Location.find(params[:id])
   end
 
   # POST /locations
   # POST /locations.json
   def create
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location = Location.new(params[:location])
 
     respond_to do |format|
@@ -56,6 +81,11 @@ class LocationsController < ApplicationController
   # PUT /locations/1
   # PUT /locations/1.json
   def update
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location = Location.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +102,11 @@ class LocationsController < ApplicationController
   # DELETE /locations/1
   # DELETE /locations/1.json
   def destroy
+    if current_user.is_not_staff?
+      flash.now[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
     @location = Location.find(params[:id])
     @location.destroy
 
