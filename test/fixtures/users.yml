@@ -18,7 +18,7 @@ one:
   salt: <%= salt %>
   account_value: 45.50
   has_read_packet: true
-  role: 1
+  role: 10
 
 two:
   id: 2
@@ -35,7 +35,7 @@ two:
   salt: <%= salt %>
   account_value: 0
   has_read_packet: false
-  role: 1
+  role: 10
 
 three:
   id: 3
@@ -51,7 +51,7 @@ three:
   salt: <%= salt %>
   account_value: 230
   has_read_packet: true
-  role: 1
+  role: 40
   
 four:
   id: 4
@@ -67,7 +67,7 @@ four:
   salt: <%= salt %>
   account_value: 105
   has_read_packet: true
-  role: 1
+  role: 40
   
 five:
   id: 5
@@ -83,7 +83,7 @@ five:
   salt: <%= salt %>
   account_value: 78
   has_read_packet: true
-  role: 1
+  role: 30
   
 six:
   id: 6
@@ -99,4 +99,4 @@ six:
   salt: <%= salt %>
   account_value: 45
   has_read_packet: false
-  role: 2
+  role: 20

@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
         flash.now[:error] = "You must login before you can access that feature."
         redirect_to root_path
       end
-    end  
+    end
     
 end

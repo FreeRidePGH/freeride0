@@ -55,6 +55,36 @@ class User < ActiveRecord::Base
     first_name + " " + last_name
   end
   
+  # PERMISSIONS DEFINED
+  def is_member?
+    return true if self.role >= 10
+    false
+  end
+  def is_not_member?
+    return !self.is_member?
+  end
+  def is_staff?
+    return true if self.role >= 20
+    false
+  end
+  def is_not_staff?
+    return !self.is_staff?
+  end
+  def is_council?
+    return true if self.role >= 30
+    false
+  end
+  def is_not_council?
+    return !self.is_council?
+  end
+  def is_admin?
+    return true if self.role >= 40
+    false
+  end
+  def is_not_admin?
+    return !self.is_admin?
+  end
+  
 
 
 
