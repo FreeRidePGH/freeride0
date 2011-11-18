@@ -99,6 +99,7 @@ function addInput(divName){
           var newdiv = document.createElement('div');
           newdiv.innerHTML = " <br/><input type='text' id='tempbrand' name='tempbrand' placeholder='Brand Name' />";
           document.getElementById(divName).appendChild(newdiv);
+		  emptyList( document.forms['newbikeform']['bike[model_id]'] );
      }
 	 else{
 		//remove the text box	
@@ -178,7 +179,8 @@ function isNumberKey(evt)
 	<tr>
 		<td>
 			<b><div onMouseover="ddrivetip('Input Hook Number or Physical Location (E.g. Off-site)','yellow', 80)"; onMouseout="hideddrivetip()">
-			Hook No.</div></b></td><td><%@currloc = Location.find_by_id(@bike.location_id)%>
+			Hook No.</div></b></td><td>
+			<%@currloc = Location.find_by_id(@bike.location_id)%>
 			<input id="location_id" name="bike[location_id]" size="10" type="text" 
 			value="<%if !@currloc.nil?%><%=@currloc.hook_number%><%end%>" placeholder="NA" onchange="defaultLocation()" onkeypress="return isNumberKey(event)"/>		    
 

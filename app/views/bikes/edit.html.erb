@@ -1,4 +1,3 @@
-<p id="notice"><font color="red"><%= notice %></font></p>
 <script>
 function update(box)
 {
@@ -93,43 +92,61 @@ document.onmousemove=positiontip
 
 </script>
 <script>
-var counter = 0;
 function addInput(divName){
 
-     if (counter < 1)  {
+     if (document.getElementsByName('brandcheck')[0].checked ==true)  {
+		//add text box
           var newdiv = document.createElement('div');
           newdiv.innerHTML = " <br/><input type='text' id='tempbrand' name='tempbrand' placeholder='Brand Name' />";
           document.getElementById(divName).appendChild(newdiv);
-          counter++;
+		  emptyList( document.forms['newbikeform']['bike[model_id]'] );
      }
 	 else{
-		//post the data
-		
-		document.body.innerHTML += '<form id="newbrandform" action="/newbrandform" method="post"><input type="hidden" name="bike_brand[name]" value="'
-								+	document.getElementById("tempbrand").value  +'"></form>';
-		document.getElementById("newbrandform").submit();
+		//remove the text box	
+		child=document.getElementById(divName).childNodes[0];		
+		document.getElementById(divName).removeChild(child);
 	 }
 }
 
-var counter2 = 0;
 function addInput2(divName){
-
-     if (counter2 < 1)  {
+	
+     if (document.getElementsByName('modelcheck')[0].checked ==true)  {
           var newdiv = document.createElement('div');
           newdiv.innerHTML = " <br/><input type='text' id='tempmodel' name='tempmodel' placeholder='Model Name' />";
           document.getElementById(divName).appendChild(newdiv);
-          counter2++;
      }
 	 else{
-		//post the data
-		
-		document.body.innerHTML += '<form id="newmodelform" action="/newmodelform" method="post"><input type="hidden" name="bike_model[name]" value="'
-								+	document.getElementById("tempmodel").value  +'"><input type="hidden" name="bike_model[brand_id]" value="'
-								+	document.getElementById("bike_brand_id").value  +'"></form>';
-		document.getElementById("newmodelform").submit();
+		//remove the text box			
+		child=document.getElementById(divName).childNodes[0];		
+		document.getElementById(divName).removeChild(child);
 	 }
 }
+
+function defaultLocation(){	
+	if (document.getElementById('location_id').value == null || document.getElementById('location_id').value == ""){
+		//if Hook No is left empty, do nothing
+	}
+	else{
+	document.getElementById('locname').options[0].selected = true;
+	}
+}
+
+function clearHookField(){
+	if(document.getElementById('locname').value != "On hook - enter above"){
+		document.getElementById('location_id').value = "";
+	}
+}
+
+function isNumberKey(evt)
+{
+ var charCode = (evt.which) ? evt.which : event.keyCode
+ if (charCode > 31 && (charCode < 48 || charCode > 57))
+	return false;
+
+ return true;
+}
 </script>  
+<p id="notice"><font color="red"><%= notice %></font></p>
 <h1>Edit bike info</h1>
 
 <%= form_for(@bike,:html => {:name => 'newbikeform'}) do |f| %>
@@ -156,7 +173,7 @@ function addInput2(divName){
 		<td >
 			<b><div onMouseover="ddrivetip('ID of the bike','yellow', 50)"; onMouseout="hideddrivetip()"><%= f.label :bike_id, "ID"%></div></b></td><td>
 			<b>			    
-		<input id="bike_id" name="bike[bike_id]" size="10" type="number" value="<%=@bike.bike_id%>"/>			
+		<input id="bike_id" name="bike[bike_id]" size="10" type="number" value="<%=@bike.bike_id%>" onkeypress="return isNumberKey(event)"/>			
 		</td>
 	</tr>
 	<tr>
@@ -165,13 +182,13 @@ function addInput2(divName){
 			Hook No.</div></b></td><td>
 			<%@currloc = Location.find_by_id(@bike.location_id)%>
 			<input id="location_id" name="bike[location_id]" size="10" type="text" 
-			value="<%if !@currloc.nil?%><%=@currloc.hook_number%><%end%>" placeholder="NA"/>		    
+			value="<%if !@currloc.nil?%><%=@currloc.hook_number%><%end%>" placeholder="NA" onchange="defaultLocation()" onkeypress="return isNumberKey(event)"/>		    
 
 		</td>
 	</tr>
 	</table>
 	<br/>OR location name
-	<select id="locname" name="locname">
+	<select id="locname" name="locname" onchange="clearHookField()">
 	<option value="">On hook - enter above</option>
 	<% for i in Location.all%>
 		<%if !i.name.nil?%>
@@ -192,57 +209,54 @@ function addInput2(divName){
 	
 		
 	<hr/>
-	<b>Update Status</b>
+	<p>Change Model and Brand: </p>
+	<table border="0" cellpadding="3" id="bikeTable">	
+		<tr>
+		<td>
+		  <b onMouseover="ddrivetip('Brand of the bike. Check below add a new brand if not found in the list ','yellow', 150)"; onMouseout="hideddrivetip()">
+		  <%= f.label :brand_id %></b></td><td>
+		<select id="bike_brand_id" name="bike[brand_id]" onchange="update(document.forms['newbikeform']);">
+		<option value="">Select a Brand</option>
+		<%for i in BikeBrand.all%>
+		<option value="<%=i.id%>" <%if @bike.brand_id==i.id%>selected="selected"<%end%>><%=i.name%></option>
+		<%end%>
+		</select>
+		
+		<div id="dynamicInput"></div>
+		<input type="checkbox" name="brandcheck" onchange="addInput('dynamicInput');"/>New brand<br/>
+				
+		</td>
+		<td>
+	
+		<b onMouseover="ddrivetip('Model of bike(choose a brand to see the list of models)','yellow', 150)"; onMouseout="hideddrivetip()"><%= f.label :model_id %></b></td><td>
+		<select name="bike[model_id]">
+		<option>Select a Model</option>	
+		<%for i in BikeModel.where(:brand_id => @bike.brand_id)%>
+			<option value="<%=i.id%>" <%if i.id==@bike.model_id%>selected="selected"<%end%>><%=i.name%></option>
+		<%end%>		
+		</select>	
+		
+		<div id="dynamicInput2"></div>
+		<input type="checkbox" name="modelcheck" onchange="addInput2('dynamicInput2');"/>New model<br/>
+		
+		</td>
+		</tr>
+	</table>
+</td>
+<td>
+	<br/><center>
+	Update Status:
 	<select id="status" name="bike[status]">
 	
 	<% for i in ["Available", "EAB in Progress", "FFS in Progress", "Off-site", "Sold", "Departed", "Missing", "Other"] %>
 	<option value="<%=i%>"<%if i.casecmp(@bike.status) ==0%>selected="selected"<%end%>><%=i%></option>
 	<% end %>
 	</select>
-	<br/><br/>
-	
-	
-		  <b onMouseover="ddrivetip('Current price of the bike if it was to be sold','yellow', 80)"; onMouseout="hideddrivetip()">
-		  AS-IS Value:</b><% @bikeAss = BikeAssesment.find_by_bike_id(@bike.id)%>
-		  $ <input id="value" name="value" size="6" type="number" value="<%if @bikeAss.nil? || @bikeAss.value.nil?%>0.00<%else%><%=@bikeAss.value%><%end%>"/>
+	<br/></center>
+	<hr/>
 
-</td>
-<td>
 	<p>&nbsp;Bike details: </p>
 		<table border="1" cellpadding="3" id="bikeTable">
-		<tr>
-		<td>
-		  <b onMouseover="ddrivetip('Brand of the bike. Click button to add a new brand if not found in the list ','yellow', 150)"; onMouseout="hideddrivetip()">
-		  <%= f.label :brand_id %></b></td><td>
-		<select id="bike_brand_id" name="bike[brand_id]" onchange="update(document.forms['newbikeform']);">
-		
-		<%for i in BikeBrand.all%>
-		<option value="<%=i.id%>" <%if @bike.brand_id==i.id%>selected="selected"<%end%>><%=i.name%></option>
-		<%end%>
-		</select>
-		<form name="brandname" id="brandname" method="POST" >
-			<div id="dynamicInput"></div>
-			 <input type="button" value="New Brand" onClick="addInput('dynamicInput');">
-		</form>		
-		</td>
-		<td>
-	
-		  <b onMouseover="ddrivetip('Model of bike(choose a brand to see the list of models)','yellow', 150)"; onMouseout="hideddrivetip()"><%= f.label :model_id %></b></td><td>
-		<select name="bike[model_id]">
-			
-		<%for i in BikeModel.where(:brand_id => @bike.brand_id)%>
-			<option value="<%=i.id%>" <%if i.id==@bike.model_id%>selected="selected"<%end%>><%=i.name%></option>
-		<%end%>
-		</select>
-		<form name="newmodelname" id="newmodelname" method="POST" >
-			<div id="dynamicInput2"></div>
-			 <input type="button" value="New Model" onClick="addInput2('dynamicInput2');">
-		</form>			
-		</td>
-
-		
-		</tr>
-
 		<tr>
 		<td>
 
@@ -286,8 +300,6 @@ function addInput2(divName){
 
 		</tr>
 		</table>
-		<br/>
-		<br/>
 		<p>&nbsp;Condition and quality: </p>
 		
 		<table border="0">
@@ -311,12 +323,15 @@ function addInput2(divName){
 		  <option value="B" <%if !@bikeAss.nil? && @bikeAss.quality=="B"%>selected="selected"<%end%>>B</option>
 		  <option value="C" <%if !@bikeAss.nil? && @bikeAss.quality=="C"%>selected="selected"<%end%>>C</option>
 		  <option value="D" <%if !@bikeAss.nil? && @bikeAss.quality=="D"%>selected="selected"<%end%>>D</option>
-		</select></td>
-		
-		</tr>
-		</table><br/>
-	
-		
+		</select>
+		</td></tr>
+		</table><br/>	
+		<center>
+			<b onMouseover="ddrivetip('Current price of the bike if it was to be sold','yellow', 80)"; onMouseout="hideddrivetip()">
+			AS-IS Value:</b>			
+			<% @bikeAss = BikeAssesment.find_by_bike_id(@bike.id)%>
+			$ <input id="value" name="value" size="6" type="number" value="<%if @bikeAss.nil? || @bikeAss.value.nil?%>0.00<%else%><%=@bikeAss.value%><%end%>"/>
+		</center>
 </td>
 
 </tr>

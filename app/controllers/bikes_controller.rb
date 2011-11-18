@@ -183,7 +183,6 @@ class BikesController < ApplicationController
 	@models = BikeModel.find(:all)
 	@originalLoc = @bike.location_id
 	@originalLocHist = Location.find_by_id(@originalLoc)
-	
 	if !@originalLocHist.nil?
 		if @originalLocHist.name.nil?
 			@historyName = "HookID - " + @originalLocHist.hook_number.to_s()
@@ -200,6 +199,38 @@ class BikesController < ApplicationController
 	
     respond_to do |format|
       if @bike.update_attributes(params[:bike])
+			#Checking and adding new brand/models. 
+			#Have to check in this block because the bike is being updated here
+			if !params[:tempbrand].nil?	
+				@bike_brand = BikeBrand.new(:name => params[:tempbrand])		
+				if @bike_brand.save      
+					@bike.brand_id = @bike_brand.id   
+					@bike.save
+				else
+					@bike.errors.add(:brand_id, "is invalid or already exists")
+					respond_to do |format|
+						format.html { render action: "new" }
+						format.json { render json: @bike.errors, status: :unprocessable_entity }				
+					end
+					return
+				end			
+			end	
+			
+			if !params[:tempmodel].nil?
+				@bike_model = BikeModel.new(:brand_id => @bike.brand_id, :name => params[:tempmodel])
+				if @bike_model.save      
+					@bike.model_id = @bike_model.id	
+					@bike.save
+				else
+					@bike.errors.add(:model_id, "is invalid or already exists")
+					respond_to do |format|
+						format.html { render action: "new" }
+						format.json { render json: @bike.errors, status: :unprocessable_entity }				
+					end
+					return
+				end		
+			end	  
+
 			@locname = params[:locname]
 			@hooknum = @bike.location_id #location_id was actually hook number
 			if @hooknum.nil? #hooknumber not entered, bike is off-hook		
@@ -213,6 +244,12 @@ class BikesController < ApplicationController
 						end
 					else
 						#both hooknum and location not entered
+						@offhook = Location.find_by_name("In Shop - Off Hook")
+						if @offhook.nil?
+							@offhook = Location.new(:name => "In Shop - Off Hook")
+							@offhook.save
+						end
+						@bike.location_id = @offhook.id						
 					end
 				end
 			else #hooknumber entered
