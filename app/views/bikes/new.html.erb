@@ -164,7 +164,7 @@ function isNumberKey(evt)
   <% end %>
   
   
-<table border="1" id="maininfo">
+<table border="1" id="maininfo" style="min-width=800px;">
 <tr height="80px">
 <td width="50%">
 	<p onMouseover="ddrivetip('Type in the bike ID as printed on the sticker. Hook number corresponds to the hooks in the shop','yellow', 120)"; onMouseout="hideddrivetip()">
@@ -325,13 +325,26 @@ function isNumberKey(evt)
 </tr>
 </table>
 
-
-  <div align="right" class="actions">
-    <input type="submit" name="submit" value="Create" /> 
-	<br/><br/>
-	<input type="submit" name="submit" value="Create & Next New Bike" />  
-  </div>
-
-
-  
+	
+<table>
+	<tr>
+		<td width="300px">
+			<b>Bike Image 1:</b> <i>(optional)</i>
+			<%= f.file_field :image1 %>
+			<br/>
+			<b>Bike Image 2:</b> <i>(optional)</i>
+			<%= f.file_field :image2 %>
+		</td>
+		<td width="200px">
+		</td>
+		<td width="300px">
+			<br/>
+			<div align="center" class="actions">
+				<input type="submit" name="submit" value="Add Bike" /> 
+				<br/><br/>
+				<input type="submit" name="submit" value="Add Bike & Add Another New Bike" />  
+			</div>
+		</td>
+	</tr>
+</table>  
 <% end %>

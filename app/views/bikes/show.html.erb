@@ -16,7 +16,25 @@ else
 end
 %>
 <% @loc = Location.find_by_id(@bike.location_id)%>
-<table id="statusTable"><tr><td><h2>Bike Profile&nbsp;&nbsp;&nbsp;&nbsp;</h2></td><td id="<%=@sColor%>"> Status: <%=@bike.status%></td></tr></table>
+<table id="statusTable" width="750px"><tr>
+	<td width="200px"><h1>Bike Info</h1></td>
+<td width="300px">	
+	<table>
+		<tr>
+			<td align="center"><b>Image 1:</b></td>
+			<td align="center"><b>Image 2:</b></td></tr>
+			<tr><td>
+				<%= image_tag @bike.image1.url(:small) %>
+			</td><td>
+				<%= image_tag @bike.image2.url(:small) %>
+			</td>
+		</tr>
+	</table>
+	</td>	
+	<td align="right"><span id="<%=@sColor%>" style="padding: 5px;"> Status: <%=@bike.status%></span></td></tr>
+
+</table>
+
 <div class="floatright">
 <%if !@isDeparted and !@hasProj %>
 <form name="addtoFav" action = "/favorites" method = "post">

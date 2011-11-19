@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111119002553) do
+ActiveRecord::Schema.define(:version => 20111119194326) do
 
   create_table "bike_assesments", :force => true do |t|
     t.integer  "bike_id"
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(:version => 20111119002553) do
     t.datetime "date_out"
     t.string   "status"
     t.integer  "bike_id"
+    t.string   "image1_file_name"
+    t.string   "image1_content_type"
+    t.integer  "image1_file_size"
+    t.datetime "image1_updated_at"
+    t.string   "image2_file_name"
+    t.string   "image2_content_type"
+    t.integer  "image2_file_size"
+    t.datetime "image2_updated_at"
   end
 
   create_table "eab_projects", :force => true do |t|
