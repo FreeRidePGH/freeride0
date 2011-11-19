@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>User</th>
-    <th>Bike</th>
+    <th>Bike ID</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,13 +11,14 @@
 
 <% @favorites.each do |favorite| %>
   <tr>
-    <td><%= favorite.user_id %></td>
-    <td><%= favorite.bike_id %></td>
+    <td><%= User.find_by_id(favorite.user_id).name %></td>
+    <td><%= Bike.find_by_id(favorite.bike_id).bike_id %></td>
 
   </tr>
 <% end %>
 </table>
-
+<%if @favorites.empty?%>
+There are no favorites.
+<%end%>
 <br />
-
-<%= link_to 'New Favorite', new_favorite_path %>
+<%= link_to 'Back', :back %>

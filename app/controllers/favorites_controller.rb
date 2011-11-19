@@ -8,6 +8,9 @@ class FavoritesController < ApplicationController
     end
     
     @favorites = Favorite.all
+	if(!params[:bike_id].nil?)
+		@favorites = Favorite.where(:bike_id => params[:bike_id])
+	end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -113,7 +116,7 @@ class FavoritesController < ApplicationController
     @favorite.destroy
 
     respond_to do |format|
-      format.html { redirect_to myfav_url }
+      format.html { redirect_to :back }
       format.json { head :ok }
     end
   end
