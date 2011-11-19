@@ -74,7 +74,7 @@ class FavoritesController < ApplicationController
         format.html { redirect_to myfav_url, notice: 'Favorite was successfully created.' }
         format.json { render json: @favorite, status: :created, location: @favorite }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to myfav_url, notice: 'Bike is already in your favourites.'}
         format.json { render json: @favorite.errors, status: :unprocessable_entity }
       end
     end

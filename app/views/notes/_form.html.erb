@@ -22,7 +22,9 @@
     <%= f.number_field :bike_id %>
   </div>
   <%else%>
-  Bike ID: <b><%=Bike.find_by_id(@note.bike_id).bike_id%></b>	
+  <% @b = Bike.find_by_id(@note.bike_id) %>
+  
+  Bike ID: <b><%if !@b.nil?%><%=@b.bike_id%><%end%></b>	
   <div class="field">
     <br />
     <input type="hidden" name="note[bike_id]" value="<%=@note.bike_id%>"/>

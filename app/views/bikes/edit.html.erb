@@ -256,7 +256,7 @@ function isNumberKey(evt)
 	<br/></center>
 	<hr/>
 
-	<p>&nbsp;Bike details:<font size="1"><a href ="/notes/new?bikeid=<%=@bike.bike_id%>">(Create a new note)</a></font> </p>
+	<p>&nbsp;Bike details:</p>
 		<table border="1" cellpadding="3" id="bikeTable">
 		<tr>
 		<td>
@@ -301,11 +301,12 @@ function isNumberKey(evt)
 
 		</tr>
 		</table>
+		<font size="2"><a href ="/notes/new?bikeid=<%=@bike.id%>">(Create a new note)</a></font> 
 		<p>&nbsp;Condition and quality: </p>
 		
 		<table border="0">
 		<tr><td>		
-		
+		<% @bikeAss = BikeAssesment.find_by_bike_id(@bike.id)%>
 		<b onMouseover="ddrivetip('A - Excellent condition. Almost like brand new.<br/> B - Good. Used but in working condition. <br/> C - Fair Condition. Requires a few tweaks to get it running. <br/> D - Poor Condition. Almost unusable and needs extensive repair.','yellow', 300)"; onMouseout="hideddrivetip()">
 		Condition:</b></td><td>
 		  <select id="condition" name="condition">
@@ -330,7 +331,7 @@ function isNumberKey(evt)
 		<center>
 			<b onMouseover="ddrivetip('Current price of the bike if it was to be sold','yellow', 80)"; onMouseout="hideddrivetip()">
 			AS-IS Value:</b>			
-			<% @bikeAss = BikeAssesment.find_by_bike_id(@bike.id)%>
+			
 			$ <input id="value" name="value" size="6" type="number" value="<%if @bikeAss.nil? || @bikeAss.value.nil?%>0.00<%else%><%=@bikeAss.value%><%end%>"/>
 
 		<br/><br/>

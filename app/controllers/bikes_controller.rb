@@ -173,7 +173,7 @@ class BikesController < ApplicationController
 
     respond_to do |format|
       if @bike.save
-        @bike_assesment = BikeAssesment.new(:bike_id => @bike.id, :quality => @q, :condition => @c, :value => @v)
+        @bike_assesment = BikeAssesment.new(:user_id => current_user.id, :bike_id => @bike.id, :quality => @q, :condition => @c, :value => @v)
         @bike_assesment.save
 
         if(params[:submit] == "Create") #Create and go to bike profile page
@@ -300,7 +300,8 @@ class BikesController < ApplicationController
           end
         end
         @bike.save
-
+		@note = Note.new(:user_id => current_user.id, :bike_id => @bike.id, :title => "Bike info updated", :last_update => Time.now)
+		@note.save
         format.html { redirect_to @bike, notice: 'Bike was successfully updated.' }
         format.json { head :ok }
       else

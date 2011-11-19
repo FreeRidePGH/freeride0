@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 <h1>My favorites list</h1>
 
 <table>
@@ -17,7 +18,7 @@
   <% @bike = Bike.find_by_id(favorite.bike_id)%>
   <% @loc = Location.find_by_id(@bike.location_id)%>
   
-    <td><%= favorite.bike_id %></td>
+    <td><%= @bike.bike_id %></td>
     <td>
 	<%if @loc.nil?%>
 		N.A.
