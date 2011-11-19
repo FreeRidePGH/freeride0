@@ -1,4 +1,4 @@
-<style>
+﻿<style>
 #bikelisttable th .current {
   padding-right: 12px;
   background-repeat: no-repeat;
@@ -49,6 +49,26 @@
 }
 
 </style>
+<script>
+function filter2 (phrase, _id){
+	var words = phrase.value.toLowerCase().split(" ");
+	var table = document.getElementById(_id);
+	var ele;
+	for (var r = 1; r < table.rows.length; r++){
+		ele = table.rows[r].innerHTML.replace(/<[^>]+>/g,"");
+	        var displayStyle = 'none';
+	        for (var i = 0; i < words.length; i++) {
+		    if (ele.toLowerCase().indexOf(words[i])>=0)
+			displayStyle = '';
+		    else {
+			displayStyle = 'none';
+			break;
+		    }
+	        }
+		table.rows[r].style.display = displayStyle;
+	}
+}
+</script>
 <h2>Browse Bikes <font size="1"><a href="/bikes">(show all)</a></font></h2>
 <% if !@searchID.nil? %>
 You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
@@ -57,14 +77,16 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <%= form_tag bikes_path, :method => 'get' do %>
   <%= hidden_field_tag :direction, params[:direction] %>
   <%= hidden_field_tag :sort, params[:sort] %>
-  <p id="searchbox">
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search Bike ID", :name => nil %>
-  </p>
+<div align="right">
+<p>
+<form>
+	<input name="filter" placeholder="Search Current Page" onkeyup="filter2(this, 'bikelisttable')" type="text">
+</form>
+</p> 
+</div>
 <% end %>
 
-
-<table id="bikelisttable">
+<table id="bikelisttable" class="filtertable">
   <thead><tr>
 		<th><%= sortable "bike_id" %></th>
     <th><%= sortable "brand_id"%></th>		
@@ -113,7 +135,6 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <br/>
 
 <%= will_paginate @bikes %>
-
 
 <br />
 

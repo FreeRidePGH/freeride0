@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  bike_id: 1
+  title: MyString
+  details: MyString
+  last_update: 2011-11-18 19:25:53
+
+two:
+  user_id: 1
+  bike_id: 1
+  title: MyString
+  details: MyString
+  last_update: 2011-11-18 19:25:53

@@ -81,9 +81,11 @@
 	border-spacing: 1px;
 }
 #notes {
-	width: 60%;
+	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 1px;
+	margin: 4px;
+	padding: 0px;
 }
 #statusTable{
 	float: left;

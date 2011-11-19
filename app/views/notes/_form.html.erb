@@ -1,0 +1,46 @@
+<%= form_for(@note) do |f| %>
+  <% if @note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+      <% @note.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  User: <b><%=@current_user.name%></b>	
+  <div class="field">
+    <br />
+    <input type="hidden" name="note[user_id]" value="<%=@current_user.id%>"/>
+  </div>
+  <%if @note.bike_id.nil?%>
+    <div class="field">
+    <%= f.label :bike_id %><br />
+    <%= f.number_field :bike_id %>
+  </div>
+  <%else%>
+  Bike ID: <b><%=Bike.find_by_id(@note.bike_id).bike_id%></b>	
+  <div class="field">
+    <br />
+    <input type="hidden" name="note[bike_id]" value="<%=@note.bike_id%>"/>
+  </div>
+  <%end%>
+  <div class="field">
+    Title of note: <br/>
+    <input type="text" size="35" name="note[title]" value="<%=@note.title%>"/>
+  </div>
+  <div class="field">
+    Note description and content: <br/>
+    <textarea rows="4" cols="40" name="note[details]" value="<%=@note.details%>" placeholder="Type in the description of the note here"></textarea>
+  </div>
+  <div class="field">
+    <%= f.label :last_update %><br />
+    <%= f.datetime_select :last_update %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

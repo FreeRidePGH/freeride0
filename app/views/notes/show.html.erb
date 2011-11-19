@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= User.find_by_id(@note.user_id).name %>
+</p>
+
+<p>
+  <b>Bike ID:</b>
+  <%= Bike.find_by_id(@note.bike_id).bike_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @note.title %>
+</p>
+
+<p>
+  <b>Details:</b>
+  <%= @note.details %>
+</p>
+
+<p>
+  <b>Last update:</b>
+  <%= @note.last_update %>
+</p>
+
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', '/bikes/' + @note.bike_id.to_s() %>

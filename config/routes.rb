@@ -1,5 +1,7 @@
 Freeride::Application.routes.draw do
 
+  resources :notes
+
   resources :location_histories
 
   root :to => 'home#index'

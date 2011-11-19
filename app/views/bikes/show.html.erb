@@ -173,13 +173,22 @@ end
 	<% end %>
 	</table>
 </td>
-<td style="border:solid 2px #060" rowspan="2"><h2>Notes</h2>
+<td style="border:solid 2px #060" rowspan="2"><h2>Notes	
+	<font size="1"><a href ="/notes/new?bikeid=<%=@bike.id%>">(New note)</a></font></h2>
 
 	<table border="0" id="notes">
 	<tr id="headers">
-	<td>Note</td><td>Date</td>
-	</tr>	
+	<td>Title</td><td>Date</td></tr>	
+	<%for i in Note.where(:bike_id => @bike.id)%>
+	<tr>
+		<td><a href = "/notes/<%=i.id%>"><%=i.title%></a></td>
+		<td><%=i.last_update.year%>-<%= i.last_update.strftime("%b") %>-<%= i.last_update.day %></td>
+	</tr>
+	<%end%>
+	
 	</table>
+	
+
 </td>
 
 </tr>

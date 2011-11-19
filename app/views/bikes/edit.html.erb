@@ -256,7 +256,7 @@ function isNumberKey(evt)
 	<br/></center>
 	<hr/>
 
-	<p>&nbsp;Bike details: </p>
+	<p>&nbsp;Bike details:<font size="1"><a href ="/notes/new?bikeid=<%=@bike.bike_id%>">(Create a new note)</a></font> </p>
 		<table border="1" cellpadding="3" id="bikeTable">
 		<tr>
 		<td>
@@ -332,7 +332,14 @@ function isNumberKey(evt)
 			AS-IS Value:</b>			
 			<% @bikeAss = BikeAssesment.find_by_bike_id(@bike.id)%>
 			$ <input id="value" name="value" size="6" type="number" value="<%if @bikeAss.nil? || @bikeAss.value.nil?%>0.00<%else%><%=@bikeAss.value%><%end%>"/>
+
+		<br/><br/>
+		<table>
+		<tr><td>Picture 1 </td><td>Picture 2</td></tr>
+		<tr><td><input type="file" name="picture2"/></td><td> <input type="file" name="picture2"/></td></tr>
+		</table>
 		</center>
+
 </td>
 
 </tr>
