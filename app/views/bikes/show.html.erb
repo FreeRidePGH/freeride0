@@ -24,9 +24,9 @@ end
 			<td align="center"><b>Image 1:</b></td>
 			<td align="center"><b>Image 2:</b></td></tr>
 			<tr><td>
-				<%= image_tag @bike.image1.url(:small) %>
+				<%= link_to image_tag(@bike.image1.url(:small)), @bike.image2.url(:large) %>
 			</td><td>
-				<%= image_tag @bike.image2.url(:small) %>
+				<%= link_to image_tag(@bike.image2.url(:small)), @bike.image2.url(:large) %>
 			</td>
 		</tr>
 	</table>
