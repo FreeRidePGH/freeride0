@@ -142,6 +142,7 @@
   <%= @eab_project.status %>
 </p>
 
-
+<% if current_user.is_staff? %>
 <%= link_to 'Edit', edit_eab_project_path(@eab_project) %> |
+<% end %>
 <%= link_to 'Back', myproj_path %>

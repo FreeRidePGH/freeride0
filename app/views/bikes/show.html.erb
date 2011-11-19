@@ -173,8 +173,8 @@ end
 	<% end %>
 	</table>
 </td>
-<td style="border:solid 2px #060" rowspan="2"><h2>Notes	
-	<font size="1"><a href ="/notes/new?bikeid=<%=@bike.id%>">(New note)</a></font></h2>
+<td style="border:solid 2px #060" rowspan="2"><h2>Notes	<% if current_user.is_staff? %>
+	<font size="1"><a href ="/notes/new?bikeid=<%=@bike.id%>">(New note)</a></font><%end%></h2>
 
 	<table border="0" id="notes">
 	<tr id="headers">
@@ -229,7 +229,7 @@ end
 </tr>
 </table>
 
-
+<% if current_user.is_staff? %>
 <div align="right">
 <%if !@isDeparted and !@hasProj %>
 	<a href="/eab_projects/new?bike_id=<%=@bike.id%>">Start EAB Project</a> |
@@ -238,3 +238,4 @@ end
 <%= link_to "New Safety Inspection", new_safety_inspection_path(:bike_id => @bike.id) %> | 
 <%= link_to 'Edit Info', edit_bike_path(@bike) %>
 </div>
+<% end %>
