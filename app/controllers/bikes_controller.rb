@@ -1,5 +1,11 @@
 class BikesController < ApplicationController
+  
+  skip_before_filter :check_login, :only => [:index, :show]
+  before_filter :guest_login, :only => [:index, :show]
+
+  
   helper_method :sort_column, :sort_direction
+  
   # GET /bikes
   # GET /bikes.json
   def index  
@@ -65,7 +71,7 @@ class BikesController < ApplicationController
   # GET /bikes/new.json
   def new
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -80,7 +86,7 @@ class BikesController < ApplicationController
   # GET /bikes/1/edit
   def edit
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     @bike = Bike.find(params[:id])
@@ -91,7 +97,7 @@ class BikesController < ApplicationController
   # POST /bikes.json
   def create
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -194,7 +200,7 @@ class BikesController < ApplicationController
   # PUT /bikes/1.json
   def update
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -315,7 +321,7 @@ class BikesController < ApplicationController
   # DELETE /bikes/1.json
   def destroy
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     

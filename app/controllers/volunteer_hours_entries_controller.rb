@@ -3,7 +3,7 @@ class VolunteerHoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries.json
   def index
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -19,7 +19,7 @@ class VolunteerHoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries/1.json
   def show
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -35,7 +35,7 @@ class VolunteerHoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries/new.json
   def new
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -52,7 +52,7 @@ class VolunteerHoursEntriesController < ApplicationController
   # POST /volunteer_hours_entries.json
   def create
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -75,7 +75,7 @@ class VolunteerHoursEntriesController < ApplicationController
   # DELETE /volunteer_hours_entries/1.json
   def destroy
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -90,7 +90,7 @@ class VolunteerHoursEntriesController < ApplicationController
   
   def myhours
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     

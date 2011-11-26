@@ -3,7 +3,7 @@ class SafetyInspectionsController < ApplicationController
   # GET /safety_inspections.json
   def index
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -19,7 +19,7 @@ class SafetyInspectionsController < ApplicationController
   # GET /safety_inspections/1.json
   def show
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -36,7 +36,7 @@ class SafetyInspectionsController < ApplicationController
   # GET /safety_inspections/new.json
   def new
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -57,7 +57,7 @@ class SafetyInspectionsController < ApplicationController
   # GET /safety_inspections/1/edit
   def edit
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -68,7 +68,7 @@ class SafetyInspectionsController < ApplicationController
   # POST /safety_inspections.json
   def create
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -91,7 +91,7 @@ class SafetyInspectionsController < ApplicationController
   # PUT /safety_inspections/1.json
   def update
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -112,7 +112,7 @@ class SafetyInspectionsController < ApplicationController
   # DELETE /safety_inspections/1.json
   def destroy
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     

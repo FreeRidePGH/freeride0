@@ -162,3 +162,24 @@ a {
 		margin: 0;
 	}
 }
+
+
+
+#flash_error, #flash_alert {
+	padding: 8px;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	background-color: #d00000;
+	border: solid 5px #ffcc00;
+	margin-bottom: 25px;
+}
+
+#flash_notice {
+	padding: 8px;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	background-color: #008011;
+	margin-bottom: 25px;
+}

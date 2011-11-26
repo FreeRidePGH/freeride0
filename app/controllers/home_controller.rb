@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   # All users get sent here by default
   def index
     if current_user
+      flash.keep
       redirect_to dashboard_path 
       return
     end 
