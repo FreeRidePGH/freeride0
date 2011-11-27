@@ -69,35 +69,45 @@ function filter2 (phrase, _id){
 	}
 }
 </script>
-<h2>Browse Bikes <font size="1"><a href="/bikes">(show all)</a></font></h2>
-<% if !@searchID.nil? %>
-You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
-<% end %>
+<h2>Reports</h2><br/>
+<form id="report" name="report" action="/bikes/reports" type="POST">
 
-<%= form_tag bikes_path, :method => 'get' do %>
-  <%= hidden_field_tag :direction, params[:direction] %>
-  <%= hidden_field_tag :sort, params[:sort] %>
-<div align="right">
-<p>
-<form>
-	<input name="filter" placeholder="Search Current Page" onkeyup="filter2(this, 'bikelisttable')" type="text">
+Report Type:
+<select name="reportType">
+<option value="Inactive Bikes">Inactive Bikes</option>
+<option value="Inactive EABs">Inactive EABs</option>
+</select>&nbsp;&nbsp;
+
+Inactive For:
+<select name="inactiveFor">
+<option value="3">3 months</option>
+<option value="6">6 months</option>
+<option value="9">9 months</option>
+<option value="12">12 or more months</option>
+</select>
+
+<input type="submit" value="Go"/><br/><br/>
 </form>
-</p> 
-</div>
-<% end %>
+<% if @typeEAB.nil?
+@typeEAB = false
+end%>
+<%if !@reportType.nil?%>
+Showing report for: <b><%=@reportType%></b>
+<%end%>&nbsp;&nbsp;
+<%if !@inactiveFor.nil?%>
+Inactive Period: <b><%=@inactiveFor%> months</b>
+<%end%><br/><br/>
 
+<%if !@bikes.nil?%>
 <table id="bikelisttable" class="filtertable">
   <thead><tr>
-		<th><%= sortable "bike_id" %></th>
-    <th><%= sortable "brand_id"%></th>		
-    <th><%= sortable "model_id" %></th>
-    <th><%= sortable "location_id" %></th>
-    <th><%= sortable "wheel_size"%></th>
-    <th><%= sortable "top_tube" %></th>
-    <th><%= sortable "seat_tube" %></th>
-    <th><%= sortable "color"%></th>
-    <th><%= sortable "date_in", "Date In"%></th>
-    <th><%= sortable "status", "Status"%></th>
+		<th><a>ID</a></th>
+    <th><a>Brand</a></th>		
+    <th><a>Model</a></th>
+    <th><a>Location</a></th>
+    <th><a>Date In</a></th>
+    <th><a>Status</a></th>
+	<th><%if @typeEAB%><a>EAB Last Active</a><%else%><a>Last Updated</a><%end%></th>
 	<th></th>
   </tr></thead><tbody>
 
@@ -119,12 +129,16 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 			<%end%>
 		<%end%>			
 	</td>
-    <td><%= bike.wheel_size %></td>
-    <td><%= bike.top_tube %></td>
-    <td><%= bike.seat_tube %></td>
-    <td><%= bike.color %></td>
     <td><%= bike.date_in.year %>-<%= bike.date_in.strftime("%b")%>-<%=bike.date_in.day %></td>
     <td><%= bike.status %></td>
+	<td><%if @typeEAB
+			@project = EabProject.find_by_bike_id(bike.id)
+			if !@project.nil?%>
+				<%= @project.start_date.year%>-<%=@project.start_date.strftime("%b")%>-<%=@project.start_date.day%>
+			<%end%>
+		<%else%>
+			<%= bike.updated_at.year%>-<%= bike.updated_at.strftime("%b")%>-<%=bike.updated_at.day%>
+		<%end%></td>
     <td><%= link_to 'View', bike %></td>
 
   </tr>
@@ -132,7 +146,7 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <% end %>
 </tbody>
 </table>
+<%end%>
 <br/>
 
-<%= will_paginate @bikes %>
 <br/>

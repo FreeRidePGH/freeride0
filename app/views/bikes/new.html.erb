@@ -291,32 +291,34 @@ function isNumberKey(evt)
 		<table border="0">
 		<tr><td>		
 		
-		<b onMouseover="ddrivetip('A - Excellent condition. Almost like brand new.<br/> B - Good. Used but in working condition. <br/> C - Fair Condition. Requires a few tweaks to get it running. <br/> D - Poor Condition. Almost unusable and needs extensive repair.','yellow', 300)"; onMouseout="hideddrivetip()">
+		<b onMouseover="ddrivetip('<%=BikeAssesment.conditionTooltip%>','yellow', 600)"; onMouseout="hideddrivetip()">
 		Condition:</b></td><td>
 		  <select id="condition" name="condition">
 		  <option value="A" <%if !@c.nil? && @c=="A"%>selected="selected"<%end%>>A</option>
 		  <option value="B" <%if !@c.nil? && @c=="B"%>selected="selected"<%end%>>B</option>
 		  <option value="C" <%if !@c.nil? && @c=="C"%>selected="selected"<%end%>>C</option>
 		  <option value="D" <%if !@c.nil? && @c=="D"%>selected="selected"<%end%>>D</option>
+		  <option value="F" <%if !@c.nil? && @c=="F"%>selected="selected"<%end%>>F</option>
 		</select></td>	
 		</tr>
 		<tr>
 		<td>		
-		 <b onMouseover="ddrivetip('A - High quality. Excellent brand, sturdy frame, expensive gears.<br/>B - Good quality. Good brand and frame.<br/>C - Fair quality. Recognizable brand, normal frame and brakes.<br/>D - Lousy quality. Unrecognizable brand, cheap and useless.','yellow', 300)"; onMouseout="hideddrivetip()">
+		 <b onMouseover="ddrivetip('<%=BikeAssesment.qualityTooltip%>','yellow', 600)"; onMouseout="hideddrivetip()">
 		 Quality:</b></td><td>
 		  <select id="quality" name="quality">
 		  <option value="A" <%if !@q.nil? && @q=="A"%>selected="selected"<%end%>>A</option>
 		  <option value="B" <%if !@q.nil? && @q=="B"%>selected="selected"<%end%>>B</option>
 		  <option value="C" <%if !@q.nil? && @q=="C"%>selected="selected"<%end%>>C</option>
 		  <option value="D" <%if !@q.nil? && @q=="D"%>selected="selected"<%end%>>D</option>
+		  <option value="F" <%if !@q.nil? && @q=="F"%>selected="selected"<%end%>>F</option>
 		</select></td>
 		
 		</tr>
 		</table><br/>
-	<p onMouseover="ddrivetip('This is the value of the bike if it was to be sold right now. Leave empty if unsure.','yellow', 80)"; onMouseout="hideddrivetip()">
+	<p onMouseover="ddrivetip('Leave empty if unsure.','yellow', 80)"; onMouseout="hideddrivetip()">
 	&nbsp;6. Estimate the AS-IS value of the bike:
 	</p><center>
-		  <b onMouseover="ddrivetip('Current price of the bike if it was to be sold','yellow', 80)"; onMouseout="hideddrivetip()">
+		  <b onMouseover="ddrivetip('<%=BikeAssesment.priceTooltip%>','yellow', 500)"; onMouseout="hideddrivetip()">
 		  AS-IS Value:</b>
 		  $ <input id="value" name="value" size="6" type="number" placeholder="0.00" <%if !@v.nil?%>value="<%=@v%>"<%end%>/></center><br/>
 		

@@ -8,6 +8,7 @@
 	<li><%= link_to "Browse Bikes", bikes_path %></li>
 	<% if current_user.is_staff? %>
 	<li><%= link_to "Add New Bike", new_bike_path %></li>
+	<li><%= link_to "Reports", reports_path %></li>
 	<%end%>
 	
 <% elsif subnav=="home" %>

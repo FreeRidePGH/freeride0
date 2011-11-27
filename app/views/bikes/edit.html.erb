@@ -249,7 +249,7 @@ function isNumberKey(evt)
 	Update Status:
 	<select id="status" name="bike[status]">
 	
-	<% for i in ["Available", "EAB in Progress", "FFS in Progress", "Off-site", "Sold", "Departed", "Missing", "Other"] %>
+	<% for i in Bike.statuslist %>
 	<option value="<%=i%>"<%if i.casecmp(@bike.status) ==0%>selected="selected"<%end%>><%=i%></option>
 	<% end %>
 	</select>
@@ -336,38 +336,19 @@ function isNumberKey(evt)
 
 		<br/><br/>
 		<table>
-		<tr><td>Picture 1 </td><td>Picture 2</td></tr>
-		<tr><td><input type="file" name="picture2"/></td><td> <input type="file" name="picture2"/></td></tr>
+		<tr><td><b>Bike Image 1:</b> <i>(optional)</i></td><td><b>Bike Image 2:</b> <i>(optional)</i></td></tr>
+		<tr><td><%= f.file_field :image1 %></td><td><%= f.file_field :image2 %></td></tr>
 		</table>
 		</center>
-
+<br/>
 </td>
 
 </tr>
 </table>
 
-<table>
-	<tr>
-		<td width="300px">
-			<b>Bike Image 1:</b> <i>(optional)</i>
-			<%= f.file_field :image1 %>
-			<br/>
-			<b>Bike Image 2:</b> <i>(optional)</i>
-			<%= f.file_field :image2 %>
-		</td>
-		<td width="200px">
-		</td>
-		<td width="300px">
-			<br/>
-			<div align="right" class="actions">
-				<%= f.submit %>
-			</div>
-		</td>
-	</tr>
-</table>  
-
-
-
+<div align="right" class="actions">
+	<%= f.submit %>
+</div>
 <% end %>
 
 

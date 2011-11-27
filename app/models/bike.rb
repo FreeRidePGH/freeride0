@@ -44,4 +44,8 @@ class Bike < ActiveRecord::Base
     self.safety_inspections[0].passed?
   end
 
+  def self.statuslist
+	return ["Available", "In shop", "EAB in Progress", "FFS in Progress", "Youth", "Off-site", "Sold", "Departed-FFS", "Departed-EAB", "Departed-ASIS", "Departed-Scrap", "Departed-Other", "Missing", "Other"]
+  end
+  
 end

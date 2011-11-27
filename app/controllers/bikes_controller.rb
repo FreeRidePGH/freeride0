@@ -175,8 +175,9 @@ class BikesController < ApplicationController
       if @bike.save
         @bike_assesment = BikeAssesment.new(:user_id => current_user.id, :bike_id => @bike.id, :quality => @q, :condition => @c, :value => @v)
         @bike_assesment.save
-
-        if(params[:submit] == "Create") #Create and go to bike profile page
+		@note = Note.new(:user_id => current_user.id, :bike_id => @bike.id, :title => "Bike created", :last_update => Time.now)
+		@note.save
+        if(params[:submit] == "Add Bike") #Create and go to bike profile page
           format.html { redirect_to @bike, notice: 'Bike was successfully created.' }
           format.json { render json: @bike, status: :created, location: @bike }
         else 							#Create and go back to new bike page
@@ -326,6 +327,40 @@ class BikesController < ApplicationController
       format.html { redirect_to bikes_url }
       format.json { head :ok }
     end
+  end
+  
+  def reports
+	@reportType = params[:reportType]
+	@inactiveFor = params[:inactiveFor]
+	
+	if !params[:reportType].nil? 
+		@bikes = Array.new
+		if params[:reportType] == "Inactive Bikes"
+			# for inactive bikes
+			for i in Bike.all
+				lastactive = (Date.today - i.updated_at.to_date()) / 30
+				sinceCheckin = (Date.today - i.date_in.to_date()) / 30
+				if lastactive > Integer(params[:inactiveFor])
+					@bikes << i
+				elsif (sinceCheckin > Integer(params[:inactiveFor]) ) && i.status == "Available"
+					@bikes << i
+				end
+			end
+		else 
+			# for inactive EABS
+			for i in Bike.all
+				project = EabProject.find_by_bike_id(i.id)
+				@typeEAB = true
+				if !project.nil?
+					lastactiveEAB = (Date.today - project.start_date.to_date()) / 30
+					if lastactiveEAB > Integer(params[:inactiveFor])
+						@bikes << i
+					end
+				end
+			end
+		end
+	end
+
   end
  
   private

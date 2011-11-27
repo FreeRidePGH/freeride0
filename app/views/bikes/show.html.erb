@@ -6,7 +6,7 @@
 if @bike.status.casecmp("EAB in progress")==0 || @bike.status.casecmp("FFS in progress") ==0
 	@sColor = "Seab"
 	@hasProj = true
-elsif @bike.status.casecmp("Sold") ==0 || @bike.status.casecmp("Departed") ==0
+elsif @bike.status.casecmp("Sold") ==0 || @bike.status.include?('Departed')
 	@sColor = "Ssold"
 	@isDeparted = true
 elsif @bike.status.casecmp("Available") ==0
@@ -31,18 +31,19 @@ end
 		</tr>
 	</table>
 	</td>	
-	<td align="right"><span id="<%=@sColor%>" style="padding: 5px;"> Status: <%=@bike.status%></span></td></tr>
+	<td align="right"><span id="<%=@sColor%>" style="padding: 5px;"> Status: <%=@bike.status%></span>
+	<br/><br/>
+	<%if !@isDeparted and !@hasProj and @bike.status.casecmp("Available")==0 %>
+	<form name="addtoFav" action = "/favorites" method = "post">
+	<input type="hidden" name="bike_id" value="<%=@bike.id%>" />
+	<input type="hidden" name="user_id" value="<%=@current_user.id%>" />
+	<input type="submit" value="Add to Fav"></form>
+	<%end%>	
+	</td></tr>
 
 </table>
 
-<div class="floatright">
-<%if !@isDeparted and !@hasProj %>
-<form name="addtoFav" action = "/favorites" method = "post">
-<input type="hidden" name="bike_id" value="<%=@bike.id%>" />
-<input type="hidden" name="user_id" value="<%=@current_user.id%>" />
-<input type="submit" value="Add to Fav"></form>
-<%end%>
-</div>
+
 
 <table border="0" id="maininfo">
 <tr height="80px">
@@ -186,7 +187,7 @@ end
 	<tr>
 	<% @projuser = User.find_by_id(project.user_id) %>
 	<td>EAB</td><td><%= link_to @projuser.name, @projuser %></td><td>
-	<%=project.start_date.year%>-<%= project.start_date.strftime("%b") %>-<%= project.start_date.day %></td><td><%= project.status%></td><td><%= link_to "View Project", project %></td>
+	<%=project.start_date.year%>-<%= project.start_date.strftime("%b") %>-<%= project.start_date.day %></td><td><%= project.statusName%></td><td><%= link_to "View Project", project %></td>
 	</tr>
 	<% end %>
 	</table>
