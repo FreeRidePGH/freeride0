@@ -24,7 +24,9 @@
 <% elsif subnav=="users" || subnav=="transactions" %>
 
 	<% if current_user %>
-		<li><%= link_to "Browse Users", users_path %></li>
+		<% if current_user.is_staff? %>
+				<li><%= link_to "Browse Users", users_path %></li>
+		<% end %>
 		<li><%= link_to "My Favorites", myfav_path %></li>
 		<li><%= link_to "Transfer Account Balance", new_transaction_path %></li>
 		<% if current_user.is_council? %>

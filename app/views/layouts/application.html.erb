@@ -44,9 +44,9 @@
 				<% if current_user && current_user.role != 0 %>
 				<li><%= link_to "Home", root_path, :class => (page == "home" ? "selected" : "") %></li>
 				<li><%= link_to "Bikes", search_path, :class => ((page == "bikes" || page=="search" || page=="safety_inspections") ? "selected" : "") %></li>
-				<li><%= link_to "EAB Projects", eab_projects_path, :class => (page == "eab_projects" ? "selected" : "") %></li>
+				<li><%= link_to "EAB Projects", myproj_path, :class => (page == "eab_projects" ? "selected" : "") %></li>
 				<li><%= link_to "Hours", volunteer_hours_entries_path, :class => ((page == "repair_hours_entries" || page == "volunteer_hours_entries") ? "selected" : "") %></li>
-				<li><%= link_to "Users", users_path, :class => ((page == "users" || page == "transactions") ? "selected" : "") %></li>
+				<li><%= link_to "Account", user_path(current_user), :class => ((page == "users" || page == "transactions") ? "selected" : "") %></li>
 				<% else %>
 				<li><%= link_to "Home", root_path, :class => ((page == "home" || page=="users") ? "selected" : "") %></li>
 				<li><%= link_to "Bikes", search_path, :class => ((page == "bikes" || page=="search" || page=="safety_inspections") ? "selected" : "") %></li>
