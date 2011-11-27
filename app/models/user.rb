@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
   validates :email, :presence => true,
                     :uniqueness => true,
                     :format => { :with => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]*\.[a-zA-Z0-9]{2,}$/ }
-                      
+
+  scope :all, :order => "first_name ASC, last_name ASC, email ASC"                    
   scope :search, lambda { |term| where("users.first_name LIKE ? OR users.last_name LIKE ? OR users.email LIKE ?", "%#{term}%", "%#{term}%", "%#{term}%")}
 
   # only encrypt the password to be stored if it is being created or changed

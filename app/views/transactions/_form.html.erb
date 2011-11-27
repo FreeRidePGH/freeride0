@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br />
+    <%= f.label :user_id, "Transfer to User:" %><br />
 		<% users = User.all.reject{|u| u == current_user} %>
     <%= collection_select(:transaction, :user_id, users, :id, :name_with_email, {:prompt => true}) %>
   </div>
   <div class="field">
-    <%= f.label :amount %><br />
+    <%= f.label :amount, "Amount to Transfer:" %><br />
     $<%= f.text_field :amount, :size => "5" %>
   </div>
   <div class="actions">
