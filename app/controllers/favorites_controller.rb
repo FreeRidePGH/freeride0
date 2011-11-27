@@ -3,7 +3,7 @@ class FavoritesController < ApplicationController
   # GET /favorites.json
   def index
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -22,7 +22,7 @@ class FavoritesController < ApplicationController
   # GET /favorites/1.json
   def show
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -38,7 +38,7 @@ class FavoritesController < ApplicationController
   # GET /favorites/new.json
   def new
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -53,7 +53,7 @@ class FavoritesController < ApplicationController
   # GET /favorites/1/edit
   def edit
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -64,7 +64,7 @@ class FavoritesController < ApplicationController
   # POST /favorites.json
   def create
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end    
 
@@ -87,7 +87,7 @@ class FavoritesController < ApplicationController
   # PUT /favorites/1.json
   def update
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -108,7 +108,7 @@ class FavoritesController < ApplicationController
   # DELETE /favorites/1.json
   def destroy
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     

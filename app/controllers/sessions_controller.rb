@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:session][:email].downcase,
                              params[:session][:password])
     if user.nil?
-      redirect_to root_path, :notice => "Email and password combination is invalid."
+      redirect_to root_path, :alert => "Email and password combination is invalid."
     else
       sign_in user
       redirect_to root_path, :notice => "Successfully logged in."

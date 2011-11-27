@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     if current_user.is_not_council?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -69,7 +69,7 @@ class UsersController < ApplicationController
     @user.phone3 = @user.phone_number[6..9]
     
     if @user != current_user && current_user.is_not_council?
-      flash.now[:error] = "You do not have permissions to edit other users."
+      flash[:error] = "You do not have permissions to edit other users."
       redirect_to root_path and return
     end
   end
@@ -103,14 +103,14 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
     @user = User.find(params[:id])
     
     if @user != current_user && current_user.is_not_council?
-      flash.now[:error] = "You do not have permissions to edit other users."
+      flash[:error] = "You do not have permissions to edit other users."
       redirect_to root_path and return
     end
 
@@ -129,7 +129,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     if current_user.is_not_council?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     

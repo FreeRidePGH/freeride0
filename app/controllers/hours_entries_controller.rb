@@ -4,7 +4,7 @@ class HoursEntriesController < ApplicationController
   # GET /hours_entries.json
   def index
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -22,7 +22,7 @@ class HoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries/1.json
   def volunteer_show
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -38,7 +38,7 @@ class HoursEntriesController < ApplicationController
   # GET /repair_hours_entries/1.json
   def repair_show
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -55,7 +55,7 @@ class HoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries/new.json
   def volunteer_new
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -71,7 +71,7 @@ class HoursEntriesController < ApplicationController
   # GET /repair_hours_entries/new.json
   def repair_new
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -87,7 +87,7 @@ class HoursEntriesController < ApplicationController
   # POST /volunteer_hours_entries.json
   def volunteer_create
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -109,7 +109,7 @@ class HoursEntriesController < ApplicationController
   # POST /repair_hours_entries.json
   def repair_create
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -131,7 +131,7 @@ class HoursEntriesController < ApplicationController
   # DELETE /volunteer_hours_entries/1.json
   def volunteer_destroy
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -148,7 +148,7 @@ class HoursEntriesController < ApplicationController
   # DELETE /repair_hours_entries/1.json
   def repair_destroy
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     

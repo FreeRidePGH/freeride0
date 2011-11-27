@@ -3,7 +3,7 @@ class LocationHistoriesController < ApplicationController
   # GET /location_histories.json
   def index
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -19,7 +19,7 @@ class LocationHistoriesController < ApplicationController
   # GET /location_histories/1.json
   def show
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -35,7 +35,7 @@ class LocationHistoriesController < ApplicationController
   # GET /location_histories/new.json
   def new
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -50,7 +50,7 @@ class LocationHistoriesController < ApplicationController
   # GET /location_histories/1/edit
   def edit
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -61,7 +61,7 @@ class LocationHistoriesController < ApplicationController
   # POST /location_histories.json
   def create
     if current_user.is_not_member?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -82,7 +82,7 @@ class LocationHistoriesController < ApplicationController
   # PUT /location_histories/1.json
   def update
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
@@ -103,7 +103,7 @@ class LocationHistoriesController < ApplicationController
   # DELETE /location_histories/1.json
   def destroy
     if current_user.is_not_staff?
-      flash.now[:error] = "You do not have permissions to access that feature."
+      flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
