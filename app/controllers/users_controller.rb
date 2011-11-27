@@ -31,7 +31,8 @@ class UsersController < ApplicationController
     end
     
     @user = User.find(params[:id])
-	@favs = Favorite.where(:user_id => @user.id)
+	  @favs = Favorite.where(:user_id => @user.id)
+	  @transactions = @user.transactions
 
     respond_to do |format|
       format.html # show.html.erb

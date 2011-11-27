@@ -1,0 +1,25 @@
+<h1 align="center">All Transactions</h1>
+
+<table>
+  <tr>
+		<th>Date</th>
+    <th>User</th>
+    <th>Amount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @transactions.each do |transaction| %>
+  <tr>
+		<td><%= transaction.created_at_format %></td>
+    <td><%= link_to transaction.user.name, transaction.user %></td>
+    <td align="right"><%= number_to_currency(transaction.amount) %></td>
+    <td><%= link_to 'Delete', transaction, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Transaction', new_transaction_path %>

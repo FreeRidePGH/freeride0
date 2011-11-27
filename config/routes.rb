@@ -1,9 +1,5 @@
 Freeride::Application.routes.draw do
 
-  resources :notes
-
-  resources :location_histories
-
   root :to => 'home#index'
   match "/search", :to => 'search#index', :as => :search
   match '/dashboard', :to => 'home#dashboard', :as => :dashboard
@@ -30,6 +26,9 @@ Freeride::Application.routes.draw do
   resources :bikes
   resources :favorites
   resources :bike_assesments
+  resources :transactions, :except => [:show, :edit, :update]
+  resources :notes
+  resources :location_histories
   
 
 

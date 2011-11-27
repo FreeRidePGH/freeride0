@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_one :eab_project
   has_many :repair_hours_entries
   has_many :volunteer_hours_entries
+  has_many :transactions, :order => "created_at DESC"
   
   attr_accessor :password # using attr_accessor :password creates a virtual password attribute, not stored in database
   attr_accessor :phone1, :phone2, :phone3
@@ -55,6 +56,10 @@ class User < ActiveRecord::Base
     first_name + " " + last_name
   end
   
+  def name_with_email
+    name + " - " + email
+  end
+  
   # PERMISSIONS DEFINED
   def is_member?
     return true if self.role >= 10
@@ -84,7 +89,13 @@ class User < ActiveRecord::Base
   def is_not_admin?
     return !self.is_admin?
   end
-  
+  def role_text
+    return "Admin" if self.role >= 40
+    return "Council" if self.role >= 30
+    return "Staff" if self.role >= 20
+    return "Member" if self.role >= 10
+    return "Guest"
+  end
 
 
 
