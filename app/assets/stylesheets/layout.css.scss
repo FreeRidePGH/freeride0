@@ -164,22 +164,19 @@ a {
 }
 
 
-
-#flash_error, #flash_alert {
+#flash_error, #flash_alert, #flash_notice {
 	padding: 8px;
+	margin: -17px 0 25px 0;
 	color: white;
 	font-size: 16px;
 	font-weight: bold;
+}
+
+#flash_error, #flash_alert {
 	background-color: #d00000;
 	border: solid 5px #ffcc00;
-	margin-bottom: 25px;
 }
 
 #flash_notice {
-	padding: 8px;
-	color: white;
-	font-size: 16px;
-	font-weight: bold;
 	background-color: #008011;
-	margin-bottom: 25px;
 }
