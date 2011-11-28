@@ -1,10 +1,10 @@
-<p id="notice"><%= notice %></p>
+
 
 <table><tr><td>
 
 <table cellpadding="5">
 	<tr>
-		<td colspan="2" align="center">
+		<td colspan="2" align="left">
 			<h1><%= @user.name %></h1>
 			<h3><%= mail_to @user.email %></h3>
 			<p><b>Phone Number</b><br />
@@ -16,23 +16,20 @@
 		</td>
 	</tr>
 	<tr>
-		<td align="center" valign="top">
+		<td align="left" valign="top">
 			<b>Has Read Packet</b><br />
 			<%= @user.has_read_packet ? "Yes" : "No" %>
 		</td>
-		<td align="center" valign="top">
-			<b>Account Value</b><br />
-			<%= number_to_currency(@user.account_value) %>
+
+	</tr>
+	<tr>
+		<td colspan="2" align="left">
+			<b>User Type</b><br />
+			<%= @user.role_text %>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center">
-			<b>Role</b><br />
-			<%= @user.role %>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center">
+		<td colspan="2" align="left">
 			<%= link_to 'Edit Information', edit_user_path(@user) %>
 		</td>
 	</tr>
@@ -40,49 +37,89 @@
 </td>
 
 <!--For making some space-->
-<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td width="50px"></td>
 
 <td>
-<h2>Favorites list</h2>
+<h2>Favorites List</h2>
 <%if @favs.empty?%>
-There no favorite bikes.
+No favorites!
 <%else%>
 <table>
-  <tr>
-    <th>Bike</th>
-	<th>Brand</th>
-    <th>Model</th>
-	<th>Color</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<tr>
+		<th>Bike</th>
+		<th>Brand</th>
+		<th>Model</th>
+		<th>Color</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
 
-<% @favs.each do |favorite| %>
-  <tr>
-  <% @bike = Bike.find_by_id(favorite.bike_id)%>
-  
-    <td><%= @bike.bike_id %></td>
-    <td><%= BikeBrand.find(@bike.brand_id).name %></td>
-    <td><%= BikeModel.find(@bike.model_id).name %></td>
-    <td><%= @bike.color %></td>
-    <td><%= link_to 'Remove', favorite, confirm: 'Are you sure?', method: :delete %></td>
-	<td>&nbsp;&nbsp;&nbsp;</td>
-	<td><%@proj = EabProject.find_by_bike_id(@bike.id)%>
-	<% if !@proj.nil?%>
-		<% if @proj.user_id==@user.id%>
-			<table id="favpage"><tr><td>Current Project</td></tr></table>
-		<%else%>
-			<i>Project claimed by <%=User.find_by_id(@proj.user_id).name%></i>
-		<%end%>
-	<%end%>
-	
-	</td>
-  </tr>
-<% end %>
-</table>
+	<% @favs.each do |favorite| %>
+	<tr>
+		<% bike = favorite.bike %>
+		<% loc = bike.location %>
+
+			<td><%= link_to bike.bike_id, bike %></td>
+			<td><%= bike.brand.name %></td>
+			<td><%= bike.model.name %></td>
+			<td><%= bike.color %></td>
+			<td><%= link_to 'Remove', favorite, confirm: 'Are you sure?', method: :delete %></td>
+			<td>&nbsp;&nbsp;&nbsp;</td>
+			<td><%proj = bike.eab_project %>
+				<% if !proj.nil? %>
+				<% if proj.user_id==current_user.id %>
+				<table id="favpage"><tr><td><%= link_to "Current Project", proj %></td></tr></table>
+				<%else%>
+				<i>Project claimed by <%= proj.user.name %></i>
+				<%end%>
+				<%end%>
+
+			</td>
+		</tr>
+		<% end %>
+	</table>
 <%end%>
 
 </td>
 
-</tr></table>
+</tr>
+<tr>
+	<table>
+		<tr><td>	
+			<h2 align="center">Transactions</h2>
+		</td></tr>
+		<tr><td>
+			<h3 align="center" style="margin:0;">Account Value: <%= number_to_currency(@user.account_value) %></h3>
+		</td></tr>
+		</table>
+		<table id="transactions">
+		<tr class="t_header">
+			<td align="center">Date</th>
+			<td align="center">Credit</th>
+			<td align="center">Debit</th>
+			<td algin="center">Balance</th>
+		</tr>
+		<% if @transactions.empty? %>
+		<tr><td colspan="4" align="center">No transactions!</td></tr>
+		<% else %>
+			<% bal = @user.account_value %>
+			<% @transactions.each do |transaction| %>
+			<tr>
+				<td><%= transaction.created_at_format %></td>
+				<% if transaction.amount >= 0 %>
+				<td class="credit_cell" align="right"><%= number_to_currency(transaction.amount) %></td>
+				<td></td>
+				<% else %>
+				<td></td>
+				<td class="debit_cell" align="right"><%= number_to_currency(transaction.amount.abs) %></td>
+				<% end %>
+				<td align="right"><%= number_to_currency(bal) %></td>
+				<% bal = bal - transaction.amount %>
+			</tr>
+			<% end %>
+		<% end %>
+	</table>
+</tr>
+
+</table>

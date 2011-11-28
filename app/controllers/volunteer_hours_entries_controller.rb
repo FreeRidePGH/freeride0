@@ -64,6 +64,14 @@ class VolunteerHoursEntriesController < ApplicationController
       if @volunteer_hours_entry.save
         format.html { redirect_to @volunteer_hours_entry, notice: 'Volunteer hours entry was successfully created.' }
         format.json { render json: @volunteer_hours_entry, status: :created, location: @volunteer_hours_entry }
+        
+        @transaction = Transaction.new
+        @transaction.user = current_user
+        seconds_in_hour = 60.0*60.0
+        payrate = 8.00
+        @transaction.amount = payrate*((@volunteer_hours_entry.end_time - @volunteer_hours_entry.start_time)/seconds_in_hour)
+        @transaction.save
+      
       else
         format.html { render action: "new" }
         format.json { render json: @volunteer_hours_entry.errors, status: :unprocessable_entity }

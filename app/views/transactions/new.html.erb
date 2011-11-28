@@ -1,0 +1,8 @@
+<h1>New Account Balance Transfer</h1>
+
+<p>This form allows you to transfer money from your account balance to another user.</p>
+
+<p><b>Your Available Balance:<br/>
+<%= number_to_currency(current_user.account_value) %></b></p>
+
+<%= render 'form' %>

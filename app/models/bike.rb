@@ -1,8 +1,8 @@
 class Bike < ActiveRecord::Base
   has_one :eab_project
-  has_one :bike_brand
-  has_one :bike_model
-  has_one :location
+  belongs_to :brand, :class_name => "BikeBrand"
+  belongs_to :model, :class_name => "BikeModel"
+  belongs_to :location
   has_many :safety_inspections, :order => "inspection_date DESC, created_at DESC"
   
   has_attached_file :image1, :default_url => "/images/missing.png",

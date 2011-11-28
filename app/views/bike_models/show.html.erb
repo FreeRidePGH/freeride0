@@ -1,8 +1,8 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <b>Brand:</b>
-  <%= @bike_model.brand_id %>
+  <%= link_to @bike_model.brand.name, @bike_model.brand %>
 </p>
 
 <p>
@@ -10,10 +10,6 @@
   <%= @bike_model.name %>
 </p>
 
-<p>
-  <b>ID:</b>
-  <%= @bike_model.id %>
-</p>
 
 
 <%= link_to 'Edit', edit_bike_model_path(@bike_model) %> |

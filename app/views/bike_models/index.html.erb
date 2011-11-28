@@ -1,27 +1,24 @@
-<h1>Listing bike_models</h1>
+<h1>Bike Models</h1>
 
 <table>
-  <tr>
-    <th>Brand</th>
-    <th>Name</th>
-	<th>ID</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<tr>
+		<th>Brand</th>
+		<th>Name</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
 
-<% @bike_models.each do |bike_model| %>
-  <tr>
-    <td><%= bike_model.brand_id %></td>
-    <td><%= bike_model.name %></td>
-	<td><%= bike_model.id %></td>
-    <td><%= link_to 'Show', bike_model %></td>
-    <td><%= link_to 'Edit', edit_bike_model_path(bike_model) %></td>
-    <td><%= link_to 'Destroy', bike_model, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+	<% @bike_models.each do |bike_model| %>
+	<tr>
+		<td><%= link_to bike_model.brand.name, bike_model.brand %></td>
+		<td><%= bike_model.name %></td>
+		<td><%= link_to 'Edit', edit_bike_model_path(bike_model) %></td>
+		<td><%= link_to 'Destroy', bike_model, confirm: 'Are you sure?', method: :delete %></td>
+	</tr>
+	<% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Bike model', new_bike_model_path %>
+<%= link_to 'New Bike Model', new_bike_model_path %>

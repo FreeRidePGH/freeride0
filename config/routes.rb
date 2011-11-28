@@ -1,18 +1,15 @@
 Freeride::Application.routes.draw do
 
-  resources :notes
-
-  resources :location_histories
-
   root :to => 'home#index'
   match "/search", :to => 'search#index', :as => :search
   match '/dashboard', :to => 'home#dashboard', :as => :dashboard
   match '/signup', :to => 'users#new', :as => :signup
-  match '/myfav', :to => 'users#myfav', :as => :myfav
+  match '/myfav', :to => 'favorites#myfav', :as => :myfav
   match '/bikes/reports', :to => 'bikes#reports', :as => :reports
   match '/myproj', :to => 'EabProjects#myproj', :as => :myproj
   match '/myhours', :to => 'VolunteerHoursEntries#myhours', :as => :myhours
   match '/logout', :to => 'sessions#destroy'
+  match '/admin', :to => 'admin#index', :as => :admin
 
     
   resources :sessions, :only => [:create, :destroy]
@@ -30,6 +27,9 @@ Freeride::Application.routes.draw do
   resources :bikes
   resources :favorites
   resources :bike_assesments
+  resources :transactions, :except => [:show, :edit, :update]
+  resources :notes
+  resources :location_histories
   
 
 

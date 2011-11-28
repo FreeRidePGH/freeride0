@@ -120,5 +120,12 @@ class FavoritesController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  
+  def myfav
+
+    @favs = current_user.favorites
+
+  end  
 
 end

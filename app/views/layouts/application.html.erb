@@ -42,11 +42,14 @@
 			<ul>
 				
 				<% if current_user && current_user.role != 0 %>
-				<li><%= link_to "Home", root_path, :class => (page == "home" ? "selected" : "") %></li>
+				<li><%= link_to "Home", root_path, :class => ((page == "home" || page=="favorites") ? "selected" : "") %></li>
 				<li><%= link_to "Bikes", search_path, :class => ((page == "bikes" || page=="search" || page=="safety_inspections") ? "selected" : "") %></li>
-				<li><%= link_to "EAB Projects", eab_projects_path, :class => (page == "eab_projects" ? "selected" : "") %></li>
+				<li><%= link_to "EAB Projects", myproj_path, :class => (page == "eab_projects" ? "selected" : "") %></li>
 				<li><%= link_to "Hours", volunteer_hours_entries_path, :class => ((page == "repair_hours_entries" || page == "volunteer_hours_entries") ? "selected" : "") %></li>
-				<li><%= link_to "Users", users_path, :class => (page == "users" ? "selected" : "") %></li>
+				<li><%= link_to "Account", user_path(current_user), :class => ((page == "users" || page == "transactions") ? "selected" : "") %></li>
+				<% if current_user.is_council? %>
+					<li><%= link_to "Admin", admin_path, :class => ((page == "admin" || page == "bike_brands" || page == "bike_models" || page == "notes" || page == "locations" || page == "safety_items") ? "selected" : "") %></li>
+				<% end %>
 				<% else %>
 				<li><%= link_to "Home", root_path, :class => ((page == "home" || page=="users") ? "selected" : "") %></li>
 				<li><%= link_to "Bikes", search_path, :class => ((page == "bikes" || page=="search" || page=="safety_inspections") ? "selected" : "") %></li>
@@ -68,7 +71,7 @@
 						</div>
 					<% end %>
 				<% end %>
-				
+
 				<%= yield %>
 			</td></tr></table>
 		</div>

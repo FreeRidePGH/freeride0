@@ -16,3 +16,24 @@
 	font-weight: bold; 
 	background-color: #66FF33;
 }
+
+#transactions {
+	border-collapse: collapse;
+	border: solid 2px black;
+	td {
+		padding: 3px;
+		border: solid 2px black;
+	}
+	.t_header {
+		font-weight: bold;
+		font-size: 16px;
+	}
+	.credit_cell {
+		font-weight: bold;
+		background-color: #00ff33;
+	}
+	.debit_cell {
+		font-weight: bold;
+		background-color: #fa5858;
+	}
+}
