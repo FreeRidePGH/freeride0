@@ -60,7 +60,7 @@ No favorites!
 		<% bike = favorite.bike %>
 		<% loc = bike.location %>
 
-		<td><%= bike.bike_id %></td>
+			<td><%= link_to bike.bike_id, bike %></td>
 			<td><%= bike.brand.name %></td>
 			<td><%= bike.model.name %></td>
 			<td><%= bike.color %></td>
@@ -69,7 +69,7 @@ No favorites!
 			<td><%proj = bike.eab_project %>
 				<% if !proj.nil? %>
 				<% if proj.user_id==current_user.id %>
-				<table id="favpage"><tr><td><%= link_to "Current Project", eab_project_path(proj) %></td></tr></table>
+				<table id="favpage"><tr><td><%= link_to "Current Project", proj %></td></tr></table>
 				<%else%>
 				<i>Project claimed by <%= proj.user.name %></i>
 				<%end%>
