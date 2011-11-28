@@ -37,7 +37,7 @@
 			<td><%proj = bike.eab_project %>
 				<% if !proj.nil? %>
 				<% if proj.user_id==current_user.id %>
-				<table id="favpage"><tr><td>My Current Project</td></tr></table>
+				<table id="favpage"><tr><td><%= link_to "My Current Project", eab_project_path(proj) %></td></tr></table>
 				<%else%>
 				<i>Project claimed by <%= proj.user.name %></i>
 				<%end%>
