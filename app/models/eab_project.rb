@@ -15,8 +15,7 @@ class EabProject < ActiveRecord::Base
   end
   
   def statusName
-	eabStatusList = Hash.new
-	
+	eabStatusList = Hash.new	
 	eabStatusList = {
 		100 => "EAB in progress",
 		200 => "Ready for Inspection",
@@ -27,8 +26,7 @@ class EabProject < ActiveRecord::Base
 		400 => "Bike signed off", #(Project Completed) 
 		500 => "Inactive",
 		600 => "Abandoned"
-	}
-  
+	}  
 	return eabStatusList[self.status]
   end
 

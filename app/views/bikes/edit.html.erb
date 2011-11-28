@@ -312,7 +312,7 @@ function isNumberKey(evt)
 		  <select id="condition" name="condition">
 		  <option value="A" <%if !@bikeAss.nil? && @bikeAss.condition=="A"%>selected="selected"<%end%>>A</option>
 		  <option value="B" <%if !@bikeAss.nil? && @bikeAss.condition=="B"%>selected="selected"<%end%>>B</option>
-		  <option value="C" <%if !@bikeAss.nil? && @bikeAss.condition=="C"%>selected="selected"<%end%>>C</option>
+		  <option value="C" <%if !@bikeAss.nil? && @bikeAss.condition=="C"%>selected="selected"<%elsif @bikeAss.nil?%>selected="selected"<%end%>>C</option>
 		  <option value="D" <%if !@bikeAss.nil? && @bikeAss.condition=="D"%>selected="selected"<%end%>>D</option>
 		</select></td>	
 		</tr>
@@ -323,7 +323,7 @@ function isNumberKey(evt)
 		  <select id="quality" name="quality">
 		  <option value="A" <%if !@bikeAss.nil? && @bikeAss.quality=="A"%>selected="selected"<%end%>>A</option>
 		  <option value="B" <%if !@bikeAss.nil? && @bikeAss.quality=="B"%>selected="selected"<%end%>>B</option>
-		  <option value="C" <%if !@bikeAss.nil? && @bikeAss.quality=="C"%>selected="selected"<%end%>>C</option>
+		  <option value="C" <%if !@bikeAss.nil? && @bikeAss.quality=="C"%>selected="selected"<%elsif @bikeAss.nil?%>selected="selected"<%end%>>C</option>
 		  <option value="D" <%if !@bikeAss.nil? && @bikeAss.quality=="D"%>selected="selected"<%end%>>D</option>
 		</select>
 		</td></tr>

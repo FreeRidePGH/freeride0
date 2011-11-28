@@ -3,13 +3,13 @@
 one:
   user_id: 1
   bike_id: 1
-  title: MyString
-  details: MyString
+  title: Bike Updated
+  details: Bike is good
   last_update: 2011-11-18 19:25:53
 
 two:
   user_id: 1
   bike_id: 1
-  title: MyString
-  details: MyString
+  title: Bike Updated
+  details: Very nice bike
   last_update: 2011-11-18 19:25:53

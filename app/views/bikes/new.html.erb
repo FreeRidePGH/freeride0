@@ -246,7 +246,7 @@ function isNumberKey(evt)
 		<tr>
 		<td>
 
-		  <b onMouseover="ddrivetip('Wheel size in ISO format','#66FF33', 80)"; onMouseout="hideddrivetip()">
+		  <b onMouseover="ddrivetip('<%=Bike.wheelTooltip%>','#66FF33', 300)"; onMouseout="hideddrivetip()">
 		  <%= f.label :wheel_size %></b></td><td>
    
     <%= f.text_field :wheel_size %>
@@ -296,7 +296,7 @@ function isNumberKey(evt)
 		  <select id="condition" name="condition">
 		  <option value="A" <%if !@c.nil? && @c=="A"%>selected="selected"<%end%>>A</option>
 		  <option value="B" <%if !@c.nil? && @c=="B"%>selected="selected"<%end%>>B</option>
-		  <option value="C" <%if !@c.nil? && @c=="C"%>selected="selected"<%end%>>C</option>
+		  <option value="C" <%if !@c.nil? && @c=="C"%>selected="selected"<%elsif @c.nil?%>selected="selected"<%end%>>C</option>
 		  <option value="D" <%if !@c.nil? && @c=="D"%>selected="selected"<%end%>>D</option>
 		  <option value="F" <%if !@c.nil? && @c=="F"%>selected="selected"<%end%>>F</option>
 		</select></td>	
@@ -308,7 +308,7 @@ function isNumberKey(evt)
 		  <select id="quality" name="quality">
 		  <option value="A" <%if !@q.nil? && @q=="A"%>selected="selected"<%end%>>A</option>
 		  <option value="B" <%if !@q.nil? && @q=="B"%>selected="selected"<%end%>>B</option>
-		  <option value="C" <%if !@q.nil? && @q=="C"%>selected="selected"<%end%>>C</option>
+		  <option value="C" <%if !@q.nil? && @q=="C"%>selected="selected"<%elsif @q.nil?%>selected="selected"<%end%>>C</option>
 		  <option value="D" <%if !@q.nil? && @q=="D"%>selected="selected"<%end%>>D</option>
 		  <option value="F" <%if !@q.nil? && @q=="F"%>selected="selected"<%end%>>F</option>
 		</select></td>

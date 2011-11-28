@@ -17,7 +17,7 @@ class BikeAssesment < ActiveRecord::Base
 		ttstring += "<tr><td>A</td><td>Passes the fix for sale completion checklist and would be ready to sell</td><td>100%</td></tr>"
 		ttstring += "<tr><td>B</td><td>The bicycle is complete, and it satisfies at least half of the fix for sale completion checklist.</td><td>100%</td></tr>"
 		ttstring += "<tr><td>C</td><td>The bicycle is complete but it meets less than half of the fix for sale completion check list. Or, the bicycle is missing important parts, but what is there is working well.</td><td>75%-100%</td></tr>" 
-		ttstring += "<tr><td>D</td><td>The bicycle is missing componenets. The present components are in need of major repair.</td><td>75%-50%</td></tr>"
+		ttstring += "<tr><td>D</td><td>The bicycle is missing components. The present components are in need of major repair.</td><td>75%-50%</td></tr>"
 		ttstring += "<tr><td>F</td><td>This bike would require significant work to function. Repairing it would be equivalent to starting from a frame if it is not at that point already.</td><td>50% or less</td></tr></table>"
 		return ttstring		
 	end
