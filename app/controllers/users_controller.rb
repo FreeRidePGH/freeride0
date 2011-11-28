@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    if current_user.is_not_council?
+    if current_user.is_not_staff?
       flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
@@ -25,12 +25,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    if current_user.is_not_member?
+    
+    @user = User.find(params[:id])
+    if current_user.is_not_member? || (@user != current_user && current_user.is_not_staff?)
       flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
-    @user = User.find(params[:id])
 	  @favs = Favorite.where(:user_id => @user.id)
 	  @transactions = @user.transactions
 
