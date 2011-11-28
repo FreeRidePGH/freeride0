@@ -42,7 +42,7 @@
 			<ul>
 				
 				<% if current_user && current_user.role != 0 %>
-				<li><%= link_to "Home", root_path, :class => (page == "home" ? "selected" : "") %></li>
+				<li><%= link_to "Home", root_path, :class => ((page == "home" || page=="favorites") ? "selected" : "") %></li>
 				<li><%= link_to "Bikes", search_path, :class => ((page == "bikes" || page=="search" || page=="safety_inspections") ? "selected" : "") %></li>
 				<li><%= link_to "EAB Projects", myproj_path, :class => (page == "eab_projects" ? "selected" : "") %></li>
 				<li><%= link_to "Hours", volunteer_hours_entries_path, :class => ((page == "repair_hours_entries" || page == "volunteer_hours_entries") ? "selected" : "") %></li>
@@ -68,7 +68,7 @@
 						</div>
 					<% end %>
 				<% end %>
-				
+
 				<%= yield %>
 			</td></tr></table>
 		</div>

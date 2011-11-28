@@ -1,0 +1,53 @@
+
+<h1>My favorites list</h1>
+
+<table>
+  <tr>
+    <th>Bike</th>
+	<th>Location</th>
+	<th>Brand</th>
+    <th>Model</th>
+	<th>Color</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @favs.each do |favorite| %>
+  <tr>
+  <% @bike = Bike.find_by_id(favorite.bike_id)%>
+  <% @loc = Location.find_by_id(@bike.location_id)%>
+  
+    <td><%= @bike.bike_id %></td>
+    <td>
+	<%if @loc.nil?%>
+		N.A.
+	<%else%>
+		<%if @loc.hook_number.nil?%>
+			<%=@loc.name%>
+		<%else%>
+			HookID - <%=@loc.hook_number%>
+		<%end%>		
+	<%end%></td>
+    <td><%= BikeBrand.find(@bike.brand_id).name %></td>
+    <td><%= BikeModel.find(@bike.model_id).name %></td>
+    <td><%= @bike.color %></td>
+    <td><%= link_to 'Remove', favorite, confirm: 'Are you sure?', method: :delete %></td>
+	<td>&nbsp;&nbsp;&nbsp;</td>
+	<td><%@proj = EabProject.find_by_bike_id(@bike.id)%>
+	<% if !@proj.nil?%>
+		<% if @proj.user_id==@current_user.id%>
+			<table id="favpage"><tr><td>My Current Project</td></tr></table>
+		<%else%>
+			<i>Project claimed by <%=User.find_by_id(@proj.user_id).name%></i>
+		<%end%>
+	<%end%>
+	
+	</td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'View more bikes', bikes_path %>

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :repair_hours_entries
   has_many :volunteer_hours_entries
   has_many :transactions, :order => "created_at DESC"
+  has_many :favorites
   
   attr_accessor :password # using attr_accessor :password creates a virtual password attribute, not stored in database
   attr_accessor :phone1, :phone2, :phone3

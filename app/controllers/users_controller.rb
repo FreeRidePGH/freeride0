@@ -144,8 +144,4 @@ class UsersController < ApplicationController
     end
   end
     
-  def myfav
-    @favs = Favorite.where(:user_id => current_user.id)
-
-  end  
 end
