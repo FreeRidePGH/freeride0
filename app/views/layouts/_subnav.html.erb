@@ -49,5 +49,10 @@
 
 		<li><%= link_to "View Hours Log", myhours_path %></li>
 		<li><%= link_to "Record Volunteer Hours", new_volunteer_hours_entry_path %></li>
+		
+<% elsif subnav=="admin" %>
+		<% if current_user.is_council? %>
+		<li><%= link_to "Administrative Items", admin_path %></li>
+		<% end %>
 
 <% end %>

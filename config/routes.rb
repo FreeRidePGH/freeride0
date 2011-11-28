@@ -9,6 +9,7 @@ Freeride::Application.routes.draw do
   match '/myproj', :to => 'EabProjects#myproj', :as => :myproj
   match '/myhours', :to => 'VolunteerHoursEntries#myhours', :as => :myhours
   match '/logout', :to => 'sessions#destroy'
+  match '/admin', :to => 'admin#index', :as => :admin
 
     
   resources :sessions, :only => [:create, :destroy]
