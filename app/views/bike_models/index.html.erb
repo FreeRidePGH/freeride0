@@ -11,7 +11,7 @@
 
 	<% @bike_models.each do |bike_model| %>
 	<tr>
-		<td><%= link_to bike_model.brand.name, bike_model.brand %></td>
+		<td><%= link_to bike_model.bike_brand.name, bike_model.bike_brand %></td>
 		<td><%= bike_model.name %></td>
 		<td><%= link_to 'Edit', edit_bike_model_path(bike_model) %></td>
 		<td><%= link_to 'Destroy', bike_model, confirm: 'Are you sure?', method: :delete %></td>
