@@ -307,7 +307,7 @@ function isNumberKey(evt)
 		<table border="0">
 		<tr><td>		
 		<% @bikeAss = BikeAssesment.find_by_bike_id(@bike.id)%>
-		<b onMouseover="ddrivetip('A - Excellent condition. Almost like brand new.<br/> B - Good. Used but in working condition. <br/> C - Fair Condition. Requires a few tweaks to get it running. <br/> D - Poor Condition. Almost unusable and needs extensive repair.','yellow', 300)"; onMouseout="hideddrivetip()">
+		<b onMouseover="ddrivetip('<%=BikeAssesment.conditionTooltip%>','yellow', 600)"; onMouseout="hideddrivetip()">
 		Condition:</b></td><td>
 		  <select id="condition" name="condition">
 		  <option value="A" <%if !@bikeAss.nil? && @bikeAss.condition=="A"%>selected="selected"<%end%>>A</option>
@@ -318,7 +318,7 @@ function isNumberKey(evt)
 		</tr>
 		<tr>
 		<td>		
-		 <b onMouseover="ddrivetip('A - High quality. Excellent brand, sturdy frame, expensive gears.<br/>B - Good quality. Good brand and frame.<br/>C - Fair quality. Recognizable brand, normal frame and brakes.<br/>D - Lousy quality. Unrecognizable brand, cheap and useless.','yellow', 300)"; onMouseout="hideddrivetip()">
+		 <b onMouseover="ddrivetip('<%=BikeAssesment.qualityTooltip%>','yellow', 600)"; onMouseout="hideddrivetip()">
 		 Quality:</b></td><td>
 		  <select id="quality" name="quality">
 		  <option value="A" <%if !@bikeAss.nil? && @bikeAss.quality=="A"%>selected="selected"<%end%>>A</option>
@@ -329,7 +329,7 @@ function isNumberKey(evt)
 		</td></tr>
 		</table><br/>	
 		<center>
-			<b onMouseover="ddrivetip('Current price of the bike if it was to be sold','yellow', 80)"; onMouseout="hideddrivetip()">
+			<b onMouseover="ddrivetip('<%=BikeAssesment.priceTooltip%>','yellow', 500)"; onMouseout="hideddrivetip()">
 			AS-IS Value:</b>			
 			
 			$ <input id="value" name="value" size="6" type="number" value="<%if @bikeAss.nil? || @bikeAss.value.nil?%>0.00<%else%><%=@bikeAss.value%><%end%>"/>

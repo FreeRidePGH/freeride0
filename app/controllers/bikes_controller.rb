@@ -14,7 +14,7 @@ class BikesController < ApplicationController
     @idtype = params[:idtype]
     if @searchID.nil?
       #nothing selected, display all
-      @bikes = Bike.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+      @bikes = Bike.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       #
       #if a category was chosen, display it
       @brand = params[:brand]
@@ -25,27 +25,27 @@ class BikesController < ApplicationController
       @seat_tube = params[:seat_tube]
 
       if !@brand.nil?
-        @bikes = Bike.where(:brand_id => @brand).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+        @bikes = Bike.where(:brand_id => @brand).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       end
       if !@color.nil?
-        @bikes = Bike.where(:color => @color).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+        @bikes = Bike.where(:color => @color).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       end
       if !@status.nil?
-        @bikes = Bike.where(:status => @status).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+        @bikes = Bike.where(:status => @status).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       end
       if !@wheel_size.nil?
-        @bikes = Bike.where(:wheel_size => @wheel_size).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+        @bikes = Bike.where(:wheel_size => @wheel_size).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       end
       if !@top_tube.nil?
-        @bikes = Bike.where(:top_tube => @top_tube).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+        @bikes = Bike.where(:top_tube => @top_tube).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       end
       if !@seat_tube.nil?
-        @bikes = Bike.where(:seat_tube => @seat_tube).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+        @bikes = Bike.where(:seat_tube => @seat_tube).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       end
 
 
     elsif @idtype == "bikeID"
-      @bikes = Bike.where(:bike_id => @searchID).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+      @bikes = Bike.where(:bike_id => @searchID).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
     else
       @bikes = Bike.where(:location_id => Location.find_by_hook_number(@searchID)).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
     end

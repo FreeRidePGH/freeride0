@@ -127,5 +127,4 @@ class FavoritesController < ApplicationController
     @favs = current_user.favorites
 
   end  
-
 end

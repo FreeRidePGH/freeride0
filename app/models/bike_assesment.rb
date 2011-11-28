@@ -23,10 +23,10 @@ class BikeAssesment < ActiveRecord::Base
 	end
 	
 	def self.priceTooltip
-		ttstring = "Sale Price = Base - (Damage) - (Labor) - (Missing Parts Cost)<br/>"
-		ttstring += "1. Base: What we would sell it for in mint condition<br/>"
-		ttstring += "2. Damage: Subtract $5 to $20 for rust and wear, if there is any<br/>"
-		ttstring += "3. Labor: Subtract needed labor = (number of hours of work needed) x ($8 per hour)<br/>"
+		ttstring = "Sale Price = Base - (Damage) - (Labor) - (Missing Parts Cost)<br/><br/>"
+		ttstring += "1. Base: What we would sell it for in mint condition<br/><br/>"
+		ttstring += "2. Damage: Subtract $5 to $20 for rust and wear, if there is any<br/><br/>"
+		ttstring += "3. Labor: Subtract needed labor = (number of hours of work needed) x ($8 per hour)<br/><br/>"
 		ttstring += "4. Missing Parts: Subtract some discount for any stuff it is obvious they will have to buy new(example, 27\" tires or a rear cassette). This does not apply to people who want to do single-speed or fixed gear conversions or other customizations since those customizations are not necessary for getting the bike up and running."
 		return ttstring
 	end
