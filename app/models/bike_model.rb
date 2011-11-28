@@ -1,5 +1,5 @@
 class BikeModel < ActiveRecord::Base
-  belongs_to :bike_brand
+  belongs_to :brand, :class_name => "BikeBrand"
   has_many :bikes, :dependent => :destroy
   
   attr_accessible :name, :brand_id
