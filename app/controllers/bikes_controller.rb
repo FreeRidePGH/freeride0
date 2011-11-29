@@ -14,7 +14,7 @@ class BikesController < ApplicationController
     @idtype = params[:idtype]
     if @searchID.nil?
       #nothing selected, display all
-      @bikes = Bike.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
+      @bikes = Bike.order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       #
       #if a category was chosen, display it
       @brand = params[:brand]
@@ -31,7 +31,7 @@ class BikesController < ApplicationController
         @bikes = Bike.where(:color => @color).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       end
       if !@status.nil?
-        @bikes = Bike.where(:status => @status).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
+        @bikes = Bike.searchStatus(@status).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       end
       if !@wheel_size.nil?
         @bikes = Bike.where(:wheel_size => @wheel_size).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])

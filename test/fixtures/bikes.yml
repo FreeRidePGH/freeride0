@@ -31,7 +31,7 @@ two:
 three:
   id: 3
   bike_id: 4
-  model_id: 1
+  model_id: 3
   brand_id: 2
   location_id: 3
   wheel_size: 400

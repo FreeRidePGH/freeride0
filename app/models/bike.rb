@@ -31,9 +31,9 @@ class Bike < ActiveRecord::Base
   validates_numericality_of :model_id, :message => "is invalid"
   validates_uniqueness_of :bike_id, :message => "ID has already been taken"
   
-  def self.search(search)
+  def self.searchStatus(search)
     if search
-      where('bike_id LIKE ?', "%#{search}%")
+      where('status LIKE ?', "%#{search}%")
     else
       scoped
     end

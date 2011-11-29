@@ -43,11 +43,14 @@
 		<tr>
 		<th>Status</th>
 		</tr>		
-		<% for i in Bike.select("distinct status").limit(6).map {|a| a.status} %>
-		<tr><td><a href="/bikes?status=<%=i%>">
-		<%= i%></a>
-		</td></tr>
-		<% end %>		
+		
+		<tr><td><a href="/bikes?status=Available">Available</a></td></tr>
+		<tr><td><a href="/bikes?status=EAB in Progress">EAB in Progress</a></td></tr>
+		<tr><td><a href="/bikes?status=FFS in Progress">FFS in Progress</a></td></tr>
+		<tr><td><a href="/bikes?status=In Shop">In Shop</a></td></tr>
+		<tr><td><a href="/bikes?status=Sold">Sold</a></td></tr>
+		<tr><td><a href="/bikes?status=Departed">Departed</a></td></tr>
+		
 		</table>
 	</td>		
 	</tr>
