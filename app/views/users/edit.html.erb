@@ -1,6 +1,10 @@
-<h1>Editing user</h1>
+<h1>Edit Account Information</h1>
 
+<% if current_user.is_staff? %>
+<%= render 'form_admin' %>
+<% else %>
 <%= render 'form_edit' %>
+<% end %>
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>

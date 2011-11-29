@@ -1,0 +1,57 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_number %><br />
+    (<%= f.text_field :phone1, :size => 2, :maxlength => 3 %>)
+		<%= f.text_field :phone2, :size => 2, :maxlength => 3 %> &ndash;
+		<%= f.text_field :phone3, :size => 3, :maxlength => 4 %>
+  </div>
+  <div class="field">
+	  <%= f.check_box :can_text_phone %>
+    <%= f.label :can_text_phone, "Text messages?" %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_area :address, :rows => 3, :cols => 26 %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+	  <%= f.check_box :has_read_packet %>
+    <%= f.label :has_read_packet, "Has Read Packet & Met Prerequisites" %>
+  </div>
+	<% if current_user.is_council? %>
+  <div class="field">
+	  <%= f.label :role, "User Type" %><br />
+    <%= select(:user, :role, {"Member" => "10", "Staff" => "20", "Council" => "30", "Admin" => "40"}) %>
+  </div>
+	<% end %>
+  <div class="actions">
+    <%= f.submit "Update Account Information" %>
+  </div>
+<% end %>

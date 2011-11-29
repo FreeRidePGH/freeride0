@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     @user.phone2 = @user.phone_number[3..5]
     @user.phone3 = @user.phone_number[6..9]
     
-    if @user != current_user && current_user.is_not_council?
+    if @user != current_user && current_user.is_not_staff?
       flash[:error] = "You do not have permissions to edit other users."
       redirect_to root_path and return
     end
@@ -111,13 +111,22 @@ class UsersController < ApplicationController
     
     @user = User.find(params[:id])
     
-    if @user != current_user && current_user.is_not_council?
+    if @user != current_user && current_user.is_not_staff?
       flash[:error] = "You do not have permissions to edit other users."
       redirect_to root_path and return
     end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
+        
+        if current_user.is_staff?
+          @user.has_read_packet = params[:user][:has_read_packet]
+          if current_user.is_council?
+            @user.role = params[:user][:role]
+          end
+          @user.save
+        end
+        
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :ok }
       else

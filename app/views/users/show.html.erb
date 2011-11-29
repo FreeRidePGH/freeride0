@@ -2,63 +2,64 @@
 
 <table><tr><td>
 
-<table cellpadding="5">
-	<tr>
-		<td colspan="2" align="left">
-			<h1><%= @user.name %></h1>
-			<h3><%= mail_to @user.email %></h3>
-			<p><b>Phone Number</b><br />
-			<%= number_to_phone(@user.phone_number, :area_code => true) %><br />
-			<b>Text messages?</b><br />
-			<%= @user.can_text_phone ? "Yes" : "No" %></p>
-			<p><b>Address</b><br />
-			<%= simple_format(@user.address, :class => 'address_display') %></p>
-		</td>
-	</tr>
-	<tr>
-		<td align="left" valign="top">
-			<b>Has Read Packet</b><br />
-			<%= @user.has_read_packet ? "Yes" : "No" %>
-		</td>
+	<table cellpadding="5">
+		<tr>
+			<td colspan="2" align="left">
+				<h1><%= @user.name %></h1>
+				<h3><%= mail_to @user.email %></h3>
+				<p><b>Phone Number</b><br />
+					<%= number_to_phone(@user.phone_number, :area_code => true) %><br />
+					<b>Text messages?</b><br />
+					<%= @user.can_text_phone ? "Yes" : "No" %></p>
+					<p><b>Address</b><br />
+						<%= simple_format(@user.address, :class => 'address_display') %></p>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+						<b>Has Read Packet &amp;<br/>Met Prerequisites?</b><br />
+						<%= @user.has_read_packet ? "Yes" : "No" %>
+					</td>
 
-	</tr>
-	<tr>
-		<td colspan="2" align="left">
-			<b>User Type</b><br />
-			<%= @user.role_text %>
+				</tr>
+				<tr>
+					<td colspan="2" align="left">
+						<b>User Type</b><br />
+						<%= @user.role_text %>
+					</td>
+				</tr>
+			</table>
 		</td>
-	</tr>
-	<tr>
-		<td colspan="2" align="left">
-			<%= link_to 'Edit Information', edit_user_path(@user) %>
-		</td>
-	</tr>
-</table>
-</td>
 
 <!--For making some space-->
 <td width="50px"></td>
-
-<td>
-<h2>Favorites List</h2>
-<%if @favs.empty?%>
-No favorites!
-<%else%>
-<table>
+<td valign="top">
+	<table>
 	<tr>
-		<th>Bike</th>
-		<th>Brand</th>
-		<th>Model</th>
-		<th>Color</th>
-		<th></th>
-		<th></th>
-		<th></th>
+		<td><div style="margin:20px 0 50px 0; font-weight:bold;">
+		<%= link_to '[Edit Account Information]', edit_user_path(@user) %></div>
+		</td>
 	</tr>
+	</table>
+	<h2>Favorites List</h2>
+	<%if @favs.empty?%>
+	No favorites!
+	<%else%>
+	<table>
+		<tr>
+			<th>Bike</th>
+			<th>Brand</th>
+			<th>Model</th>
+			<th>Color</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
 
-	<% @favs.each do |favorite| %>
-	<tr>
-		<% bike = favorite.bike %>
-		<% loc = bike.location %>
+		<% @favs.each do |favorite| %>
+		<tr>
+			<% bike = favorite.bike %>
+			<% loc = bike.location %>
 
 			<td><%= link_to bike.bike_id, bike %></td>
 			<td><%= bike.brand.name %></td>
@@ -79,7 +80,7 @@ No favorites!
 		</tr>
 		<% end %>
 	</table>
-<%end%>
+	<%end%>
 
 </td>
 
@@ -92,34 +93,34 @@ No favorites!
 		<tr><td>
 			<h3 align="center" style="margin:0;">Account Value: <%= number_to_currency(@user.account_value) %></h3>
 		</td></tr>
-		</table>
-		<table id="transactions">
+	</table>
+	<table id="transactions">
 		<tr class="t_header">
 			<td align="center">Date</th>
-			<td align="center">Credit</th>
-			<td align="center">Debit</th>
-			<td algin="center">Balance</th>
-		</tr>
-		<% if @transactions.empty? %>
-		<tr><td colspan="4" align="center">No transactions!</td></tr>
-		<% else %>
-			<% bal = @user.account_value %>
-			<% @transactions.each do |transaction| %>
-			<tr>
-				<td><%= transaction.created_at_format %></td>
-				<% if transaction.amount >= 0 %>
-				<td class="credit_cell" align="right"><%= number_to_currency(transaction.amount) %></td>
-				<td></td>
-				<% else %>
-				<td></td>
-				<td class="debit_cell" align="right"><%= number_to_currency(transaction.amount.abs) %></td>
-				<% end %>
-				<td align="right"><%= number_to_currency(bal) %></td>
-				<% bal = bal - transaction.amount %>
-			</tr>
-			<% end %>
-		<% end %>
-	</table>
-</tr>
+				<td align="center">Credit</th>
+					<td align="center">Debit</th>
+						<td algin="center">Balance</th>
+						</tr>
+						<% if @transactions.empty? %>
+						<tr><td colspan="4" align="center">No transactions!</td></tr>
+						<% else %>
+						<% bal = @user.account_value %>
+						<% @transactions.each do |transaction| %>
+						<tr>
+							<td><%= transaction.created_at_format %></td>
+							<% if transaction.amount >= 0 %>
+							<td class="credit_cell" align="right"><%= number_to_currency(transaction.amount) %></td>
+							<td></td>
+							<% else %>
+							<td></td>
+							<td class="debit_cell" align="right"><%= number_to_currency(transaction.amount.abs) %></td>
+							<% end %>
+							<td align="right"><%= number_to_currency(bal) %></td>
+							<% bal = bal - transaction.amount %>
+						</tr>
+						<% end %>
+						<% end %>
+					</table>
+				</tr>
 
-</table>
+			</table>
