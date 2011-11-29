@@ -42,45 +42,7 @@
 	</tr>
 	</table>
 	<h2>Favorites List</h2>
-	<%if @favs.empty?%>
-	No favorites!
-	<%else%>
-	<table>
-		<tr>
-			<th>Bike</th>
-			<th>Brand</th>
-			<th>Model</th>
-			<th>Color</th>
-			<th></th>
-			<th></th>
-			<th></th>
-		</tr>
-
-		<% @favs.each do |favorite| %>
-		<tr>
-			<% bike = favorite.bike %>
-			<% loc = bike.location %>
-
-			<td><%= link_to bike.bike_id, bike %></td>
-			<td><%= bike.brand.name %></td>
-			<td><%= bike.model.name %></td>
-			<td><%= bike.color %></td>
-			<td><%= link_to 'Remove', favorite, confirm: 'Are you sure?', method: :delete %></td>
-			<td>&nbsp;&nbsp;&nbsp;</td>
-			<td><%proj = bike.eab_project %>
-				<% if !proj.nil? %>
-				<% if proj.user_id==current_user.id %>
-				<table id="favpage"><tr><td><%= link_to "Current Project", proj %></td></tr></table>
-				<%else%>
-				<i>Project claimed by <%= proj.user.name %></i>
-				<%end%>
-				<%end%>
-
-			</td>
-		</tr>
-		<% end %>
-	</table>
-	<%end%>
+  <%= render 'favorites/favorites'%>
 </td>
 </tr>
 <tr>

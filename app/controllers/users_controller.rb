@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       redirect_to root_path and return
     end
     
-	  @favs = Favorite.where(:user_id => @user.id)
+    @favs = @user.favorites
 	  @transactions = @user.transactions
 
     respond_to do |format|
