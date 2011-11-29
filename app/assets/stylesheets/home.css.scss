@@ -3,5 +3,43 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .dash_h2 {
-	margin: 0 0 15px 0;
+	margin: 0 0 10px 0;
+}
+
+.favorites_table {
+	border-collapse: collapse;
+	border: solid 2px black;
+	td {
+		padding: 3px;
+		border: solid 1px black;
+	}
+	th {
+		text-align: center;
+		border: solid 2px black;
+		padding: 3px;
+		font-weight: bold;
+		font-size: 14px;
+	}
+	#hide {
+		border: none;
+	}
+}
+
+.eab_table {
+	border-collapse: collapse;
+	border: solid 2px black;
+	td {
+		padding: 3px;
+		border: solid 1px black;
+	}
+	th {
+		text-align: center;
+		border: solid 2px black;
+		padding: 3px;
+		font-weight: bold;
+		font-size: 14px;
+	}
+	#hide {
+		border: none;
+	}
 }

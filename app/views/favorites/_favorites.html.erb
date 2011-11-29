@@ -1,13 +1,11 @@
-<table>
+<table class="favorites_table">
 	<tr>
 		<th>Bike</th>
 		<th>Location</th>
 		<th>Brand</th>
 		<th>Model</th>
 		<th>Color</th>
-		<th></th>
-		<th></th>
-		<th></th>
+		<th id="hide"></th>
 	</tr>
 
 	<% if @favs.empty? %>
@@ -18,7 +16,7 @@
 		<% bike = favorite.bike %>
 		<% loc = bike.location %>
 
-		<td><%= link_to bike.bike_id, bike %></td>
+		<td align="center"><%= link_to bike.bike_id, bike %></td>
 		<td>
 			<%if loc.nil? %>
 			N.A.
@@ -32,12 +30,11 @@
 			<td><%= bike.brand.name %></td>
 			<td><%= bike.model.name %></td>
 			<td><%= bike.color %></td>
-			<td><%= link_to 'Remove', favorite, confirm: 'Are you sure?', method: :delete %></td>
-			<td>&nbsp;&nbsp;&nbsp;</td>
-			<td><%proj = bike.eab_project %>
+			<td><%= link_to 'Remove', favorite, confirm: 'Are you sure?', method: :delete %>&nbsp;&nbsp;&nbsp;
+				<% proj = bike.eab_project %>
 				<% if !proj.nil? %>
 				<% if proj.user_id==current_user.id %>
-				<table id="favpage"><tr><td><%= link_to "My Current Project", proj %></td></tr></table>
+				<span id="favpage"><%= link_to "My Current Project", proj %></span>
 				<%else%>
 				<i>Project claimed by <%= proj.user.name %></i>
 				<%end%>
