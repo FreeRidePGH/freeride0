@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     end
     
     @favs = @user.favorites
-	  @transactions = @user.transactions
+	  @transactions = @user.recent_transactions
 
     respond_to do |format|
       format.html # show.html.erb

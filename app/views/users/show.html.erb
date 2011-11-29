@@ -41,15 +41,17 @@
 		</td>
 	</tr>
 	</table>
-	<h2>Favorites List</h2>
-  <%= render 'favorites/favorites'%>
+
+	<h2 align="center" style="margin-bottom: 5px;">Recent Transactions</h2>
+	<%= render 'transactions/transaction_table' %>
+	<p align="center"><%= link_to "View All Transactions", alltransactions_path("user_id" => @user) %></p>
 </td>
 </tr>
 <tr>
 	<td colspan="3">
 	<br/>
-	<h2 align="center" style="margin-bottom: 5px;">All Transactions</h2>
-	<%= render 'transactions/transaction_table' %>
+	<h2 align="center" style="margin-bottom: 5px;">Favorites List</h2>
+  <%= render 'favorites/favorites'%>
 	</td>
 </tr>
 
