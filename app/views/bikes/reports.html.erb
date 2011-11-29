@@ -74,28 +74,25 @@ function filter2 (phrase, _id){
 
 Report Type:
 <select name="reportType">
-<option value="Inactive Bikes">Inactive Bikes</option>
-<option value="Inactive EABs">Inactive EABs</option>
+<option value="Inactive Bikes" <%if @reportType=="Inactive Bikes"%>selected="selected"<%end%>>Inactive Bikes</option>
+<option value="Inactive EABs" <%if @reportType=="Inactive EABs"%>selected="selected"<%end%>>Inactive EABs</option>
 </select>&nbsp;&nbsp;
 
-Inactive For:
+Period:
 <select name="inactiveFor">
-<option value="3">3 months</option>
-<option value="6">6 months</option>
-<option value="9">9 months</option>
-<option value="12">12 or more months</option>
+<option value="3" <%if @inactiveFor=="3"%>selected="selected"<%end%>>3 months</option>
+<option value="6" <%if @inactiveFor=="6"%>selected="selected"<%end%>>6 months</option>
+<option value="9" <%if @inactiveFor=="9"%>selected="selected"<%end%>>9 months</option>
+<option value="12" <%if @inactiveFor=="12"%>selected="selected"<%end%>>12 or more months</option>
 </select>
 
 <input type="submit" value="Go"/><br/><br/>
 </form>
-<% if @typeEAB.nil?
-@typeEAB = false
-end%>
 <%if !@reportType.nil?%>
 Showing report for: <b><%=@reportType%></b>
 <%end%>&nbsp;&nbsp;
 <%if !@inactiveFor.nil?%>
-Inactive Period: <b><%=@inactiveFor%> months</b>
+Period: <b><%=@inactiveFor%> months</b>
 <%end%><br/><br/>
 
 <%if !@bikes.nil?%>
@@ -107,7 +104,7 @@ Inactive Period: <b><%=@inactiveFor%> months</b>
     <th><a>Location</a></th>
     <th><a>Date In</a></th>
     <th><a>Status</a></th>
-	<th><%if @typeEAB%><a>EAB Last Active</a><%else%><a>Last Updated</a><%end%></th>
+	<th><%if @reportType=="Inactive EABs"%><a>EAB Last Active</a><%else%><a>Last Updated</a><%end%></th>
 	<th></th>
   </tr></thead><tbody>
 
@@ -131,15 +128,20 @@ Inactive Period: <b><%=@inactiveFor%> months</b>
 	</td>
     <td><%= bike.date_in.year %>-<%= bike.date_in.strftime("%b")%>-<%=bike.date_in.day %></td>
     <td><%= bike.status %></td>
-	<td><%if @typeEAB
+	<td><%if @reportType=="Inactive EABs"
 			@project = EabProject.find_by_bike_id(bike.id)
 			if !@project.nil?%>
 				<%= @project.start_date.year%>-<%=@project.start_date.strftime("%b")%>-<%=@project.start_date.day%>
 			<%end%>
-		<%else%>
-			<%= bike.updated_at.year%>-<%= bike.updated_at.strftime("%b")%>-<%=bike.updated_at.day%>
-		<%end%></td>
-    <td><%= link_to 'View', bike %></td>
+			<%else%>
+				<%= bike.updated_at.year%>-<%= bike.updated_at.strftime("%b")%>-<%=bike.updated_at.day%>
+			<%end%></td>
+    <td>
+	<%if @reportType=="Inactive Bikes"%>
+		<%= link_to 'View', bike %></td>
+	<%elsif @reportType=="Inactive EABs"%>
+		<a href="/eab_projects/<%=@project.id%>">View</a>
+	<%end%>
 
   </tr>
 <% @count = @count + 1%>

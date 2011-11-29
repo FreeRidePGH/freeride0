@@ -356,11 +356,10 @@ class BikesController < ApplicationController
 					end				
 				end
 			end
-		else 
+		elsif params[:reportType] == "Inactive EABs" 
 			# for inactive EABS
 			for i in Bike.all
 				project = EabProject.find_by_bike_id(i.id)
-				@typeEAB = true #for the view page
 				if !project.nil? && project.status!=400 && project.status!=600 #not completed or abandoned
 					lastactiveEAB = (Date.today - project.start_date.to_date()) / 30
 					if lastactiveEAB > Integer(params[:inactiveFor])
