@@ -152,6 +152,6 @@ class EabProjectsController < ApplicationController
       redirect_to root_path and return
     end
     
-    @eab_projects = EabProject.all  
+    @eab_projects = current_user.eab_projects  
   end
 end

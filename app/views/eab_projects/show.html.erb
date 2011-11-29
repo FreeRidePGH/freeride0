@@ -37,12 +37,19 @@
 				<tr>
 					<td><h2>3</h2></td>
 					<td><a href="<%= new_volunteer_hours_entry_path %>"><h2 align="center">Earn Volunteer<br/>Hours</h2></a></td>
-					<td class="checkmark">&#10004;</td>
+					<td class="checkmark">
+						<% assessment = BikeAssesment.find_by_bike_id(@eab_project.bike.id) %>
+						<% value = assessment.value unless assessment.nil? %>
+						<% value = 0 if value.nil? %>
+						<% if @eab_project.user.account_value >= value %>
+							&#10004;
+						<% end %>
+					</td>
 				</tr>
 				</tr>
 				<tr>
 					<td><h2>4</h2></td>
-					<td><a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>"><h2 align="center">Refurbish Bike</h2></td>
+					<td><a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>"><h2 align="center">Refurbish Bike</h2></a></td>
 					<td class="checkmark">
 						<% if @eab_project.bike.has_passed_safety? %>
 						&#10004;
@@ -51,7 +58,15 @@
 				</tr>
 				<tr>
 					<td><h2>5</h2></td>
-					<td><a href="<%= new_safety_inspection_path(:bike_id => @eab_project.bike) %>"><h2 align="center">Safety Check</h2></td>
+					<td>
+						<% if current_user.is_staff? %>
+						<a href="<%= new_safety_inspection_path(:bike_id => @eab_project.bike) %>">
+						<% end %>
+							<h2 align="center">Safety Check</h2>
+						<% if current_user.is_staff? %>
+						</a>
+						<% end %>
+						</td>
 					<td class="checkmark">
 						<% if @eab_project.bike.has_passed_safety? %>
 						&#10004;
@@ -69,6 +84,12 @@
 		</td>
 		<td valign="top">
 			<table id="stats_table">
+				<tr>
+					<td>
+						<h2>Project Value</h2>
+						<h3><%= number_to_currency(value) %></h3>
+					</td>
+				</tr>
 				<tr>
 					<td>
 						<h2>Total Hours Spent</h2>
@@ -118,7 +139,9 @@
 				<tr>
 					<td>
 						<h2>Safety Inspections</h2>
+						<% if current_user.is_staff? %>
 						<p><%= link_to "New Safety Inspection", new_safety_inspection_path(:bike_id => @eab_project.bike) %></p>
+						<% end %>
 					</td>
 				</tr>
 				<% if @safety_inspections.empty? %>

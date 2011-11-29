@@ -81,4 +81,22 @@ class TransactionsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  
+  def all
+    
+    @user = User.find_by_id(params[:user_id])
+    if @user.nil?
+      flash[:error] = "User not found."
+      redirect_to root_path and return
+    end
+    if @user != current_user && current_user.is_not_staff?
+      flash[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
+    @transactions = @user.transactions
+    
+  end
+  
 end

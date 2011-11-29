@@ -1,0 +1,20 @@
+<table class="eab_table">
+	<tr>
+		<th>Bike ID</th>
+		<th>Status</th>
+		<th>Start date</th>
+		<th id="hide"></th>
+	</tr>
+	<% if @eab_projects.empty? %>
+	<tr><td colspan="4" align="center">No EAB projects!</td></tr>
+	<% else %>
+		<% @eab_projects.each do |eab_project| %>
+		<tr>
+			<td><%= link_to eab_project.bike_id, eab_project.bike %></td>
+			<td><%= eab_project.status %></td>
+			<td><%= eab_project.start_date_format %></td>
+			<td><%= link_to 'View Project', eab_project %></td>
+		</tr>
+		<% end %>
+	<% end %>
+</table>

@@ -32,8 +32,8 @@ class UsersController < ApplicationController
       redirect_to root_path and return
     end
     
-	  @favs = Favorite.where(:user_id => @user.id)
-	  @transactions = @user.transactions
+    @favs = @user.favorites
+	  @transactions = @user.recent_transactions
 
     respond_to do |format|
       format.html # show.html.erb
