@@ -15,7 +15,10 @@ class HomeController < ApplicationController
   # Logged in users get sent here from index
   def dashboard
     # get my projects
-    @eab_project = current_user.eab_project
+    @eab_projects = current_user.eab_projects
+    @favs = current_user.favorites
+    @user = current_user
+    @transactions = @user.recent_transactions
   end
   
 end

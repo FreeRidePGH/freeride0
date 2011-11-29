@@ -1,10 +1,11 @@
 require 'digest'
 
 class User < ActiveRecord::Base
-  has_one :eab_project
+  has_many :eab_projects
   has_many :repair_hours_entries
   has_many :volunteer_hours_entries
   has_many :transactions, :order => "created_at DESC"
+  has_many :recent_transactions, :class_name => "Transaction", :order => "created_at DESC", :limit => 3
   has_many :favorites
   
   attr_accessor :password # using attr_accessor :password creates a virtual password attribute, not stored in database

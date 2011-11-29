@@ -6,6 +6,7 @@
 
 	<li><%= link_to "Search Bikes", search_path %></li>
 	<li><%= link_to "Browse Bikes", bikes_path %></li>
+	<li><%= link_to "My Favorite Bikes", myfav_path %></li>
 	<% if current_user.is_staff? %>
 	<li><%= link_to "Add New Bike", new_bike_path %></li>
 	<li><%= link_to "Reports", reports_path %></li>
@@ -15,7 +16,6 @@
 	
 	<% if current_user %>
 		<li><%= link_to "My Dashboard", dashboard_path %></li>
-		<li><%= link_to "My Favorite Bikes", myfav_path %></li>
 	<% else %>
 		<li><%= link_to "Login", root_path %></li>
 		<li><%= link_to "Signup", signup_path %></li>

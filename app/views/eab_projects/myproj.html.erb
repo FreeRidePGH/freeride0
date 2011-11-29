@@ -1,21 +1,3 @@
 <h1>My EAB Projects</h1>
 
-<table>
-  <tr>
-    <th>Bike ID</th>
-    <th>Status</th>
-    <th>Start date</th>
-    <th></th>
-  </tr>
-
-<% @eab_projects.each do |eab_project| %>
-  <%if eab_project.user_id == @current_user.id%>
-  <tr>
-    <td><%= link_to eab_project.bike_id, eab_project.bike %></td>
-    <td><%= eab_project.status %></td>
-    <td><%= eab_project.start_date_format %></td>
-    <td><%= link_to 'View Project', eab_project %></td>
-  </tr>
-  <%end%>
-<% end %>
-</table>
+<%= render 'myprojects' %>

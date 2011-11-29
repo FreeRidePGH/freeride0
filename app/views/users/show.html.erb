@@ -81,48 +81,14 @@
 		<% end %>
 	</table>
 	<%end%>
-
 </td>
-
 </tr>
 <tr>
-	<table>
-		<tr><td>	
-			<h2 align="center">Transactions</h2>
-		</td></tr>
-		<tr><td>
-			<h3 align="center" style="margin:0;">Account Value: <%= number_to_currency(@user.account_value) %></h3>
-		</td></tr>
-	</table>
-	<table id="transactions">
-		<tr class="t_header">
-			<td align="center">Date</td>
-			<td align="center">Credit</td>
-			<td align="center">Debit</td>
-			<td align="center">Balance</td>
-			<td align="center">Note</td>
-		</tr>
-		<% if @transactions.empty? %>
-		<tr><td colspan="4" align="center">No transactions!</td></tr>
-		<% else %>
-		<% bal = @user.account_value %>
-		<% @transactions.each do |transaction| %>
-		<tr>
-			<td><%= transaction.created_at_format %></td>
-			<% if transaction.amount >= 0 %>
-			<td class="credit_cell" align="right"><%= number_to_currency(transaction.amount) %></td>
-			<td></td>
-			<% else %>
-			<td></td>
-			<td class="debit_cell" align="right"><%= number_to_currency(transaction.amount.abs) %></td>
-			<% end %>
-			<td align="right"><%= number_to_currency(bal) %></td>
-			<td style="font-size:12px;"><%= transaction.note %></td>
-			<% bal = bal - transaction.amount %>
-		</tr>
-		<% end %>
-		<% end %>
-	</table>
+	<td colspan="3">
+	<br/>
+	<h2 align="center" style="margin-bottom: 5px;">All Transactions</h2>
+	<%= render 'transactions/transaction_table' %>
+	</td>
 </tr>
 
 </table>
