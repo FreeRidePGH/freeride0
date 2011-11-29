@@ -3,47 +3,59 @@
 one:
   user_id: 1
   amount: 45.50
+  note: Initital credit
 
 two:
   user_id: 4
   amount: 55.00
+  note: Initital credit
 
 three:
   user_id: 3
   amount: -12.00
+  note: Initital debit
   
 four:
   user_id: 3
   amount: 200.00
+  note: Initital credit
   
 five:  
   user_id: 3
   amount: -2.50
+  note: Initital debit
   
 six:
   user_id: 3
   amount: 35.00
+  note: Initital credit
   
 seven:
   user_id: 3
   amount: 9.50
+  note: Initital credit
   
 eight:
   user_id: 4
   amount: 65.00
+  note: Initital credit
   
 nine:
   user_id: 4
   amount: -15.00
+  note: Initital debit
   
 ten:
   user_id: 5
   amount: 78.00
+  note: Initital credit
   
 eleven:
   user_id: 6
   amount: 50.00
+  note: Initital credit
 
 twelve:
   user_id: 6
   amount: -5.00
+  note: Initital debit
