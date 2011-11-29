@@ -225,7 +225,8 @@ function isNumberKey(evt)
 		</td>
 		<td>
 	
-		<b onMouseover="ddrivetip('Model of bike(choose a brand to see the list of models)','yellow', 150)"; onMouseout="hideddrivetip()"><%= f.label :model_id %></b></td><td>
+		<b onMouseover="ddrivetip('Model of bike(choose a brand to see the list of models)','yellow', 150)"; onMouseout="hideddrivetip()">
+		<%= f.label :model_id %></b></td><td>
 		<select name="bike[model_id]">
 		<option>Select a Model</option>	
 		<%for i in BikeModel.where(:brand_id => @bike.brand_id)%>
@@ -242,17 +243,19 @@ function isNumberKey(evt)
 </td>
 <td>
 	<p>&nbsp;4. Fill in bike details as below: </p>
-		<table border="1" cellpadding="3" id="bikeTable">
-		<tr>
-		<td>
-
-		  <b onMouseover="ddrivetip('<%=Bike.wheelTooltip%>','#66FF33', 300)"; onMouseout="hideddrivetip()">
-		  <%= f.label :wheel_size %></b></td><td>
-   
-    <%= f.text_field :wheel_size %>
-
-		</td>
-		<td>
+	<table border="1" cellpadding="3" id="bikeTable">
+	<tr>
+	<td><b><%= f.label :wheel_size %></b></td>
+	<td onMouseover="ddrivetip('<%=Bike.wheelTooltip%>','#66FF33', 600)"; onMouseout="hideddrivetip()">   
+		<div align="center">
+		<select name="bike[wheel_size]">
+			<%for i in BikeAssesment.wheelsizelist%>
+			<option value="<%=i%>" <%if @bike.wheel_size == i.to_f%>selected="selected"<%end%>><%=i%></option>
+			<%end%>
+		</select> mm (ISO)
+		</div>
+	</td>
+	<td>
 
 		  <b onMouseover="ddrivetip('Tube size in ISO format','#66FF33', 80)"; onMouseout="hideddrivetip()">
 		  <%= f.label :top_tube %></b></td><td>
@@ -316,9 +319,9 @@ function isNumberKey(evt)
 	<p onMouseover="ddrivetip('Leave empty if unsure.','yellow', 80)"; onMouseout="hideddrivetip()">
 	&nbsp;6. Estimate the AS-IS value of the bike:
 	</p><center>
-		  <b onMouseover="ddrivetip('<%=BikeAssesment.priceTooltip%>','yellow', 500)"; onMouseout="hideddrivetip()">
+		  <b>
 		  AS-IS Value:</b>
-		  $ <input id="value" name="value" size="6" type="number" placeholder="0.00" <%if !@v.nil?%>value="<%=@v%>"<%end%>/></center><br/>
+		  $ <input onMouseover="ddrivetip('<%=BikeAssesment.priceTooltip%>','yellow', 500)"; onMouseout="hideddrivetip()" id="value" name="value" size="6" type="number" placeholder="0.00" <%if !@v.nil?%>value="<%=@v%>"<%end%>/></center><br/>
 		
 </td>
 

@@ -49,13 +49,28 @@ class Bike < ActiveRecord::Base
   end
   
   def self.wheelTooltip
-	ttstring = "<table><tr><th>ISO Bead Seat Diameter</th><th>Traditional Designations</th></tr>"
-   	ttstring += "<tr><td>635 mm</td><td>28 x 1 1/2, 700 B</td></tr><tr><td>630 mm</td><td>27 x anything</td></tr>"
-	ttstring += "<tr><td>622 mm</td><td>700 C, 28 x (two fractions), 29 inch<br />(28 x 1 1/2 F.13 Canada)</td></tr>"
-	ttstring += "<tr><td>599 mm</td><td>26 x 1.25, x 1.375</td></tr><tr><td>597 mm</td><td>26 x 1 1/4, 26 x 1 3/8 (S-6)</td>	</tr>"
-	ttstring += "<tr><td>590 mm</td><td>26 x 1 3/8 (E.A.3), 650 A</td></tr><tr><td>587 mm</td><td>700 D</td></tr>"
-
+  
+	#ttstring = "<table id='wheeltooltip'><tr><td>"
+	
+	ttstring = "<table><tr><th>ISO</th><th>Traditional</th><th>ISO</th><th>Traditional</th><th>ISO</th><th>Traditional</th></tr>"
+   	ttstring += "<tr><td>635 mm</td><td>28 x 1 1/2, 700 B</td><td>520 mm</td><td>24 x 1, 24 x 1 1/8</td><td>340 mm</td><td>400 A</td></tr>"
+	ttstring += "<tr><td>630 mm</td><td>27 x anything</td><td>507 mm</td><td>24 x 1.5- x 2.125</td><td>337 mm</td><td>16 x 1 3/8</td></tr>"
+	ttstring += "<tr><td>622 mm</td><td>700 C, 28 x (two fractions), 29 inch<br />(28 x 1 1/2 F.13 Canada)</td><td>490 mm</td><td>550 A</td><td>317 mm</td><td>16 x 1 3/4</td></tr>"
+	ttstring += "<tr><td>599 mm</td><td>26 x 1.25, x 1.375</td><td>457 mm</td><td>22 x 1.75; x 2.125</td><td>305 mm</td><td>16 x 1.75- x 2.125</td></tr>"
+	ttstring += "<tr><td>597 mm</td><td>26 x 1 1/4, 26 x 1 3/8 (S-6)</td><td>451 mm</td><td>20 x 1 1/8; x 1 1/4; x 1 3/8</td><td>203 mm</td><td>12 1/2 X anything.</td></tr>"
+	ttstring += "<tr><td>590 mm</td><td>26 x 1 3/8 (E.A.3), 650 A</td><td>440 mm</td><td>500 A</td><td>152 mm</td><td>10 x 2</td></tr>"
+	ttstring += "<tr><td>587 mm</td><td>700 D</td><td>419 mm</td><td>20 x 1 3/4</td><td>137 mm</td><td>8 x 1 1/4</td></tr>"
+	ttstring += "<tr><td>584 mm</td><td>650B, 26 x 1 1/2</td><td>406 mm</td><td>20 x 1.5- x 2.125</td></tr>"
+	ttstring += "<tr><td>571 mm</td><td>26 x 1, 26 x 1 3/4, 650 C</td><td>390 mm</td><td>450 A</td></tr>"
+	ttstring += "<tr><td>559 mm</td><td>26 x 1.00- x 2.125</td><td>369 mm</td><td>17 x 1 1/4</td></tr>"
+	ttstring += "<tr><td>547 mm</td><td>24 x 1 1/4, 24 x 1 3/8 (S-5)</td><td>355 mm</td><td>18 x 1.5- x 2.125</td></tr>"
+	ttstring += "<tr><td>540 mm</td><td>24 x 1 1/8, 24 x 1 3/8 (E.5), 600 A</td><td>349 mm</td><td>16 x 1 3/8</td></tr>"
 	ttstring += "</table>"
-  end
+
+	
+	
+	#ttstring += "</td></tr></table>"
+
+	end
   
 end

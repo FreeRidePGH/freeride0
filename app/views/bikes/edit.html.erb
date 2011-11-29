@@ -257,17 +257,19 @@ function isNumberKey(evt)
 	<hr/>
 
 	<p>&nbsp;Bike details:</p>
-		<table border="1" cellpadding="3" id="bikeTable">
-		<tr>
-		<td>
-
-		  <b onMouseover="ddrivetip('Wheel size in ISO format','#66FF33', 80)"; onMouseout="hideddrivetip()">
-		  <%= f.label :wheel_size %></b></td><td>
-   
-    <%= f.text_field :wheel_size %>
-
-		</td>
-		<td>
+	<table border="1" cellpadding="3" id="bikeTable">
+	<tr>
+	<td><b><%= f.label :wheel_size %></b></td>
+	<td onMouseover="ddrivetip('<%=Bike.wheelTooltip%>','#66FF33', 600)"; onMouseout="hideddrivetip()">   
+		<div align="center">
+		<select name="bike[wheel_size]">
+			<%for i in BikeAssesment.wheelsizelist%>
+			<option value="<%=i%>" <%if @bike.wheel_size == i.to_f%>selected="selected"<%end%>><%=i%></option>
+			<%end%>
+		</select> mm (ISO)
+		</div>
+	</td>
+	<td>
 
 		  <b onMouseover="ddrivetip('Tube size in ISO format','#66FF33', 80)"; onMouseout="hideddrivetip()">
 		  <%= f.label :top_tube %></b></td><td>
