@@ -68,8 +68,10 @@ class VolunteerHoursEntriesController < ApplicationController
         @transaction = Transaction.new
         @transaction.user = current_user
         seconds_in_hour = 60.0*60.0
+        hours_worked = (@volunteer_hours_entry.end_time - @volunteer_hours_entry.start_time)/seconds_in_hour
         payrate = 8.00
-        @transaction.amount = payrate*((@volunteer_hours_entry.end_time - @volunteer_hours_entry.start_time)/seconds_in_hour)
+        @transaction.amount = payrate*hours_worked
+        @transaction.note = sprintf("%.2f", hours_worked) + " Volunteer Hours for " + @volunteer_hours_entry.date
         @transaction.save
       
       else

@@ -42,11 +42,20 @@ class TransactionsController < ApplicationController
     
     @transaction = Transaction.new(params[:transaction])
     @transaction_from = Transaction.new
-    @transaction_from.amount = -@transaction.amount
-    @transaction_from.user = current_user
+    
+    transaction_ok = true
+    if @transaction.amount.nil? || @transaction.amount <= 0 || current_user.account_value < @transaction.amount
+      transaction_ok = false
+      flash[:error] = "The amount to transfer must be positive and less than your available balance."
+    else
+      @transaction_from.amount = -@transaction.amount
+      @transaction_from.user = current_user
+      @transaction.note = "Transfer from " + current_user.name + " (" + current_user.email + ")"
+      @transaction_from.note = "Transfer to " + @transaction.user.name + " (" + @transaction.user.email + ")"
+    end
 
     respond_to do |format|
-      if (@transaction.amount > 0) && (current_user.account_value >= @transaction.amount) && @transaction.save && @transaction_from.save
+      if transaction_ok && @transaction.save && @transaction_from.save
         format.html { redirect_to user_path(current_user), notice: 'Account balance was successfully transferred.' }
         format.json { render json: @transaction, status: :created, location: @transaction }
       else
