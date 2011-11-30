@@ -336,6 +336,12 @@ class BikesController < ApplicationController
   end
   
   def reports
+  
+    if current_user.is_not_staff?
+      flash[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+	
 	@reportType = params[:reportType]
 	@inactiveFor = params[:inactiveFor]
 	
