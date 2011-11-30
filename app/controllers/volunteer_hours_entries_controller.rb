@@ -2,7 +2,7 @@ class VolunteerHoursEntriesController < ApplicationController
   # GET /volunteer_hours_entries
   # GET /volunteer_hours_entries.json
   def index
-    if current_user.is_not_staff?
+    if current_user.is_not_member?
       flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end

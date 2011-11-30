@@ -68,6 +68,10 @@ function filter2 (phrase, _id){
 		table.rows[r].style.display = displayStyle;
 	}
 }
+
+function submitfilter(){
+	document.getElementById('filtermenuform').submit();
+}
 </script>
 <h2>Browse Bikes <font size="1"><a href="/bikes">(show all)</a></font></h2>
 <% if !@searchID.nil? %>
@@ -85,10 +89,62 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 </p> 
 </div>
 <% end %>
+<table><tr><td id="filtersection"><form id="filtermenuform" name="filtermenu" action="/bikes">
+<input type="hidden" name="filterSectionUsed" value="true"/>
+<b>Brand</b><br/>
+<select id="filtermenu" name="brandfilter" onchange="submitfilter()">
+	<option value="All">All</option>
+	<%for i in BikeBrand.all%>
+	<option value="<%=i.id%>"><%=i.name%></option>	
+	<%end%></select>
 
-<table id="bikelisttable" class="filtertable">
+<br/><br/><b>Model</b><br/>
+<select id="filtermenu" name="modelfilter" onchange="submitfilter()">
+	<option value="All">All</option>
+	<%for i in BikeModel.all%>
+	<option value="<%=i.id%>"><%=i.name%></option>	
+	<%end%></select>
+	
+<br/><br/><b>Wheel Size</b><br/>
+<select id="filtermenu" name="wheelfilter" onchange="submitfilter()">
+	<option value="All">All</option>
+	<%for i in Bike.select("distinct wheel_size")%>
+	<option value="<%=i.wheel_size%>"><%=i.wheel_size%></option>	
+	<%end%></select>
+	
+<br/><br/><b>Top tube</b><br/>
+<select id="filtermenu" name="toptubefilter" onchange="submitfilter()">
+	<option value="All">All</option>
+	<%for i in Bike.select("distinct top_tube")%>
+	<option value="<%=i.top_tube%>"><%=i.top_tube%></option>	
+	<%end%></select>
+	
+<br/><br/><b>Seat Tube</b><br/>
+<select id="filtermenu" name="seattubefilter" onchange="submitfilter()">
+	<option value="All">All</option>
+	<%for i in Bike.select("distinct seat_tube")%>
+	<option value="<%=i.seat_tube%>"><%=i.seat_tube%></option>	
+	<%end%></select>
+	
+<br/><br/><b>Color</b><br/>
+<select id="filtermenu" name="colorfilter" onchange="submitfilter()">
+	<option value="All">All</option>
+	<%for i in Bike.select("distinct color")%>
+	<option value="<%=i.color%>"><%=i.color%></option>	
+	<%end%></select>
+	
+<br/><br/><b>Status</b><br/>
+<select id="filtermenu" name="statusfilter" onchange="submitfilter()">
+	<option value="All">All</option>
+	<%for i in Bike.select("distinct status")%>
+	<option value="<%=i.status%>"><%=i.status%></option>	
+	<%end%></select>
+
+</form>
+</td>
+<td><table id="bikelisttable" class="filtertable">
   <thead><tr>
-		<th><%= sortable "bike_id" %></th>
+	<th><%= sortable "bike_id" %></th>
     <th><%= sortable "brand_id"%></th>		
     <th><%= sortable "model_id" %></th>
     <th><%= sortable "location_id" %></th>
@@ -132,6 +188,8 @@ You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
 <% end %>
 </tbody>
 </table>
+
+</td></tr></table>
 <br/>
 
 <%= will_paginate @bikes %>

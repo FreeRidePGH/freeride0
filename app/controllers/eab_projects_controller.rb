@@ -79,13 +79,13 @@ class EabProjectsController < ApplicationController
     memberProjList = EabProject.where(:user_id => @eab_project.user_id)	
 	alreadyHas = false
 	for i in memberProjList
-		if i.status<600
+		if i.status<400
 			alreadyHas = true
 			break;
 		end
 	end
 	
-    if !alreadyTaken.nil? && alreadyTaken.status<600 
+    if !alreadyTaken.nil? && alreadyTaken.status<400 
       respond_to do |format|
         format.html { redirect_to :back, notice: 'Bike is currently in a project already.' }
         format.json { render json: @eab_project.errors, notice: 'Bike is currently in a project already' }

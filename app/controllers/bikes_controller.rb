@@ -2,7 +2,6 @@ class BikesController < ApplicationController
   
   skip_before_filter :check_login, :only => [:index, :show]
   before_filter :guest_login, :only => [:index, :show]
-
   
   helper_method :sort_column, :sort_direction
   
@@ -13,9 +12,10 @@ class BikesController < ApplicationController
     @searchID = params[:searchText]
     @idtype = params[:idtype]
     if @searchID.nil?
-      #nothing selected, display all
+      #Display all (page was directly accessed)
       @bikes = Bike.order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
-      #
+      
+	  # -- Search Code --
       #if a category was chosen, display it
       @brand = params[:brand]
       @color = params[:color]
@@ -42,8 +42,27 @@ class BikesController < ApplicationController
       if !@seat_tube.nil?
         @bikes = Bike.where(:seat_tube => @seat_tube).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
       end
+	  # -- End of search code --
+	  
+	  # -- Filter Menu code --	  
+	  if !params[:filterSectionUsed].nil?
+		  @brandfilter = params[:brandfilter]
+		  @modelfilter = params[:modelfilter]
+		  @wheelfilter = params[:wheelfilter]
+		  @toptubefilter = params[:toptubefilter]
+		  @seattubefilter = params[:seattubefilter]
+		  @colorfilter = params[:colorfilter]
+		  @statusfilter = params[:statusfilter]
+		  
+		  #@bikes = Bike.where(:brand_id => @brandfilter) unless @brandfilter == "All"
+		  
+	  
+		#do paginate and order at the last
+	  
+	  end	  
+	  # -- End of Filter Menu code --
 
-
+	# Query came from /search  
     elsif @idtype == "bikeID"
       @bikes = Bike.where(:bike_id => @searchID).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
     else

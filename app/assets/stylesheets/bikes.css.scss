@@ -114,6 +114,11 @@
 	float:right;
 }
 
+.floatleft{
+
+	float:left;
+}
+
 #dhtmltooltip{
 position: absolute;
 width: 150px;
@@ -131,6 +136,20 @@ font-size: 8px;
 
 #locname option{
 	max-width: 180px; 
+}
+
+#filtermenu option{
+	width: 90px;
+}
+
+#filtersection{
+	vertical-align: top;
+	width: 90px;
+	font-size: 12px;
+}
+
+#filtersection select{
+	font-size: 12px;
 }
 
 #searchbox{
