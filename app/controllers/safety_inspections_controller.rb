@@ -78,6 +78,24 @@ class SafetyInspectionsController < ApplicationController
 
     respond_to do |format|
       if @safety_inspection.save
+		
+		#Update EAB status
+		passed = true
+		for i in SafetyItemResponse.where(:safety_inspection_id => @safety_inspection.id)
+			if i.is_checked == false
+				passed = false
+			end
+		end
+		eabproj = EabProject.find_by_bike_id(@safety_inspection.bike.id)
+		if !eabproj.nil?
+			if passed
+				eabproj.status = 300
+			else
+				eabproj.status = 325
+			end
+			eabproj.save
+		end
+		
         format.html { redirect_to @safety_inspection, notice: 'Safety inspection was successfully created.' }
         format.json { render json: @safety_inspection, status: :created, location: @safety_inspection }
       else

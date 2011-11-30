@@ -36,7 +36,7 @@ function checkuser(){
 	
 	<%if @bikeID.nil?%>
 		<p>Bike ID:
-		<select ="bike_id" name="eab_project[bike_id]">
+		<select id="bike_id" name="eab_project[bike_id]">
 		<%for i in Bike.all%>
 		<option value="<%=i.id%>"><%=i.bike_id%></option>
 		<%end%>		

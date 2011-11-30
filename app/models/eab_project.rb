@@ -30,6 +30,22 @@ class EabProject < ActiveRecord::Base
 	return eabStatusList[self.status]
   end
 
+  def self.statusList
+	eabStatusList = Hash.new	
+	eabStatusList = {
+		100 => "EAB in progress",
+		200 => "Ready for Inspection",
+		300 => "Inspection passed",
+		325 => "Inspection failed",
+		350 => "Inspection expired",
+		375 => "Bike earned", #(cash, hours or combination) 
+		400 => "Bike signed off", #(Project Completed) 
+		500 => "Inactive",
+		600 => "Abandoned"
+	}  
+	return eabStatusList
+  end
+
   def stickerID
 	return Bike.find_by_id(self.bike_id).bike_id
   end

@@ -191,7 +191,8 @@ end
 	<tr>
 	<% @projuser = User.find_by_id(project.user_id) %>
 	<td>EAB</td><td><%= link_to @projuser.name, @projuser %></td><td>
-	<%=project.start_date.year%>-<%= project.start_date.strftime("%b") %>-<%= project.start_date.day %></td><td><%= project.status%></td><td><%= link_to "View Project", project %></td>
+	<%=project.start_date.year%>-<%= project.start_date.strftime("%b") %>-<%= project.start_date.day %></td>
+	<td><%= project.statusName%></td><td><%= link_to "View Project", project %></td>
 	</tr>
 	<% end %>
 	</table>

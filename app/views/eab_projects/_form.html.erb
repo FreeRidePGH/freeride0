@@ -11,17 +11,24 @@
     </div>
   <% end %>
 
+  
   <div class="field">
-    <%= f.label :bike_id %><br />
-    <%= f.number_field :bike_id %>
+    <%= f.label :bike_id %>ID : <%=@eab_project.stickerID%><br />
+    <input type="hidden" name="eab_project[bike_id]" value="<%=@eab_project.bike_id%>"/>
+	
   </div>
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+    <%= f.label :user_id %>: <%=@eab_project.user.name%><br />
+    <input type="hidden" name="eab_project[user_id]" value="<%=@eab_project.user_id%>"/>
   </div>
   <div class="field">
     <%= f.label :status %><br />
-    <%= f.number_field :status %>
+    <select id="status" name="eab_project[status]">
+	<% statusList = EabProject.statusList
+	for i in statusList.keys%>
+	<option value="<%=i%>" <%if i==@eab_project.status%>selected="selected"<%end%>><%=statusList[i]%></option>
+	<%end%>
+	</select>
   </div>
   <div class="field">
     <%= f.label :start_date %><br />
