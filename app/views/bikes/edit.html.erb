@@ -271,9 +271,10 @@ function isNumberKey(evt)
 	</td>
 	<td>
 
-		  <b onMouseover="ddrivetip('Tube size in ISO format','#66FF33', 80)"; onMouseout="hideddrivetip()">
-		  <%= f.label :top_tube %></b></td><td>
-    
+		  <b>
+		  <%= f.label :top_tube %></b></td>
+		  
+	<td onMouseover="ddrivetip('Tube size in ISO format','#66FF33', 80)"; onMouseout="hideddrivetip()">
     <%= f.text_field :top_tube %>
 
 		</td>
@@ -282,18 +283,19 @@ function isNumberKey(evt)
 		<tr>
 		<td>
 
-		  <b onMouseover="ddrivetip('Seat tube in ISO format','yellow', 80)"; onMouseout="hideddrivetip()">
-		  <%= f.label :seat_tube %></b></td><td>
-    
+		  <b>
+		  <%= f.label :seat_tube %></b></td>
+		  
+	<td onMouseover="ddrivetip('Seat tube in ISO format','yellow', 80)"; onMouseout="hideddrivetip()">
     <%= f.text_field :seat_tube %>
 
 		</td>
 		<td>
 
-		  <b onMouseover="ddrivetip('Color of bicycle frame','yellow', 80)"; onMouseout="hideddrivetip()">
-		  <%= f.label :color %></b></td><td>
-
-    
+		  <b>
+		  <%= f.label :color %></b></td>
+		  
+	<td onMouseover="ddrivetip('Color of bicycle frame','yellow', 80)"; onMouseout="hideddrivetip()">
     <%= f.text_field :color %>
 		</td>
 
@@ -331,10 +333,10 @@ function isNumberKey(evt)
 		</td></tr>
 		</table><br/>	
 		<center>
-			<b onMouseover="ddrivetip('<%=BikeAssesment.priceTooltip%>','yellow', 500)"; onMouseout="hideddrivetip()">
+			<b>
 			AS-IS Value:</b>			
 			
-			$ <input id="value" name="value" size="6" type="number" value="<%if @bikeAss.nil? || @bikeAss.value.nil?%>0.00<%else%><%=@bikeAss.value%><%end%>"/>
+			$ <input id="value" name="value" size="6" type="number" value="<%if @bikeAss.nil? || @bikeAss.value.nil?%>0.00<%else%><%=@bikeAss.value%><%end%>" onMouseover="ddrivetip('<%=BikeAssesment.priceTooltip%>','yellow', 500)"; onMouseout="hideddrivetip()"/>
 
 		<br/><br/>
 		<table>
