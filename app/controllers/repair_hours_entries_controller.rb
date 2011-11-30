@@ -39,18 +39,13 @@ class RepairHoursEntriesController < ApplicationController
       redirect_to root_path and return
     end
     
-    if current_user.eab_project.nil? || current_user.eab_project.status != 1
-      respond_to do |format|
-        format.html { redirect_to :root, error: 'You do not have an EAB Project' }
-      end
-      return
+    if current_user.active_eab_project.nil? || current_user.active_eab_project.status >= 400
+      flash[:error] = "You do not have an active EAB Project."
+      redirect_to root_path and return
     end
-    #project = current_user.eab_project.find(:bike_id => bike_id)
-    #if project.nil? || project.status != 1
-    # redirect_to location: :back
-    #end
+
     @repair_hours_entry = RepairHoursEntry.new
-	@bike_id = params[:bike_id]
+	  @bike_id = current_user.active_eab_project.bike.id
 	
     respond_to do |format|
       format.html # new.html.erb
