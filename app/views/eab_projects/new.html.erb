@@ -9,13 +9,17 @@ function checkuser(){
 		return;
 	}	
 	
-	<%nopacketlist = User.where(:has_read_packet => false)%>
-	if(<%for i in nopacketlist %>elementUser.value=="<%=i.id%>" <%="||" unless i==nopacketlist.last%><%end%>){
+	if(<%for i in @nopacketlist %>elementUser.value=="<%=i.id%>" <%="||" unless i==@nopacketlist.last%><%end%>){
 		var newdiv = document.createElement('div');
-		newdiv.innerHTML = " <br/><font color='red'><b>Member has not read packet. Proceed to create project?</b></font>";
+		newdiv.innerHTML = " <br/><font color='red'><b>Member has not read packet. Bypass this requirement?</b></font>";
 		document.getElementById('errormsg').appendChild(newdiv);			
-		return;
 	}	
+	
+	if(<%for u in @usersWithProjects %>elementUser.value=="<%=u.id%>" <%="||" unless u==@usersWithProjects.last%><%end%>){
+		var newdiv = document.createElement('div');
+		newdiv.innerHTML = " <br/><font color='red'><b>Member already has an ongoing project. Bypass this rule?</b></font>";
+		document.getElementById('errormsg').appendChild(newdiv);			
+		}		
 
 }
 </script>

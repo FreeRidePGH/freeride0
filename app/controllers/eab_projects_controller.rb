@@ -47,10 +47,19 @@ class EabProjectsController < ApplicationController
 
     @eab_project = EabProject.new
     @bikeID = params[:bike_id]
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @eab_project }
-    end
+	@nopacketlist = User.where(:has_read_packet => false)
+	@usersWithProjects = Array.new	
+	
+	for i in EabProject.where("status < 400")
+		u = User.find_by_id(i.user_id)
+		@usersWithProjects << u unless @usersWithProjects.include?(u)
+	end
+	
+	respond_to do |format|
+	  format.html # new.html.erb
+	  format.json { render json: @eab_project }
+	end
+	
   end
 
   # GET /eab_projects/1/edit
@@ -76,25 +85,12 @@ class EabProjectsController < ApplicationController
 	@bikeID = @eab_project.bike_id
 	
     alreadyTaken = EabProject.find_by_bike_id(@eab_project.bike_id)
-    memberProjList = EabProject.where(:user_id => @eab_project.user_id)	
-	alreadyHas = false
-	for i in memberProjList
-		if i.status<400
-			alreadyHas = true
-			break;
-		end
-	end
-	
+
     if !alreadyTaken.nil? && alreadyTaken.status<400 
       respond_to do |format|
         format.html { redirect_to :back, notice: 'Bike is currently in a project already.' }
         format.json { render json: @eab_project.errors, notice: 'Bike is currently in a project already' }
       end
-    elsif alreadyHas
-      respond_to do |format|
-        format.html { redirect_to :back, notice: 'User already has an eab project in progress' }
-        format.json { render json: @eab_project.errors, notice: 'User already has an eab roject in progress' }
-      end		
     else
       respond_to do |format|
         if @eab_project.save
