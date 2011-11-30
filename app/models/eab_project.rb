@@ -30,4 +30,7 @@ class EabProject < ActiveRecord::Base
 	return eabStatusList[self.status]
   end
 
+  def stickerID
+	return Bike.find_by_id(self.bike_id).bike_id
+  end
 end

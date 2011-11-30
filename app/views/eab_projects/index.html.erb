@@ -13,7 +13,7 @@
 
 <% @eab_projects.each do |eab_project| %>
   <tr>
-    <td><%= link_to eab_project.bike_id, eab_project.bike %></td>
+    <td><%= link_to eab_project.stickerID, eab_project.bike %></td>
     <td><%= link_to eab_project.user.name, eab_project.user %></td>
     <td><%= eab_project.statusName %></td>
     <td><%= eab_project.start_date_format %></td>
