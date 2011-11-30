@@ -2,10 +2,10 @@
 
 one:
   bike_id: 1
-  location_name: MyString
+  location_name: In Shop - Off Hook
   last_date_at_location: 2011-11-12 18:22:46
 
 two:
   bike_id: 1
-  location_name: MyString
+  location_name: Shadyside Elementary School
   last_date_at_location: 2011-11-12 18:22:46

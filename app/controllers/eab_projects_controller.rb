@@ -72,33 +72,42 @@ class EabProjectsController < ApplicationController
     end
 
     @eab_project = EabProject.new(params[:eab_project])
-    @eab_project.status = 1 #status 1 means EAB in progress	
-    @alreadyTaken = EabProject.find_by_bike_id(@eab_project.bike_id)
-    @alreadyHas = EabProject.find_by_user_id(@eab_project.user_id)
-
-    if !@alreadyTaken.nil? && @alreadyTaken.status==1 
+    @eab_project.status = 100 #status 1 means EAB in progress	
+	@bikeID = @eab_project.bike_id
+	
+    alreadyTaken = EabProject.find_by_bike_id(@eab_project.bike_id)
+    memberProjList = EabProject.where(:user_id => @eab_project.user_id)	
+	alreadyHas = false
+	for i in memberProjList
+		if i.status<600
+			alreadyHas = true
+			break;
+		end
+	end
+	
+    if !alreadyTaken.nil? && alreadyTaken.status<600 
       respond_to do |format|
         format.html { redirect_to :back, notice: 'Bike is currently in a project already.' }
         format.json { render json: @eab_project.errors, notice: 'Bike is currently in a project already' }
       end
-    elsif !@alreadyHas.nil? && @alreadyHas.status==1
+    elsif alreadyHas
       respond_to do |format|
         format.html { redirect_to :back, notice: 'User already has an eab project in progress' }
         format.json { render json: @eab_project.errors, notice: 'User already has an eab roject in progress' }
       end		
     else
-      @bike = Bike.find_by_id(@eab_project.bike_id)
-      @bike.status = "EAB in Progress"
-      @bike.save
-      @favorite = Favorite.new(:bike_id => @eab_project.bike_id, :user_id => @eab_project.user_id)
-      @favorite.save
-
       respond_to do |format|
         if @eab_project.save
+		  @bike = Bike.find_by_id(@eab_project.bike_id)
+		  @bike.status = "EAB in Progress"
+		  @bike.save
+		  @favorite = Favorite.new(:bike_id => @eab_project.bike_id, :user_id => @eab_project.user_id)
+		  @favorite.save
+		  
           format.html { redirect_to @eab_project, notice: 'Eab project was successfully created.' }
           format.json { render json: @eab_project, status: :created, location: @eab_project }
         else
-          format.html { render action: "new" }
+          format.html { redirect_to :back, notice: 'Please ensure an earner is selected' }
           format.json { render json: @eab_project.errors, status: :unprocessable_entity }
         end
       end
