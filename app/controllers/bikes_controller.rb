@@ -3,7 +3,7 @@ class BikesController < ApplicationController
   skip_before_filter :check_login, :only => [:index, :show]
   before_filter :guest_login, :only => [:index, :show]
   
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :is_number?
   
   # GET /bikes
   # GET /bikes.json
@@ -352,6 +352,10 @@ class BikesController < ApplicationController
     end
   end
   
+  def is_number?(object)
+	true if Integer(object) rescue false
+  end
+
   def reports
   
     if current_user.is_not_staff?
@@ -361,20 +365,24 @@ class BikesController < ApplicationController
 	
 	@reportType = params[:reportType]
 	@inactiveFor = params[:inactiveFor]
-	
+	if !is_number?(@inactiveFor)
+		flash[:error] = "Please enter a valid number"
+		redirect_to :back and return	
+	end
+
 	if !params[:reportType].nil? 
 		@bikes = Array.new
 		if params[:reportType] == "Inactive Bikes"
 			# for inactive bikes
 			for i in Bike.all
-				lastactive = (Date.today - i.updated_at.to_date()) / 30
-				sinceCheckin = (Date.today - i.date_in.to_date()) / 30
+				lastactive = (Date.today - i.updated_at.to_date()) / 7
+				sinceCheckin = (Date.today - i.date_in.to_date()) / 7
 				departedList = ["Sold", "Departed-FFS", "Departed-EAB", "Departed-ASIS", "Departed-Scrap", "Departed-Other"]
 				#ignore if bike is in any of the status above
 				if !departedList.include?(i.status)
 					if lastactive > Integer(params[:inactiveFor])
 						@bikes << i
-					elsif (sinceCheckin > Integer(params[:inactiveFor]) ) && (i.status == "Available" || i.status == "In Shop")
+					elsif (sinceCheckin > Integer(params[:inactiveFor]) ) && (i.status == "Available" || i.status == "In Shop" || i.status == "Other")
 						@bikes << i
 					end				
 				end
@@ -384,7 +392,7 @@ class BikesController < ApplicationController
 			for i in Bike.all
 				project = EabProject.find_by_bike_id(i.id)
 				if !project.nil? && project.status!=400 && project.status!=600 #not completed or abandoned
-					lastactiveEAB = (Date.today - project.start_date.to_date()) / 30
+					lastactiveEAB = (Date.today - project.start_date.to_date()) / 7
 					if lastactiveEAB > Integer(params[:inactiveFor])
 						@bikes << i
 					end
