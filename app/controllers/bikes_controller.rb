@@ -365,7 +365,7 @@ class BikesController < ApplicationController
 	
 	@reportType = params[:reportType]
 	@inactiveFor = params[:inactiveFor]
-	if !is_number?(@inactiveFor)
+	if !@inactiveFor.nil? && !is_number?(@inactiveFor)
 		flash[:error] = "Please enter a valid number"
 		redirect_to :back and return	
 	end
