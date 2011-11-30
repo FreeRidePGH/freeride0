@@ -1,14 +1,23 @@
+<script>
+function isNumberKey(evt)
+{
+ var charCode = (evt.which) ? evt.which : event.keyCode
+ if (charCode > 31 && (charCode < 48 || charCode > 57))
+	return false;
 
-<h1 align="center">Search Bikes</h1>
-<div name="searchFromDiv"align="center">
+ return true;
+}
+</script> 
+<center>
+<h1>Search Bikes</h1>
+<div name="searchFromDiv">
 <form name="searchForm" action = "/bikes" method = "get">
-<input type="text" size = "23" name="searchText" id="txtfld" placeholder="Bike ID or Hook Number"/>
+<input type="text" name="searchText" id="txtfld" placeholder="Bike ID/Hook No." onkeypress="return isNumberKey(event)"/>
 <input type="submit" value="Go">
 <br/>
 <br/>
-
-	<input type="radio" name = "idtype" value="bikeID" id="bikeID" checked="checked"><label for="bikeID">Bike ID</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="radio" name = "idtype" value="hookID" id="hookID"/><label for="hookID">Hook ID</label><br/><br/>
+</div>
+</form>
 
 <table id="criteria" border="4">
 	<tr>
@@ -17,7 +26,7 @@
 		<tr>
 		<th>Brand</th>
 		</tr>
-		<% for i in BikeBrand.limit(6) %>
+		<% for i in BikeBrand.limit(8) %>
 		<tr><td>
 		<a href="/bikes?brand=<%=i.id%>">
 		<%= i.name %>
@@ -48,19 +57,21 @@
 		<tr><td><a href="/bikes?status=EAB in Progress">EAB in Progress</a></td></tr>
 		<tr><td><a href="/bikes?status=FFS in Progress">FFS in Progress</a></td></tr>
 		<tr><td><a href="/bikes?status=In Shop">In Shop</a></td></tr>
+		<tr><td><a href="/bikes?status=Youth">Youth</a></td></tr>
 		<tr><td><a href="/bikes?status=Sold">Sold</a></td></tr>
 		<tr><td><a href="/bikes?status=Departed">Departed</a></td></tr>
+		<tr><td><a href="/bikes?status=Other">Other</a></td></tr>
 		
 		</table>
 	</td>		
-	</tr>
-	<tr>
+	
+	
 	<td>
 		<table>
 		<tr>
 		<th>Wheel</th>
 		</tr>
-		<% for i in Bike.select("distinct wheel_size").limit(6).map {|a| a.wheel_size} %>
+		<% for i in Bike.select("distinct wheel_size").limit(8).map {|a| a.wheel_size} %>
 		<tr><td><a href="/bikes?wheel_size=<%=i%>">
 		<%= i%></a>
 		</td></tr>
@@ -74,7 +85,7 @@
 		<tr>
 		<th>Top Tube</th>
 		</tr>
-		<% for i in Bike.select("distinct top_tube").limit(6).map {|a| a.top_tube} %>
+		<% for i in Bike.select("distinct top_tube").limit(8).map {|a| a.top_tube} %>
 		<tr><td><a href="/bikes?top_tube=<%=i%>">
 		<%= i%></a>
 		</td></tr>
@@ -86,7 +97,7 @@
 		<tr>
 		<th>Seat Tube</th>
 		</tr>
-		<% for i in Bike.select("distinct seat_tube").limit(6).map {|a| a.seat_tube} %>
+		<% for i in Bike.select("distinct seat_tube").limit(8).map {|a| a.seat_tube} %>
 		<tr><td><a href="/bikes?seat_tube=<%=i%>">
 		<%= i%></a>
 		</td></tr>
@@ -98,7 +109,4 @@
 
 
 </table>
-
-
-</div>
-</form>
+</center>

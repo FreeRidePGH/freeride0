@@ -75,7 +75,7 @@ function submitfilter(){
 </script>
 <h2>Browse Bikes <font size="1"><a href="/bikes">(show all)</a></font></h2>
 <% if !@searchID.nil? %>
-You searched for <%=@idtype%>: <b><%=@searchID%> </b><br/><br/>
+You searched for No. <b><%=@searchID%> </b><br/><br/>
 <% end %>
 
 <%= form_tag bikes_path, :method => 'get' do %>

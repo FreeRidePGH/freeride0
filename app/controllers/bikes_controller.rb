@@ -10,7 +10,6 @@ class BikesController < ApplicationController
   def index  
 
     @searchID = params[:searchText]
-    @idtype = params[:idtype]
     if @searchID.nil?
       #Display all (page was directly accessed)
       @bikes = Bike.order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
@@ -62,11 +61,10 @@ class BikesController < ApplicationController
 	  end	  
 	  # -- End of Filter Menu code --
 
-	# Query came from /search  
-    elsif @idtype == "bikeID"
-      @bikes = Bike.where(:bike_id => @searchID).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
+	# Query came from search page ID/Hook box
     else
-      @bikes = Bike.where(:location_id => Location.find_by_hook_number(@searchID)).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+      @bikes = Bike.where("bike_id = ? OR location_id = ?", @searchID, Location.find_by_hook_number(@searchID)).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
+      
     end
 
     respond_to do |format|
