@@ -24,7 +24,7 @@
 					<td><h2>1</h2></td>
 					<td><h2 align="center">Complete<br/>Prerequisites</h2></td>
 					<td class="checkmark">
-						<% if @eab_project.user.has_read_packet %>
+						<% if @eab_project.prereqs_complete? %>
 						&#10004;
 						<% end %>
 					</td>
@@ -38,10 +38,7 @@
 					<td><h2>3</h2></td>
 					<td><a href="<%= new_volunteer_hours_entry_path %>"><h2 align="center">Earn Volunteer<br/>Hours</h2></a></td>
 					<td class="checkmark">
-						<% assessment = BikeAssesment.find_by_bike_id(@eab_project.bike.id) %>
-						<% value = assessment.value unless assessment.nil? %>
-						<% value = 0 if value.nil? %>
-						<% if @eab_project.user.account_value >= value %>
+						<% if @eab_project.value_earned? %>
 							&#10004;
 						<% end %>
 					</td>
@@ -51,7 +48,7 @@
 					<td><h2>4</h2></td>
 					<td><a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>"><h2 align="center">Refurbish Bike</h2></a></td>
 					<td class="checkmark">
-						<% if @eab_project.bike.has_passed_safety? %>
+						<% if @eab_project.safety_check_complete? %>
 						&#10004;
 						<% end %>
 					</td>
@@ -61,33 +58,49 @@
 					<td>
 						<% if current_user.is_staff? %>
 						<a href="<%= new_safety_inspection_path(:bike_id => @eab_project.bike) %>">
-						<% end %>
 							<h2 align="center">Safety Check</h2>
-						<% if current_user.is_staff? %>
 						</a>
+						<% else %>
+							<h2 align="center">Safety Check</h2>						
 						<% end %>
 						</td>
 					<td class="checkmark">
-						<% if @eab_project.bike.has_passed_safety? %>
+						<% if @eab_project.safety_check_complete? %>
 						&#10004;
 						<% end %>
 					</td>
 				</tr>
 				<tr>
 					<td><h2>6</h2></td>
-					<td><h2 align="center">Sign Off</h2></td>
+					<td>
+						<% if current_user.is_staff? && @eab_project.ready_to_sign_off? %>
+						<a href="<%= @eab_project.id %>/sign_off" data-method="put" rel="nofollow">
+							<h2 align="center">Sign Off</h2>
+						</a>
+						<% else %>
+							<h2 align="center">Sign Off</h2>						
+						<% end %>
+					</td>
 					<td class="checkmark">
-						<!-- &#10004; -->
-						</td>
+						<% if @eab_project.signed_off? %>
+						&#10004;
+						<% end %>
+					</td>
 				</tr>
 			</table>
 		</td>
 		<td valign="top">
 			<table id="stats_table">
+					<tr>
+					<td>
+						<h2>Status</h2>
+  					<h3><%= @eab_project.statusName %></h3>
+					</td>
+				</tr>
 				<tr>
 					<td>
 						<h2>Project Value</h2>
-						<h3><%= number_to_currency(value) %></h3>
+						<h3><%= number_to_currency(@eab_project.value) %></h3>
 					</td>
 				</tr>
 				<tr>
@@ -158,12 +171,6 @@
 		</td>
 	</tr>
 </table>
-
-
-<p>
-  <b>Status:</b>
-  <%= @eab_project.statusName %>
-</p>
 
 <% if current_user.is_staff? %>
 <%= link_to 'Edit', edit_eab_project_path(@eab_project) %> |

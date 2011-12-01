@@ -100,7 +100,7 @@ class EabProjectsController < ApplicationController
 		  @favorite = Favorite.new(:bike_id => @eab_project.bike_id, :user_id => @eab_project.user_id)
 		  @favorite.save
 		  
-          format.html { redirect_to @eab_project, notice: 'Eab project was successfully created.' }
+          format.html { redirect_to @eab_project, notice: 'EAB project was successfully created.' }
           format.json { render json: @eab_project, status: :created, location: @eab_project }
         else
           format.html { redirect_to :back, notice: 'Please ensure an earner is selected' }
@@ -122,7 +122,7 @@ class EabProjectsController < ApplicationController
 
     respond_to do |format|
       if @eab_project.update_attributes(params[:eab_project])
-        format.html { redirect_to @eab_project, notice: 'Eab project was successfully updated.' }
+        format.html { redirect_to @eab_project, notice: 'EAB project was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -159,4 +159,33 @@ class EabProjectsController < ApplicationController
     
     @eab_projects = current_user.eab_projects  
   end
+  
+  def sign_off
+    if current_user.is_not_staff?
+      flash[:error] = "You do not have permissions to access that feature."
+      redirect_to root_path and return
+    end
+    
+    @eab_project = EabProject.find(params[:id])
+    
+    if !@eab_project.ready_to_sign_off?
+      flash[:error] = "EAB project is not ready for sign off."
+      redirect_to @eab_project and return
+    end
+    
+    @transaction = Transaction.new
+    @transaction.user = @eab_project.user
+    @transaction.amount = -@eab_project.value
+    @transaction.note = "EAB Project Sign Off for Bike ID " + @eab_project.bike_id.to_s
+    @transaction.save
+    
+    @eab_project.status = 400
+    @eab_project.save
+
+    respond_to do |format|
+        format.html { redirect_to @eab_project, notice: 'EAB project sign off successful.' }
+        format.json { head :ok }
+    end
+  end
+  
 end

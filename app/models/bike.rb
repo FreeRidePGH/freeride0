@@ -1,5 +1,6 @@
 class Bike < ActiveRecord::Base
   has_one :eab_project
+  has_one :bike_assesment
   belongs_to :brand, :class_name => "BikeBrand"
   belongs_to :model, :class_name => "BikeModel"
   belongs_to :location

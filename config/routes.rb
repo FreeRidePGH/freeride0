@@ -8,7 +8,7 @@ Freeride::Application.routes.draw do
   match '/bikes/reports', :to => 'bikes#reports', :as => :reports
   match '/myproj', :to => 'EabProjects#myproj', :as => :myproj
   match '/myhours', :to => 'VolunteerHoursEntries#myhours', :as => :myhours
-  match '/logout', :to => 'sessions#destroy'
+  match '/logout', :to => 'sessions#destroy', :as => :logout
   match '/alltransactions', :to => 'transactions#all', :as => :alltransactions
   match '/admin', :to => 'admin#index', :as => :admin
 
@@ -21,7 +21,11 @@ Freeride::Application.routes.draw do
   resources :repair_hours_entries, :except => [:edit]
   resources :hours_entries, :except => [:create, :destroy, :show, :edit]
   resources :users, :except => [:new]
-  resources :eab_projects
+  resources :eab_projects do
+    member do
+      put 'sign_off'
+    end
+  end
   resources :locations
   resources :bike_models
   resources :bike_brands
