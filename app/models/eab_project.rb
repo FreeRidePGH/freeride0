@@ -74,6 +74,7 @@ class EabProject < ActiveRecord::Base
     return false unless prereqs_complete?
     return false unless value_earned?
     return false unless safety_check_complete?
+    return false if status >= 400
     true
   end
   
