@@ -48,7 +48,7 @@ function checkuser(){
 		</p>
 	<%else%>
 		<%@bike = Bike.find_by_id(@bikeID)%>	
-		<p>Bike ID: <font size="5"><b><%=@bike.bike_id%></b></font></p>
+		<p>Bike ID: <font size="5"><b><%=@bike.sticker_id%></b></font></p>
 		<input id="bike_id" name="eab_project[bike_id]" size="10" type="hidden" value="<%=@bikeID%>"/>
 	<%end%>
 	

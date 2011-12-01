@@ -156,7 +156,7 @@ You searched for No. <b><%=@searchID%> </b><br/><br/>
 <% @loc = Location.find_by_id(bike.location_id)%>
 
   <tr <% if @count % 2 ==0%>class="odd"<%end%> >
-		<td><a href="/bikes/<%=bike.id%>"><%= bike.bike_id %></a></td>
+		<td><b><%= link_to bike.sticker_id, bike %></b></td>
     <td><%= BikeBrand.find_by_id(bike.brand_id).name%></td>
 	<td><%= BikeModel.find_by_id(bike.model_id).name %></td>
     <td><%if @loc.nil?%>
@@ -178,6 +178,8 @@ You searched for No. <b><%=@searchID%> </b><br/><br/>
     <td width="50px" align="center">
 			<% if bike.image1? %>
 				<%= link_to image_tag(bike.image1.url(:tiny)), bike %>
+			<% elsif bike.image2? %>
+				<%= link_to image_tag(bike.image2.url(:tiny)), bike %>
 			<% else %>
 				<%= link_to image_tag("/images/missing_thumb.png"), bike %>
 			<% end %>
