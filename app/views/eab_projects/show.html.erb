@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<td><h2>2</h2></td>
-					<td><a href="<%= bike_path(@eab_project.bike) %>"><h2 align="center">Select Bike</h2></a></td>
+					<td><a href="<%= bike_path(@eab_project.bike) %>"><h2 align="center">Choose Bike</h2></a></td>
 					<td class="checkmark">&#10004;</td>
 				</tr>
 				<tr>
@@ -46,7 +46,15 @@
 				</tr>
 				<tr>
 					<td><h2>4</h2></td>
-					<td><a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>"><h2 align="center">Refurbish Bike</h2></a></td>
+					<td>
+						<% if !@eab_project.signed_off? %>
+						<a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>">
+							<h2 align="center">Refurbish Bike</h2>
+						</a>
+						<% else %>
+							<h2 align="center">Refurbish Bike</h2>
+						<% end %>
+					</td>
 					<td class="checkmark">
 						<% if @eab_project.safety_check_complete? %>
 						&#10004;
@@ -56,7 +64,7 @@
 				<tr>
 					<td><h2>5</h2></td>
 					<td>
-						<% if current_user.is_staff? %>
+						<% if current_user.is_staff? && !@eab_project.signed_off? %>
 						<a href="<%= new_safety_inspection_path(:bike_id => @eab_project.bike) %>">
 							<h2 align="center">Safety Check</h2>
 						</a>
@@ -130,7 +138,9 @@
 				<tr>
 					<td>
 						<h2>Refurbishment Work</h2>
+						<% unless @eab_project.signed_off? %>
 						<p><a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>">New Repair Hours Entry</a></p>
+						<% end %>
 					</td>
 				</tr>
 				<% if @eab_project.repair_hours_entries.empty? %>
@@ -152,7 +162,7 @@
 				<tr>
 					<td>
 						<h2>Safety Inspections</h2>
-						<% if current_user.is_staff? %>
+						<% if current_user.is_staff? && !@eab_project.signed_off? %>
 						<p><%= link_to "New Safety Inspection", new_safety_inspection_path(:bike_id => @eab_project.bike) %></p>
 						<% end %>
 					</td>
