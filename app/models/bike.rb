@@ -6,9 +6,9 @@ class Bike < ActiveRecord::Base
   has_many :safety_inspections, :order => "inspection_date DESC, created_at DESC"
   
   has_attached_file :image1, :default_url => "/images/missing.png",
-                    :styles => { :large => "1024x768>", :medium => "300x300>", :small => "100x100>", :tiny => "50x50>" }
+                    :styles => { :large => "1024x768>", :medium => "300x300>", :small => "100x100>", :tiny => "50x50#" }
   has_attached_file :image2, :default_url => "/images/missing.png",
-                    :styles => { :large => "1024x768>", :medium => "300x300>", :small => "100x100>", :tiny => "50x50>" }
+                    :styles => { :large => "1024x768>", :medium => "300x300>", :small => "100x100>", :tiny => "50x50#" }
   # Paperclip gem validations
   validates_attachment_content_type :image1, 
                                     :content_type => ["image/jpeg", "image/png", "image/gif"],

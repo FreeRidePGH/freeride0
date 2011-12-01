@@ -175,7 +175,13 @@ You searched for No. <b><%=@searchID%> </b><br/><br/>
     <td><%= bike.color %></td>
     <td><%= bike.date_in.year %>-<%= bike.date_in.strftime("%b")%>-<%=bike.date_in.day %></td>
     <td><%= bike.status %></td>
-    <td width="28px"><%= link_to image_tag(bike.image1.url(:tiny)), bike %></td>
+    <td width="28px">
+			<% if bike.image1.url %>
+				<%= link_to image_tag(bike.image1.url(:tiny)), bike %>
+			<% else %>
+				<%= link_to image_tag("images/missing_thumb.png"), bike %>
+			<% end %>
+		</td>
 
   </tr>
 <% @count = @count + 1%>
