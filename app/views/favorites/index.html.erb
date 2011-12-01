@@ -1,4 +1,9 @@
-<h1>Listing favorites</h1>
+<h1 align="center">Favorites</h1>
+
+<% if @bike %>
+<h3 align="center">for Bike <%= link_to @bike.sticker_id, @bike %></h3>
+<p><i>Users who have added this bike to their favorites list.</i></p>
+<% end %>
 
 <table>
   <tr>
@@ -11,8 +16,8 @@
 
 <% @favorites.each do |favorite| %>
   <tr>
-    <td><%= User.find_by_id(favorite.user_id).name %></td>
-    <td><%= Bike.find_by_id(favorite.bike_id).sticker_id %></td>
+    <td><%= link_to favorite.user.name, favorite.user %></td>
+    <td><%= link_to favorite.bike.sticker_id, favorite.bike %></td>
 
   </tr>
 <% end %>

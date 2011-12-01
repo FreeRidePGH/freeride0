@@ -2,15 +2,16 @@ class FavoritesController < ApplicationController
   # GET /favorites
   # GET /favorites.json
   def index
-    if current_user.is_not_member?
+    if current_user.is_not_staff?
       flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
     
     @favorites = Favorite.all
-	if(!params[:bike_id].nil?)
-		@favorites = Favorite.where(:bike_id => params[:bike_id])
-	end
+    if !params[:bike_id].nil?
+      @bike = Bike.find_by_id(params[:bike_id])
+      @favorites = Favorite.where(:bike_id => params[:bike_id]) unless @bike.nil?
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -113,6 +114,12 @@ class FavoritesController < ApplicationController
     end
     
     @favorite = Favorite.find(params[:id])
+    
+    if (current_user.is_not_staff && @favorite.user != current_user)
+      flash[:error] = "You do not have permissions to remove the favorite of another user."
+      redirect_to root_path and return
+    end
+    
     @favorite.destroy
 
     respond_to do |format|
