@@ -148,7 +148,7 @@ You searched for No. <b><%=@searchID%> </b><br/><br/>
     <th><%= sortable "color"%></th>
     <th><%= sortable "date_in", "Date In"%></th>
     <th><%= sortable "status", "Status"%></th>
-	<th><a>View Bike</a></th>
+	<th><a>View</a></th>
   </tr></thead><tbody>
 
 <% @count = 0%>
@@ -175,7 +175,7 @@ You searched for No. <b><%=@searchID%> </b><br/><br/>
     <td><%= bike.color %></td>
     <td><%= bike.date_in.year %>-<%= bike.date_in.strftime("%b")%>-<%=bike.date_in.day %></td>
     <td><%= bike.status %></td>
-    <td width="50px"><%= link_to image_tag(bike.image1.url(:tiny)), bike %></td>
+    <td width="33px"><a href ="/bikes/<%=bike.id%>"><img src="<%=bike.image1.url(:tiny)%>" height="25" width="30" /></a></td>
 
   </tr>
 <% @count = @count + 1%>
