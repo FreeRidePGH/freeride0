@@ -144,7 +144,7 @@
 					</td>
 				</tr>
 				<% if @eab_project.repair_hours_entries.empty? %>
-					<tr><td><h3>None yet!</h3></td></tr>
+					<tr><td><h3 style="margin:0;" align="center">None yet!</h3></td></tr>
 				<% end %>
 				<% @eab_project.repair_hours_entries.each do |entry| %>
 				<tr>
@@ -168,7 +168,7 @@
 					</td>
 				</tr>
 				<% if @safety_inspections.empty? %>
-					<tr><td><h3>None yet!</h3></td></tr>
+					<tr><td><h3 style="margin:0;" align="center">None yet!</h3></td></tr>
 				<% end %>
 				<% @safety_inspections.each do |inspection| %>
 				<tr>
