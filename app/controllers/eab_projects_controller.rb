@@ -179,6 +179,10 @@ class EabProjectsController < ApplicationController
     @transaction.note = "EAB Project Sign Off for Bike ID " + @eab_project.bike.sticker_id.to_s
     @transaction.save
     
+    @bike = @eab_project.bike
+    @bike.status = "Departed-EAB"
+    @bike.save
+    
     @eab_project.status = 400
     @eab_project.save
 

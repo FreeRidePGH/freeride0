@@ -2,4 +2,7 @@
 
 <%= render 'form' %>
 
+<% if @safety_inspection.bike.eab_project %>
+<%= link_to 'Back to EAB Project', eab_project_path(@safety_inspection.bike.eab_project) %> |
+<% end %>
 <%= link_to 'Back to Bike', @safety_inspection.bike %>
