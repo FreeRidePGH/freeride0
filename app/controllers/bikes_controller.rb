@@ -52,6 +52,7 @@ class BikesController < ApplicationController
 		  @colorfilter = params[:colorfilter]
 		  @statusfilter = params[:statusfilter]
 		  
+		  #Get all bikes ordered and paginated
 		  @bikes = Bike.where('id > 0').order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page]).compact
 		  if @brandfilter != "All"
 			@brandfilter = Integer(@brandfilter)
