@@ -138,10 +138,10 @@ You searched for No. <b><%=@searchID%> </b><br/><br/>
 </td>
 <td class="aligntop"><table id="bikelisttable" class="filtertable">
   <thead><tr>
-	<th><%= sortable "bike_id" %></th>
+		<th><%= sortable "bike_id" %></th>
+	  <th><%= sortable "location_id" %></th>
     <th><%= sortable "brand_id"%></th>		
     <th><%= sortable "model_id" %></th>
-    <th><%= sortable "location_id" %></th>
     <th><%= sortable "wheel_size"%></th>
     <th><%= sortable "top_tube" %></th>
     <th><%= sortable "seat_tube" %></th>
@@ -157,9 +157,7 @@ You searched for No. <b><%=@searchID%> </b><br/><br/>
 
   <tr <% if @count % 2 ==0%>class="odd"<%end%> >
 		<td><b><%= link_to bike.sticker_id, bike %></b></td>
-    <td><%= BikeBrand.find_by_id(bike.brand_id).name%></td>
-	<td><%= BikeModel.find_by_id(bike.model_id).name %></td>
-    <td><%if @loc.nil?%>
+		<td><%if @loc.nil?%>
 			N.A.
 		<%else%>
 			<%if @loc.hook_number.nil?%>
@@ -168,7 +166,9 @@ You searched for No. <b><%=@searchID%> </b><br/><br/>
 				HookID - <%=@loc.hook_number%>
 			<%end%>
 		<%end%>			
-	</td>
+		</td>
+    <td><%= BikeBrand.find_by_id(bike.brand_id).name%></td>
+	<td><%= BikeModel.find_by_id(bike.model_id).name %></td>
     <td><%= bike.wheel_size %></td>
     <td><%= bike.top_tube %></td>
     <td><%= bike.seat_tube %></td>

@@ -5,6 +5,7 @@
 		<th>Brand</th>
 		<th>Model</th>
 		<th>Color</th>
+		<th>View</th>
 		<th id="hide"></th>
 	</tr>
 
@@ -30,6 +31,15 @@
 			<td><%= bike.brand.name %></td>
 			<td><%= bike.model.name %></td>
 			<td><%= bike.color %></td>
+			<td width="50px" align="center">
+				<% if bike.image1? %>
+				<%= link_to image_tag(bike.image1.url(:tiny)), bike %>
+				<% elsif bike.image2? %>
+				<%= link_to image_tag(bike.image2.url(:tiny)), bike %>
+				<% else %>
+				<%= link_to image_tag("/images/missing_thumb.png"), bike %>
+				<% end %>
+			</td>
 			<td><%= link_to 'Remove', favorite, confirm: 'Are you sure?', method: :delete %>&nbsp;&nbsp;&nbsp;
 				<% proj = bike.eab_project %>
 				<% if !proj.nil? %>
