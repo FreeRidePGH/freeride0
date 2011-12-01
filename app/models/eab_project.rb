@@ -54,10 +54,6 @@ class EabProject < ActiveRecord::Base
     }  
     return eabStatusList
   end
-
-  def stickerID
-    return self.bike.bike_id
-  end
   
   def value
     assessment = self.bike.bike_assesment

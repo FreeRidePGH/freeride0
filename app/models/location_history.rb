@@ -1,5 +1,5 @@
 class LocationHistory < ActiveRecord::Base
-	has_one:bike
+	belongs_to :bike
 	
   validates :bike_id, :presence => true 	
 				  

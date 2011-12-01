@@ -12,7 +12,7 @@
 <% @favorites.each do |favorite| %>
   <tr>
     <td><%= User.find_by_id(favorite.user_id).name %></td>
-    <td><%= Bike.find_by_id(favorite.bike_id).bike_id %></td>
+    <td><%= Bike.find_by_id(favorite.bike_id).sticker_id %></td>
 
   </tr>
 <% end %>

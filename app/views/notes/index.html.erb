@@ -15,7 +15,7 @@
 <% @notes.each do |note| %>
   <tr>
     <td><%= note.user_id %></td>
-    <td><%= note.bike_id %></td>
+    <td><%= note.bike.sticker_id %></td>
     <td><%= note.title %></td>
     <td><%= note.details %></td>
     <td><%= note.last_update %></td>

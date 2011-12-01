@@ -124,7 +124,7 @@ Period: <b><%=@inactiveFor%> weeks</b>
 <% @loc = Location.find_by_id(bike.location_id)%>
 
   <tr <% if @count % 2 ==0%>class="odd"<%end%> >
-		<td><%= bike.bike_id %></td>
+		<td><%= bike.sticker_id %></td>
     <td><%= BikeBrand.find_by_id(bike.brand_id).name%></td>
 	<td><%= BikeModel.find_by_id(bike.model_id).name %></td>
     <td><%if @loc.nil?%>

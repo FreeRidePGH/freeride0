@@ -176,7 +176,7 @@ class EabProjectsController < ApplicationController
     @transaction = Transaction.new
     @transaction.user = @eab_project.user
     @transaction.amount = -@eab_project.value
-    @transaction.note = "EAB Project Sign Off for Bike ID " + @eab_project.bike_id.to_s
+    @transaction.note = "EAB Project Sign Off for Bike ID " + @eab_project.bike.sticker_id.to_s
     @transaction.save
     
     @eab_project.status = 400

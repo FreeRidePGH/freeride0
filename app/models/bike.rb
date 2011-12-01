@@ -40,6 +40,10 @@ class Bike < ActiveRecord::Base
     end
   end
   
+  def sticker_id
+    return sprintf("%05d", self.bike_id)
+  end
+  
   def has_passed_safety?
     return false if self.safety_inspections.empty?
     self.safety_inspections[0].passed?
