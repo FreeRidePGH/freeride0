@@ -26,10 +26,12 @@ function isNumberKey(evt)
 		<tr>
 		<th>Brand</th>
 		</tr>
-		<% for i in BikeBrand.limit(8) %>
+		<% for i in Bike.select("distinct brand_id").limit(8).map {|a| a.brand_id} 
+		brand = BikeBrand.find_by_id(i)
+		%>
 		<tr><td>
-		<a href="/bikes?brand=<%=i.id%>">
-		<%= i.name %>
+		<a href="/bikes?brand=<%=i%>">
+		<%= brand.name %>
 		</td></tr>
 		</a>
 		<% end %>
@@ -40,7 +42,7 @@ function isNumberKey(evt)
 		<tr>
 		<th>Color</th>
 		</tr>	
-		<% for i in Bike.select("distinct color").limit(6).map {|a| a.color}%>
+		<% for i in Bike.select("distinct color").limit(8).map {|a| a.color}%>
 		<tr><td><a href="/bikes?color=<%=i%>">
 		<%=i%></a>
 		</td></tr>

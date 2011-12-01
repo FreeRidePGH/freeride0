@@ -25,6 +25,7 @@ class BikesController < ApplicationController
 
       if !@brand.nil?
         @bikes = Bike.where(:brand_id => @brand).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
+		@brand = Integer(@brand)
       end
       if !@color.nil?
         @bikes = Bike.where(:color => @color).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
@@ -34,13 +35,16 @@ class BikesController < ApplicationController
       end
       if !@wheel_size.nil?
         @bikes = Bike.where(:wheel_size => @wheel_size).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
-      end
+		@wheel_size = @wheel_size.to_f
+	  end
       if !@top_tube.nil?
         @bikes = Bike.where(:top_tube => @top_tube).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
-      end
+		@top_tube = @top_tube.to_f
+	  end
       if !@seat_tube.nil?
         @bikes = Bike.where(:seat_tube => @seat_tube).order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
-      end
+		@seat_tube = @seat_tube.to_f
+	  end
 	  # -- End of search code --
 	  
 	  # -- Filter Menu code --	  
