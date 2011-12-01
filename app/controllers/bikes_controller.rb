@@ -46,17 +46,41 @@ class BikesController < ApplicationController
 	  # -- Filter Menu code --	  
 	  if !params[:filterSectionUsed].nil?
 		  @brandfilter = params[:brandfilter]
-		  @modelfilter = params[:modelfilter]
 		  @wheelfilter = params[:wheelfilter]
 		  @toptubefilter = params[:toptubefilter]
 		  @seattubefilter = params[:seattubefilter]
 		  @colorfilter = params[:colorfilter]
 		  @statusfilter = params[:statusfilter]
 		  
-		  #@bikes = Bike.where(:brand_id => @brandfilter) unless @brandfilter == "All"
+		  @bikes = Bike.where('id > 0').order(sort_column + ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page]).compact
+		  if @brandfilter != "All"
+			@brandfilter = Integer(@brandfilter)
+			@bikes.delete_if {|x| x.brand_id!=@brandfilter}
+		  end
 		  
-	  
-		#do paginate and order at the last
+		  if @wheelfilter != "All"
+			@wheelfilter = @wheelfilter.to_f
+			@bikes.delete_if {|x| x.wheel_size!=@wheelfilter}
+		  end
+		  
+		  if @toptubefilter != "All"
+			@toptubefilter = @toptubefilter.to_f
+			@bikes.delete_if {|x| x.top_tube!=@toptubefilter}
+		  end
+		  
+		  if @seattubefilter != "All"
+			@seattubefilter = @seattubefilter.to_f
+			@bikes.delete_if {|x| x.seat_tube!=@seattubefilter}
+		  end
+		  
+		  if @colorfilter != "All"
+			@bikes.delete_if {|x| x.color!=@colorfilter}
+		  end
+		  
+		  if @statusfilter != "All"
+			@bikes.delete_if {|x| x.status!=@statusfilter}
+		  end
+		  
 	  
 	  end	  
 	  # -- End of Filter Menu code --

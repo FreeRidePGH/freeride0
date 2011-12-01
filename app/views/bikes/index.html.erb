@@ -95,49 +95,42 @@ You searched for No. <b><%=@searchID%> </b><br/><br/>
 <select id="filtermenu" name="brandfilter" onchange="submitfilter()">
 	<option value="All">All</option>
 	<%for i in BikeBrand.all%>
-	<option value="<%=i.id%>"><%=i.name%></option>	
-	<%end%></select>
-
-<br/><br/><b>Model</b><br/>
-<select id="filtermenu" name="modelfilter" onchange="submitfilter()">
-	<option value="All">All</option>
-	<%for i in BikeModel.all%>
-	<option value="<%=i.id%>"><%=i.name%></option>	
+	<option value="<%=i.id%>" <%if i.id==@brandfilter%>selected="selected"<%end%>><%=i.name%></option>	
 	<%end%></select>
 	
 <br/><br/><b>Wheel Size</b><br/>
 <select id="filtermenu" name="wheelfilter" onchange="submitfilter()">
 	<option value="All">All</option>
 	<%for i in Bike.select("distinct wheel_size")%>
-	<option value="<%=i.wheel_size%>"><%=i.wheel_size%></option>	
+	<option value="<%=i.wheel_size%>" <%if i.wheel_size==@wheelfilter%>selected="selected"<%end%>><%=i.wheel_size%></option>	
 	<%end%></select>
 	
 <br/><br/><b>Top tube</b><br/>
 <select id="filtermenu" name="toptubefilter" onchange="submitfilter()">
 	<option value="All">All</option>
 	<%for i in Bike.select("distinct top_tube")%>
-	<option value="<%=i.top_tube%>"><%=i.top_tube%></option>	
+	<option value="<%=i.top_tube%>" <%if i.top_tube==@toptubefilter%>selected="selected"<%end%>><%=i.top_tube%></option>	
 	<%end%></select>
 	
 <br/><br/><b>Seat Tube</b><br/>
 <select id="filtermenu" name="seattubefilter" onchange="submitfilter()">
 	<option value="All">All</option>
 	<%for i in Bike.select("distinct seat_tube")%>
-	<option value="<%=i.seat_tube%>"><%=i.seat_tube%></option>	
+	<option value="<%=i.seat_tube%>" <%if i.seat_tube==@seattubefilter%>selected="selected"<%end%>><%=i.seat_tube%></option>	
 	<%end%></select>
 	
 <br/><br/><b>Color</b><br/>
 <select id="filtermenu" name="colorfilter" onchange="submitfilter()">
 	<option value="All">All</option>
 	<%for i in Bike.select("distinct color")%>
-	<option value="<%=i.color%>"><%=i.color%></option>	
+	<option value="<%=i.color%>" <%if i.color==@colorfilter%>selected="selected"<%end%>><%=i.color%></option>	
 	<%end%></select>
 	
 <br/><br/><b>Status</b><br/>
 <select id="filtermenu" name="statusfilter" onchange="submitfilter()">
 	<option value="All">All</option>
 	<%for i in Bike.select("distinct status")%>
-	<option value="<%=i.status%>"><%=i.status%></option>	
+	<option value="<%=i.status%>" <%if i.status==@statusfilter%>selected="selected"<%end%>><%=i.status%></option>	
 	<%end%></select>
 
 </form>
