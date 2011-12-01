@@ -80,15 +80,9 @@ class SafetyInspectionsController < ApplicationController
       if @safety_inspection.save
 		
 		#Update EAB status
-		passed = true
-		for i in SafetyItemResponse.where(:safety_inspection_id => @safety_inspection.id)
-			if i.is_checked == false
-				passed = false
-			end
-		end
-		eabproj = EabProject.find_by_bike_id(@safety_inspection.bike.id)
+		eabproj = @safety_inspection.bike.eab_project
 		if !eabproj.nil?
-			if passed
+			if @safety_inspection.passed?
 				eabproj.status = 300
 			else
 				eabproj.status = 325
