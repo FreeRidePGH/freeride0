@@ -109,7 +109,10 @@ class LocationHistoriesController < ApplicationController
     
     @location_history = LocationHistory.find(params[:id])
     @location_history.destroy
-
+	for i in Bike.where(:location_id =>params[:id] )
+		i.location_id = 1
+	end
+	
     respond_to do |format|
       format.html { redirect_to location_histories_url }
       format.json { head :ok }

@@ -374,6 +374,25 @@ class BikesController < ApplicationController
     
     @bike = Bike.find(params[:id])
     @bike.destroy
+	for i in Favorite.where(:bike_id => params[:id])
+		i.destroy
+	end	
+	for i in Note.where(:bike_id => params[:id])
+		i.destroy
+	end
+	for i in LocationHistory.where(:bike_id => params[:id])
+		i.destroy
+	end	
+	for i in BikeAssesment.where(:bike_id => params[:id])
+		i.destroy
+	end	
+	for i in RepairHoursEntry.where(:bike_id => params[:id])
+		i.destroy
+	end	
+	
+	#for i in EabProject.where(:bike_id => params[:id])
+	#	i.destroy
+	#end	
 
     respond_to do |format|
       format.html { redirect_to bikes_url }

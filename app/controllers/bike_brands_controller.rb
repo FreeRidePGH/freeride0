@@ -109,7 +109,10 @@ class BikeBrandsController < ApplicationController
     
     @bike_brand = BikeBrand.find(params[:id])
     @bike_brand.destroy
-
+	for i in BikeModel.where(:brand_id => params[:id])
+		i.destroy
+	end
+	
     respond_to do |format|
       format.html { redirect_to bike_brands_url }
       format.json { head :ok }
