@@ -40,13 +40,13 @@
 				<%= link_to image_tag("/images/missing_thumb.png"), bike %>
 				<% end %>
 			</td>
-			<td><%= link_to 'Remove', favorite, confirm: 'Are you sure?', method: :delete %>&nbsp;&nbsp;&nbsp;
+			<td><%= link_to 'Remove', favorite, confirm: 'Remove this bike from favorites?', method: :delete %>&nbsp;&nbsp;&nbsp;
 				<% proj = bike.eab_project %>
 				<% if !proj.nil? %>
 				<% if proj.user_id==current_user.id %>
-				<span id="favpage"><%= link_to "My Project", proj %></span>
+				<span id="favpage"><%= link_to "My EAB Project", proj %></span>
 				<%else%>
-				<i>Project claimed by <%= proj.user.name %></i>
+				<i>Bike claimed by another user.</i>
 				<%end%>
 				<%end%>
 
