@@ -56,7 +56,7 @@ function checkuser(){
 	<select id="user_id" name="eab_project[user_id]" onchange="checkuser()">
 	<option value="">- Select -</option>
 	<%for i in User.all%>
-    <option value="<%=i.id%>"><%=i.name%></option>
+    <option value="<%=i.id%>"><%=i.name_with_email%></option>
 	<%end%>
 	</select></p>
 	

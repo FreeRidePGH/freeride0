@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   end
   
   def name_with_email
-    name + " - " + email
+    name + " (" + email + ")"
   end
   
   # PERMISSIONS DEFINED

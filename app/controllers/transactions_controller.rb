@@ -50,8 +50,8 @@ class TransactionsController < ApplicationController
     else
       @transaction_from.amount = -@transaction.amount
       @transaction_from.user = current_user
-      @transaction.note = "Transfer from " + current_user.name + " (" + current_user.email + ")"
-      @transaction_from.note = "Transfer to " + @transaction.user.name + " (" + @transaction.user.email + ")"
+      @transaction.note = "Transfer from " + current_user.name_with_email
+      @transaction_from.note = "Transfer to " + @transaction.user.name_with_email
     end
 
     respond_to do |format|
