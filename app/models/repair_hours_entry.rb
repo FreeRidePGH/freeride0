@@ -1,5 +1,6 @@
 class RepairHoursEntry < ActiveRecord::Base
   belongs_to :user
+  belongs_to :bike
   
   attr_accessible :user_id, :bike_id, :start_time, :end_time, :eab_project_id
   

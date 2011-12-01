@@ -14,8 +14,8 @@
 
 <% @notes.each do |note| %>
   <tr>
-    <td><%= note.user_id %></td>
-    <td><%= note.bike.sticker_id %></td>
+    <td><%= link_to note.user.name, note.user %></td>
+    <td><%= link_to note.bike.sticker_id, note.bike %></td>
     <td><%= note.title %></td>
     <td><%= note.details %></td>
     <td><%= note.last_update %></td>
@@ -25,7 +25,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Note', new_note_path %>

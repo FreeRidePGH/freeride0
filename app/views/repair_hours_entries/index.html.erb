@@ -14,7 +14,7 @@
 <% @repair_hours_entries.each do |repair_hours_entry| %>
   <tr>
     <td><%= repair_hours_entry.user_id %></td>
-    <td><%= repair_hours_entry.bike_id %></td>
+    <td><%= repair_hours_entry.bike.sticker_id %></td>
     <td><%= repair_hours_entry.start_time %></td>
     <td><%= repair_hours_entry.end_time %></td>
     <td><%= link_to 'Show', repair_hours_entry %></td>
