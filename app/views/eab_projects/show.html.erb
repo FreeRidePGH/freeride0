@@ -114,13 +114,13 @@
 				<tr>
 					<td>
 						<h2>Total Hours Spent</h2>
-						<h3><%= @total_hours_spent %></h3>
+						<h3><%= sprintf("%.1f", @total_hours_spent) %></h3>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<h2>Last Active</h2>
-						<h3><%= time_ago_in_words(@eab_project.updated_at) %> ago</h3>
+						<h3><%= time_ago_in_words(@eab_project.last_active) %> ago</h3>
 					</td>
 				</tr>
 				<tr>

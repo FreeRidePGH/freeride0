@@ -1,7 +1,8 @@
 class EabProject < ActiveRecord::Base
   belongs_to :bike
   belongs_to :user
-  has_many :repair_hours_entries
+  has_many :repair_hours_entries, :order => "start_time DESC"
+  has_many :latest_repair_hours_entries, :class_name => "RepairHoursEntry", :order => "start_time DESC", :limit => 1
 
   attr_accessible :bike_id, :user_id, :status, :start_date
 
@@ -12,6 +13,14 @@ class EabProject < ActiveRecord::Base
 
   def start_date_format
     return start_date.localtime.strftime("%a, %-m/%-e/%Y %-I:%M %p") # show the year
+  end
+
+  def last_active
+    latest_entry = self.latest_repair_hours_entries
+    if !latest_entry.empty? && latest_entry.first.start_time > self.updated_at
+      return latest_entry.first.start_time
+    end
+    self.updated_at
   end
 
   def statusName
