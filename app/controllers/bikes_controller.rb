@@ -440,7 +440,7 @@ class BikesController < ApplicationController
 			for i in Bike.all
 				project = EabProject.find_by_bike_id(i.id)
 				if !project.nil? && project.status!=400 && project.status!=600 #not completed or abandoned
-					lastactiveEAB = (Date.today - project.start_date.to_date()) / 7
+					lastactiveEAB = (Date.today - project.last_active.to_date()) / 7
 					if lastactiveEAB > Integer(params[:inactiveFor])
 						@bikes << i
 					end
