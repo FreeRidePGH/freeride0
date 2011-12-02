@@ -86,10 +86,10 @@ class EabProjectsController < ApplicationController
 	
     alreadyTaken = EabProject.find_by_bike_id(@eab_project.bike_id)
 
-    if !alreadyTaken.nil? && alreadyTaken.status<400 
+    if !alreadyTaken.nil? && alreadyTaken.status<600 
       respond_to do |format|
-        format.html { redirect_to :back, notice: 'Bike is currently in a project already.' }
-        format.json { render json: @eab_project.errors, notice: 'Bike is currently in a project already' }
+        format.html { redirect_to :back, notice: 'Bike already has a project or is completed.' }
+        format.json { render json: @eab_project.errors, notice: 'Bike already has a project or is completed.' }
       end
     else
       respond_to do |format|
