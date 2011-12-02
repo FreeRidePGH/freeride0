@@ -1,23 +1,23 @@
 <h1>My Volunteer Hours Entries</h1>
 
-<table>
-  <tr>
-    <th>User</th>
-    <th>Start time</th>
-    <th>End time</th>
-    <th></th>
-    <th></th>
-    <th></th>
+<table id="hours_log_table">
+  <tr class="t_header">
+    <td>User</td>
+	<td>Date</td>
+    <td>Start time</td>
+    <td>End time</td>
+    <td></td>
+    <td></td>
   </tr>
 
 <% @volunteer_hours_entries.each do |volunteer_hours_entry| %>
   <%if volunteer_hours_entry.user_id == @current_user.id%>
   <tr>
     <td><%= @current_user.name %></td>
-    <td><%= volunteer_hours_entry.start_time %></td>
-    <td><%= volunteer_hours_entry.end_time %></td>
+	<td><%= volunteer_hours_entry.start_date%></td>
+    <td><%= volunteer_hours_entry.f_start_time %></td>
+    <td><%= volunteer_hours_entry.f_end_time %></td>
     <td><%= link_to 'Show', volunteer_hours_entry %></td>
-    <td><%= link_to 'Edit', volunteer_hours_entry %></td>
     <td><%= link_to 'Destroy', volunteer_hours_entry, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
   <%end%>

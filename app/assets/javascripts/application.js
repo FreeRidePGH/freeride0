@@ -6,12 +6,18 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require_tree .
-//= require jquery-ui-1.8.16.custom.min.js
 //= require jquery-ui-timepicker-addon.js
 
 $(document).ready(function(){
-	$('.datetimepicker').datetimepicker();
+	$('.datetimepicker').datetimepicker({
+		ampm: true
+	});
+	$('.datepicker').datepicker();
+	$('.timepicker').timepicker({
+		ampm: true
+	});
 });
 
 $('[placeholder]').focus(function() {

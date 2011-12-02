@@ -1,3 +1,16 @@
 // Place all the styles related to the VolunteerHoursEntries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#hours_log_table {
+	border-collapse: collapse;
+	border: solid 2px black;
+	td {
+		padding: 3px;
+		border: solid 2px black;
+	}
+	.t_header {
+		font-weight: bold;
+		font-size: 14px;
+	}
+}

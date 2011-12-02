@@ -56,10 +56,28 @@ class VolunteerHoursEntriesController < ApplicationController
       redirect_to root_path and return
     end
     
+
     @volunteer_hours_entry = VolunteerHoursEntry.new(params[:volunteer_hours_entry])
-    @volunteer_hours_entry.user_id = current_user.id
-    #@volunteer_hours_entry.start_time = Date.strptime(params["start"], '%m/%d/%Y %H:%M')
-    #@volunteer_hours_entry.end_time = Date.strptime(params["end"], '%m/%d/%Y %H:%M')
+    @volunteer_hours_entry.user_id = current_user.id  
+    
+    if @volunteer_hours_entry.end_time < @volunteer_hours_entry.start_time
+      @volunteer_hours_entry.errors.add(:start_time, "is passed your End time")
+      respond_to do |format|
+        format.html { render action: "new" }
+        format.json { render json: @volunteer_hours_entry.errors, status: :unprocessable_entity }
+      end
+      return
+    end
+    
+    if @volunteer_hours_entry.end_time.to_date != @volunteer_hours_entry.start_time.to_date
+    @volunteer_hours_entry.errors.add(:end_time, "is not in the same Day")
+      respond_to do |format|
+        format.html { render action: "new" }
+        format.json { render json: @volunteer_hours_entry.errors, status: :unprocessable_entity }
+      end
+      return
+    end
+    
     respond_to do |format|
       if @volunteer_hours_entry.save
         format.html { redirect_to @volunteer_hours_entry, notice: 'Volunteer hours entry was successfully created.' }

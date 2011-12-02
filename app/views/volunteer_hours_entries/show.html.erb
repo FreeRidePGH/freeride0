@@ -11,14 +11,23 @@
 </p>
 
 <p>
+  <b>Date:</b>
+  <%= @volunteer_hours_entry.start_date %>
+</p>
+
+<p>
   <b>Start time:</b>
-  <%= @volunteer_hours_entry.start_time %>
+  <%= @volunteer_hours_entry.f_start_time %>
 </p>
 
 <p>
   <b>End time:</b>
-  <%= @volunteer_hours_entry.end_time %>
+  <%= @volunteer_hours_entry.f_end_time %>
 </p>
 
+<p>
+  <b>Description:</b>
+  <%= @volunteer_hours_entry.description %>
+</p>
 
 <%= link_to 'Back', myproj_path %>
