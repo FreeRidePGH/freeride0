@@ -5,7 +5,7 @@
 <% if subnav=="bikes" || subnav=="search" || subnav=="safety_inspections" || subnav=="favorites" %>
 
 	<li><%= link_to "Search Bikes", search_path %></li>
-	<li><%= link_to "Browse Bikes", bikes_path %></li>
+	<li><%= link_to "Browse Bikes", "/bikes?status=Available" %></li>
 	<% if current_user.is_member? %>
 	<li><%= link_to "My Favorite Bikes", myfav_path %></li>
 	<% end %>

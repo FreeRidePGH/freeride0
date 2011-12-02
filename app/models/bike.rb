@@ -77,5 +77,12 @@ class Bike < ActiveRecord::Base
 	#ttstring += "</td></tr></table>"
 
 	end
-  
+
+    def checkdefaults
+		self.wheel_size = 0.0 unless !self.wheel_size.blank?
+		self.top_tube = 0.0 unless !self.top_tube.blank?
+		self.seat_tube = 0.0 unless !self.seat_tube.blank?
+		self.color = "Not chosen" unless !self.color.blank?
+	end
+	
 end

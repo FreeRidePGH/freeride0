@@ -149,12 +149,13 @@ class BikesController < ApplicationController
     
     @models = BikeModel.find(:all)
     @bike = Bike.new(params[:bike])
+	@bike.checkdefaults
     @bike.status = "Available"
     @q = params[:quality]
     @c = params[:condition]
     @v = params[:value]
     @locname = params[:locname]
-
+	
     #Checking and adding new brand/models
     if !params[:tempbrand].nil?	
       @bike_brand = BikeBrand.new(:name => params[:tempbrand])		
@@ -271,6 +272,8 @@ class BikesController < ApplicationController
 
     respond_to do |format|
       if @bike.update_attributes(params[:bike])
+		@bike.checkdefaults
+		@bike.save
         #Checking and adding new brand/models. 
         #Have to check in this block because the bike is being updated here
         if !params[:tempbrand].nil?	

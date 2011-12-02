@@ -249,6 +249,7 @@ function isNumberKey(evt)
 	<td onMouseover="ddrivetip('<%=Bike.wheelTooltip%>','#66FF33', 600)"; onMouseout="hideddrivetip()">   
 		<div align="center">
 		<select name="bike[wheel_size]">
+			<option value"0.0">- Select -</option>
 			<%for i in BikeAssesment.wheelsizelist%>
 			<option value="<%=i%>" <%if @bike.wheel_size == i.to_f%>selected="selected"<%end%>><%=i%></option>
 			<%end%>
