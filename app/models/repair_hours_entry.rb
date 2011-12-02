@@ -27,4 +27,10 @@ class RepairHoursEntry < ActiveRecord::Base
     end
   end
   
+  def f_start_time
+    return start_time.localtime.strftime("%I:%M %p")
+  end
+  def f_end_time
+    return end_time.localtime.strftime("%I:%M %p")
+  end
 end

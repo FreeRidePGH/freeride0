@@ -62,12 +62,28 @@ class RepairHoursEntriesController < ApplicationController
     end
     
     @repair_hours_entry = RepairHoursEntry.new(params[:repair_hours_entry])
-    #@repair_hours_entry.end_time = Date.strptime(params["end"], '%m/%d/%Y %H:%M')
-    #@repair_hours_entry.start_time = Date.strptime(params["start"], '%m/%d/%Y %H:%M')
-
     @repair_hours_entry.user_id = current_user.id
     @repair_hours_entry.eab_project_id = params[:eab]
     @repair_hours_entry.bike_id = EabProject.find(@repair_hours_entry.eab_project_id).bike_id
+    
+    if @repair_hours_entry.end_time < @repair_hours_entry.start_time
+      @repair_hours_entry.errors.add(:start_time, "is passed your End time")
+      respond_to do |format|
+        format.html { render action: "new" }
+        format.json { render json: @repair_hours_entry.errors, status: :unprocessable_entity }
+      end
+      return
+    end
+    
+    if @repair_hours_entry.end_time.to_date != @repair_hours_entry.start_time.to_date
+    @repair_hours_entry.errors.add(:end_time, "is not in the same Day")
+      respond_to do |format|
+        format.html { render action: "new" }
+        format.json { render json: @repair_hours_entry.errors, status: :unprocessable_entity }
+      end
+      return
+    end
+    
     respond_to do |format|
       if @repair_hours_entry.save
         format.html { redirect_to @repair_hours_entry, notice: 'Repair hours entry was successfully created.' }
