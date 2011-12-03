@@ -71,6 +71,7 @@ class RepairHoursEntriesController < ApplicationController
       redirect_to root_path and return
     end
     
+    @bike = @eab_project.bike
     @repair_hours_entry.eab_project_id = @eab_project.id
     @repair_hours_entry.user_id = @eab_project.user_id
     @repair_hours_entry.bike_id = @eab_project.bike_id
