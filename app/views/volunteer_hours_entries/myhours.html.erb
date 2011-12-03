@@ -1,27 +1,27 @@
 <h1 align="center">My Volunteer Hours Log</h1>
 
 <table id="hours_log_table">
-  <tr class="t_header">
-	<td>Date</td>
-    <td>Start time</td>
-    <td>End time</td>
-		<td>Description</td>
-    <td></td>
-    <td></td>
-  </tr>
+	<tr class="t_header">
+		<td align="center">Date</td>
+		<td align="center">Start time</td>
+		<td align="center">End time</td>
+		<td align="center">Description</td>
+		<td></td>
+		<td></td>
+	</tr>
 
-<% @volunteer_hours_entries.each do |volunteer_hours_entry| %>
-  <%if volunteer_hours_entry.user_id == @current_user.id%>
-  <tr>
-	<td><%= volunteer_hours_entry.start_date%></td>
-    <td><%= volunteer_hours_entry.f_start_time %></td>
-    <td><%= volunteer_hours_entry.f_end_time %></td>
+	<% @volunteer_hours_entries.each do |volunteer_hours_entry| %>
+	<%if volunteer_hours_entry.user_id == @current_user.id%>
+	<tr>
+		<td><%= volunteer_hours_entry.start_date%></td>
+		<td><%= volunteer_hours_entry.f_start_time %></td>
+		<td><%= volunteer_hours_entry.f_end_time %></td>
 		<td width="350px"><%= volunteer_hours_entry.description %></td>
-    <td><%= link_to 'View', volunteer_hours_entry %></td>
-    <td><%= link_to 'Delete', volunteer_hours_entry, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-  <%end%>
-<% end %>
+		<td><%= link_to 'View', volunteer_hours_entry %></td>
+		<td><%= link_to 'Delete', volunteer_hours_entry, confirm: 'Are you sure?', method: :delete %></td>
+	</tr>
+	<%end%>
+	<% end %>
 </table>
 
 <br />
