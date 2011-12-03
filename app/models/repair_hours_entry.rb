@@ -10,6 +10,8 @@ class RepairHoursEntry < ActiveRecord::Base
   validates :eab_project_id, :presence => true
   validates :start_time, :presence => true
   validates :end_time, :presence => true
+  validates :description, :presence => true
+
   
   
   def start_date

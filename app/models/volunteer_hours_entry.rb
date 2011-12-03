@@ -6,6 +6,7 @@ class VolunteerHoursEntry < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :start_time, :presence => true
   validates :end_time, :presence => true
+  validates :description, :presence => true
   
   def date
     return start_time.localtime.strftime("%A %-m/%-e/%Y")
