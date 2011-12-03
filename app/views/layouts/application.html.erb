@@ -45,7 +45,7 @@
 				<li><%= link_to "Home", root_path, :class => (page == "home" ? "selected" : "") %></li>
 				<li><%= link_to "Bikes", search_path, :class => ((page == "bikes" || page=="search" || page=="safety_inspections" || page=="favorites") ? "selected" : "") %></li>
 				<li><%= link_to "EAB Projects", myproj_path, :class => (page == "eab_projects" ? "selected" : "") %></li>
-				<li><%= link_to "Hours Log", volunteer_hours_entries_path, :class => ((page == "repair_hours_entries" || page == "volunteer_hours_entries") ? "selected" : "") %></li>
+				<li><%= link_to "Hours Log", myhours_path, :class => ((page == "repair_hours_entries" || page == "volunteer_hours_entries") ? "selected" : "") %></li>
 				<li><%= link_to "Account", user_path(current_user), :class => ((page == "users" || page == "transactions") ? "selected" : "") %></li>
 				<% if current_user.is_council? %>
 					<li><%= link_to "Admin", admin_path, :class => ((page == "admin" || page == "bike_brands" || page == "bike_models" || page == "notes" || page == "locations" || page == "safety_items") ? "selected" : "") %></li>
