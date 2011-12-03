@@ -6,6 +6,7 @@ one:
   eab_project_id: 1
   start_time: 2011-09-30 14:23:40
   end_time: 2011-09-30 15:23:40
+  description: Fixed brakes and replaced brake pads.
   
 two:
   user_id: 2
@@ -13,6 +14,8 @@ two:
   eab_project_id: 2
   start_time: 2011-10-20 12:00:00
   end_time: 2011-10-20 14:00:00
+  description: Repainted frame.
+
 
 three:
   user_id: 1
@@ -20,3 +23,5 @@ three:
   eab_project_id: 1
   start_time: 2011-10-21 08:30:00
   end_time: 2011-10-21 10:00:00
+  description: Changed tire tube and filled with air.
+

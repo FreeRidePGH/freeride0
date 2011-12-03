@@ -17,8 +17,8 @@ class EabProject < ActiveRecord::Base
 
   def last_active
     latest_entry = self.latest_repair_hours_entries
-    if !latest_entry.empty? && latest_entry.first.start_time > self.updated_at
-      return latest_entry.first.start_time
+    if !latest_entry.empty? && latest_entry.first.created_at > self.updated_at
+      return latest_entry.first.created_at
     end
     self.updated_at
   end

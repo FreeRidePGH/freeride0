@@ -1,8 +1,16 @@
 class RepairHoursEntry < ActiveRecord::Base
   belongs_to :user
   belongs_to :bike
+  belongs_to :eab_project
   
-  attr_accessible :user_id, :bike_id, :start_time, :end_time, :eab_project_id
+  attr_accessible :user_id, :bike_id, :start_time, :end_time, :eab_project_id, :description
+  
+  validates :user_id, :presence => true
+  validates :bike_id, :presence => true
+  validates :eab_project_id, :presence => true
+  validates :start_time, :presence => true
+  validates :end_time, :presence => true
+  
   
   def start_date
     return start_time.localtime.strftime("%A %-m/%-e/%Y")

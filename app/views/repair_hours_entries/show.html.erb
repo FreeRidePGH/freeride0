@@ -1,13 +1,8 @@
 
 
 <p>
-  <b>User ID:</b>
-  <%= @repair_hours_entry.user_id %>
-</p>
-
-<p>
   <b>User Name:</b>
-  <%= User.find_by_id(@repair_hours_entry.user_id).name %>
+  <%= @repair_hours_entry.user.name %>
 </p>
 
 <p>
@@ -20,5 +15,11 @@
   <%= @repair_hours_entry.end_time %>
 </p>
 
+<p>
+	<b>Description:</b>
+	<%= @repair_hours_entry.description %>
+</p>
 
-<%= link_to 'Back', :back %>
+
+<%= link_to 'Back to EAB Project', @repair_hours_entry.eab_project %> |
+<%= link_to 'Back to Bike', @repair_hours_entry.bike %>

@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :eab_projects, :order => "start_date DESC"
   has_one :active_eab_project, :class_name => "EabProject", :order => "status ASC"
   has_many :repair_hours_entries
-  has_many :volunteer_hours_entries
+  has_many :volunteer_hours_entries, :order => "start_time DESC"
   has_many :transactions, :order => "created_at DESC"
   has_many :recent_transactions, :class_name => "Transaction", :order => "created_at DESC", :limit => 5
   has_many :favorites, :order => "created_at DESC"

@@ -122,6 +122,6 @@ class VolunteerHoursEntriesController < ApplicationController
       redirect_to root_path and return
     end
     
-    @volunteer_hours_entries = VolunteerHoursEntry.all  
+    @volunteer_hours_entries = current_user.volunteer_hours_entries 
   end
 end

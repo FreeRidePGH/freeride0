@@ -39,13 +39,15 @@ class RepairHoursEntriesController < ApplicationController
       redirect_to root_path and return
     end
     
-    if current_user.active_eab_project.nil? || current_user.active_eab_project.status >= 400
-      flash[:error] = "You do not have an active EAB Project."
+    @eab_project = EabProject.find_by_id(params[:eab])
+    
+    if @eab_project.nil? || @eab_project.user != current_user || @eab_project.status >= 400
+      flash[:error] = "You do not have an active EAB Project with the given ID."
       redirect_to root_path and return
     end
 
     @repair_hours_entry = RepairHoursEntry.new
-	  @bike_id = current_user.active_eab_project.bike.id
+	  @bike = @eab_project.bike
 	
     respond_to do |format|
       format.html # new.html.erb
@@ -62,9 +64,16 @@ class RepairHoursEntriesController < ApplicationController
     end
     
     @repair_hours_entry = RepairHoursEntry.new(params[:repair_hours_entry])
-    @repair_hours_entry.user_id = current_user.id
-    @repair_hours_entry.eab_project_id = params[:eab]
-    @repair_hours_entry.bike_id = EabProject.find(@repair_hours_entry.eab_project_id).bike_id
+    @eab_project = EabProject.find_by_id(params[:eab])
+
+    if @eab_project.nil? || @eab_project.user != current_user || @eab_project.status >= 400
+      flash[:error] = "You do not have an active EAB Project with the given ID."
+      redirect_to root_path and return
+    end
+    
+    @repair_hours_entry.eab_project_id = @eab_project.id
+    @repair_hours_entry.user_id = @eab_project.user_id
+    @repair_hours_entry.bike_id = @eab_project.bike_id
     
     if @repair_hours_entry.end_time < @repair_hours_entry.start_time
       @repair_hours_entry.errors.add(:start_time, "is passed your End time")
