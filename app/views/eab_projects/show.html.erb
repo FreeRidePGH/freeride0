@@ -36,7 +36,14 @@
 				</tr>
 				<tr>
 					<td><h2>3</h2></td>
-					<td><a href="<%= new_volunteer_hours_entry_path %>"><h2 align="center">Earn Volunteer<br/>Hours</h2></a></td>
+					<td>
+						<% if @eab_project.user == current_user %>
+						<a href="<%= new_volunteer_hours_entry_path %>">
+							<h2 align="center">Earn Volunteer<br/>Hours</h2>
+						</a></td>
+						<% else %>
+							<h2 align="center">Earn Volunteer<br/>Hours</h2>
+						<% end %>
 					<td class="checkmark">
 						<% if @eab_project.value_earned? %>
 							&#10004;
@@ -47,7 +54,7 @@
 				<tr>
 					<td><h2>4</h2></td>
 					<td>
-						<% if !@eab_project.signed_off? %>
+						<% if !@eab_project.signed_off? && @eab_project.user == current_user %>
 						<a href="<%= new_repair_hours_entry_path %>?eab=<%= @eab_project.id%>">
 							<h2 align="center">Refurbish Bike</h2>
 						</a>
