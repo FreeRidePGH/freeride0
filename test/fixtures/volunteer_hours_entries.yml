@@ -4,13 +4,16 @@ one:
   user_id: 1
   start_time: 2011-09-30 14:23:40
   end_time: 2011-09-30 15:23:40
+  description: Swept shop floor and cleaned.
 
 two:
   user_id: 2
   start_time: 2011-10-15 13:30:00
   end_time: 2011-10-15 14:00:00
+  description: Sorted spare brake parts.
   
 three:
   user_id: 1
   start_time: 2011-10-21 18:22:00
   end_time: 2011-10-21 19:37:00
+  description: Organized paperwork in shop.
