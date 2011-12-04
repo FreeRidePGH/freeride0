@@ -414,11 +414,19 @@ class BikesController < ApplicationController
       redirect_to root_path and return
     end
 	
+	@numBikes = Bike.all.count
+	@totalProjs = EabProject.all.count
+	@availBikes = Bike.where(:status => "Available").count
+	@activeProjs = EabProject.where("status < 400").count
+	@totalMembers = User.all.count
+			
 	@reportType = params[:reportType]
 	@inactiveFor = params[:inactiveFor]
-	if !@inactiveFor.nil? && !is_number?(@inactiveFor)
-		flash[:error] = "Please enter a valid number"
-		redirect_to :back and return	
+	if params[:reportType] == "Inactive Bikes" || params[:reportType] == "Inactive EABs" 
+		if !@inactiveFor.nil? && !is_number?(@inactiveFor)
+			flash[:error] = "Please enter a valid number"
+			redirect_to :back and return	
+		end
 	end
 
 	if !params[:reportType].nil? 
