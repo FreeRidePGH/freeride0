@@ -19,7 +19,7 @@
   Bike ID: <b><%= link_to @bike.sticker_id, @bike %></b>	
   <div class="field">
     <br />
-    <input type="hidden" name="repair_hours_entry[bike_id]" value="<%=@bike_id%>"/>
+    <input type="hidden" name="repair_hours_entry[bike_id]" value="<%=@bike.id%>"/>
   </div>
   <div class="field">
     <%= f.label :start_time %><br />

@@ -3,7 +3,7 @@ class BikeAssesment < ActiveRecord::Base
   
   validates :bike_id, :presence => true 
   
-	def self.conditionTooltip
+	def self.qualityTooltip
 		ttstring =  "<table><tr><th>Quality</th><th>Description</th><th>Price*</th></tr>"
 		ttstring += "<tr><td>A</td><td>Frames of Good Material(chromoly, aluminum). Mid to high end components, even if some are missing.</td><td> $120 or more.</td></tr>"
 		ttstring += "<tr><td>B</td><td>Start bikes in a bike shop. The frame accepts 3-piece cranks and has other good features. All of the parts are low-end to mid-range. Older bikes that were high-end of their time.</td><td>$70-119</td></tr>"
@@ -14,7 +14,7 @@ class BikeAssesment < ActiveRecord::Base
 		return ttstring
 	end
 	
-	def self.qualityTooltip
+	def self.conditionTooltip
 		ttstring =  "<table><tr><th>Condition</th><th>Description</th><th>Component completeness</th></tr>"
 		ttstring += "<tr><td>A</td><td>Passes the fix for sale completion checklist and would be ready to sell</td><td>100%</td></tr>"
 		ttstring += "<tr><td>B</td><td>The bicycle is complete, and it satisfies at least half of the fix for sale completion checklist.</td><td>100%</td></tr>"
@@ -25,7 +25,7 @@ class BikeAssesment < ActiveRecord::Base
 	end
 	
 	def self.priceTooltip
-		ttstring = "Sale Price = Base - (Damage) - (Labor) - (Missing Parts Cost)<br/><br/>"
+		ttstring = "<b>Pricing Guide:  </b>Sale Price = Base - (Damage) - (Labor) - (Missing Parts Cost)<br/><br/>"
 		ttstring += "1. Base: What we would sell it for in mint condition<br/><br/>"
 		ttstring += "2. Damage: Subtract $5 to $20 for rust and wear, if there is any<br/><br/>"
 		ttstring += "3. Labor: Subtract needed labor = (number of hours of work needed) x ($8 per hour)<br/><br/>"
