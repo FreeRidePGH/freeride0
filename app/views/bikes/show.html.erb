@@ -151,7 +151,7 @@ end
 		<td>
 
 		  <b>Value:</b></td><td>
-		  <%= number_to_currency(@value) %>
+		  <%= number_to_currency(@value) %> (<%= (@value/8).round(1)%> hours)
 
 		</td>
 		</tr>

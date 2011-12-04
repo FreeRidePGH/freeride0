@@ -115,7 +115,7 @@
 				<tr>
 					<td>
 						<h2>Project Value</h2>
-						<h3><%= number_to_currency(@eab_project.value) %></h3>
+						<h3><%= number_to_currency(@eab_project.value) %> (<%=(@eab_project.value/8).round(1)%> hours)</h3>
 					</td>
 				</tr>
 				<tr>
