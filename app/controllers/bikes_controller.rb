@@ -252,7 +252,7 @@ class BikesController < ApplicationController
       flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
-    
+
     @bike = Bike.find(params[:id])
     @models = BikeModel.find(:all)
     @originalLoc = @bike.location_id
@@ -274,6 +274,9 @@ class BikesController < ApplicationController
 
     respond_to do |format|
       if @bike.update_attributes(params[:bike])
+		if !params[:hasdateout].blank?
+			@bike.date_out=nil
+		end
 		@bike.checkdefaults
 		@bike.save
         #Checking and adding new brand/models. 
