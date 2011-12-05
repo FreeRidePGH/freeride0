@@ -36,6 +36,9 @@ Freeride::Application.routes.draw do
   resources :notes
   resources :location_histories
   
+  match '/:id' => 'bikes#show'
+
+  
 
 
   # The priority is based upon order of creation:
