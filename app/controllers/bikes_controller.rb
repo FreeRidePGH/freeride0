@@ -154,6 +154,7 @@ class BikesController < ApplicationController
     @q = params[:quality]
     @c = params[:condition]
     @v = params[:value]
+	@v = 0.0 unless !params[:value].blank?
     @locname = params[:locname]
 	
     #Checking and adding new brand/models
@@ -268,6 +269,7 @@ class BikesController < ApplicationController
     @bike_assesment.quality = params[:quality]
     @bike_assesment.condition = params[:condition]
     @bike_assesment.value = params[:value]
+	@bike_assesment.value = 0.0 unless !params[:value].blank?
     @bike_assesment.save
 
     respond_to do |format|
