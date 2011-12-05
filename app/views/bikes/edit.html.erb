@@ -123,6 +123,7 @@ function addInput2(divName){
 	 }
 }
 
+
 function defaultLocation(){	
 	if (document.getElementById('location_id').value == null || document.getElementById('location_id').value == ""){
 		//if Hook No is left empty, do nothing
@@ -204,9 +205,15 @@ function isNumberKey(evt)
 	<%= f.label :date_in %></b>    
     <%= f.datetime_select :date_in %>
 	<br/><br/>
-	<b onMouseover="ddrivetip('Date of bike departure from Free Ride','yellow', 80)"; onMouseout="hideddrivetip()">
-	<%= f.label :date_out %></b>    
-    <%= f.datetime_select :date_out %><br/><br/>
+	
+	<b onMouseover="ddrivetip('Date that bike departs from Free Ride','yellow', 80)"; onMouseout="hideddrivetip()">
+		
+	<%= f.label :date_out %></b>
+	<%= f.datetime_select :date_out %><br/>
+	<i onMouseover="ddrivetip('Uncheck box to depart the bike','yellow', 80)"; onMouseout="hideddrivetip()">
+	Bike still active - Ignore date out
+	<input type="checkbox" name="hasdateout" <%if @bike.date_out.blank?%>checked="yes"<%end%>/></i>
+    <br/><br/>
 	
 		
 	<hr/>

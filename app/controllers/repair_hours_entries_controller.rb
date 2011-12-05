@@ -76,9 +76,6 @@ class RepairHoursEntriesController < ApplicationController
     @repair_hours_entry.user_id = @eab_project.user_id
     @repair_hours_entry.bike_id = @eab_project.bike_id
     
-	puts "***************"
-	puts @repair_hours_entry.end_time
-	puts "***************"
 	puts @repair_hours_entry.start_time
     if @repair_hours_entry.end_time < @repair_hours_entry.start_time
       @repair_hours_entry.errors.add(:start_time, "is past your End time")
