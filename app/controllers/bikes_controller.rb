@@ -466,7 +466,7 @@ class BikesController < ApplicationController
  
   private
   def sort_column
-    Bike.column_names.include?(params[:sort]) ? params[:sort] : "id"
+    Bike.column_names.include?(params[:sort]) ? params[:sort] : "bike_id"
   end
 
   def sort_direction
