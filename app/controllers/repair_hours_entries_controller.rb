@@ -76,7 +76,10 @@ class RepairHoursEntriesController < ApplicationController
     @repair_hours_entry.user_id = @eab_project.user_id
     @repair_hours_entry.bike_id = @eab_project.bike_id
     
-	puts @repair_hours_entry.start_time
+    #Parsing the users String DateTime into acutal DateTime objects
+    @repair_hours_entry.start_time = DateTime.strptime(params[:start_datetime],"%m/%d/%Y %l:%M %p")
+    @repair_hours_entry.end_time = DateTime.strptime(params[:end_datetime],"%m/%d/%Y %l:%M %p")
+    
     if @repair_hours_entry.end_time < @repair_hours_entry.start_time
       @repair_hours_entry.errors.add(:start_time, "is past your End time")
       respond_to do |format|

@@ -55,11 +55,14 @@ class VolunteerHoursEntriesController < ApplicationController
       flash[:error] = "You do not have permissions to access that feature."
       redirect_to root_path and return
     end
-    
 
     @volunteer_hours_entry = VolunteerHoursEntry.new(params[:volunteer_hours_entry])
-    @volunteer_hours_entry.user_id = current_user.id  
+    @volunteer_hours_entry.user_id = current_user.id
     
+    #Parsing the users String DateTime into acutal DateTime objects
+    @volunteer_hours_entry.start_time = DateTime.strptime(params[:start_datetime],"%m/%d/%Y %l:%M %p")
+    @volunteer_hours_entry.end_time = DateTime.strptime(params[:end_datetime],"%m/%d/%Y %l:%M %p")
+
     if @volunteer_hours_entry.end_time < @volunteer_hours_entry.start_time
       @volunteer_hours_entry.errors.add(:start_time, "is passed your End time")
       respond_to do |format|
