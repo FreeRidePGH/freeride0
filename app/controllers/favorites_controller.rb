@@ -115,7 +115,7 @@ class FavoritesController < ApplicationController
     
     @favorite = Favorite.find(params[:id])
     
-    if (current_user.is_not_staff && @favorite.user != current_user)
+    if (current_user.is_not_staff? && @favorite.user != current_user)
       flash[:error] = "You do not have permissions to remove the favorite of another user."
       redirect_to root_path and return
     end
