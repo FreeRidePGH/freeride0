@@ -5,6 +5,7 @@ set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 set :use_sudo, false
+set :runner, "git"
 
 role :web, "freeride.andrew.cmu.edu"                          # Your HTTP server, Apache/etc
 role :app, "freeride.andrew.cmu.edu"                          # This may be the same as your `Web` server
