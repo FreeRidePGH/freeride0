@@ -2,6 +2,10 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
 
+# Use MySQL as the database
+# gem 'ruby-mysql'
+gem 'mysql2'
+
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
@@ -10,8 +14,7 @@ gem 'therubyracer'
 gem 'will_paginate'
 gem 'paperclip'
 
-# Use MySQL as the database
-gem 'ruby-mysql'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
