@@ -5,7 +5,14 @@ set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 set :use_sudo, false
-set :rake, "/usr/local/rvm/gems/ruby-1.9.2-p290/bin/rake"
+
+set :default_environment, {
+  'PATH' => "/usr/local/rvm/gems/ruby-1.9.2-p290/bin:/usr/local/rvm/gems/ruby-1.9.2-p290@global/bin:/usr/local/rvm/rubies/ruby-1.9.2-p290/bin:/usr/local/rvm/bin:$PATH",
+  'RUBY_VERSION' => 'ruby-1.9.2-p290',
+  'GEM_HOME'     => '/usr/local/rvm/gems/ruby-1.9.2-p290',
+  'GEM_PATH'     => '/usr/local/rvm/gems/ruby-1.9.2-p290:/usr/local/rvm/gems/ruby-1.9.2-p290@global',
+  'BUNDLE_PATH'  => '/usr/local/rvm/gems/ruby-1.9.2-p290'  # If you are using bundler.
+}
 
 role :web, "freeride.andrew.cmu.edu"                          # Your HTTP server, Apache/etc
 role :app, "freeride.andrew.cmu.edu"                          # This may be the same as your `Web` server
