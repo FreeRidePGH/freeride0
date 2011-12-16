@@ -1,5 +1,5 @@
 set :application, "freeride"
-set :repository,  "git@localhost:/home/git/freeride.git"
+set :repository,  "git@freeride.andrew.cmu.edu:/home/git/freeride.git"
 
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
