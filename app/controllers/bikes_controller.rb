@@ -4,6 +4,7 @@ class BikesController < ApplicationController
   before_filter :guest_login, :only => [:index, :show]
   
   helper_method :sort_column, :sort_direction, :is_number?
+  layout 'application', :except => :printview
   
   # GET /bikes
   # GET /bikes.json
@@ -113,6 +114,16 @@ class BikesController < ApplicationController
     end
   end
 
+  def printview
+    @bike = Bike.find(params[:id])
+	@bikeassmt = BikeAssesment.find_by_bike_id(@bike.id)
+	
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @bike, :layout => false  }
+    end
+  end
+  
   # GET /bikes/new
   # GET /bikes/new.json
   def new

@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Bike Print View</title>
+<style type="text/css">
+body {
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+.bordered {
+	border: thin solid #000;
+}
+
+#allbordered tr td{
+	border: thin solid #000;
+
+}
+.shaded {
+	background-color: #CCC;
+}
+.vertical-top {
+	vertical-align: top;
+}
+#rightalign {
+	text-align: right;
+}
+
+#statsTable{
+	max-height: 200px;
+	overflow:hidden;
+}
+
+#notesTable{
+	max-height: 400px;
+	overflow:hidden;
+}
+
+#locationTable{
+	max-height: 340px;
+	overflow:hidden;
+}
+</style>
+</head>
+
+<body>
+<table width="770" max-height="1000" border="0" cellspacing="2" cellpadding="0">
+  <tr><td colspan="3"><table><tr>
+    <td width="181" class="bordered" style="font-family: Georgia, 'Times New Roman', Times, serif"><p>Date Arrived: <br/>
+	<%= @bike.date_in.year %>/<%= @bike.date_in.strftime("%m") %>/<%= @bike.date_in.day %> <br />
+      yyyy/mm/dd<br />
+    </p></td>
+    <td width="389" style="font-family: Georgia, 'Times New Roman', Times, serif"><h2><center>Bike Info Sheet</center></h2></td>
+    <td width="180" class="bordered"><h3>Bike ID: <%=@bike.sticker_id%></h3></td>
+ </tr></table> </td></tr>
+  <tr>
+    <td colspan="3"><div id="statsTable"><table id="allbordered" width="100%" border="0" cellspacing="0" cellpadding="2">
+      <tr>
+        <td width="7%" rowspan="4" class="vertical-top"><img src="/images/computer.bmp" width="50" height="50" /></td>
+        <td width="12%" height="29" class="shaded">Seat Tube</td>
+        <td width="25%"><%=@bike.seat_tube%></td>
+        <td width="11%" class="shaded">Mfgr.</td>
+        <td width="45%"><%=@bike.brand.name%></td>
+      </tr>
+      <tr>
+        <td height="32" class="shaded">Top Tube</td>
+        <td><%=@bike.top_tube%></td>
+        <td class="shaded">Model</td>
+        <td><%=@bike.model.name%></td>
+      </tr>
+      <tr>
+        <td height="36" class="shaded">Wheel Size</td>
+        <td><%=@bike.wheel_size%></td>
+        <td class="shaded">Quality</td>
+        <td><%=@bikeassmt.quality%></td>
+      </tr>
+      <tr>
+        <td height="29" class="shaded">Color</td>
+        <td><%=@bike.color%></td>
+        <td class="shaded">Condition</td>
+        <td><%=@bikeassmt.condition%></td>
+      </tr>
+    </table></div></td>
+  </tr>
+  <tr>
+    <td width="157" height="67" class="bordered">AS-IS: $<%=@bikeassmt.value%></td>
+    <td width="181" class="bordered">Initials:</td>
+    <td width="424" rowspan="2" class="vertical-top"><div id="notesTable"><table width="100%" height="100%" border="1" cellspacing="2" cellpadding="0">
+      <tr class="shaded">
+        <th width="30%">Date</th>
+        <th width="70%">Notes</th>
+      </tr>
+		<%for i in Note.where(:bike_id => @bike.id)%>
+		<tr>
+			<td><%=i.last_update.year%>-<%= i.last_update.strftime("%b") %>-<%= i.last_update.day %></td>
+			<td><%=i.details%></td>
+		</tr>
+		<%end%>
+    </table></div></td>
+  </tr>
+  <tr>
+    <td height="213" colspan="2" class="vertical-top">
+	<div id="locationTable">
+	<table width="100%" height="100%" border="1" cellspacing="2" cellpadding="0">
+      <tr>
+        <th colspan="2" class="shaded">Bike Location Log</th>
+        </tr>
+      <tr class="shaded">
+        <th width="32%">Date</th>
+        <th width="68%">Location</th>
+      </tr>
+	  <%for i in LocationHistory.where(:bike_id => @bike)%>
+		<tr><%lastdate = i.last_date_at_location%>
+			<td><%=lastdate.to_formatted_s(:long) %></td>
+			<td><%=i.location_name%></td>
+		</tr>
+	  <%end%>
+    </div>
+	</table></td>
+  </tr>
+  <tr>
+    <td height="92" colspan="3" class="vertical-top">
+      <table width="100%" border="1" cellspacing="2" cellpadding="0">
+        <tr>
+          <th colspan="6" class="shaded">Departure Info</th>
+          </tr>
+        <tr>
+          <td width="7%" rowspan="4" class="vertical-top"><img src="/images/computer.bmp" width="50" height="50" /></td>
+          <td width="34%" rowspan="2"><center><p>Date Departed:<br />
+          </p>
+            <p>
+			<%if @bike.date_out.nil?%>
+			_ _ _ _/_ _ /_ _
+			<%else%>
+			<%= @bike.date_out.year %>/<%= @bike.date_out.strftime("%m") %>/<%= @bike.date_out.day %>
+			<%end%>
+			<br />
+              YYYY/MM/DD<br />
+            </p></center></td>
+          <td height="39" colspan="2" style="vertical-align: middle; text-align: right;">Staff Initial:</td>
+          <td colspan="2">&nbsp;</td>
+          </tr>
+        <tr>
+          <td height="33" colspan="2" style="text-align: right;">Final Value:</td>
+          <td colspan="2">$</td>
+          </tr>
+        <tr>
+          <td height="68" colspan="5"><table width="100%" border="1" cellspacing="0" cellpadding="0">
+            <tr class="shaded">
+              <td width="15%">EAB</td>
+              <td width="15%">FFS</td>
+              <td width="15%">AS-IS</td>
+              <td width="15%">Scrap</td>
+              <td width="15%"><center>?</center></td>
+              <td width="25%">Other(Specify)</td>
+            </tr>
+            <tr>
+              <td><%if @bike.status.include?("EAB")%><img src="/images/tick.jpg" width="15" height="15" /><%end%></td>
+              <td><%if @bike.status.include?("FFS")%><img src="/images/tick.jpg" width="15" height="15" /><%end%></td>
+              <td><%if @bike.status.include?("ASIS")%><img src="/images/tick.jpg" width="15" height="15" /><%end%></td>
+              <td><%if @bike.status.include?("Scrap")%><img src="/images/tick.jpg" width="15" height="15" /><%end%></td>
+              <td>&nbsp;</td>
+              <td><%if @bike.status.include?("Other")%><img src="/images/tick.jpg" width="15" height="15" /><%end%></td>
+            </tr>
+          </table></td>
+        </tr>
+        <tr>
+          <td colspan="3">Move this and all related pages to the departed<br />
+            bikes binder. Keep pages in reverse chronological order.</td>
+          <td width="28%" class="bordered" style="text-align: right;">Sticker?</td>
+          <td width="8%" class="bordered">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+
+
+</body>
+</html>

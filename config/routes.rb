@@ -10,6 +10,7 @@ Freeride::Application.routes.draw do
   match '/myhours', :to => 'VolunteerHoursEntries#myhours', :as => :myhours
   match '/logout', :to => 'sessions#destroy', :as => :logout
   match '/alltransactions', :to => 'transactions#all', :as => :alltransactions
+  match '/bikes/printview', :to => 'bikes#printview', :as => :printview 
   match '/admin', :to => 'admin#index', :as => :admin
 
     
