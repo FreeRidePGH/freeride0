@@ -255,6 +255,7 @@ end
 
 <% if current_user.is_staff? %>
 <div align="right">
+<a href="/bikes/printview?id=<%=@bike.id%>">Print View</a> | 
 <%if !@isDeparted and !@hasProj %>
 	<a href="/eab_projects/new?bike_id=<%=@bike.id%>">Start EAB Project</a> |
 
