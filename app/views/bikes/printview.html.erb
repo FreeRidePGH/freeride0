@@ -89,7 +89,7 @@ body {
         <th width="30%">Date</th>
         <th width="70%">Notes</th>
       </tr>
-		<%for i in Note.where(:bike_id => @bike.id).order(last_update desc)%>
+		<%for i in Note.where(:bike_id => @bike.id).order("last_update desc")%>
 		<tr>
 			<td><%=i.last_update.year%>-<%= i.last_update.strftime("%b") %>-<%= i.last_update.day %></td>
 			<td><%=i.details%></td>
@@ -99,7 +99,7 @@ body {
   </tr>
   <tr>
     <td height="213" colspan="2" class="vertical-top">
-	<div id="locationTable">
+	<div id="locationTable"> 
 	<table width="100%" height="100%" border="1" cellspacing="2" cellpadding="0">
       <tr>
         <th colspan="2" class="shaded">Bike Location Log</th>
@@ -120,7 +120,7 @@ body {
 		<%end%>
 		</td>
 		</tr>
-	  <%for i in LocationHistory.where(:bike_id => @bike).order(last_date_at_location desc)%>
+	  <%for i in LocationHistory.where(:bike_id => @bike).order("last_date_at_location desc")%>
 		<tr><%lastdate = i.last_date_at_location%>
 			<td><%=lastdate.to_formatted_s(:long) %></td>
 			<td><%=i.location_name%></td>
