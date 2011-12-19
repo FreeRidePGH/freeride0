@@ -1,8 +1,8 @@
 ---
+cwd: /u/apps/freeride/current/
 port: "80"
 servers: 3
 pid_file: tmp/pids/mongrel.pid
 log_file: log/mongrel.log
 address: 127.0.0.1
 environment: production
-cwd: /u/apps/freeride/current/public/
