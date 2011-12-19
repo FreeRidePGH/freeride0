@@ -1,10 +1,16 @@
-require 'mongrel_cluster/recipes'
+# RVM bootstrap
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+require 'rvm/capistrano'
+set :rvm_ruby_string, '1.9.2-p290'
+
+
+# bundler bootstrap
+require 'bundler/capistrano'
 
 set :application, "freeride"
-set :repository,  "git@freeride.andrew.cmu.edu:/home/git/freeride.git"
 
 set :scm, :git
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :repository,  "git@freeride.andrew.cmu.edu:/home/git/freeride.git"
 
 set :use_sudo, false
 
