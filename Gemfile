@@ -6,6 +6,8 @@ gem 'rails', '3.1.0'
 # gem 'ruby-mysql'
 gem 'mysql2'
 
+gem 'mongrel_cluster'
+
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 

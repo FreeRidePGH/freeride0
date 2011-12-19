@@ -1,3 +1,5 @@
+require 'mongrel_cluster/recipes'
+
 set :application, "freeride"
 set :repository,  "git@freeride.andrew.cmu.edu:/home/git/freeride.git"
 
@@ -13,6 +15,8 @@ set :default_environment, {
   'GEM_PATH'     => '/usr/local/rvm/gems/ruby-1.9.2-p290:/usr/local/rvm/gems/ruby-1.9.2-p290@global',
   'BUNDLE_PATH'  => '/usr/local/rvm/gems/ruby-1.9.2-p290'  # If you are using bundler.
 }
+
+set :mongrel_conf, "#{current_path}/config/mongrel_cluster.yml"
 
 role :web, "freeride.andrew.cmu.edu"                          # Your HTTP server, Apache/etc
 role :app, "freeride.andrew.cmu.edu"                          # This may be the same as your `Web` server
