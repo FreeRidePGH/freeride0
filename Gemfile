@@ -35,11 +35,11 @@ gem 'capistrano'
 
 group :production do
   # Use PostgreSQL for Heroku deployment
-  # gem 'pg'
+  gem 'pg'
 
   # Use MySQL as the database
   # gem 'ruby-mysql'
-  gem 'mysql2'
+  # gem 'mysql2'
 end
 
 
