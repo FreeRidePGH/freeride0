@@ -1,6 +1,16 @@
 .bundle
 db/*.sqlite3
 log/*.log
-tmp/
+tmp/*
 .sass-cache/
 Gemfile
+*.swp
+*~
+*.out
+*.project
+*.DS_Store
+*~
+.#*
+*#
+#*.lock
+config/database.yml

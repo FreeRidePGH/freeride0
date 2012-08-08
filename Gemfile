@@ -2,20 +2,16 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
 
-# Use MySQL as the database
-# gem 'ruby-mysql'
-gem 'mysql2'
-
-gem 'passenger'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+
+gem 'passenger'
+
 gem 'therubyracer'
 gem 'will_paginate'
 gem 'paperclip'
-
 
 
 # Gems used only for assets and not required
@@ -37,7 +33,22 @@ gem 'capistrano'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+group :production do
+  # Use PostgreSQL for Heroku deployment
+  # gem 'pg'
+
+  # Use MySQL as the database
+  # gem 'ruby-mysql'
+  gem 'mysql2'
+end
+
+
+group :development do
+  gem 'sqlite3' 
+end
+
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+  gem 'sqlite3' 
 end
